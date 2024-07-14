@@ -1,0 +1,26 @@
+import React from 'react';
+
+const Card1 = ({ category, title, imageUrl, height, width }) => {
+    return (
+        <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width }}>           
+            <img
+                className="object-cover w-full h-full"
+                src={imageUrl}
+                alt="Card Background"
+            />
+
+
+            {/* Category Label */}
+            <div className="absolute top-2 left-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm font-semibold">
+                {category}
+            </div>
+
+            {/* Title Container */}
+            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2">
+                <h2 className="text-white text-xl md:text-2xl font-bold">{title}</h2>
+            </div>
+        </div>
+    );
+};
+
+export default Card1;

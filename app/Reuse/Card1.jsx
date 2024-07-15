@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Card1 = ({ category, title, imageUrl, height, width }) => {
+const Card1 = ({ category, title, imageUrl, height, width,marginBottom }) => {
     return (
-        <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width }}>           
+        <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width ,marginBottom}}>            {/* Background Image */}
             <img
                 className="object-cover w-full h-full"
                 src={imageUrl}
@@ -11,7 +11,7 @@ const Card1 = ({ category, title, imageUrl, height, width }) => {
 
 
             {/* Category Label */}
-            <div className="absolute top-2 left-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm font-semibold">
+            <div className="absolute top-2 left-2 bg-red-700 text-white px-2 py-1 rounded-md text-sm font-semibold">
                 {category}
             </div>
 

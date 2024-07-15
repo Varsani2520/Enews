@@ -3,7 +3,7 @@ import { Container, Button, Typography } from '@mui/material';
 
 const Banner = ({ logo, title, buttonText }) => {
   return (
-    <Container maxWidth="lg" className="mt-5">
+    <Container maxWidth="lg" className="my-10">
       <div className="flex items-center justify-between bg-opacity-50 bg-black text-white p-4 rounded-lg mb-4">
         {/* Left side - Logo */}
         <div className="mr-1">

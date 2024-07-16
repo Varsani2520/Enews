@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
-import Card1 from "../Reuse/Card1";
-import Card2 from "../Reuse/Card2";
 import { Container, Grid, Button } from "@mui/material";
+import Card2 from "../Reuse/Card2";
+import Card3 from "../Reuse/Card3";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -12,7 +12,7 @@ const Technology = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await getNews("technology");
+        const response = await getNews("videos");
         setArticles(response.docs);
         console.log("technology", response);
       } catch (error) {
@@ -40,7 +40,7 @@ const Technology = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{marginY:'5%'}}>
+    <Container maxWidth="xl" sx={{ marginY: "5%" }}>
       <Grid container spacing={3}>
         {/* Left Side - Big Card */}
         <Grid item xs={12} md={3}>
@@ -50,7 +50,7 @@ const Technology = () => {
             imageUrl={`https://www.nytimes.com/${
               articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
             }`}
-            height="400px"
+            height="518px"
           />
         </Grid>
 
@@ -64,8 +64,14 @@ const Technology = () => {
             {articles
               .slice(currentIndex, currentIndex + 3)
               .map((article, index) => (
-                <Grid item xs={12} md={4} key={index} style={{ height: "100%" }}>
-                  <Card1
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  key={index}
+                  style={{ height: "100%" }}
+                >
+                  <Card3
                     category={article.section_name}
                     title={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${

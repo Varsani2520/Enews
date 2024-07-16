@@ -7,6 +7,9 @@ import Heading from "./Reuse/Heading";
 import PopularCards from "./Components/PopularNews";
 import RecentNews from "./Components/RecentNews";
 import Technology from "./Components/Technology";
+import Travels from "./Components/Travels";
+import BreakingNews from "./Components/BreakingNews";
+import MostFavouriteNews from "./Components/MostFavouriteNews";
 
 export default function Home() {
   return (
@@ -37,6 +40,27 @@ export default function Home() {
       />
       <RecentNews />
       <Technology />
+      <Heading title={"Travels"} subtitle={"Travels"} />
+      <Travels />
+      <Banner
+        logo={"/logo.png"}
+        title="Stay informesd with us- 24/7 news updates"
+        buttonText={"Buy Now"}
+      />
+      <Heading title={"Breaking News"} subtitle={"Breaking News Here"} />
+
+      <BreakingNews />
+      <Banner
+        logo={"/logo.png"}
+        title="Discover the power od informed news"
+        buttonText={"Buy Now"}
+      />
+      <Heading
+        title={"Most Favourite News"}
+        subtitle={"Most Favourite News Here"}
+        buttonText={"View More"}
+      />
+      <MostFavouriteNews />
     </main>
   );
 }

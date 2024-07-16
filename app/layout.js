@@ -1,6 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./Components/Footer";
+import Weather from "./Components/Weather";
+import { Navigation } from "@mui/icons-material";
+import Header from "./Components/Header";
+import Banner from "./Reuse/Banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Weather />
+        <Navigation />
+        <Header />
+        <Banner
+          logo={"/logo.png"}
+          title="Stay informed,stay ahead with our daily news."
+          buttonText={"Buy Now"}
+        />
         {children}
         <Footer />
       </body>

@@ -14,14 +14,6 @@ import MostFavouriteNews from "./Components/MostFavouriteNews";
 export default function Home() {
   return (
     <main className="flex  flex-col  justify-between ">
-      <Weather />
-      <Navigation />
-      <Header />
-      <Banner
-        logo={"/logo.png"}
-        title="Stay informed,stay ahead with our daily news."
-        buttonText={"Buy Now"}
-      />
       <Heading
         title={"Popular News"}
         subtitle={"Popular News Here"}

@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
@@ -40,10 +40,10 @@ const Technology = () => {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Grid container spacing={3}>
         {/* Left Side - Big Card */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={3}>
           <Card2
             category={articles[0].section_name}
             title={articles[0].headline.main}
@@ -55,19 +55,23 @@ const Technology = () => {
         </Grid>
 
         {/* Right Side - Three Smaller Cards */}
-        <Grid item xs={12} md={6}>
-          <Grid container spacing={3}>
+        <Grid item xs={12} md={9}>
+          <Grid
+            container
+            spacing={3}
+            style={{ display: "flex", flexDirection: "row", height: "100%" }}
+          >
             {articles
               .slice(currentIndex, currentIndex + 3)
               .map((article, index) => (
-                <Grid item xs={12} md={4} key={index}>
+                <Grid item xs={12} md={4} key={index} style={{ height: "100%" }}>
                   <Card1
                     category={article.section_name}
                     title={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${
                       article.multimedia?.[0]?.url || "/placeholder.jpg"
                     }`}
-                    height="200px"
+                    height="100%" // Adjust to 100% to fill the container height
                     width="100%"
                   />
                 </Grid>
@@ -78,7 +82,7 @@ const Technology = () => {
             spacing={3}
             justifyContent="center"
             alignItems="center"
-            style={{ marginTop: "46px" }}
+            style={{ marginTop: "20px" }}
           >
             <Grid item>
               <Button

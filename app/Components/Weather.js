@@ -32,7 +32,7 @@ const Weather = () => {
 
   return (
     <div style={{ background: '#1a2e51', color: 'white', padding: '10px 0' }}>      <Container
-        maxWidth="lg"
+        maxWidth="xl"
         style={{
           display: "flex",
           justifyContent: "space-between",

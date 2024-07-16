@@ -15,7 +15,7 @@ const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
 
   return (
-    <Container maxWidth="lg" className="pt-1 pb-1">
+    <Container maxWidth="xl" className="pt-1 pb-1">
       <div position="static" className="bg-white text-black mb-4">
         <Toolbar className="flex justify-between items-center">
           {/* Logo */}

@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <div className="bg-gray-200 border-t border-b border-gray-400">
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
      
       <div className="flex gap-20 py-2">
           

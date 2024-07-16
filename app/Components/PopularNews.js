@@ -26,7 +26,7 @@ const PopularCards = () => {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Grid container spacing={3}>
         {/* First Column - Left Side Cards */}
         <Grid item xs={12} md={3}>

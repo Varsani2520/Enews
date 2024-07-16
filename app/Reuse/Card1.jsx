@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Card1 = ({ category, title, imageUrl, height, width, marginBottom }) => {
+const Card1 = ({ category, title, imageUrl, height, width, marginBottom, href }) => {
     return (
-        <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width, marginBottom }}>            {/* Background Image */}
+        <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width, marginBottom }} >
+            {/* Background Image */}
             <img
                 className="object-cover w-full h-full"
                 src={imageUrl}
                 alt="Card Background"
+                href={href}
             />
 
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import { Container, Grid } from "@mui/material";
+import Link from "next/link";
 
 const PopularCards = () => {
   const [articles, setArticles] = useState([]);
@@ -30,61 +31,71 @@ const PopularCards = () => {
       <Grid container spacing={3}>
         {/* First Column - Left Side Cards */}
         <Grid item xs={12} md={3}>
-          <Card1
-            marginBottom={"5%"}
-            category={articles[0].section_name}
-            title={articles[0].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="300px"
-            width="100%"
-          />
-          <Card1
-            category={articles[1].section_name}
-            title={articles[1].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[1].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="300px"
-            width="100%"
-          />
+          <Link href={`/news/${articles[0].headline.main}`}>
+            <Card1
+              marginBottom={"5%"}
+              category={articles[0].section_name}
+              title={articles[0].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="300px"
+              width="100%"
+            />
+          </Link>
+          <Link href={`/news/${articles[1].headline.main}`}>
+            <Card1
+              category={articles[1].section_name}
+              title={articles[1].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[1].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="300px"
+              width="100%"
+            />
+          </Link>
         </Grid>
 
         {/* Second Column - Center Big Card */}
         <Grid item xs={12} md={6}>
-          <Card1
-            category={articles[2].section_name}
-            title={articles[2].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[2].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="613px"
-            width="100%"
-          />
+          <Link href={`/news/${articles[2].headline.main}`}>
+            <Card1
+              category={articles[2].section_name}
+              title={articles[2].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[2].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="613px"
+              width="100%"
+            />
+          </Link>
         </Grid>
 
         {/* Third Column - Right Side Cards */}
         <Grid item xs={12} md={3}>
-          <Card1
-            marginBottom={"5%"}
-            category={articles[3].section_name}
-            title={articles[3].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[3].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="300px"
-            width="100%"
-          />
-          <Card1
-            category={articles[4].section_name}
-            title={articles[4].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[4].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="300px"
-            width="100%"
-          />
+          <Link href={`/news/${articles[3].headline.main}`}>
+            <Card1
+              marginBottom={"5%"}
+              category={articles[3].section_name}
+              title={articles[3].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[3].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="300px"
+              width="100%"
+            />
+          </Link>
+          <Link href={`/news/${articles[4].headline.main}`}>
+            <Card1
+              category={articles[4].section_name}
+              title={articles[4].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[4].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="300px"
+              width="100%"
+            />
+          </Link>
         </Grid>
       </Grid>
     </Container>

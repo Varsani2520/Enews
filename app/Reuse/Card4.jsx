@@ -13,8 +13,8 @@ const Card4 = ({ imageUrl, category, title }) => {
       </div>
       {/* Right side content */}
       <div className="p-4">
-        <div className="text-sm text-red-600 py-3 font-bold">{category}</div>
-        <h2 className="text-xl font-bold">{title}</h2>
+        <div className="text-sm text-white bg-[#f20404] w-fit py-1 px-4 rounded-md font-bold">{category}</div>
+        <h2 className="text-xl font-bold text-[#0f1f40]">{title}</h2>
       </div>
     </div>
   );

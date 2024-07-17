@@ -3,24 +3,33 @@ import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
-  Typography,
-  InputBase,
   Container,
   Box,
+  IconButton,
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
+import SearchDialog from "./SearchDialog";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleSearchOpen = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleSearchClose = () => {
+    setIsDialogOpen(false);
+  };
 
   return (
     <Container maxWidth="xl" className="pt-1 pb-1">
       <div position="static" className="bg-white text-black mb-4">
         <Toolbar className="flex justify-between items-center">
           {/* Logo */}
-          <img src="/logo.png" width="10%" height="auto" alt="logo"/>
- 
+          <img src="/logo.png" width="10%" height="auto" alt="logo" />
+
           {/* Navigation Links */}
           <Box className="flex gap-6 items-center">
             <NavLink
@@ -87,14 +96,14 @@ const Navigation = () => {
 
           {/* Search Input */}
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <IconButton
+              onClick={handleSearchOpen}
+              aria-label="search"
+              color="inherit"
+            >
               <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              className="pl-12 pr-4 py-2 w-full"
-            />
+            </IconButton>
+            <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />
           </div>
         </Toolbar>
       </div>

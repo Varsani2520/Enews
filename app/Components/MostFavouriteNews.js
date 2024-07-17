@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
@@ -40,17 +40,19 @@ const MostFavouriteNews = () => {
         {/* First Column - Left Side Large Card */}
         <Grid item xs={12} md={8}>
           <Link
-            key={article._id}
-            href={`/news/${encodeURIComponent(article.headline.main)}`}
+            key={articles[0]._id}
+            href={`/news/${encodeURIComponent(articles[0].headline.main)}`}
           >
-            <Card2
-              height={"613px"}
-              category={articles[0].section_name}
-              title={articles[0].headline.main}
-              imageUrl={`https://www.nytimes.com/${
-                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-              }`}
-            />
+            <a style={{ textDecoration: "none" }}>
+              <Card2
+                height={"613px"}
+                category={articles[0].section_name}
+                title={articles[0].headline.main}
+                imageUrl={`https://www.nytimes.com/${
+                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                }`}
+              />
+            </a>
           </Link>
         </Grid>
 
@@ -59,34 +61,38 @@ const MostFavouriteNews = () => {
           {articles.length > 1 && (
             <>
               <Link
-                key={articles._id}
-                href={`/news/${encodeURIComponent(articles.headline.main)}`}
+                key={articles[1]._id}
+                href={`/news/${encodeURIComponent(articles[1].headline.main)}`}
               >
-                <Card1
-                  category={articles[1].section_name}
-                  title={articles[1].headline.main}
-                  imageUrl={`https://www.nytimes.com/${
-                    articles[1].multimedia?.[0]?.url || "/placeholder.jpg"
-                  }`}
-                  height="300px"
-                  width="100%"
-                  marginBottom={"5%"}
-                />
-              </Link>
-              {articles.length > 2 && (
-                <Link
-                  key={articles._id}
-                  href={`/news/${encodeURIComponent(articles.headline.main)}`}
-                >
+                <a style={{ textDecoration: "none" }}>
                   <Card1
-                    category={articles[2].section_name}
-                    title={articles[2].headline.main}
+                    category={articles[1].section_name}
+                    title={articles[1].headline.main}
                     imageUrl={`https://www.nytimes.com/${
-                      articles[2].multimedia?.[0]?.url || "/placeholder.jpg"
+                      articles[1].multimedia?.[0]?.url || "/placeholder.jpg"
                     }`}
                     height="300px"
                     width="100%"
+                    marginBottom={"5%"}
                   />
+                </a>
+              </Link>
+              {articles.length > 2 && (
+                <Link
+                  key={articles[2]._id}
+                  href={`/news/${encodeURIComponent(articles[2].headline.main)}`}
+                >
+                  <a style={{ textDecoration: "none" }}>
+                    <Card1
+                      category={articles[2].section_name}
+                      title={articles[2].headline.main}
+                      imageUrl={`https://www.nytimes.com/${
+                        articles[2].multimedia?.[0]?.url || "/placeholder.jpg"
+                      }`}
+                      height="300px"
+                      width="100%"
+                    />
+                  </a>
                 </Link>
               )}
             </>

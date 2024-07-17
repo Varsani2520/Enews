@@ -38,7 +38,7 @@ const PopularCards = () => {
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${
                 articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-              }`}c
+              }`}
               height="300px"
               width="100%"
             />

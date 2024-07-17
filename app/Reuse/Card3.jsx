@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const Card3 = ({ title, imageUrl, height, width, marginBottom, abstract, snippet }) => {

@@ -32,7 +32,7 @@ const Card2 = ({ category, title, imageUrl, height, width, abstract, snippet }) 
                 alt="Card Background"
             />
             {/* Category and Title */}
-            <div className="absolute bottom-0 left-0 w-full bg-red-500 text-white p-4">
+            <div className="absolute bottom-0 left-0 w-full bg-red-[#f20404] text-white p-4">
                 <div className="text-lg font-bold">{category}</div>
                 <div className="text-xl font-bold">{title}</div>
             </div>

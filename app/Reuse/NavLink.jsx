@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 
 const NavLink = ({ to, isActive, children, ...props }) => {
   const activeClasses = isActive
-    ? "border-b-2 border-red-500"
+    ? "border-b-2 border-red-[#f20404]"
     : "border-b-2 border-transparent";
 
   return (

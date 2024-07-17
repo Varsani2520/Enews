@@ -17,7 +17,7 @@ const Header = () => {
           isActive={activeTab === "technology"}
           onClick={() => setActiveTab("technology")}
           className={`text-black font-bold ${
-            activeTab === "technology" ? "border-b-2 border-red-500" : ""
+            activeTab === "technology" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Technology
@@ -27,7 +27,7 @@ const Header = () => {
           isActive={activeTab === "science"}
           onClick={() => setActiveTab("science")}
           className={`text-black font-bold ${
-            activeTab === "science" ? "border-b-2 border-red-500" : ""
+            activeTab === "science" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Science
@@ -37,7 +37,7 @@ const Header = () => {
           isActive={activeTab === "religion"}
           onClick={() => setActiveTab("religion")}
           className={`text-black font-bold ${
-            activeTab === "religion" ? "border-b-2 border-red-500" : ""
+            activeTab === "religion" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Religion
@@ -47,7 +47,7 @@ const Header = () => {
           isActive={activeTab === "politics"}
           onClick={() => setActiveTab("politics")}
           className={`text-black font-bold ${
-            activeTab === "politics" ? "border-b-2 border-red-500" : ""
+            activeTab === "politics" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Politics
@@ -57,7 +57,7 @@ const Header = () => {
           isActive={activeTab === "business"}
           onClick={() => setActiveTab("business")}
           className={`text-black font-bold ${
-            activeTab === "business" ? "border-b-2 border-red-500" : ""
+            activeTab === "business" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Business
@@ -67,7 +67,7 @@ const Header = () => {
           isActive={activeTab === "family"}
           onClick={() => setActiveTab("family")}
           className={`text-black font-bold ${
-            activeTab === "family" ? "border-b-2 border-red-500" : ""
+            activeTab === "family" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Family
@@ -77,7 +77,7 @@ const Header = () => {
           isActive={activeTab === "car"}
           onClick={() => setActiveTab("car")}
           className={`text-black font-bold ${
-            activeTab === "car" ? "border-b-2 border-red-500" : ""
+            activeTab === "car" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Car
@@ -87,7 +87,7 @@ const Header = () => {
           isActive={activeTab === "travels"}
           onClick={() => setActiveTab("travels")}
           className={`text-black font-bold ${
-            activeTab === "travels" ? "border-b-2 border-red-500" : ""
+            activeTab === "travels" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Travels
@@ -97,7 +97,7 @@ const Header = () => {
           isActive={activeTab === "sports"}
           onClick={() => setActiveTab("sports")}
           className={`text-black font-bold ${
-            activeTab === "sports" ? "border-b-2 border-red-500" : ""
+            activeTab === "sports" ? "border-b-2 border-red-[#f20404]" : ""
           }`}
         >
           Sports

@@ -10,7 +10,7 @@ const AboutPage = () => {
         <div className="mt-8">
           <h1 className="text-2xl font-bold mb-4">About Us:</h1>
           <p className="text-lg">
-            Most people wouldn&apos;t even consider getting a physical morning
+            Most people would not even consider getting a physical morning
             newspaper anymore, so we depend on digital sources for our news.
             Finding an app that helps you get the news you want in a timely
             manner is essential.
@@ -30,9 +30,9 @@ const AboutPage = () => {
           <br />
           <p className="text-lg">
             Our motto is to help the customer expand their business with the help of
-            technology. Yes, we aren&apos;t alone, we are a team of developers &amp;
+            technology. Yes, we are not alone, we are a team of developers 
             technology lovers who are enthusiastic, passionate, skilled,
-            creative, multi-talented, ready to strive, helpful &amp; always there to
+            creative, multi-talented, ready to strive, helpful  always there to
             support our lovable clients, who are an integral part of our team.
           </p>
         </div>

@@ -20,11 +20,6 @@ export default function RootLayout({ children }) {
         <Weather />
         <Navigation />
         <Header />
-        <Banner
-          logo={"/logo.png"}
-          title="Stay informed,stay ahead with our daily news."
-          buttonText={"Buy Now"}
-        />
         {children}
         <Footer />
       </body>

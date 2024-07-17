@@ -24,7 +24,7 @@ const Navigation = () => {
           {/* Navigation Links */}
           <Box className="flex gap-6 items-center">
             <NavLink
-              href="/"
+              to="/"
               isActive={activeTab === "home"}
               onClick={() => setActiveTab("home")}
               className={`text-black ${
@@ -34,7 +34,7 @@ const Navigation = () => {
               Home
             </NavLink>
             <NavLink
-              href="/about_us"
+              to="/about-us"
               isActive={activeTab === "about"}
               onClick={() => setActiveTab("about")}
               className={`text-black ${
@@ -44,7 +44,7 @@ const Navigation = () => {
               About Us
             </NavLink>
             <NavLink
-              href="/contact_us"
+              to="/contact-us"
               isActive={activeTab === "contact"}
               onClick={() => setActiveTab("contact")}
               className={`text-black ${
@@ -54,7 +54,7 @@ const Navigation = () => {
               Contact
             </NavLink>
             <NavLink
-              href="/all_breaking_news"
+              to="/all_breaking_news"
               isActive={activeTab === "breaking"}
               onClick={() => setActiveTab("breaking")}
               className={`text-black ${
@@ -64,7 +64,7 @@ const Navigation = () => {
               Breaking News
             </NavLink>
             <NavLink
-              href="/categories"
+              to="/categories"
               isActive={activeTab === "categories"}
               onClick={() => setActiveTab("categories")}
               className={`text-black ${
@@ -74,7 +74,7 @@ const Navigation = () => {
               Categories
             </NavLink>
             <NavLink
-              href="/login"
+              to="/login"
               isActive={activeTab === "login"}
               onClick={() => setActiveTab("login")}
               className={`text-black ${

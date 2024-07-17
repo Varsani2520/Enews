@@ -13,13 +13,13 @@ const Banner = ({ logo, title, buttonText }) => {
         {/* Center - Title */}
         <div className="text-center flex-1">
           <Typography variant="h4" component="h2">
-            {title}
+            {title ? title : "Stay informed,stay ahead with our daily news"}
           </Typography>
         </div>
 
         {/* Right side - Buy Now button */}
-        <Button variant="contained" color="primary" className="ml-4">
-          {buttonText}
+        <Button variant="outlined" color="primary" className="ml-4">
+          {buttonText ? buttonText : "Buy Now"}
         </Button>
       </div>
     </Container>

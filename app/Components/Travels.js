@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import { Container } from "@mui/material";
+import Link from "next/link";
 
 const Travels = () => {
   const [articles, setArticles] = useState([]);
@@ -26,16 +27,21 @@ const Travels = () => {
       <Grid container spacing={4}>
         {articles.slice(0, 4).map((article, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card1
-              category={article.section_name}
-              title={article.headline.main}
-              imageUrl={`https://www.nytimes.com/${
-                article.multimedia?.[0]?.url || "/placeholder.jpg"
-              }`}
-              height="100%"
-              width="100%"
-              marginBottom="20px"
-            />
+            <Link
+              key={article._id}
+              href={`/news/${encodeURIComponent(article.headline.main)}`}
+            >
+              <Card1
+                category={article.section_name}
+                title={article.headline.main}
+                imageUrl={`https://www.nytimes.com/${
+                  article.multimedia?.[0]?.url || "/placeholder.jpg"
+                }`}
+                height="100%"
+                width="100%"
+                marginBottom="20px"
+              />
+            </Link>
           </Grid>
         ))}
       </Grid>

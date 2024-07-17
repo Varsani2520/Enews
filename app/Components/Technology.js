@@ -4,6 +4,7 @@ import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid, Button } from "@mui/material";
+import Link from "next/link";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -40,7 +41,7 @@ const Technology = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{marginY:'5%'}}>
+    <Container maxWidth="xl" sx={{ marginY: "5%" }}>
       <Grid container spacing={3}>
         {/* Left Side - Big Card */}
         <Grid item xs={12} md={3}>
@@ -65,15 +66,17 @@ const Technology = () => {
               .slice(currentIndex, currentIndex + 3)
               .map((article, index) => (
                 <Grid item xs={12} md={4} key={index} style={{ height: "100%" }}>
-                  <Card1
-                    category={article.section_name}
-                    title={article.headline.main}
-                    imageUrl={`https://www.nytimes.com/${
-                      article.multimedia?.[0]?.url || "/placeholder.jpg"
-                    }`}
-                    height="100%" // Adjust to 100% to fill the container height
-                    width="100%"
-                  />
+                  <Link href={`/news/${encodeURIComponent(article.headline.main)}`}>
+                      <Card1
+                        category={article.section_name}
+                        title={article.headline.main}
+                        imageUrl={`https://www.nytimes.com/${
+                          article.multimedia?.[0]?.url || "/placeholder.jpg"
+                        }`}
+                        height="100%" // Adjust to 100% to fill the container height
+                        width="100%"
+                      />
+                  </Link>
                 </Grid>
               ))}
           </Grid>

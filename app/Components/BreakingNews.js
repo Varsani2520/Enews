@@ -1,9 +1,10 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import { Container, Grid, Button } from "@mui/material";
 import Card2 from "../Reuse/Card2";
 import Card3 from "../Reuse/Card3";
+import Link from "next/link";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -44,44 +45,38 @@ const Technology = () => {
       <Grid container spacing={3}>
         {/* Left Side - Big Card */}
         <Grid item xs={12} md={3}>
-          <Card2
-            category={articles[0].section_name}
-            title={articles[0].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="518px"
-          />
+          <Link href={`/news/${encodeURIComponent(articles[0].headline.main)}`}>
+              <Card2
+                category={articles[0].section_name}
+                title={articles[0].headline.main}
+                imageUrl={`https://www.nytimes.com/${
+                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                }`}
+                height="518px"
+              />
+\          </Link>
         </Grid>
 
         {/* Right Side - Three Smaller Cards */}
         <Grid item xs={12} md={9}>
-          <Grid
-            container
-            spacing={3}
-            style={{ display: "flex", flexDirection: "row", height: "100%" }}
-          >
-            {articles
-              .slice(currentIndex, currentIndex + 3)
-              .map((article, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  key={index}
-                  style={{ height: "100%" }}
+          <Grid container spacing={3} style={{ height: "100%" }}>
+            {articles.slice(1, 4).map((article, index) => (
+              <Grid item xs={12} md={4} key={index}>
+                <Link
+                  href={`/news/${encodeURIComponent(article.headline.main)}`}
                 >
-                  <Card3
-                    category={article.section_name}
-                    title={article.headline.main}
-                    imageUrl={`https://www.nytimes.com/${
-                      article.multimedia?.[0]?.url || "/placeholder.jpg"
-                    }`}
-                    height="100%" // Adjust to 100% to fill the container height
-                    width="100%"
-                  />
-                </Grid>
-              ))}
+                    <Card3
+                      category={article.section_name}
+                      title={article.headline.main}
+                      imageUrl={`https://www.nytimes.com/${
+                        article.multimedia?.[0]?.url || "/placeholder.jpg"
+                      }`}
+                      height="100%"
+                      width="100%"
+                    />
+                </Link>
+              </Grid>
+            ))}
           </Grid>
           <Grid
             container

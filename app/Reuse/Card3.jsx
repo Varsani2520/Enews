@@ -1,10 +1,31 @@
 import React from 'react';
 
-const Card3 = ({ title, imageUrl, height, width, marginBottom }) => {
+const Card3 = ({ title, imageUrl, height, width, marginBottom, abstract, snippet }) => {
+  const router = useRouter();
+
+  // Function to handle click and store data in localStorage
+  const handleClick = () => {
+    const articleData = {
+      category,
+      title,
+      imageUrl,
+      height,
+      width,
+      abstract,
+      snippet
+      // Other fields as needed
+    };
+
+
+    // Store data in localStorage
+    localStorage.setItem('clickedArticle', JSON.stringify(articleData));
+
+    router.push(`/news/${encodeURIComponent(title)}`);
+  };
   return (
     <div
       className="bg-gray-200 border border-gray-300 rounded-lg p-4"
-      style={{ height, width, marginBottom }}
+      style={{ height, width, marginBottom }} onClick={handleClick}
     >
       {/* Image */}
       <div className="w-full h-72 mb-4">

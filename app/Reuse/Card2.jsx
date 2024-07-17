@@ -1,8 +1,30 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const Card2 = ({ category, title, imageUrl, height ,width}) => {
+const Card2 = ({ category, title, imageUrl, height, width, abstract, snippet }) => {
+    const router = useRouter();
+
+    // Function to handle click and store data in localStorage
+    const handleClick = () => {
+        const articleData = {
+            category,
+            title,
+            imageUrl,
+            height,
+            width,
+            abstract,
+            snippet
+            // Other fields as needed
+        };
+
+
+        // Store data in localStorage
+        localStorage.setItem('clickedArticle', JSON.stringify(articleData));
+
+        router.push(`/news/${encodeURIComponent(title)}`);
+    };
     return (
-        <div className="relative overflow-hidden rounded-lg shadow-lg bg-white mb-4" style={{ height,width }}>
+        <div className="relative overflow-hidden rounded-lg shadow-lg bg-white mb-4" style={{ height, width }}onClick={handleClick}>
             {/* Background Image */}
             <img
                 className="object-cover w-full h-full"

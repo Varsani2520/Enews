@@ -3,7 +3,7 @@ import React from 'react';
 
 const Heading = ({ title, subtitle, buttonText }) => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 0' }}>
         <Box sx={{ flex: 1 }}>
           <Typography variant="h4" sx={{ color: 'black', fontWeight: 'bold', marginBottom: '8px' }}>

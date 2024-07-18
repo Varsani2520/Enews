@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import { Container, Grid, Button } from "@mui/material";
 import Card2 from "../Reuse/Card2";
 import Card3 from "../Reuse/Card3";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -37,7 +38,7 @@ const Technology = () => {
   };
 
   if (articles.length === 0) {
-    return <div>Loading...</div>; // Show a loading indicator while fetching data
+    return <CardSkeleton />; // Show a loading indicator while fetching data
   }
 
   return (
@@ -46,15 +47,16 @@ const Technology = () => {
         {/* Left Side - Big Card */}
         <Grid item xs={12} md={3}>
           <Link href={`/news/${encodeURIComponent(articles[0].headline.main)}`}>
-              <Card2
-                category={articles[0].section_name}
-                title={articles[0].headline.main}
-                imageUrl={`https://www.nytimes.com/${
-                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-                }`}
-                height="518px"
-              />
-\          </Link>
+            <Card2
+              category={articles[0].section_name}
+              title={articles[0].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="518px"
+            />
+            \{" "}
+          </Link>
         </Grid>
 
         {/* Right Side - Three Smaller Cards */}
@@ -65,15 +67,15 @@ const Technology = () => {
                 <Link
                   href={`/news/${encodeURIComponent(article.headline.main)}`}
                 >
-                    <Card3
-                      category={article.section_name}
-                      title={article.headline.main}
-                      imageUrl={`https://www.nytimes.com/${
-                        article.multimedia?.[0]?.url || "/placeholder.jpg"
-                      }`}
-                      height="100%"
-                      width="100%"
-                    />
+                  <Card3
+                    category={article.section_name}
+                    title={article.headline.main}
+                    imageUrl={`https://www.nytimes.com/${
+                      article.multimedia?.[0]?.url || "/placeholder.jpg"
+                    }`}
+                    height="100%"
+                    width="100%"
+                  />
                 </Link>
               </Grid>
             ))}

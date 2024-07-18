@@ -1,37 +1,31 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const MostFavouriteNews = () => {
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading indicator
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const response = await getNews("favourite");
         setArticles(response.docs);
-        setLoading(false);
         console.log("favourite", response);
       } catch (error) {
         console.error("Error fetching favourite articles:", error);
-        setLoading(false);
       }
     };
 
     fetchArticles();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (articles.length === 0) {
-    return <div>No favourite articles found.</div>;
+    return <CardSkeleton />;
   }
 
   return (
@@ -80,7 +74,9 @@ const MostFavouriteNews = () => {
               {articles.length > 2 && (
                 <Link
                   key={articles[2]._id}
-                  href={`/news/${encodeURIComponent(articles[2].headline.main)}`}
+                  href={`/news/${encodeURIComponent(
+                    articles[2].headline.main
+                  )}`}
                 >
                   <a style={{ textDecoration: "none" }}>
                     <Card1

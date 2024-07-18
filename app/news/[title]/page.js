@@ -64,12 +64,9 @@ const NewsDetailPage = () => {
             </h2>
             <div className="space-y-4">
               {relatedArticles.map((article) => (
-                <Link
-                  href={`/news/${article.headline.main}`}
-                >
+                <Link href={`/news/${article.headline.main}`} key={article._id}>
                   {" "}
                   <Card4
-                    key={article._id}
                     category={article.section_name}
                     title={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${

@@ -12,12 +12,13 @@ import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
+import Login from "../Models/Login";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const handleSearchOpen = () => {
     setIsDialogOpen(true);
   };
@@ -25,7 +26,13 @@ const Navigation = () => {
   const handleSearchClose = () => {
     setIsDialogOpen(false);
   };
+  const handleLoginOpen = () => {
+    setIsLoginDialogOpen(true); // Open LoginDialog
+  };
 
+  const handleLoginClose = () => {
+    setIsLoginDialogOpen(false); // Close LoginDialog
+  };
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -121,14 +128,17 @@ const Navigation = () => {
               Categories
             </NavLink>
             <NavLink
-              href="/login"
-              isActive={activeTab === "login"}
-              onClick={() => setActiveTab("login")}
+              href="#"
+              isActive={activeTab === "SignUp"}
+              onClick={() => {
+                setActiveTab("SignUp");
+                handleLoginOpen();
+              }}
               className={`text-black cursor-pointer${
                 activeTab === "login" ? "border-b-2 border-red-500" : ""
               }`}
             >
-              Login
+              SignUp
             </NavLink>
           </Box>
 
@@ -143,6 +153,7 @@ const Navigation = () => {
             </IconButton>
             <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />
           </div>
+          <Login open={isLoginDialogOpen} onClose={handleLoginClose} />
         </Toolbar>
       </div>
     </Container>

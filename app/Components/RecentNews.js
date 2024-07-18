@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const RecentNews = () => {
   const [articles, setArticles] = useState([]);
@@ -24,7 +25,7 @@ const RecentNews = () => {
   }, []);
 
   if (articles.length === 0) {
-    return <div>Loading...</div>; // Display a loading indicator while fetching data
+    return <CardSkeleton />;
   }
 
   return (
@@ -49,7 +50,10 @@ const RecentNews = () => {
         {/* Second Column - Right Side Small Cards */}
         <Grid item xs={12} md={4}>
           {articles.slice(1, 3).map((article, index) => (
-            <Link key={article._id} href={`/news/${encodeURIComponent(article.headline.main)}`}>
+            <Link
+              key={article._id}
+              href={`/news/${encodeURIComponent(article.headline.main)}`}
+            >
               <Card1
                 category={article.section_name}
                 title={article.headline.main}

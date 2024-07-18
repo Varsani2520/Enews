@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid, Button } from "@mui/material";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -37,7 +38,7 @@ const Technology = () => {
   };
 
   if (articles.length === 0) {
-    return <div>Loading...</div>; // Show a loading indicator while fetching data
+    return <CardSkeleton />;
   }
 
   return (
@@ -65,17 +66,25 @@ const Technology = () => {
             {articles
               .slice(currentIndex, currentIndex + 3)
               .map((article, index) => (
-                <Grid item xs={12} md={4} key={index} style={{ height: "100%" }}>
-                  <Link href={`/news/${encodeURIComponent(article.headline.main)}`}>
-                      <Card1
-                        category={article.section_name}
-                        title={article.headline.main}
-                        imageUrl={`https://www.nytimes.com/${
-                          article.multimedia?.[0]?.url || "/placeholder.jpg"
-                        }`}
-                        height="100%" // Adjust to 100% to fill the container height
-                        width="100%"
-                      />
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  key={index}
+                  style={{ height: "100%" }}
+                >
+                  <Link
+                    href={`/news/${encodeURIComponent(article.headline.main)}`}
+                  >
+                    <Card1
+                      category={article.section_name}
+                      title={article.headline.main}
+                      imageUrl={`https://www.nytimes.com/${
+                        article.multimedia?.[0]?.url || "/placeholder.jpg"
+                      }`}
+                      height="100%" // Adjust to 100% to fill the container height
+                      width="100%"
+                    />
                   </Link>
                 </Grid>
               ))}

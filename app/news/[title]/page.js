@@ -1,10 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Typography, Link } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { getNews } from "@/app/utils/getNews";
 import Card4 from "@/app/Reuse/Card4";
 import Breadcumbs from "@/app/Reuse/Breadcumps";
 import { useParams } from "next/navigation";
+import Banner from "@/app/Reuse/Banner";
+import CardSkeleton from "@/app/Components/Skeleton";
+import Link from "next/link";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -29,19 +32,24 @@ const NewsDetailPage = () => {
   };
 
   if (!clickedArticle) {
-    return <div>Loading...</div>; // Handle initial load or no stored data
+    return <CardSkeleton />;
   }
 
   return (
     <div className="bg-gray-100 min-h-screen py-6">
       <Breadcumbs heading={decodeURIComponent(title)} title={"News Articles"} />
       <Container maxWidth="xl" sx={{ mt: "5%" }}>
+        <Banner buttonText={"Buy Now"} />
         <Grid container spacing={3}>
           {/* Left Side - Display Big Image */}
           <Grid item xs={12} md={8}>
             <div className="mb-4">
-              <p className="text-gray-600">{clickedArticle.category}</p>
-              <h1 className="text-3xl font-bold mt-1">{clickedArticle.title}</h1>
+              <p className="text-white bg-red-700 p-2 w-fit rounded-md">
+                {clickedArticle.category}
+              </p>
+              <h1 className="text-3xl font-bold mt-1">
+                {clickedArticle.title}
+              </h1>
             </div>
             <img
               src={clickedArticle.imageUrl}
@@ -56,14 +64,16 @@ const NewsDetailPage = () => {
             </h2>
             <div className="space-y-4">
               {relatedArticles.map((article) => (
-                <Card4
-                  key={article._id}
-                  category={article.section_name}
-                  title={article.headline.main}
-                  imageUrl={`https://www.nytimes.com/${
-                    article.multimedia?.[0]?.url || "/placeholder.jpg"
-                  }`}
-                />
+                <Link href={`/news/${article.headline.main}`} key={article._id}>
+                  {" "}
+                  <Card4
+                    category={article.section_name}
+                    title={article.headline.main}
+                    imageUrl={`https://www.nytimes.com/${
+                      article.multimedia?.[0]?.url || "/placeholder.jpg"
+                    }`}
+                  />
+                </Link>
               ))}
             </div>
           </Grid>

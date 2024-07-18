@@ -4,6 +4,7 @@ import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const PopularCards = () => {
   const [articles, setArticles] = useState([]);
@@ -23,7 +24,7 @@ const PopularCards = () => {
   }, []);
 
   if (articles.length === 0) {
-    return <div>Loading...</div>; // You can show a loading indicator while fetching data
+    return <CardSkeleton />; 
   }
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Container, IconButton, Menu, MenuItem } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import LanguageIcon from "@mui/icons-material/Language";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -12,7 +12,7 @@ import Icons from "../Reuse/Icons";
 const Weather = () => {
   const getCurrentDate = () => {
     const options = {
-      weekday: "long",
+      // weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -31,7 +31,9 @@ const Weather = () => {
   };
 
   return (
-    <div style={{ background: '#1a2e51', color: 'white', padding: '10px 0' }}>      <Container
+    <div style={{ background: "#1a2e51", color: "white", padding: "10px 0" }}>
+      {" "}
+      <Container
         maxWidth="xl"
         style={{
           display: "flex",
@@ -42,15 +44,23 @@ const Weather = () => {
         }}
       >
         {/* Left Side - Current Date and Calendar Icon */}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <IconButton color="inherit">
-            <CalendarTodayIcon />
-          </IconButton>
-          <span style={{ marginLeft: "5px" }}>{getCurrentDate()}</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#f20404",
+            color: "white",
+            fontWeight: "bold",
+            borderRadius: "10px",
+            fontSize: "small",
+          }}
+        >
+          <Icons icon={<DateRangeOutlinedIcon fontSize="small" />} />
+          <span>{getCurrentDate()}</span>
         </div>
 
         {/* Right Side - Language Option Menu and Social Icons */}
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ alignItems: "center" }} className="hidden sm:flex">
           {/* Language Option */}
           <IconButton color="inherit" onClick={handleLanguageClick}>
             <LanguageIcon />

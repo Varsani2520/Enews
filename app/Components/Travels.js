@@ -5,6 +5,7 @@ import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import { Container } from "@mui/material";
 import Link from "next/link";
+import CardSkeleton from "./Skeleton";
 
 const Travels = () => {
   const [articles, setArticles] = useState([]);
@@ -21,7 +22,9 @@ const Travels = () => {
   useEffect(() => {
     fetchArticles();
   }, []);
-
+  if (articles.length === 0) {
+    return <CardSkeleton />;
+  }
   return (
     <Container maxWidth="xl">
       <Grid container spacing={4}>

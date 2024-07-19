@@ -37,7 +37,6 @@ const MostFavouriteNews = () => {
             key={articles[0]._id}
             href={`/news/${encodeURIComponent(articles[0].headline.main)}`}
           >
-            <a style={{ textDecoration: "none" }}>
               <Card2
                 height={"613px"}
                 category={articles[0].section_name}
@@ -46,7 +45,6 @@ const MostFavouriteNews = () => {
                   articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
                 }`}
               />
-            </a>
           </Link>
         </Grid>
 
@@ -58,7 +56,6 @@ const MostFavouriteNews = () => {
                 key={articles[1]._id}
                 href={`/news/${encodeURIComponent(articles[1].headline.main)}`}
               >
-                <a style={{ textDecoration: "none" }}>
                   <Card1
                     category={articles[1].section_name}
                     title={articles[1].headline.main}
@@ -69,7 +66,6 @@ const MostFavouriteNews = () => {
                     width="100%"
                     marginBottom={"5%"}
                   />
-                </a>
               </Link>
               {articles.length > 2 && (
                 <Link
@@ -78,7 +74,7 @@ const MostFavouriteNews = () => {
                     articles[2].headline.main
                   )}`}
                 >
-                  <a style={{ textDecoration: "none" }}>
+                 
                     <Card1
                       category={articles[2].section_name}
                       title={articles[2].headline.main}
@@ -88,7 +84,6 @@ const MostFavouriteNews = () => {
                       height="300px"
                       width="100%"
                     />
-                  </a>
                 </Link>
               )}
             </>

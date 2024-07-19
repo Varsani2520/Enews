@@ -9,31 +9,32 @@ import {
   TextField,
   IconButton,
   Box,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleIcon from "@mui/icons-material/Google";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import { setDoc, doc } from "firebase/firestore";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import firebase from "firebase/app";
-import "firebase/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginDialog = ({ open, onClose }) => {
-  const [isLogin, setIsLogin] = useState(false); // State to toggle between login and signup
+  const [tabIndex, setTabIndex] = useState(0); // State to switch between tabs
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
-    phone: "",
+    otp: "",
   });
-  const [showOTPInput, setShowOTPInput] = useState(false);
-  const [verificationId, setVerificationId] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
 
-  const toggleLogin = () => {
-    setIsLogin((prev) => !prev); // Toggle between login and signup
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
   };
 
   const handleInputChange = (e) => {
@@ -46,58 +47,62 @@ const LoginDialog = ({ open, onClose }) => {
       const result = await signInWithPopup(auth, provider);
       console.log("User signed in:", result.user);
       await saveUserDataToFirestore(result.user);
+      toast.success("Signed in with Google successfully!");
       onClose();
     } catch (error) {
       console.error("Error signing in with Google:", error);
+      toast.error("Error signing in with Google.");
     }
   };
 
   const handleSignUp = async () => {
     try {
-      // Validate all required fields are filled
-      if (
-        !userData.name ||
-        !userData.email ||
-        !userData.password ||
-        !userData.phone
-      ) {
-        console.error("Please fill in all required fields.");
+      if (!userData.name || !userData.email || !userData.password) {
+        toast.error("Please fill in all required fields.");
         return;
       }
 
-      // Example: Sign up with phone number
-      const phoneNumber = userData.phone;
-      const appVerifier = new firebase.auth.RecaptchaVerifier(
-        "recaptcha-container"
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        userData.email,
+        userData.password
       );
-      const confirmationResult = await firebase
-        .auth()
-        .signInWithPhoneNumber(phoneNumber, appVerifier);
-      setVerificationId(confirmationResult.verificationId);
-      console.log("Verification code sent to", phoneNumber);
-
-      // Show OTP input fields
-      setShowOTPInput(true);
-    } catch (error) {
-      console.error("Error signing up with phone number:", error);
-    }
-  };
-
-  const handleVerifyOTP = async () => {
-    try {
-      const credential = firebase.auth.PhoneAuthProvider.credential(
-        verificationId,
-        verificationCode
-      );
-      const result = await auth.signInWithCredential(credential);
-      console.log("User signed in with phone:", result.user);
-
-      // Save user data to Firestore
+      console.log("User signed up:", result.user);
+      toast.success("Sign up successful!");
       await saveUserDataToFirestore(result.user);
       onClose();
     } catch (error) {
-      console.error("Error verifying OTP:", error);
+      console.error("Error signing up with email:", error);
+      toast.error("Error signing up with email.");
     }
+  };
+
+  const handleLogin = async () => {
+    try {
+      if (!userData.email || !userData.password) {
+        toast.error("Please fill in all required fields.");
+        return;
+      }
+
+      const result = await signInWithEmailAndPassword(
+        auth,
+        userData.email,
+        userData.password
+      );
+      console.log("User logged in:", result.user);
+      toast.success("Login successful!");
+      onClose();
+    } catch (error) {
+      console.error("Error logging in with email:", error);
+      toast.error("Error logging in with email.");
+    }
+  };
+
+  const handleOtpSignIn = async () => {
+    // Handle OTP sign-in here
+    // This is a placeholder for your OTP authentication logic
+    toast.success("OTP sign-in is not implemented yet.");
+    onClose();
   };
 
   const saveUserDataToFirestore = async (user) => {
@@ -106,7 +111,6 @@ const LoginDialog = ({ open, onClose }) => {
       const userDataToSave = {
         name: userData.name || user.displayName,
         email: userData.email || user.email,
-        phoneNumber: userData.phone || user.phoneNumber || "",
       };
       await setDoc(userRef, userDataToSave);
       console.log("User data saved to Firestore:", userDataToSave);
@@ -116,151 +120,140 @@ const LoginDialog = ({ open, onClose }) => {
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      sx={{
-        "& .MuiDialog-paper": {
-          display: "flex",
-          flexDirection: "column",
-          width: "400px",
-        },
-      }}
-      fullWidth
-      maxWidth="sm"
-    >
-      <DialogTitle>
-        {isLogin ? "Login" : "Sign Up"}
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          style={{ position: "absolute", right: 8, top: 8 }}
+    <>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        sx={{
+          "& .MuiDialog-paper": {
+            display: "flex",
+            flexDirection: "column",
+            width: "400px",
+            padding: "16px",
+          },
+        }}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontWeight: "bold",
+          }}
         >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        {!isLogin && !showOTPInput && (
-          <>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Name"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={userData.name}
-              onChange={handleInputChange}
-            />
-            <PhoneInput
-              country={"us"}
-              inputProps={{
-                id: "phone",
-                name: "phone",
-                required: true,
-                autoFocus: false,
-              }}
-              containerStyle={{ marginTop: "16px", width: "100%" }}
-              inputStyle={{ width: "100%" }}
-              value={userData.phone}
-              onChange={(phone) => setUserData({ ...userData, phone })}
-            />
-            <TextField
-              margin="dense"
-              id="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="outlined"
-              value={userData.email}
-              onChange={handleInputChange}
-            />
-            <TextField
-              margin="dense"
-              id="password"
-              label="Password"
-              type="password"
-              fullWidth
-              variant="outlined"
-              value={userData.password}
-              onChange={handleInputChange}
-            />
-           
-          </>
-        )}
-        {!isLogin && showOTPInput && (
-          <>
-            {[...Array(6)].map((_, index) => (
+          {tabIndex === 0 ? "Login" : tabIndex === 1 ? "Sign Up" : "OTP Sign In"}
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{ color: "text.primary" }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Tabs value={tabIndex} onChange={handleTabChange} aria-label="login options">
+            <Tab label="Email/Password" />
+            <Tab label="Google" />
+            <Tab label="OTP" />
+          </Tabs>
+
+          {tabIndex === 0 && (
+            <>
               <TextField
-                key={index}
-                autoFocus={index === 0}
                 margin="dense"
-                id={`otp${index}`}
-                label={`OTP ${index + 1}`}
+                id="email"
+                label="Email Address"
+                type="email"
+                fullWidth
+                variant="outlined"
+                value={userData.email}
+                onChange={handleInputChange}
+                sx={{ marginBottom: "16px" }}
+              />
+              <TextField
+                margin="dense"
+                id="password"
+                label="Password"
+                type="password"
+                fullWidth
+                variant="outlined"
+                value={userData.password}
+                onChange={handleInputChange}
+              />
+              <Box width="100%" sx={{ marginTop: "8px" }}>
+                <Button
+                  onClick={handleLogin}
+                  fullWidth
+                  sx={{
+                    background: "#4CAF50",
+                    color: "#fff",
+                    ":hover": { background: "#388E3C" },
+                  }}
+                  variant="contained"
+                >
+                  Sign In
+                </Button>
+              </Box>
+            </>
+          )}
+
+         
+
+          {tabIndex === 2 && (
+            <>
+              <TextField
+                margin="dense"
+                id="otp"
+                label="Enter OTP"
                 type="text"
                 fullWidth
                 variant="outlined"
-                value={verificationCode[index] || ""}
-                onChange={(e) => {
-                  const newVerificationCode = [...verificationCode];
-                  newVerificationCode[index] = e.target.value;
-                  setVerificationCode(newVerificationCode);
-                }}
+                value={userData.otp}
+                onChange={handleInputChange}
+                sx={{ marginBottom: "16px" }}
               />
-            ))}
-            <Button
-              onClick={handleVerifyOTP}
-              variant="contained"
-              color="primary"
-              style={{ marginTop: "16px" }}
-              fullWidth
-            >
-              Verify OTP
-            </Button>
-          </>
-        )}
-      </DialogContent>
-      <DialogActions>
-        {!showOTPInput && (
-          <Box width="100%">
-            <Button
-              onClick={handleSignUp}
-              sx={{ background: "#f20404" }}
-              fullWidth
-              variant="contained"
-            >
-              Sign Up
-            </Button>
-          </Box>
-        )}
-        {!showOTPInput && (
-          <Box width="100%">
-            <Button
-              onClick={handleGoogleSignIn}
-              color="secondary"
-              fullWidth
-              startIcon={<GoogleIcon />}
-              variant="contained"
-            >
-              Sign Up with Google
-            </Button>
-          </Box>
-        )}
-        {!showOTPInput && (
-          <Box width="100%">
-            <Button
-              onClick={toggleLogin}
-              fullWidth
-              variant="text"
-              color="primary"
-            >
-              Already have an account? Login
-            </Button>
-          </Box>
-        )}
-      </DialogActions>
-    </Dialog>
+              <Box width="100%" sx={{ marginTop: "8px" }}>
+                <Button
+                  onClick={handleOtpSignIn}
+                  fullWidth
+                  sx={{
+                    background: "#007bff",
+                    color: "#fff",
+                    ":hover": { background: "#0056b3" },
+                  }}
+                  variant="contained"
+                >
+                  Verify OTP
+                </Button>
+              </Box>
+            </>
+          )}
+        </DialogContent>
+        <DialogActions>
+          {tabIndex === 1 && (
+            <Box width="100%" sx={{ marginTop: "8px" }}>
+              <Button
+                onClick={handleGoogleSignIn}
+                color="secondary"
+                fullWidth
+                startIcon={<GoogleIcon />}
+                variant="contained"
+                sx={{
+                  background: "#4285F4",
+                  color: "#fff",
+                  ":hover": { background: "#357ae8" },
+                }}
+              >
+                {tabIndex === 0 ? "Sign In with Google" : "Sign Up with Google"}
+              </Button>
+            </Box>
+          )}
+        </DialogActions>
+      </Dialog>
+      <Toaster />
+    </>
   );
 };
 

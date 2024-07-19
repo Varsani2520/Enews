@@ -1,3 +1,4 @@
+// LoginDialog component
 'use client'
 import React, { useState } from "react";
 import {
@@ -11,21 +12,24 @@ import {
   Box,
   Tabs,
   Tab,
+  Backdrop,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleIcon from "@mui/icons-material/Google";
-import { setDoc, doc } from "firebase/firestore";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import PhoneInput from "react-phone-input-2";
+import OtpContainer from "../utils/OtpContainer";
+import { onSignup } from "../utils/OnSignUp";
+import { onCaptchVerify } from "./onCaptchVerify";
 
-const LoginDialog = ({ open, onClose }) => {
-  const [tabIndex, setTabIndex] = useState(0); // State to switch between tabs
+const LoginDialog = ({ open, onClose, setOpen }) => {
+  const [tabIndex, setTabIndex] = useState(0);
+  const [otpModel, setOtpModel] = useState(false);
+  const [ph, setPh] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [signupLoading, setSignupLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -99,8 +103,6 @@ const LoginDialog = ({ open, onClose }) => {
   };
 
   const handleOtpSignIn = async () => {
-    // Handle OTP sign-in here
-    // This is a placeholder for your OTP authentication logic
     toast.success("OTP sign-in is not implemented yet.");
     onClose();
   };
@@ -118,6 +120,22 @@ const LoginDialog = ({ open, onClose }) => {
       console.error("Error saving user data:", error);
     }
   };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    // Call onCaptchVerify to handle captcha verification
+    onCaptchVerify(() => {
+      onSignup({
+        setLoading,
+        onCaptchVerify,
+        setSignupLoading,
+        setOtpModel,
+        setOpen,
+        ph,
+      });
+    });
+  }
 
   return (
     <>
@@ -143,7 +161,11 @@ const LoginDialog = ({ open, onClose }) => {
             fontWeight: "bold",
           }}
         >
-          {tabIndex === 0 ? "Login" : tabIndex === 1 ? "Sign Up" : "OTP Sign In"}
+          {tabIndex === 0
+            ? "Login"
+            : tabIndex === 1
+            ? "Sign Up"
+            : "OTP Sign In"}
           <IconButton
             aria-label="close"
             onClick={onClose}
@@ -153,7 +175,11 @@ const LoginDialog = ({ open, onClose }) => {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <Tabs value={tabIndex} onChange={handleTabChange} aria-label="login options">
+          <Tabs
+            value={tabIndex}
+            onChange={handleTabChange}
+            aria-label="login options"
+          >
             <Tab label="Email/Password" />
             <Tab label="Google" />
             <Tab label="OTP" />
@@ -199,35 +225,28 @@ const LoginDialog = ({ open, onClose }) => {
             </>
           )}
 
-         
-
           {tabIndex === 2 && (
             <>
-              <TextField
-                margin="dense"
-                id="otp"
-                label="Enter OTP"
-                type="text"
-                fullWidth
-                variant="outlined"
-                value={userData.otp}
-                onChange={handleInputChange}
-                sx={{ marginBottom: "16px" }}
+              <PhoneInput
+                country={"in"}
+                value={ph}
+                className="appearance-none border rounded w-full border-none"
+                onChange={setPh}
+                inputStyle={{ width: "240px" }}
               />
-              <Box width="100%" sx={{ marginTop: "8px" }}>
-                <Button
-                  onClick={handleOtpSignIn}
-                  fullWidth
-                  sx={{
-                    background: "#007bff",
-                    color: "#fff",
-                    ":hover": { background: "#0056b3" },
-                  }}
-                  variant="contained"
+              <div id="recaptcha-container"></div>
+
+              <div className="flex items-center justify-center">
+                <button
+                  onClick={handleSubmit} // Changed to handleSubmit directly
+                  className="w-full hover:bg-white hover:text-black hover:border-red-600 border flex gap-1 items-center justify-center py-2 text-white rounded secondry-bg"
                 >
-                  Verify OTP
-                </Button>
-              </Box>
+                  {signupLoading && (
+                    <CgSpinner size={20} className="mt-1 animate-spin" />
+                  )}
+                  <span>Sign up</span>
+                </button>
+              </div>
             </>
           )}
         </DialogContent>
@@ -253,6 +272,15 @@ const LoginDialog = ({ open, onClose }) => {
         </DialogActions>
       </Dialog>
       <Toaster />
+      <Backdrop open={open}>
+        <OtpContainer
+          user={userData}
+          setOpen={setOtpModel}
+          loading={loading}
+          setLoading={setLoading}
+          phoneNo={ph}
+        />
+      </Backdrop>
     </>
   );
 };

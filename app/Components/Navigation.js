@@ -13,12 +13,14 @@ import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
 import Login from "../Models/Login";
+import Link from "next/link";
 
-const Navigation = () => {
+const Navigation = ({ otpModel, setOtpModel }) => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+
   const handleSearchOpen = () => {
     setIsDialogOpen(true);
   };
@@ -26,6 +28,7 @@ const Navigation = () => {
   const handleSearchClose = () => {
     setIsDialogOpen(false);
   };
+
   const handleLoginOpen = () => {
     setIsLoginDialogOpen(true); // Open LoginDialog
   };
@@ -33,6 +36,7 @@ const Navigation = () => {
   const handleLoginClose = () => {
     setIsLoginDialogOpen(false); // Close LoginDialog
   };
+
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -48,11 +52,12 @@ const Navigation = () => {
       <div position="static" className="bg-white text-black mb-4">
         <Toolbar className="flex justify-between items-center">
           {/* Logo */}
-          <img src="/logo.png" width="10%" alt="logo" />
+          <Link href="/">
 
+          <img src="/logo.png" width="10%" alt="logo" />
+</Link>
           {/* Burger Menu for Medium Devices */}
           <div className="md:hidden border border-black border-solid border-opacity-50 space-x-3 rounded-lg">
-            {" "}
             <IconButton
               color="inherit"
               aria-label="menu"
@@ -116,16 +121,6 @@ const Navigation = () => {
               }`}
             >
               Breaking News
-            </NavLink>
-            <NavLink
-              href="/categories"
-              isActive={activeTab === "categories"}
-              onClick={() => setActiveTab("categories")}
-              className={`text-black cursor-pointer${
-                activeTab === "categories" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Categories
             </NavLink>
             <NavLink
               href="#"

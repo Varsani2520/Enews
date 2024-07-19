@@ -44,19 +44,16 @@ const Footer = () => {
           <Divider />
           <ul className="text-sm">
             <li className="mb-2">
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </li>
             <li className="mb-2">
-              <a href="#">Live News</a>
+              <a href="/all_breaking_news">Breaking News</a>
             </li>
             <li className="mb-2">
-              <a href="#">Breaking News</a>
+              <a href="/about-us">About Us</a>
             </li>
             <li className="mb-2">
-              <a href="#">About Us</a>
-            </li>
-            <li className="mb-2">
-              <a href="#">Contact Us</a>
+              <a href="/contact-us">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -69,37 +66,37 @@ const Footer = () => {
           <Divider />
           <ul className="text-sm">
             <li className="mb-1">
-              <a href="#">Technology</a>
+              <a href="/news/technology">Technology</a>
             </li>
             <li className="mb-1">
-              <a href="#">Science</a>
+              <a href="/news/science">Science</a>
             </li>
             <li className="mb-1">
-              <a href="#">Religion</a>
+              <a href="/news/religion">Religion</a>
             </li>
             <li className="mb-1">
-              <a href="#">Politics</a>
+              <a href="/news/politics">Politics</a>
             </li>
             <li className="mb-1">
-              <a href="#">Business</a>
+              <a href="/news/business">Business</a>
             </li>
             <li className="mb-1">
-              <a href="#">Family</a>
+              <a href="/news/family">Family</a>
             </li>
             <li className="mb-1">
-              <a href="#">Top News</a>
+              <a href="/news/top-news">Top News</a>
             </li>
             <li className="mb-1">
-              <a href="#">Cars</a>
+              <a href="/news/car">Cars</a>
             </li>
             <li className="mb-1">
-              <a href="#">Travels</a>
+              <a href="/news/travels">Travels</a>
             </li>
             <li className="mb-1">
-              <a href="#">Sports</a>
+              <a href="/news/sports">Sports</a>
             </li>
             <li className="mb-1">
-              <a href="#">Health</a>
+              <a href="/news/health">Health</a>
             </li>
           </ul>
         </div>

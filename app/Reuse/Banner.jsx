@@ -18,9 +18,9 @@ const Banner = ({ logo, title, buttonText }) => {
         </div>
 
         {/* Right side - Buy Now button */}
-        <Button variant="outlined"  className="ml-4 text-white border-white">
+        {/* <Button variant="outlined"  className="ml-4 text-white border-white">
           {buttonText ? buttonText : "Buy Now"}
-        </Button>
+        </Button> */}
       </div>
     </Container>
   );

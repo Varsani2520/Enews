@@ -13,7 +13,7 @@ const Heading = ({ title, subtitle, buttonText }) => {
             {subtitle}
           </Typography>
         </Box>
-        <Button
+        {/* <Button
           variant="contained"
           sx={{
             background: '#f20404',
@@ -25,7 +25,7 @@ const Heading = ({ title, subtitle, buttonText }) => {
           }}
         >
           {buttonText}
-        </Button>
+        </Button> */}
       </Box>
     </Container>
   );

@@ -13,7 +13,7 @@ const MostFavouriteNews = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await getNews("favourite");
+        const response = await getNews("education");
         setArticles(response.docs);
         console.log("favourite", response);
       } catch (error) {
@@ -37,16 +37,14 @@ const MostFavouriteNews = () => {
             key={articles[0]._id}
             href={`/news/${encodeURIComponent(articles[0].headline.main)}`}
           >
-            <a style={{ textDecoration: "none" }}>
-              <Card2
-                height={"613px"}
-                category={articles[0].section_name}
-                title={articles[0].headline.main}
-                imageUrl={`https://www.nytimes.com/${
-                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-                }`}
-              />
-            </a>
+            <Card2
+              height={"613px"}
+              category={articles[0].section_name}
+              title={articles[0].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+            />
           </Link>
         </Grid>
 

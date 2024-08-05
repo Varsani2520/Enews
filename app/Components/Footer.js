@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -44,19 +45,19 @@ const Footer = () => {
           <Divider />
           <ul className="text-sm">
             <li className="mb-2">
-              <a href="#">Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li className="mb-2">
-              <a href="#">Live News</a>
+              <Link href="/news/live-news">Live News</Link>
             </li>
             <li className="mb-2">
-              <a href="#">Breaking News</a>
+              <Link href="/news/breaking-news">Breaking News</Link>
             </li>
             <li className="mb-2">
-              <a href="#">About Us</a>
+              <Link href="/about-us">About Us</Link>
             </li>
             <li className="mb-2">
-              <a href="#">Contact Us</a>
+              <Link href="/contact-us">Contact Us</Link>
             </li>
           </ul>
         </div>
@@ -65,41 +66,41 @@ const Footer = () => {
         <div>
           <Typography variant="h6" className="text-lg font-bold mb-4">
             Categories
-          </Typography>{" "}
+          </Typography>
           <Divider />
           <ul className="text-sm">
             <li className="mb-1">
-              <a href="#">Technology</a>
+              <Link href="/news/technology">Technology</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Science</a>
+              <Link href="/news/science">Science</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Religion</a>
+              <Link href="/news/religion">Religion</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Politics</a>
+              <Link href="/news/politics">Politics</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Business</a>
+              <Link href="/news/business">Business</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Family</a>
+              <Link href="/news/family">Family</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Top News</a>
+              <Link href="/news/top-news">Top News</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Cars</a>
+              <Link href="/news/cars">Cars</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Travels</a>
+              <Link href="/news/travels">Travels</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Sports</a>
+              <Link href="/news/sports">Sports</Link>
             </li>
             <li className="mb-1">
-              <a href="#">Health</a>
+              <Link href="/categories-news/health">Health</Link>
             </li>
           </ul>
         </div>

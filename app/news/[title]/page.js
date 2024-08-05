@@ -56,6 +56,7 @@ const NewsDetailPage = () => {
               alt="Article"
               className="w-full h-auto rounded-lg shadow-lg mb-6"
             />
+            <p>{clickedArticle.snippet}</p>
           </Grid>
           {/* Right Side - Display Related Articles */}
           <Grid item xs={12} md={4}>

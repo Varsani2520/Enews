@@ -26,7 +26,7 @@ const Card1 = ({ category, title, imageUrl, height, width, marginBottom }) => {
     <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width, marginBottom }} onClick={handleClick}>
       {/* Background Image */}
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
         src={imageUrl}
         alt="Card Background"
       />
@@ -38,7 +38,7 @@ const Card1 = ({ category, title, imageUrl, height, width, marginBottom }) => {
 
       {/* Title Container */}
       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2">
-        <h2 className="text-white text-xl md:text-2xl font-bold">{title}</h2>
+        <h2 className="text-white text-xs  font-bold">{title}</h2>
       </div>
     </div>
   );

@@ -21,11 +21,6 @@ export default function Home() {
         buttonText={"View More"}
       />
       <PopularCards />
-      <Banner
-        logo={"/logo.png"}
-        title="News that matters,delivered daily."
-        buttonText={"Buy Now"}
-      />
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}

@@ -44,12 +44,12 @@ const Navigation = () => {
   };
 
   return (
-    <Container maxWidth="xl" className="pt-1 pb-1">
-      <div position="static" className="bg-white text-black mb-4">
+    <Container maxWidth="xl" >
+      <div position="static" className="bg-white text-black">
         <Toolbar className="flex justify-between items-center">
+    
           {/* Logo */}
-          <img src="/logo.png" width="10%" alt="logo" />
-
+            <img src="/logo.png" width="10%" alt="logo"/>
           {/* Burger Menu for Medium Devices */}
           <div className="md:hidden border border-black border-solid border-opacity-50 space-x-3 rounded-lg">
             {" "}
@@ -98,16 +98,6 @@ const Navigation = () => {
               About Us
             </NavLink>
             <NavLink
-              href="/contact-us"
-              isActive={activeTab === "contact"}
-              onClick={() => setActiveTab("contact")}
-              className={`text-black cursor-pointer ${
-                activeTab === "contact" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Contact
-            </NavLink>
-            <NavLink
               href="/all_breaking_news"
               isActive={activeTab === "breaking"}
               onClick={() => setActiveTab("breaking")}
@@ -128,27 +118,36 @@ const Navigation = () => {
               Categories
             </NavLink>
             <NavLink
+              href="/contact-us"
+              isActive={activeTab === "contact"}
+              onClick={() => setActiveTab("contact")}
+              className={`text-black cursor-pointer ${
+                activeTab === "contact" ? "border-b-2 border-red-500" : ""
+              }`}
+            >
+              Contact
+            </NavLink>
+          </Box>
+
+          {/* Search Input */}
+          <div className="relative hidden md:flex items-center cursor-pointer space-x-4">
+          <NavLink
               href="#"
               isActive={activeTab === "SignUp"}
               onClick={() => {
                 setActiveTab("SignUp");
                 handleLoginOpen();
               }}
-              className={`text-black cursor-pointer${
+              className={`text-white bg-red-500 rounded cursor-pointer${
                 activeTab === "login" ? "border-b-2 border-red-500" : ""
               }`}
             >
-              SignUp
+              Sign Up
             </NavLink>
-          </Box>
-
-          {/* Search Input */}
-          <div className="relative hidden md:flex cursor-pointer">
             <IconButton
               onClick={handleSearchOpen}
               aria-label="search"
-              color="inherit"
-            >
+              style={{ color: 'red' }}            >
               <SearchIcon />
             </IconButton>
             <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />

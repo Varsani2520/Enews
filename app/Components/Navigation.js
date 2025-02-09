@@ -44,12 +44,11 @@ const Navigation = () => {
   };
 
   return (
-    <Container maxWidth="xl" >
-      <div position="static" className="bg-white text-black">
+    <Container maxWidth="xl">
+      <div position="static" className="bg-white text-[#1a2e51]">
         <Toolbar className="flex justify-between items-center">
-    
           {/* Logo */}
-            <img src="/logo.png" width="10%" alt="logo"/>
+          <img src="/logo.png" width="10%" alt="logo" />
           {/* Burger Menu for Medium Devices */}
           <div className="md:hidden border border-black border-solid border-opacity-50 space-x-3 rounded-lg">
             {" "}
@@ -81,7 +80,7 @@ const Navigation = () => {
               href="/"
               isActive={activeTab === "home"}
               onClick={() => setActiveTab("home")}
-              className={`text-black cursor-pointer ${
+              className={`text-["#1a2e51"] cursor-pointer ${
                 activeTab === "home" ? "border-b-2 border-red-500" : ""
               }`}
             >
@@ -91,7 +90,7 @@ const Navigation = () => {
               href="/about-us"
               isActive={activeTab === "about"}
               onClick={() => setActiveTab("about")}
-              className={`text-black cursor-pointer ${
+              className={` cursor-pointer ${
                 activeTab === "about" ? "border-b-2 border-red-500" : ""
               }`}
             >
@@ -101,7 +100,7 @@ const Navigation = () => {
               href="/all_breaking_news"
               isActive={activeTab === "breaking"}
               onClick={() => setActiveTab("breaking")}
-              className={`text-black cursor-pointer ${
+              className={` cursor-pointer ${
                 activeTab === "breaking" ? "border-b-2 border-red-500" : ""
               }`}
             >
@@ -111,7 +110,7 @@ const Navigation = () => {
               href="/categories"
               isActive={activeTab === "categories"}
               onClick={() => setActiveTab("categories")}
-              className={`text-black cursor-pointer${
+              className={` cursor-pointer${
                 activeTab === "categories" ? "border-b-2 border-red-500" : ""
               }`}
             >
@@ -121,7 +120,7 @@ const Navigation = () => {
               href="/contact-us"
               isActive={activeTab === "contact"}
               onClick={() => setActiveTab("contact")}
-              className={`text-black cursor-pointer ${
+              className={` cursor-pointer ${
                 activeTab === "contact" ? "border-b-2 border-red-500" : ""
               }`}
             >
@@ -131,7 +130,7 @@ const Navigation = () => {
 
           {/* Search Input */}
           <div className="relative hidden md:flex items-center cursor-pointer space-x-4">
-          <NavLink
+            <NavLink
               href="#"
               isActive={activeTab === "SignUp"}
               onClick={() => {
@@ -147,7 +146,8 @@ const Navigation = () => {
             <IconButton
               onClick={handleSearchOpen}
               aria-label="search"
-              style={{ color: 'red' }}            >
+              style={{ color: "red" }}
+            >
               <SearchIcon />
             </IconButton>
             <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />

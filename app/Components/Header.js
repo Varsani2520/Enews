@@ -29,7 +29,7 @@ const Header = () => {
                 href={`/categories-news/${category.toLowerCase()}`}
                 isActive={activeTab === category.toLowerCase()}
                 onClick={() => setActiveTab(category.toLowerCase())}
-                className={`text-black font-bold cursor-pointer transition-all duration-300 ${
+                className={`text-[#1a2e51] font-bold cursor-pointer transition-all duration-300 ${
                   activeTab === category.toLowerCase()
                     ? "border-b-2 border-[#f20404] text-[#f20404]"
                     : "hover:text-[#ce2b2b]"

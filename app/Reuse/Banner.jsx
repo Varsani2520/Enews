@@ -1,18 +1,20 @@
-import React from 'react';
-import { Container, Button, Typography } from '@mui/material';
+import React from "react";
+import { Container, Button, Typography } from "@mui/material";
 
 const Banner = ({ logo, title, buttonText }) => {
   return (
-    <Container maxWidth="lg" className="my-8">
-      <div className={`flex items-center justify-between  bg-black text-white p-4 rounded-lg mb-4`}>
+    <Container maxWidth="xl" className="my-8">
+      <div
+        className={`flex items-center justify-between  bg-black text-white p-4 rounded-lg mb-4`}
+      >
         {/* Left side - Logo */}
         <div className="mr-1">
-          <img src='/logo.png' alt="Logo" className="w-20 h-auto" />
+          <img src="/logo.png" alt="Logo" className="w-20 h-auto" />
         </div>
 
         {/* Center - Title */}
         <div className="text-center flex-1 ">
-          <Typography variant="body2" component="h2">
+          <Typography variant="body2" component="h1">
             {title ? title : "Stay informed,stay ahead with our daily news"}
           </Typography>
         </div>

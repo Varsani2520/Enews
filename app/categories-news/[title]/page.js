@@ -16,6 +16,7 @@ const CategoryPage = () => {
       try {
         if (title) {
           const response = await getNews(title);
+          console.log("response of popular",response.docs)
           setArticles(response.docs);
         }
       } catch (error) {

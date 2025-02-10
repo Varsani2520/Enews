@@ -18,13 +18,15 @@ export default function Home() {
       <Heading
         title={"Popular News"}
         subtitle={"Popular News Here"}
-        buttonText={"View More"}
+        buttonText={"View More"} 
+        link="/categories-news/popular"
       />
       <PopularCards />
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}
         buttonText={"View More"}
+        link="/categories-news/recent"
       />
       <RecentNews />
       <Technology />

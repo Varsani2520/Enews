@@ -1,23 +1,20 @@
-import { IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 
 const Icons = ({ onClick, icon, props, href }) => {
   return (
-    <IconButton
+    <Box
       onClick={onClick}
       {...props}
       color="inherit"
       href={href}
       target="_blank"
       sx={{
-        "&:hover": {
-          background: "#ce2b2b",
-          borderRadius: "5px"
-        },
+        padding: "5px",
       }}
     >
       {icon}
-    </IconButton>
+    </Box>
   );
 };
 

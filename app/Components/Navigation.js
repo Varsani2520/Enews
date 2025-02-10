@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,8 +7,14 @@ import {
   Box,
   IconButton,
   Drawer,
+  Menu,
+  MenuItem,
 } from "@mui/material";
-import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  Search as SearchIcon,
+  Menu as MenuIcon,
+  AccountCircle,
+} from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
@@ -19,6 +25,17 @@ const Navigation = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Retrieve user from localStorage
+    const storedUser = localStorage.getItem("users");
+    console.log(storedUser);
+
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const handleSearchOpen = () => {
     setIsDialogOpen(true);
   };
@@ -76,73 +93,46 @@ const Navigation = () => {
 
           {/* Navigation Links */}
           <Box className="hidden md:flex gap-6 items-center justify-end">
-            <NavLink
-              href="/"
-              isActive={activeTab === "home"}
-              onClick={() => setActiveTab("home")}
-              className={`text-["#1a2e51"] cursor-pointer ${
-                activeTab === "home" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              href="/about-us"
-              isActive={activeTab === "about"}
-              onClick={() => setActiveTab("about")}
-              className={` cursor-pointer ${
-                activeTab === "about" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              About Us
-            </NavLink>
-            <NavLink
-              href="/all_breaking_news"
-              isActive={activeTab === "breaking"}
-              onClick={() => setActiveTab("breaking")}
-              className={` cursor-pointer ${
-                activeTab === "breaking" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Breaking News
-            </NavLink>
-            <NavLink
-              href="/categories"
-              isActive={activeTab === "categories"}
-              onClick={() => setActiveTab("categories")}
-              className={` cursor-pointer${
-                activeTab === "categories" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Categories
-            </NavLink>
-            <NavLink
-              href="/contact-us"
-              isActive={activeTab === "contact"}
-              onClick={() => setActiveTab("contact")}
-              className={` cursor-pointer ${
-                activeTab === "contact" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Contact
-            </NavLink>
+            {["home", "about", "breaking", "categories", "contact"].map(
+              (tab) => (
+                <NavLink
+                  key={tab}
+                  href={`/${tab === "home" ? "" : tab}`}
+                  isActive={activeTab === tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`cursor-pointer ${
+                    activeTab === tab ? "border-b-2 border-red-500" : ""
+                  }`}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1).replace("-", " ")}
+                </NavLink>
+              )
+            )}
           </Box>
 
           {/* Search Input */}
+          {/* User Section */}
           <div className="relative hidden md:flex items-center cursor-pointer space-x-4">
-            <NavLink
-              href="#"
-              isActive={activeTab === "SignUp"}
-              onClick={() => {
-                setActiveTab("SignUp");
-                handleLoginOpen();
-              }}
-              className={`text-white bg-red-500 rounded cursor-pointer${
-                activeTab === "login" ? "border-b-2 border-red-500" : ""
-              }`}
-            >
-              Sign Up
-            </NavLink>
+            {user ? (
+              <>
+                <p>{user.displayName}</p>
+              </>
+            ) : (
+              <NavLink
+                href="#"
+                isActive={activeTab === "SignUp"}
+                onClick={() => {
+                  setActiveTab("SignUp");
+                  handleLoginOpen();
+                }}
+                className={`text-white bg-red-500 rounded px-3 py-1 cursor-pointer ${
+                  activeTab === "SignUp" ? "border-b-2 border-red-500" : ""
+                }`}
+              >
+                Sign Up
+              </NavLink>
+            )}
+
             <IconButton
               onClick={handleSearchOpen}
               aria-label="search"

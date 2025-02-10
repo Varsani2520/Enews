@@ -23,7 +23,7 @@ const Card1 = ({ category, title, imageUrl, height, width, marginBottom }) => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height, width, marginBottom }} onClick={handleClick}>
+    <div className="relative overflow-hidden rounded-lg shadow-lg" style={{ height: height || "300px", width: width || "100%" , marginBottom }} onClick={handleClick}>
       {/* Background Image */}
       <img
         className="object-cover w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"

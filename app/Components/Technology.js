@@ -6,6 +6,7 @@ import Card2 from "../Reuse/Card2";
 import { Container, Grid, Button } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
+import SwiperCard from "../Reuse/SwiperCard";
 
 const Technology = () => {
   const [articles, setArticles] = useState([]);
@@ -42,82 +43,92 @@ const Technology = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ marginY: "5%" }}>
-      <Grid container spacing={3}>
-        {/* Left Side - Big Card */}
-        <Grid item xs={12} md={3}>
-          <Card2
-            category={articles[0].section_name}
-            title={articles[0].headline.main}
-            imageUrl={`https://www.nytimes.com/${
-              articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-            }`}
-            height="400px"
-          />
-        </Grid>
+    <div
+      className="relative bg-cover bg-no-repeat bg-center "
+      style={{
+        backgroundImage: `url('https://newsweb.wrteam.me/_next/static/media/design-top.d6f21b2f.svg')`,
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>{" "}
+      {/* Subtle overlay */}
+      <Container maxWidth="xl" sx={{ marginY: "5%" }} className="relative z-10">
+        <Grid container spacing={3}>
+          {/* Left Side - Big Card */}
+          <Grid item xs={12} md={4}>
+            <Card2
+              category={articles[0].section_name}
+              title={articles[0].headline.main}
+              imageUrl={`https://www.nytimes.com/${
+                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+              }`}
+              height="400px"
+            />
+          </Grid>
 
-        {/* Right Side - Three Smaller Cards */}
-        <Grid item xs={12} md={9}>
-          <Grid
-            container
-            spacing={3}
-            style={{ display: "flex", flexDirection: "row", height: "100%" }}
-          >
-            {articles
-              .slice(currentIndex, currentIndex + 3)
-              .map((article, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  key={index}
-                  style={{ height: "100%" }}
-                >
-                  <Link
-                    href={`/news/${encodeURIComponent(article.headline.main)}`}
+          {/* Right Side - Three Smaller Cards */}
+          <Grid item xs={12} md={8}>
+            <Grid
+              container
+              spacing={3}
+              style={{ display: "flex", flexDirection: "row", height: "100%" }}
+            >
+              {articles
+                .slice(currentIndex, currentIndex + 3)
+                .map((article, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    key={index}
+                    style={{ height: "100%" }}
                   >
-                    <Card1
-                      category={article.section_name}
-                      title={article.headline.main}
-                      imageUrl={`https://www.nytimes.com/${
-                        article.multimedia?.[0]?.url || "/placeholder.jpg"
-                      }`}
-                      height="100%" // Adjust to 100% to fill the container height
-                      width="100%"
-                    />
-                  </Link>
-                </Grid>
-              ))}
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            alignItems="center"
-            style={{ marginTop: "20px" }}
-          >
-            <Grid item>
-              <Button
-                onClick={handlePrev}
-                variant="contained"
-                sx={{ background: "#ef4444" }}
-              >
-                Prev
-              </Button>
+                    <Link
+                      href={`/news/${encodeURIComponent(
+                        article.headline.main
+                      )}`}
+                    >
+                      <Grid item xs={12} md={4} key={index}>
+                        <SwiperCard
+                          category={article.section_name || "Technology"}
+                          title={article.headline.main || "Untitled"}
+                          imageUrl={`https://www.nytimes.com/${
+                            article.multimedia?.[0]?.url || "/placeholder.jpg"
+                          }`}
+                        />
+                      </Grid>
+                    </Link>
+                  </Grid>
+                ))}
             </Grid>
-            <Grid item>
-              <Button
-                onClick={handleNext}
-                variant="contained"
-                sx={{ background: "#ef4444" }}
-              >
-                Next
-              </Button>
+            <Grid
+              container
+              spacing={3}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Button
+                  onClick={handlePrev}
+                  variant="contained"
+                  sx={{ background: "#ef4444" }}
+                >
+                  Prev
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={handleNext}
+                  variant="contained"
+                  sx={{ background: "#ef4444" }}
+                >
+                  Next
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

@@ -26,6 +26,14 @@ const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const tabs = [
+    { name: "Home", link: "/" },
+    { name: "About Us", link: "/about-us" },
+    { name: "Breaking News", link: "/categories-news/breaking" },
+    { name: "Categories", link: "/categories-news" },
+    { name: "Contact Us", link: "/contact-us" },
+  ];
+
   useEffect(() => {
     // Retrieve user from localStorage
     const storedUser = localStorage.getItem("users");
@@ -93,21 +101,19 @@ const Navigation = () => {
 
           {/* Navigation Links */}
           <Box className="hidden md:flex gap-6 items-center justify-end">
-            {["home", "about", "breaking", "categories", "contact"].map(
-              (tab) => (
-                <NavLink
-                  key={tab}
-                  href={`/${tab === "home" ? "" : tab}`}
-                  isActive={activeTab === tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`cursor-pointer ${
-                    activeTab === tab ? "border-b-2 border-red-500" : ""
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1).replace("-", " ")}
-                </NavLink>
-              )
-            )}
+            {tabs.map((tab) => (
+              <NavLink
+                key={tab.link}
+                href={tab.link}
+                isActive={activeTab === tab.link}
+                onClick={() => setActiveTab(tab.link)}
+                className={`cursor-pointer ${
+                  activeTab === tab.link ? "border-b-2 border-red-500" : ""
+                }`}
+              >
+                {tab.name}
+              </NavLink>
+            ))}
           </Box>
 
           {/* Search Input */}

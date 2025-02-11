@@ -5,7 +5,7 @@ import Breadcumbs from '../Reuse/Breadcumps';
 const ContactPage = () => {
   return (
     <div className="bg-gray-200">
-      <Breadcumbs title="Contact" />
+      <Breadcumbs heading="Contact" />
 
       <Container maxWidth="xl" className="py-8">
         <Grid container spacing={1}>

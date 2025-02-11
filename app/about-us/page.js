@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 const AboutPage = () => {
   return (
     <div className="bg-gray-200">
-      <Breadcumbs title="About Us" />
+      <Breadcumbs heading="About Us" />
       <Container maxWidth="xl">
         <div className="mt-8">
           <h1 className="text-2xl font-bold mb-4">About Us:</h1>

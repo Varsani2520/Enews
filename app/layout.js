@@ -3,7 +3,6 @@ import "./globals.css";
 import Footer from "./Components/Footer";
 import Weather from "./Components/Weather";
 import Header from "./Components/Header";
-import Banner from "./Reuse/Banner";
 import Navigation from "./Components/Navigation";
 
 const inter = Inter({ subsets: ["latin"] });

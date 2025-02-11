@@ -18,7 +18,7 @@ export default function Home() {
       <Heading
         title={"Popular News"}
         subtitle={"Popular News Here"}
-        buttonText={"View More"} 
+        buttonText={"View More"}
         link="/categories-news/popular"
       />
       <PopularCards />
@@ -30,14 +30,24 @@ export default function Home() {
       />
       <RecentNews />
       <Technology />
-      <Heading title={"Travels"} subtitle={"Travels"} />
+      <Heading
+        title={"Travels"}
+        subtitle={"Travels"}
+        buttonText={"View More"}
+        link="/categories-news/travel"
+      />
       <Travels />
       <Banner
         logo={"/logo.png"}
         title="Stay informesd with us- 24/7 news updates"
         buttonText={"Buy Now"}
       />
-      <Heading title={"Breaking News"} subtitle={"Breaking News Here"} />
+      <Heading
+        title={"Breaking News"}
+        subtitle={"Breaking News Here"}
+        buttonText={"View More"}
+        link="/categories-news/breaking"
+      />
 
       <BreakingNews />
       <Banner

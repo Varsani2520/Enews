@@ -6,6 +6,7 @@ import Card1 from "../Reuse/Card1";
 import { Container } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
+import slugify from "slugify";
 
 const Travels = () => {
   const [articles, setArticles] = useState([]);
@@ -32,9 +33,10 @@ const Travels = () => {
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Link
               key={article._id}
-              href={`/news/${encodeURIComponent(article.headline.main)}`}
+              href={`/news/${slugify(article.headline.main)}`}
             >
               <Card1
+                article={article}
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${

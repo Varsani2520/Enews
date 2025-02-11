@@ -6,6 +6,7 @@ import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
+import slugify from 'slugify';
 
 const MostFavouriteNews = () => {
   const [articles, setArticles] = useState([]);
@@ -35,7 +36,7 @@ const MostFavouriteNews = () => {
         <Grid item xs={12} md={8}>
           <Link
             key={articles[0]._id}
-            href={`/news/${encodeURIComponent(articles[0].headline.main)}`}
+            href={`/news/${slugify(articles[0].headline.main)}`}
           >
             <Card2
               height={"613px"}
@@ -54,7 +55,7 @@ const MostFavouriteNews = () => {
             <>
               <Link
                 key={articles[1]._id}
-                href={`/news/${encodeURIComponent(articles[1].headline.main)}`}
+                href={`/news/${slugify(articles[1].headline.main)}`}
               >
                 <a style={{ textDecoration: "none" }}>
                   <Card1
@@ -72,7 +73,7 @@ const MostFavouriteNews = () => {
               {articles.length > 2 && (
                 <Link
                   key={articles[2]._id}
-                  href={`/news/${encodeURIComponent(
+                  href={`/news/${slugify(
                     articles[2].headline.main
                   )}`}
                 >

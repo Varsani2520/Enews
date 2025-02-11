@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getNews } from "../utils/getNews";
-import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid, Button } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
-import SwiperCard from "../Reuse/SwiperCard";
-
+import Card5 from "../Reuse/Card5";
+import slugify from "slugify";
+import backgroundImage from "../../static/media/design-top.d6f21b2f.svg";
 const Technology = () => {
   const [articles, setArticles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,9 +45,7 @@ const Technology = () => {
   return (
     <div
       className="relative bg-cover bg-no-repeat bg-center "
-      style={{
-        backgroundImage: `url('https://newsweb.wrteam.me/_next/static/media/design-top.d6f21b2f.svg')`,
-      }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-20"></div>{" "}
       {/* Subtle overlay */}
@@ -55,14 +53,16 @@ const Technology = () => {
         <Grid container spacing={3}>
           {/* Left Side - Big Card */}
           <Grid item xs={12} md={4}>
-            <Card2
-              category={articles[0].section_name}
-              title={articles[0].headline.main}
-              imageUrl={`https://www.nytimes.com/${
-                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
-              }`}
-              height="400px"
-            />
+            <Link href={`/news/${slugify(articles[0].headline.main)}`}>
+              <Card2
+                article={articles[0]}
+                category={articles[0].section_name}
+                title={articles[0].headline.main}
+                imageUrl={`https://www.nytimes.com/${
+                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                }`}
+              />
+            </Link>
           </Grid>
 
           {/* Right Side - Three Smaller Cards */}
@@ -70,7 +70,7 @@ const Technology = () => {
             <Grid
               container
               spacing={3}
-              style={{ display: "flex", flexDirection: "row", height: "100%" }}
+              style={{ display: "flex", flexDirection: "row" }}
             >
               {articles
                 .slice(currentIndex, currentIndex + 3)
@@ -83,17 +83,19 @@ const Technology = () => {
                     style={{ height: "100%" }}
                   >
                     <Link
-                      href={`/news/${encodeURIComponent(
-                        article.headline.main
-                      )}`}
+                      href={`/news/${slugify(article.headline.main, {
+                        lower: true,
+                      })}`}
                     >
-                      <Grid item xs={12} md={4} key={index}>
-                        <SwiperCard
+                      <Grid item xs={12} key={index}>
+                        <Card5
+                          article={article}
                           category={article.section_name || "Technology"}
                           title={article.headline.main || "Untitled"}
                           imageUrl={`https://www.nytimes.com/${
                             article.multimedia?.[0]?.url || "/placeholder.jpg"
                           }`}
+                          height="200px"
                         />
                       </Grid>
                     </Link>
@@ -102,7 +104,7 @@ const Technology = () => {
             </Grid>
             <Grid
               container
-              spacing={3}
+              spacing={2}
               justifyContent="center"
               alignItems="center"
             >

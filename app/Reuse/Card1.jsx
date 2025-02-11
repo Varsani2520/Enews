@@ -1,25 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import slugify from 'slugify';
 
-const Card1 = ({ category, title, imageUrl, height, width, marginBottom }) => {
+const Card1 = ({  height, width, marginBottom ,article,imageUrl,category,title}) => {
+  
   const router = useRouter();
 
-  // Function to handle click and store data in localStorage
-  const handleClick = () => {
-    const articleData = {
-      category,
-      title,
-      imageUrl,
-      height,
-      width,
-      // Other fields as needed
-    };
-    
-
-    // Store data in localStorage
-    localStorage.setItem('clickedArticle', JSON.stringify(articleData));
-
-    router.push(`/news/${encodeURIComponent(title)}`);
+  const handleClick = () => { 
+    localStorage.setItem('clickedArticle', JSON.stringify(article));
+    router.push(`/news/${slugify(article.headline.main)}`);
   };
 
   return (

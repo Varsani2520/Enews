@@ -1,16 +1,18 @@
 import React from "react";
-import Icons from "./Icons";
-import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
-const Card5 = ({ category, title, imageUrl, date }) => {
+const Card5 = ({ category, title, imageUrl, height,article }) => {
+
+  const handleClick = () => {
+    localStorage.setItem("clickedArticle", JSON.stringify(article));
+  };
   return (
     <div className="relative  overflow-hidden">
-      <div className="relative h-64">
+      <div className="relative" style={{height}} onClick={handleClick}>
         <img
           src={imageUrl}
           alt="Article Image"
-          className="w-full h-full object-cover object-center rounded transition-transform duration-300 ease-in-out hover:scale-110"
+          className="w-full h-full object-cover object-center rounded " 
         />
-        <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-lg">
+        <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-md" >
           <p className="text-sm font-semibold">{category}</p>
         </div>
       </div>

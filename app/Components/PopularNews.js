@@ -34,6 +34,7 @@ const PopularCards = () => {
         <Grid item xs={12} md={3}>
           <Link href={`/news/${articles[0].headline.main}`}>
             <Card1
+            article={articles[0]}
               marginBottom={"5%"}
               category={articles[0].section_name}
               title={articles[0].headline.main}

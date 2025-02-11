@@ -19,6 +19,7 @@ import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
 import Login from "../Models/Login";
+import { useRouter } from "next/navigation";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -30,7 +31,7 @@ const Navigation = () => {
     { name: "Home", link: "/" },
     { name: "About Us", link: "/about-us" },
     { name: "Breaking News", link: "/categories-news/breaking" },
-    { name: "Categories", link: "/categories-news" },
+    { name: "Live News", link: "/categories-news/live" },
     { name: "Contact Us", link: "/contact-us" },
   ];
 
@@ -67,13 +68,13 @@ const Navigation = () => {
     }
     setIsDrawerOpen(open);
   };
-
+const router=useRouter();
   return (
     <Container maxWidth="xl">
       <div position="static" className="bg-white text-[#1a2e51]">
         <Toolbar className="flex justify-between items-center">
           {/* Logo */}
-          <img src="/logo.png" width="10%" alt="logo" />
+          <img src="/logo.png" width="10%" alt="logo" className="cursor-pointer" onClick={()=>router.push("/")}/>
           {/* Burger Menu for Medium Devices */}
           <div className="md:hidden border border-black border-solid border-opacity-50 space-x-3 rounded-lg">
             {" "}

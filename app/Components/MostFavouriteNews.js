@@ -14,7 +14,7 @@ const MostFavouriteNews = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await getNews("education");
+        const response = await getNews("health");
         setArticles(response.docs);
         console.log("favourite", response);
       } catch (error) {

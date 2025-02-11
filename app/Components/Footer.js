@@ -1,12 +1,30 @@
-import React from "react";
-import { Divider, Grid, Typography } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
+'use client'
+import React, { useState } from "react";
+import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../utils/firebase";
+import { toast } from "react-hot-toast";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const handleSubscribe = async () => {
+    if (!email) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    try {
+      await addDoc(collection(db, "sunscriptions"), {
+        email,
+        subscribeAt: new Date(),
+      });
+      toast.success("Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      toast.error("Failed to subscribe. Please try again.");
+      console.error("Error subscribing: ", error);
+    }
+  };
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -18,23 +36,6 @@ const Footer = () => {
             information about various topics, including current events,
             entertainment, politics, sports, technology, and more.
           </Typography>
-          <Typography variant="body2" className="text-sm mt-4">
-            Follow Us:
-          </Typography>
-          <div className="flex space-x-4 mt-2">
-            <a href="#" className="text-gray-400 hover:text-white">
-              <FacebookIcon />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white">
-              <InstagramIcon />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white">
-              <LinkedInIcon />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white">
-              <TwitterIcon />
-            </a>
-          </div>
         </div>
 
         {/* Second Section: Navigation Links */}
@@ -105,17 +106,33 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Fourth Section: Download App */}
+        {/* Fourth Section: Email Subscription */}
         <div>
           <Typography variant="h6" className="text-lg font-bold mb-4">
-            Download App
+            Subscribe to our Newsletter
           </Typography>
-          <Typography variant="body2" className="text-sm mb-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <Typography variant="body2" className="text-sm mb-4">
+            Get the latest updates right in your inbox.
           </Typography>
-          <a href="#" className="text-blue-400 hover:text-blue-200">
-            Download Now
-          </a>
+
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            className="bg-white rounded-md mb-2"
+          />
+
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleSubscribe}
+          >
+            Subscribe
+          </Button>
         </div>
       </div>
     </footer>

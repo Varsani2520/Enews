@@ -9,7 +9,7 @@ import MostFavouriteNews from "./Components/MostFavouriteNews";
 
 export default function Home() {
   return (
-    <main className="flex  flex-col  justify-between ">
+    <main className="flex  flex-col  justify-between bg-gray-200">
       <Banner
         logo={"/logo.png"}
         title="Stay informed,stay ahead with our daily news."
@@ -56,9 +56,10 @@ export default function Home() {
         buttonText={"Buy Now"}
       />
       <Heading
-        title={"Most Favourite News"}
-        subtitle={"Most Favourite News Here"}
+        title={"Health News"}
+        subtitle={"Health News Here"}
         buttonText={"View More"}
+        link="/categories-news/health"
       />
       <MostFavouriteNews />
     </main>

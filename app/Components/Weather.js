@@ -53,6 +53,7 @@ const Weather = () => {
             fontWeight: "bold",
             borderRadius: "10px",
             fontSize: "small",
+            paddingRight: "2px",
           }}
         >
           <Icons icon={<DateRangeOutlinedIcon fontSize="small" />} />

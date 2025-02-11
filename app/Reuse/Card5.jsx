@@ -16,9 +16,7 @@ const Card5 = ({ category, title, imageUrl, height,article }) => {
           <p className="text-sm font-semibold">{category}</p>
         </div>
       </div>
-      <div className="p-4">
         <h2 className="text-lg font-semibold mb-2 text-[#1a2e51]">{title}</h2>
-      </div>
     </div>
   );
 };

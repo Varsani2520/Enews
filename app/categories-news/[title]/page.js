@@ -6,7 +6,7 @@ import Card5 from "@/app/Reuse/Card5";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Breadcumbs from "@/app/Reuse/Breadcumps";
-import slugify from 'slugify';
+import slugify from "slugify";
 
 const CategoryPage = () => {
   const { title } = useParams();
@@ -33,35 +33,20 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <Breadcumbs  heading={title} />
-      <Container maxWidth="xl" sx={{ py: "2%" }}>
+      <Breadcumbs heading={title} />
+      <Container maxWidth="xl" sx={{ py: 4 }}>
         {loading ? (
           <Typography variant="h6" align="center">
             Loading articles...
           </Typography>
         ) : articles.length === 0 ? (
           <Typography variant="h6" align="center" color="error">
-            No news articles found 
+            No news articles found
           </Typography>
         ) : (
           <Grid container spacing={3}>
             {articles.map((article) => (
               <Grid item key={article._id} xs={12} md={4}>
-                <div
-                  onClick={() => {
-                    localStorage.setItem(
-                      "clickedArticle",
-                      JSON.stringify({
-                        category: article.section_name,
-                        title: article.headline.main,
-                        imageUrl: `https://www.nytimes.com/${
-                          article.multimedia?.[0]?.url || "/placeholder.jpg"
-                        }`,
-                        snippet: article.snippet || "",
-                      })
-                    );
-                  }}
-                >
                   <Link
                     href={`/news/${slugify(article.headline.main)}`}
                     passHref
@@ -73,9 +58,9 @@ const CategoryPage = () => {
                         article.multimedia?.[0]?.url || "/placeholder.jpg"
                       }`}
                       date={article.pub_date}
+                      height="250px" article={article}
                     />
                   </Link>
-                </div>
               </Grid>
             ))}
           </Grid>

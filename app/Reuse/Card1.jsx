@@ -1,14 +1,9 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import slugify from 'slugify';
 
 const Card1 = ({  height, width, marginBottom ,article,imageUrl,category,title}) => {
   
-  const router = useRouter();
-
   const handleClick = () => { 
     localStorage.setItem('clickedArticle', JSON.stringify(article));
-    router.push(`/news/${slugify(article.headline.main)}`);
   };
 
   return (
@@ -21,13 +16,13 @@ const Card1 = ({  height, width, marginBottom ,article,imageUrl,category,title})
       />
 
       {/* Category Label */}
-      <div className="absolute top-2 left-2 bg-red-700 text-white px-2 py-1 rounded-md text-sm font-semibold">
+      <div className="absolute top-2 left-2 bg-red-700 text-white text-lg font-semibold  px-2 py-1 rounded-md ">
         {category}
       </div>
 
       {/* Title Container */}
       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2">
-        <h2 className="text-white text-xs  font-bold">{title}</h2>
+        <h2 className="text-lg font-semibold text-white font-bold">{title}</h2>
       </div>
     </div>
   );

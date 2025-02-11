@@ -23,7 +23,7 @@ const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
 
       {/* Title Container */}
       <div className=" p-2 ">
-        <h2 className="text-[#0f1f40]  font-bold">{title}</h2>
+        <h2 className="text-[#0f1f40] text-lg font-semibold">{title}</h2>
       </div>
 
     </div>

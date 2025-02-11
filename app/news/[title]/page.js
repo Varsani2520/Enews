@@ -38,7 +38,7 @@ const NewsDetailPage = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen py-6">
+    <div className="bg-gray-100 min-h-screen">
       <Breadcumbs heading={decodeURIComponent(title)} />
       <Container maxWidth="xl" sx={{ mt: "5%" }}>
         <Grid container spacing={3}>
@@ -106,8 +106,10 @@ const NewsDetailPage = () => {
                 <Link href={`/news/${article.headline.main}`} key={article._id}>
                   {" "}
                   <Card4
+                    article={article}
                     category={article.section_name}
                     title={article.headline.main}
+                    alt={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${
                       article.multimedia?.[0]?.url || "/placeholder.jpg"
                     }`}

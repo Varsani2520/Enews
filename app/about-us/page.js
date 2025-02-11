@@ -7,7 +7,7 @@ const AboutPage = () => {
     <div className="bg-gray-200">
       <Breadcumbs heading="About Us" />
       <Container maxWidth="xl">
-        <div className="mt-8">
+        <div className="mt-8 mb-4">
           <h1 className="text-2xl font-bold mb-4">About Us:</h1>
           <p className="text-lg">
             Most people would not even consider getting a physical morning

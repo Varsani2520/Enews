@@ -95,7 +95,7 @@ const Technology = () => {
                           imageUrl={`https://www.nytimes.com/${
                             article.multimedia?.[0]?.url || "/placeholder.jpg"
                           }`}
-                          height="200px"
+                          height="250px"
                         />
                       </Grid>
                     </Link>

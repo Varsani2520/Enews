@@ -50,18 +50,6 @@ export default function Home() {
       />
 
       <BreakingNews />
-      <Banner
-        logo={"/logo.png"}
-        title="Discover the power od informed news"
-        buttonText={"Buy Now"}
-      />
-      <Heading
-        title={"Health News"}
-        subtitle={"Health News Here"}
-        buttonText={"View More"}
-        link="/categories-news/health"
-      />
-      <MostFavouriteNews />
     </main>
   );
 }

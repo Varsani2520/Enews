@@ -1,28 +1,26 @@
 import React from "react";
 import { Container, Button, Typography } from "@mui/material";
 
-const Banner = ({ logo, title, buttonText }) => {
+const Banner = ({ title, buttonText }) => {
   return (
     <Container maxWidth="xl" className="my-4">
-      <div
-        className={`flex items-center justify-between  bg-black text-white p-4 rounded-lg mb-4`}
-      >
-        {/* Left side - Logo */}
-        <div className="mr-1">
-          <img src="/logo.png" alt="Logo" className="w-20 h-auto" />
-        </div>
-
-        {/* Center - Title */}
-        <div className="text-center flex-1 ">
-          <Typography variant="body2" component="h1">
-            {title ? title : "Stay informed,stay ahead with our daily news"}
+      <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-lg shadow-lg mb-4">
+        {/* Left side - Logo and Title */}
+        <div className="flex items-center space-x-4">
+          <img src="/logo.png" alt="Logo" className="w-16 h-auto" />
+          <Typography variant="h5" className="font-bold">
+            {title || "Stay informed, stay ahead with our daily news"}
           </Typography>
         </div>
 
-        {/* Right side - Buy Now button */}
-        {/* <Button variant="outlined"  className="ml-4 text-white border-white">
-          {buttonText ? buttonText : "Buy Now"}
-        </Button> */}
+        {/* Right side - Read More button */}
+        <Button
+          variant="contained"
+          color="secondary"
+          className="ml-4 shadow-md"
+        >
+          {buttonText || "Read More"}
+        </Button>
       </div>
     </Container>
   );

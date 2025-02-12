@@ -10,10 +10,7 @@ import {
   Avatar,
   Typography,
 } from "@mui/material";
-import {
-  Search as SearchIcon,
-  Menu as MenuIcon,
-} from "@mui/icons-material";
+import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
@@ -49,14 +46,20 @@ const Navigation = () => {
   const handleLoginClose = () => setIsLoginDialogOpen(false);
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setIsDrawerOpen(open);
   };
 
   return (
-    <AppBar position="static" sx={{ background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+    <AppBar
+      position="static"
+      sx={{ background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}
+    >
       <Container maxWidth="xl">
         <Toolbar className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -70,13 +73,20 @@ const Navigation = () => {
 
           {/* Burger Menu for Mobile */}
           <div className="md:hidden">
-            <IconButton onClick={toggleDrawer(true)} sx={{ border: "1px solid #ccc" }}>
+            <IconButton
+              onClick={toggleDrawer(true)}
+              sx={{ border: "1px solid #ccc" }}
+            >
               <MenuIcon sx={{ color: "#1a2e51" }} />
             </IconButton>
           </div>
 
           {/* Drawer for Mobile */}
-          <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+          <Drawer
+            anchor="right"
+            open={isDrawerOpen}
+            onClose={toggleDrawer(false)}
+          >
             <NavigationDrawer
               activeTab={activeTab}
               setActiveTab={setActiveTab}
@@ -93,7 +103,9 @@ const Navigation = () => {
                 isActive={activeTab === tab.link}
                 onClick={() => setActiveTab(tab.link)}
                 className={`text-lg ${
-                  activeTab === tab.link ? "text-red-500 font-bold" : "text-[#1a2e51]"
+                  activeTab === tab.link
+                    ? "text-red-500 font-bold"
+                    : "text-[#1a2e51]"
                 } hover:text-red-500`}
               >
                 {tab.name}
@@ -106,7 +118,10 @@ const Navigation = () => {
             {user ? (
               <Box className="flex items-center gap-3">
                 <Avatar alt={user.username} src={user.profilePicture || ""} />
-                <Typography variant="body1" sx={{ color: "#1a2e51", fontWeight: "bold" }}>
+                <Typography
+                  variant="body1"
+                  sx={{ color: "#1a2e51", fontWeight: "bold" }}
+                >
                   {user.username}
                 </Typography>
               </Box>
@@ -124,7 +139,11 @@ const Navigation = () => {
               </NavLink>
             )}
 
-            <IconButton onClick={handleSearchOpen} sx={{ color: "red" }}>
+            <IconButton
+              onClick={handleSearchOpen}
+              aria-label="Open Search"
+              sx={{ color: "red" }}
+            >
               <SearchIcon />
             </IconButton>
           </Box>

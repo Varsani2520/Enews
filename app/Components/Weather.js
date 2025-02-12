@@ -63,9 +63,14 @@ const Weather = () => {
         {/* Right Side - Language Option Menu and Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
           {/* Language Option */}
-          <IconButton color="inherit" onClick={handleLanguageClick}>
+          <IconButton
+            color="inherit"
+            onClick={handleLanguageClick}
+            aria-label="Select Language"
+          >
             <LanguageIcon />
           </IconButton>
+
           <Menu
             anchorEl={languageAnchor}
             open={Boolean(languageAnchor)}
@@ -77,15 +82,25 @@ const Weather = () => {
           </Menu>
 
           {/* Social Media Icons */}
-          <Icons icon={<FacebookIcon />} href="https://www.facebook.com" />
-          <Icons icon={<TwitterIcon />} href="https://x.com/RanjaniVar61457" />
+          <Icons
+            icon={<FacebookIcon />}
+            href="https://www.facebook.com"
+            aria-label="Visit our Facebook page"
+          />
+          <Icons
+            icon={<TwitterIcon />}
+            href="https://x.com/RanjaniVar61457"
+            aria-label="Visit our Twitter page"
+          />
           <Icons
             icon={<LinkedInIcon />}
             href="https://www.linkedin.com/in/ranjani-varsani-45a875225/"
+            aria-label="Visit our LinkedIn profile"
           />
           <Icons
             icon={<InstagramIcon />}
             href="https://www.instagram.com/varsaniranjani/"
+            aria-label="Visit our Instagram page"
           />
         </div>
       </Container>

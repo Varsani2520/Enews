@@ -20,13 +20,13 @@ const Card2 = ({
     >
       {/* Background Image */}
       <img
-        className="object-cover w-full"
+        className="object-cover w-full h-full"
         src={imageUrl}
         alt="Card Background"
       />
       {/* Category and Title */}
       <div className="absolute bottom-0 left-0 w-full bg-red-[#f20404] text-white p-4">
-        <div className="text-lg font-bold">{category}</div>
+        <div className="text-lg font-bold bg-red-[#f20404]">{category}</div>
         <div className=" font-bold text-lg font-semibold">{title}</div>
       </div>
     </div>

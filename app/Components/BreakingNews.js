@@ -88,7 +88,7 @@ const Technology = () => {
             spacing={3}
             justifyContent="center"
             alignItems="center"
-            sx={{ marginTop: "5px" }}
+            sx={{ marginY: "5px" }}
           >
             <Grid item>
               <Button

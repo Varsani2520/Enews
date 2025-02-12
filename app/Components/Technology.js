@@ -7,7 +7,6 @@ import Link from "next/link";
 import CardSkeleton from "./Skeleton";
 import Card5 from "../Reuse/Card5";
 import slugify from "slugify";
-import backgroundImage from "../../static/media/design-top.d6f21b2f.svg";
 const Technology = () => {
   const [articles, setArticles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,8 +44,8 @@ const Technology = () => {
   return (
     <div
       className="relative bg-cover bg-no-repeat bg-center "
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+      style={{ backgroundImage: "url('/breaking-background.jpg')" }}
+      >
       <div className="absolute inset-0 bg-black bg-opacity-20"></div>{" "}
       {/* Subtle overlay */}
       <Container maxWidth="xl" sx={{ marginY: "5%" }} className="relative z-10">
@@ -55,6 +54,7 @@ const Technology = () => {
           <Grid item xs={12} md={4}>
             <Link href={`/news/${slugify(articles[0].headline.main)}`}>
               <Card2
+                height="400px"
                 article={articles[0]}
                 category={articles[0].section_name}
                 title={articles[0].headline.main}
@@ -93,7 +93,7 @@ const Technology = () => {
                           category={article.section_name || "Technology"}
                           title={article.headline.main || "Untitled"}
                           imageUrl={`https://www.nytimes.com/${
-                            article.multimedia?.[0]?.url || "/placeholder.jpg"
+                            article.multimedia?.[1]?.url || "/placeholder.jpg"
                           }`}
                           height="250px"
                         />

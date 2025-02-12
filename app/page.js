@@ -5,7 +5,6 @@ import RecentNews from "./Components/RecentNews";
 import Technology from "./Components/Technology";
 import Travels from "./Components/Travels";
 import BreakingNews from "./Components/BreakingNews";
-import MostFavouriteNews from "./Components/MostFavouriteNews";
 
 export default function Home() {
   return (

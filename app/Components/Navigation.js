@@ -7,13 +7,12 @@ import {
   Box,
   IconButton,
   Drawer,
-  Menu,
-  MenuItem,
+  Avatar,
+  Typography,
 } from "@mui/material";
 import {
   Search as SearchIcon,
   Menu as MenuIcon,
-  AccountCircle,
 } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import SearchDialog from "./SearchDialog";
@@ -27,6 +26,8 @@ const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const router = useRouter();
+
   const tabs = [
     { name: "Home", link: "/" },
     { name: "About Us", link: "/about-us" },
@@ -36,63 +37,46 @@ const Navigation = () => {
   ];
 
   useEffect(() => {
-    // Retrieve user from localStorage
     const storedUser = localStorage.getItem("users");
-    console.log(storedUser);
-
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
-  const handleSearchOpen = () => {
-    setIsDialogOpen(true);
-  };
+  const handleSearchOpen = () => setIsDialogOpen(true);
+  const handleSearchClose = () => setIsDialogOpen(false);
+  const handleLoginOpen = () => setIsLoginDialogOpen(true);
+  const handleLoginClose = () => setIsLoginDialogOpen(false);
 
-  const handleSearchClose = () => {
-    setIsDialogOpen(false);
-  };
-  const handleLoginOpen = () => {
-    setIsLoginDialogOpen(true); // Open LoginDialog
-  };
-
-  const handleLoginClose = () => {
-    setIsLoginDialogOpen(false); // Close LoginDialog
-  };
   const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
     setIsDrawerOpen(open);
   };
-const router=useRouter();
+
   return (
-    <Container maxWidth="xl">
-      <div position="static" className="bg-white text-[#1a2e51]">
-        <Toolbar className="flex justify-between items-center">
+    <AppBar position="static" sx={{ background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+      <Container maxWidth="xl">
+        <Toolbar className="flex justify-between items-center py-4">
           {/* Logo */}
-          <img src="/logo.png" width="10%" alt="logo" className="cursor-pointer" onClick={()=>router.push("/")}/>
-          {/* Burger Menu for Medium Devices */}
-          <div className="md:hidden border border-black border-solid border-opacity-50 space-x-3 rounded-lg">
-            {" "}
-            <IconButton
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
+          <img
+            src="/logo.png"
+            width="120"
+            alt="logo"
+            className="cursor-pointer"
+            onClick={() => router.push("/")}
+          />
+
+          {/* Burger Menu for Mobile */}
+          <div className="md:hidden">
+            <IconButton onClick={toggleDrawer(true)} sx={{ border: "1px solid #ccc" }}>
+              <MenuIcon sx={{ color: "#1a2e51" }} />
             </IconButton>
           </div>
 
-          {/* Drawer */}
-          <Drawer
-            anchor="right"
-            open={isDrawerOpen}
-            onClose={toggleDrawer(false)}
-          >
+          {/* Drawer for Mobile */}
+          <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
             <NavigationDrawer
               activeTab={activeTab}
               setActiveTab={setActiveTab}
@@ -101,29 +85,31 @@ const router=useRouter();
           </Drawer>
 
           {/* Navigation Links */}
-          <Box className="hidden md:flex gap-6 items-center justify-end">
+          <Box className="hidden md:flex gap-8 items-center">
             {tabs.map((tab) => (
               <NavLink
                 key={tab.link}
                 href={tab.link}
                 isActive={activeTab === tab.link}
                 onClick={() => setActiveTab(tab.link)}
-                className={`cursor-pointer ${
-                  activeTab === tab.link ? "border-b-2 border-red-500" : ""
-                }`}
+                className={`text-lg ${
+                  activeTab === tab.link ? "text-red-500 font-bold" : "text-[#1a2e51]"
+                } hover:text-red-500`}
               >
                 {tab.name}
               </NavLink>
             ))}
           </Box>
 
-          {/* Search Input */}
-          {/* User Section */}
-          <div className="relative hidden md:flex items-center cursor-pointer space-x-4">
+          {/* User Section and Search */}
+          <Box className="hidden md:flex items-center gap-6">
             {user ? (
-              <>
-                <p>{user.displayName}</p>
-              </>
+              <Box className="flex items-center gap-3">
+                <Avatar alt={user.username} src={user.profilePicture || ""} />
+                <Typography variant="body1" sx={{ color: "#1a2e51", fontWeight: "bold" }}>
+                  {user.username}
+                </Typography>
+              </Box>
             ) : (
               <NavLink
                 href="#"
@@ -132,27 +118,24 @@ const router=useRouter();
                   setActiveTab("SignUp");
                   handleLoginOpen();
                 }}
-                className={`text-white bg-red-500 rounded px-3 py-1 cursor-pointer ${
-                  activeTab === "SignUp" ? "border-b-2 border-red-500" : ""
-                }`}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
               >
                 Sign Up
               </NavLink>
             )}
 
-            <IconButton
-              onClick={handleSearchOpen}
-              aria-label="search"
-              style={{ color: "red" }}
-            >
+            <IconButton onClick={handleSearchOpen} sx={{ color: "red" }}>
               <SearchIcon />
             </IconButton>
-            <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />
-          </div>
+          </Box>
+
+          {/* Search Dialog */}
+          <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />
+          {/* Login Dialog */}
           <Login open={isLoginDialogOpen} onClose={handleLoginClose} />
         </Toolbar>
-      </div>
-    </Container>
+      </Container>
+    </AppBar>
   );
 };
 

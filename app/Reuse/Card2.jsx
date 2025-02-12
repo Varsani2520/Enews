@@ -25,8 +25,8 @@ const Card2 = ({
         alt="Card Background"
       />
       {/* Category and Title */}
-      <div className="absolute bottom-0 left-0 w-full bg-red-[#f20404] text-white p-4">
-        <div className="text-lg font-bold bg-red-[#f20404]">{category}</div>
+      <div className="absolute bottom-0 left-0 w-full text-white p-4">
+        <div className="text-lg font-bold bg-red-500">{category}</div>
         <div className=" font-bold text-lg font-semibold">{title}</div>
       </div>
     </div>

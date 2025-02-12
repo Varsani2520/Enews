@@ -11,21 +11,23 @@ import slugify from "slugify";
 const RecentNews = () => {
   const [articles, setArticles] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   const fetchArticles = async () => {
     try {
       const response = await getNews("recent");
       setArticles(response.docs);
-      console.log("recent", response);
     } catch (error) {
       console.error("Error fetching recent articles:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchArticles();
   }, []);
-
-  if (articles.length === 0) {
+  if (loading) {
     return <CardSkeleton />;
   }
 

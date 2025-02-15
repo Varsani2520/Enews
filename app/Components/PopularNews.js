@@ -24,17 +24,17 @@ const PopularCards = () => {
   }, []);
 
   if (articles.length === 0) {
-    return <CardSkeleton />; 
+    return <CardSkeleton />;
   }
 
   return (
     <Container maxWidth="xl">
       <Grid container spacing={3}>
         {/* First Column - Left Side Cards */}
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Link href={`/news/${articles[0].headline.main}`}>
             <Card1
-            article={articles[0]}
+              article={articles[0]}
               marginBottom={"5%"}
               category={articles[0].section_name}
               title={articles[0].headline.main}
@@ -59,7 +59,7 @@ const PopularCards = () => {
         </Grid>
 
         {/* Second Column - Center Big Card */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6} md={6}>
           <Link href={`/news/${articles[2].headline.main}`}>
             <Card1
               category={articles[2].section_name}
@@ -74,7 +74,7 @@ const PopularCards = () => {
         </Grid>
 
         {/* Third Column - Right Side Cards */}
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} sm={6} md={3} sx={{display:"flex",flexDirection:{xs:"column",sm:"row",md:"column",gap:{sm:25}}}}>
           <Link href={`/news/${articles[3].headline.main}`}>
             <Card1
               marginBottom={"5%"}

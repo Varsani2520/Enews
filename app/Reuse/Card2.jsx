@@ -1,14 +1,6 @@
 import React from "react";
 
-const Card2 = ({
-  category,
-  title,
-  imageUrl,
-  height,
-  width,
-  article
-}) => {
-
+const Card2 = ({ category, title, imageUrl, height, width, article }) => {
   const handleClick = () => {
     localStorage.setItem("clickedArticle", JSON.stringify(article));
   };
@@ -25,8 +17,10 @@ const Card2 = ({
         alt="Card Background"
       />
       {/* Category and Title */}
-      <div className="absolute bottom-0 left-0 w-full text-white p-4">
-        <div className="text-lg font-bold bg-red-500">{category}</div>
+      <div className="absolute bottom-0 left-0  text-white p-4">
+        <div className=" bg-red-700 text-white text-lg font-semibold  px-2 py-1 rounded-md ">
+          {category}
+        </div>{" "}
         <div className=" font-bold text-lg font-semibold">{title}</div>
       </div>
     </div>

@@ -45,13 +45,14 @@ const Technology = () => {
     <div
       className="relative bg-cover bg-no-repeat bg-center "
       style={{ backgroundImage: "url('/breaking-background.jpg')" }}
-      >
+    >
       <div className="absolute inset-0 bg-black bg-opacity-20"></div>{" "}
       {/* Subtle overlay */}
       <Container maxWidth="xl" sx={{ marginY: "5%" }} className="relative z-10">
         <Grid container spacing={3}>
           {/* Left Side - Big Card */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
+            {" "}
             <Link href={`/news/${slugify(articles[0].headline.main)}`}>
               <Card2
                 height="400px"
@@ -66,38 +67,26 @@ const Technology = () => {
           </Grid>
 
           {/* Right Side - Three Smaller Cards */}
-          <Grid item xs={12} md={8}>
-            <Grid
-              container
-              spacing={3}
-              style={{ display: "flex", flexDirection: "row" }}
-            >
+          <Grid item xs={12} sm={6} md={8}>
+            <Grid container spacing={3}>
               {articles
                 .slice(currentIndex, currentIndex + 3)
                 .map((article, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    md={4}
-                    key={index}
-                    style={{ height: "100%" }}
-                  >
+                  <Grid item xs={12} md={4} sm={6} key={index}>
                     <Link
                       href={`/news/${slugify(article.headline.main, {
                         lower: true,
                       })}`}
                     >
-                      <Grid item xs={12} key={index}>
-                        <Card5
-                          article={article}
-                          category={article.section_name || "Technology"}
-                          title={article.headline.main || "Untitled"}
-                          imageUrl={`https://www.nytimes.com/${
-                            article.multimedia?.[1]?.url || "/placeholder.jpg"
-                          }`}
-                          height="250px"
-                        />
-                      </Grid>
+                      <Card5
+                        article={article}
+                        category={article.section_name || "Technology"}
+                        title={article.headline.main || "Untitled"}
+                        imageUrl={`https://www.nytimes.com/${
+                          article.multimedia?.[1]?.url || "/placeholder.jpg"
+                        }`}
+                        height="250px"
+                      />
                     </Link>
                   </Grid>
                 ))}
@@ -107,8 +96,12 @@ const Technology = () => {
               spacing={2}
               justifyContent="center"
               alignItems="center"
+              sx={{ mt: 2 }}
             >
-              <Grid item>
+              <Grid
+                item
+                sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+              >
                 <Button
                   onClick={handlePrev}
                   variant="contained"
@@ -117,7 +110,7 @@ const Technology = () => {
                   Prev
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item xs={6} sm={4}>
                 <Button
                   onClick={handleNext}
                   variant="contained"

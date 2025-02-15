@@ -1,14 +1,13 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
-  Button,
-  InputBase,
   IconButton,
   CircularProgress,
+  InputBase,
+  Button,
 } from '@mui/material';
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material';
 import { getNews } from '@/app/utils/getNews';
@@ -18,12 +17,15 @@ const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
     setLoading(true);
+    setSearched(true);
     try {
       const response = await getNews(searchQuery);
-      setResults(response.docs);
+      setResults(response.docs || []);
     } catch (error) {
       console.error('Error fetching search results:', error);
     } finally {
@@ -32,42 +34,41 @@ const SearchDialog = ({ open, onClose }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xl" fullWidth>
-      <DialogTitle>
-        Search
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
+    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+      <DialogTitle className="flex justify-between items-center border-b pb-2">
+        <span className="text-xl font-semibold">Search</span>
+        <IconButton onClick={onClose} className="text-gray-500 hover:text-red-500">
           <CloseIcon />
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <div className="flex items-center mb-4">
+        <div className="flex items-center bg-gray-100 p-2 rounded-lg">
           <InputBase
             autoFocus
             fullWidth
-            placeholder="Enter your search query"
+            placeholder="Enter your search query..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="border p-2 rounded-lg flex-1"
+            className="flex-1 px-3 text-gray-700 outline-none"
           />
-          <IconButton onClick={handleSearch} aria-label="search">
-            <SearchIcon />
-          </IconButton>
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            color="error"
+            className="ml-2"
+            disabled={loading}
+          >
+            <SearchIcon className="text-white" />
+          </Button>
         </div>
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <CircularProgress />
           </div>
+        ) : searched && results.length === 0 ? (
+          <p className="text-gray-500 text-center w-full mt-4">No results found.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             {results.map((article) => (
               <Card4
                 key={article._id}
@@ -81,11 +82,6 @@ const SearchDialog = ({ open, onClose }) => {
           </div>
         )}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="secondary">
-          Close
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };

@@ -12,7 +12,7 @@ export default function Home() {
       <Banner
         logo={"/logo.png"}
         title="Stay informed,stay ahead with our daily news."
-        buttonText={"Buy Now"}
+        href="/categories-news/popular"
       />
       <Heading
         title={"Popular News"}
@@ -39,7 +39,7 @@ export default function Home() {
       <Banner
         logo={"/logo.png"}
         title="Stay informesd with us- 24/7 news updates"
-        buttonText={"Buy Now"}
+        href="/categories-news/breaking"
       />
       <Heading
         title={"Breaking News"}

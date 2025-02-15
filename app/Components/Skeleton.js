@@ -16,12 +16,8 @@ const CardSkeleton = () => {
           <Skeleton variant="rectangular" height={200} />
         </CardMedia>
         <CardContent>
-          <Typography gutterBottom variant="h5">
-            <Skeleton variant="text" />
-          </Typography>
           <Typography variant="body2">
             <Skeleton variant="text" />
-            <Skeleton variant="text" width="80%" />
           </Typography>
         </CardContent>
       </Card>

@@ -40,7 +40,7 @@ const NewsDetailPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Breadcumbs heading={decodeURIComponent(title)} />
-      <Container maxWidth="xl" sx={{ mt: "5%" }}>
+      <Container maxWidth="xl" sx={{ mt: "2%" }}>
         <Grid container spacing={3}>
           {/* Left Side - Display Big Image */}
           <Grid item xs={12} md={8}>
@@ -58,7 +58,7 @@ const NewsDetailPage = () => {
             </div>
             <img
               src={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`}
-              alt="Article"
+              alt={clickedArticle.headline_main}
               className="w-full h-auto rounded-lg shadow-lg mb-6"
             />
             {/* Lead Paragraph */}

@@ -38,9 +38,7 @@ const Weather = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          paddingTop: "25px",
-          paddingBottom: "25px",
+          alignItems: "center"
         }}
       >
         {/* Left Side - Current Date and Calendar Icon */}
@@ -54,7 +52,7 @@ const Weather = () => {
             fontWeight: "bold",
             borderRadius: "10px",
             fontSize: "small",
-            paddingRight: "2px",
+            paddingRight: "6px",
           }}
         >
           <Icons icon={<DateRangeOutlinedIcon fontSize="small" />} />

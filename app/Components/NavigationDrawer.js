@@ -1,9 +1,9 @@
+"use client";
 import React, { useState } from "react";
 import {
   Box,
   List,
   ListItem,
-  ListItemText,
   IconButton,
   Avatar,
   Button,
@@ -14,6 +14,7 @@ import {
   Search as SearchIcon,
   ExpandLess,
   ExpandMore,
+  Person as PersonIcon,
 } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import Icons from "../Reuse/Icons";
@@ -21,200 +22,83 @@ import Icons from "../Reuse/Icons";
 const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
 
-  const handleCategoriesClick = () => {
-    setCategoriesOpen(!categoriesOpen);
-  };
-
   return (
-    <Box role="presentation" style={{ width: 250 }}>
-      <List>
-        {/* Login Button with Avatar and Red Background */}
-        <ListItem>
+    <Box role="presentation" className="w-64 bg-white shadow-lg p-4">
+      <List className="space-y-2">
+        {/* Login & Search Button */}
+        <ListItem className="flex justify-between items-center">
           <Button
             variant="contained"
             color="error"
-            startIcon={<Avatar size="small" />}
-            fullWidth
-            style={{ textTransform: "none" }}
+            startIcon={<Avatar className="bg-white text-red-500"><PersonIcon /></Avatar>}
+            className="w-full capitalize font-semibold"
           >
             Login
           </Button>
-          <ListItem button onClick={handleSearchOpen}>
-            <Icons icon={<SearchIcon />} />
-          </ListItem>
+          <IconButton onClick={handleSearchOpen} className="ml-2">
+            <Icons icon={<SearchIcon className="text-gray-700" />} />
+          </IconButton>
         </ListItem>
-
 
         {/* Navigation Links */}
-        <ListItem>
-          <NavLink
-            href="/"
-            isActive={activeTab === "home"}
-            onClick={() => setActiveTab("home")}
-            className={`text-black font-bold text-lg ${
-              activeTab === "home" ? "border-l-2 border-red-500" : ""
-            }`}
-          >
-            Home
-          </NavLink>
-        </ListItem>
-        <ListItem>
-          <NavLink
-            href="/about-us"
-            isActive={activeTab === "about"}
-            onClick={() => setActiveTab("about")}
-            className={`text-black font-bold text-lg ${
-              activeTab === "about" ? "border-l-2 border-red-500" : ""
-            }`}
-          >
-            About Us
-          </NavLink>
-        </ListItem>
-        <ListItem>
-          <NavLink
-            href="/contact-us"
-            isActive={activeTab === "contact"}
-            onClick={() => setActiveTab("contact")}
-            className={`text-black font-bold text-lg ${
-              activeTab === "contact" ? "border-l-2 border-red-500" : ""
-            }`}
-          >
-            Contact
-          </NavLink>
-        </ListItem>
-        <ListItem>
-          <NavLink
-            href="/all_breaking_news"
-            isActive={activeTab === "breaking"}
-            onClick={() => setActiveTab("breaking")}
-            className={`text-black font-bold text-lg ${
-              activeTab === "breaking" ? "border-l-2 border-red-500" : ""
-            }`}
-          >
-            Breaking News
-          </NavLink>
-        </ListItem>
+        {[
+          { name: "Home", href: "/" },
+          { name: "About Us", href: "/about-us" },
+          { name: "Contact", href: "/contact-us" },
+          { name: "Breaking News", href: "/all_breaking_news" },
+        ].map(({ name, href }) => (
+          <ListItem key={name} className="px-2">
+            <NavLink
+              href={href}
+              isActive={activeTab === name.toLowerCase()}
+              onClick={() => setActiveTab(name.toLowerCase())}
+              className={`text-gray-900 font-semibold text-lg hover:text-red-500 transition-all ${
+                activeTab === name.toLowerCase() ? "border-l-4 border-red-500 pl-2" : "pl-4"
+              }`}
+            >
+              {name}
+            </NavLink>
+          </ListItem>
+        ))}
 
         {/* Categories with Dropdown */}
-        <ListItem button onClick={handleCategoriesClick}>
-          <ListItemText
-            primary="Categories"
-            className={`text-black font-bold text-lg ${
-              activeTab === "categories" ? "border-l-2 border-red-500" : ""
+        <ListItem button onClick={() => setCategoriesOpen(!categoriesOpen)} className="px-2">
+          <Typography
+            variant="body1"
+            className={`font-semibold text-lg text-gray-900 hover:text-red-500 transition-all ${
+              activeTab === "categories" ? "border-l-4 border-red-500 pl-2" : "pl-4"
             }`}
-          />
-          {categoriesOpen ? <ExpandLess /> : <ExpandMore />}
+          >
+            Categories
+          </Typography>
+          {categoriesOpen ? <ExpandLess className="text-gray-700" /> : <ExpandMore className="text-gray-700" />}
         </ListItem>
         <Collapse in={categoriesOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem>
-              <NavLink
-                href="/categories-news/technology"
-                isActive={activeTab === "technology"}
-                onClick={() => setActiveTab("technology")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "technology" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Technology
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/science"
-                isActive={activeTab === "science"}
-                onClick={() => setActiveTab("science")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "science" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Science
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/religion"
-                isActive={activeTab === "religion"}
-                onClick={() => setActiveTab("religion")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "religion" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Religion
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/politics"
-                isActive={activeTab === "politics"}
-                onClick={() => setActiveTab("politics")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "politics" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Politics
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/business"
-                isActive={activeTab === "business"}
-                onClick={() => setActiveTab("business")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "business" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Business
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/family"
-                isActive={activeTab === "family"}
-                onClick={() => setActiveTab("family")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "family" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Family
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/car"
-                isActive={activeTab === "car"}
-                onClick={() => setActiveTab("car")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "car" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Car
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/travels"
-                isActive={activeTab === "travels"}
-                onClick={() => setActiveTab("travels")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "travels" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Travels
-              </NavLink>
-            </ListItem>
-            <ListItem>
-              <NavLink
-                href="/categories-news/sports"
-                isActive={activeTab === "sports"}
-                onClick={() => setActiveTab("sports")}
-                className={`text-black font-bold text-xl ${
-                  activeTab === "sports" ? "border-b-2 border-red-500" : ""
-                }`}
-              >
-                Sports
-              </NavLink>
-            </ListItem>
+          <List component="div" className="ml-4 space-y-2">
+            {[
+              "Technology",
+              "Science",
+              "Religion",
+              "Politics",
+              "Business",
+              "Family",
+              "Car",
+              "Travels",
+              "Sports",
+            ].map((category) => (
+              <ListItem key={category} className="px-2">
+                <NavLink
+                  href={`/categories-news/${category.toLowerCase()}`}
+                  isActive={activeTab === category.toLowerCase()}
+                  onClick={() => setActiveTab(category.toLowerCase())}
+                  className={`text-gray-800 font-semibold text-base hover:text-red-500 transition-all ${
+                    activeTab === category.toLowerCase() ? "border-b-2 border-red-500 pb-1" : ""
+                  }`}
+                >
+                  {category}
+                </NavLink>
+              </ListItem>
+            ))}
           </List>
         </Collapse>
       </List>

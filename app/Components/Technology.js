@@ -100,13 +100,12 @@ const Technology = () => {
             >
               <Grid
                 item
-                md={4}
                 sx={{ display: { xs: "none", sm: "none", md: "block" } }}
               >
                 <Button
                   onClick={handlePrev}
                   variant="contained"
-                  sx={{ background: "#ef4444", width: "100%" }}
+                  sx={{ background: "#ef4444" }}
                 >
                   Prev
                 </Button>
@@ -115,7 +114,7 @@ const Technology = () => {
                 <Button
                   onClick={handleNext}
                   variant="contained"
-                  sx={{ background: "#ef4444", width: "100%" }}
+                  sx={{ background: "#ef4444" }}
                 >
                   Next
                 </Button>

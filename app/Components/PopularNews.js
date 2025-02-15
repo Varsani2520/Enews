@@ -13,7 +13,7 @@ const PopularCards = () => {
     const fetchArticles = async () => {
       try {
         const response = await getNews("popular");
-        setArticles(response.docs);
+        setArticles(response.docs || []);
         console.log("popular", response);
       } catch (error) {
         console.error("Error fetching articles:", error);
@@ -54,6 +54,7 @@ const PopularCards = () => {
               }`}
               height="300px"
               width="100%"
+              article={articles[1]}
             />
           </Link>
         </Grid>
@@ -69,12 +70,27 @@ const PopularCards = () => {
               }`}
               height="613px"
               width="100%"
+              article={articles[2]}
             />
           </Link>
         </Grid>
 
         {/* Third Column - Right Side Cards */}
-        <Grid item xs={12} sm={6} md={3} sx={{display:"flex",flexDirection:{xs:"column",sm:"row",md:"column",gap:{sm:25}}}}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={3}
+          sx={{
+            display: "flex",
+            flexDirection: {
+              xs: "column",
+              sm: "row",
+              md: "column",
+              gap: { sm: 25 },
+            },
+          }}
+        >
           <Link href={`/news/${articles[3].headline.main}`}>
             <Card1
               marginBottom={"5%"}
@@ -85,6 +101,7 @@ const PopularCards = () => {
               }`}
               height="300px"
               width="100%"
+              article={articles[3]}
             />
           </Link>
           <Link href={`/news/${articles[4].headline.main}`}>
@@ -96,6 +113,7 @@ const PopularCards = () => {
               }`}
               height="300px"
               width="100%"
+              article={articles[4]}
             />
           </Link>
         </Grid>

@@ -1,5 +1,5 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -8,13 +8,13 @@ import {
   CircularProgress,
   InputBase,
   Button,
-} from '@mui/material';
-import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material';
-import { getNews } from '@/app/utils/getNews';
-import Card4 from '../Reuse/Card4';
+} from "@mui/material";
+import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
+import { getNews } from "@/app/utils/getNews";
+import Card4 from "../Reuse/Card4";
 
 const SearchDialog = ({ open, onClose }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -27,7 +27,7 @@ const SearchDialog = ({ open, onClose }) => {
       const response = await getNews(searchQuery);
       setResults(response.docs || []);
     } catch (error) {
-      console.error('Error fetching search results:', error);
+      console.error("Error fetching search results:", error);
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,10 @@ const SearchDialog = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
       <DialogTitle className="flex justify-between items-center border-b pb-2">
         <span className="text-xl font-semibold">Search</span>
-        <IconButton onClick={onClose} className="text-gray-500 hover:text-red-500">
+        <IconButton
+          onClick={onClose}
+          className="text-gray-500 hover:text-red-500"
+        >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -66,16 +69,19 @@ const SearchDialog = ({ open, onClose }) => {
             <CircularProgress />
           </div>
         ) : searched && results.length === 0 ? (
-          <p className="text-gray-500 text-center w-full mt-4">No results found.</p>
+          <p className="text-gray-500 text-center w-full mt-4">
+            No results found.
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             {results.map((article) => (
               <Card4
+                article={article}
                 key={article._id}
                 title={article.headline.main}
                 category={article.section_name}
                 imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url || '/placeholder.jpg'
+                  article.multimedia?.[0]?.url || "/placeholder.jpg"
                 }`}
               />
             ))}

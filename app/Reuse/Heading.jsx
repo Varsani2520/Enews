@@ -1,15 +1,15 @@
-'use client'
+"use client";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
 
-const Heading = ({ title, subtitle, buttonText ,link}) => {
-  const handleClick=()=>{
-    if(link){
-      window.location.href=link;
+const Heading = ({ title, subtitle, buttonText, link }) => {
+  const handleClick = () => {
+    if (link) {
+      window.location.href = link;
     }
-  }
+  };
   return (
-    <Container maxWidth="xl" className="mt-5">
+    <Container maxWidth="xl">
       <Box
         sx={{
           display: "flex",
@@ -35,7 +35,7 @@ const Heading = ({ title, subtitle, buttonText ,link}) => {
           sx={{
             fontWeight: "bold",
             color: "#1a2e51",
-            
+            borderColor: "#ccc",
           }}
           onClick={handleClick}
         >

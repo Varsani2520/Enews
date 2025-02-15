@@ -36,17 +36,17 @@ const RecentNews = () => {
       <Grid container spacing={3}>
         {/* First Column - Left Side Large Card */}
         <Grid item xs={12} md={8}>
-          <Link href={`/news/${slugify(articles[0].headline.main)}`}>
+          {/* <Link href={`/news/${slugify(articles.headline.main)}`}>
             <Card2
-              article={articles[0]}
+              article={articles}
               height={"613px"}
-              category={articles[0].section_name}
-              title={articles[0].headline.main}
+              category={articles.section_name}
+              title={articles.headline.main}
               imageUrl={`https://www.nytimes.com/${
-                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                articles.multimedia?.[0]?.url || "/placeholder.jpg"
               }`}
             />
-          </Link>
+          </Link> */}
         </Grid>
 
         {/* Second Column - Right Side Small Cards */}

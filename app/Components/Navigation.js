@@ -14,6 +14,7 @@ import SearchDialog from "./SearchDialog";
 import NavigationDrawer from "./NavigationDrawer";
 import Login from "../Models/Login";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -109,15 +110,18 @@ const Navigation = () => {
         {/* User Section and Search */}
         <Box className="hidden md:flex items-center gap-6">
           {user ? (
-            <Box className="flex items-center gap-3">
-              <Avatar alt={user.username} src={user.profilePicture || ""} />
-              <Typography
-                variant="body1"
-                sx={{ color: "#1a2e51", fontWeight: "bold" }}
-              >
-                {user.username}
-              </Typography>
-            </Box>
+            <Link href={`/profile/${user.displayName}`} passHref>
+              {" "}
+              <Box className="flex items-center gap-3">
+                <Avatar alt={user.displayName} src={user.photoURL || ""} />
+                <Typography
+                  variant="body1"
+                  sx={{ color: "#1a2e51", fontWeight: "bold" }}
+                >
+                  {user.displayName}
+                </Typography>
+              </Box>
+            </Link>
           ) : (
             <NavLink
               href="#"

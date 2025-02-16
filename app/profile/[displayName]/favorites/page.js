@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, getDocs } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/app/utils/firebase";
 
@@ -13,10 +13,12 @@ const FavoritesPage = () => {
 
     const fetchFavorites = async () => {
       try {
-        const favoritesRef = collection(db, "users", user.email, "favorites");
-        const querySnapshot = await getDocs(favoritesRef);
+        const q = query(collection(db, "users", user.email, "favorites"));
+        const querySnapshot = await getDocs(q);
         const favs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setFavorites(favs);
+        console.log("favs",favs);
+        
       } catch (error) {
         console.error("Error fetching favorites:", error);
       }
@@ -27,15 +29,14 @@ const FavoritesPage = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Favorite Articles</h2>
+      <h2 className="text-2xl font-bold">Favorite Articles</h2>
       {favorites.length === 0 ? (
         <p>No favorite articles yet.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="mt-4 space-y-2">
           {favorites.map((article) => (
-            <li key={article.id} className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <h3 className="font-semibold">{article.article.title}</h3>
-              <p>{article.article.description}</p>
+            <li key={article.id} className="bg-gray-100 p-4 rounded-lg">
+              {article.article.headline.main}
             </li>
           ))}
         </ul>

@@ -8,21 +8,20 @@ const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
 
   return (
     <div
-      className="bg-gray-200 border border-gray-300 rounded-lg p-4"
+      className="bg-gray-200 border border-gray-300 rounded-lg p-4 relative"
       style={{ height, width, marginBottom }}
       onClick={()=>handleArticleClick(article)}
     >
       {/* Image */}
-      <div className="w-full h-48">
+      <div className="w-full h-48 relative">
         <img
           className="w-full h-full object-cover rounded-lg"
           src={imageUrl}
           alt="Card Background"
-          style={{ borderRadius: "10px" }}
         />
         {/* Like Button */}
         <button
-          className="absolute top-2 right-2 text-white text-2xl"
+          className="absolute top-2 right-2  text-2xl"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -32,7 +31,7 @@ const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
           {isFavorite ? (
             <Favorite className="text-red-500" />
           ) : (
-            <FavoriteBorder className="text-white" />
+            <FavoriteBorder className="text-gray-300" />
           )}
         </button>
       </div>

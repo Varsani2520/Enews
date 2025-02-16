@@ -7,6 +7,11 @@ import Breadcumbs from "@/app/Reuse/Breadcumps";
 import { useParams } from "next/navigation";
 import CardSkeleton from "@/app/Components/Skeleton";
 import Link from "next/link";
+import ShareIcon from "@mui/icons-material/Share";
+import CommentIcon from "@mui/icons-material/Comment";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import PrintIcon from "@mui/icons-material/Print";
+import Icons from "@/app/Reuse/Icons";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -55,6 +60,18 @@ const NewsDetailPage = () => {
                 {clickedArticle.byline?.original} •{" "}
                 {new Date(clickedArticle.pub_date).toLocaleDateString()}
               </p>
+            </div>
+            {/* left side share and comment icon and right side of img read later and print icon */}
+            {/* Icons Section (Share, Comment, Read Later, Print) */}
+            <div className="flex justify-between items-center my-4">
+              <div className="flex space-x-2">
+                <Icons icon={<ShareIcon />} />
+                <Icons icon={<CommentIcon />} />
+              </div>
+              <div className="flex space-x-2">
+                <Icons icon={<BookmarkBorderIcon />} />
+                <Icons icon={<PrintIcon />}onClick={()=>window.print()} />
+              </div>
             </div>
             <img
               src={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
+import { handleArticleClick } from "../hooks/ArticleClick";
 
 const Card5 = ({ category, title, imageUrl, height, article }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);

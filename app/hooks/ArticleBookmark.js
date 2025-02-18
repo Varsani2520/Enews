@@ -5,13 +5,13 @@ import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast"; // ✅ Add toast for feedback
 
-const useArticleLike = (article) => {
+const useArticleBookmark = (article) => {
   const [user] = useAuthState(auth);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isBookmark, setIsBookmark] = useState(false);
 
   useEffect(() => {
     if (user && article?._id) {
-      checkFavorite();
+      checkBookmark();
     }
   }, [user, article]);
   // 🔹 Get Firebase-safe article ID
@@ -20,19 +20,19 @@ const useArticleLike = (article) => {
     return article._id.replace(/[^a-zA-Z0-9-_]/g, "_");
   };
   // 🔹 Check if article is already liked
-  const checkFavorite = async () => {
+  const checkBookmark = async () => {
     const articleId = getArticleId();
     if (!user || !articleId) return;
-    const docRef = doc(db, `users/${user.email}/favorites/${articleId}`);
+    const docRef = doc(db, `users/${user.email}/bookmark/${articleId}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setIsFavorite(true);
+      setIsBookmark(true);
     }
   };
   // 🔹 Toggle like/unlike article
-  const toggleFavorite = async () => {
+  const toggleBookmark = async () => {
     if (!user) {
-      toast.error("Please log in to save favorites.");
+      toast.error("Please log in to save Bookmarks.");
       return;
     }
     const articleId = getArticleId();
@@ -40,11 +40,11 @@ const useArticleLike = (article) => {
       toast.error("Article ID is missing.");
       return;
     }
-    const docRef = doc(db, `users/${user.email}/favorites/${articleId}`);
-    if (isFavorite) {
+    const docRef = doc(db, `users/${user.email}/bookmark/${articleId}`);
+    if (isBookmark) {
       await deleteDoc(docRef);
-      setIsFavorite(false);
-      toast.success("Removed from favorites.");
+      setIsBookmark(false);
+      toast.success("Removed from Bookmarks.");
     } else {
       await setDoc(docRef, {
         email: user.email,
@@ -52,11 +52,11 @@ const useArticleLike = (article) => {
         article,
         timestamp: new Date().toISOString(),
       });
-      setIsFavorite(true);
-      toast.success("Added to favorites!");
+      setIsBookmark(true);
+      toast.success("Added to Bookmarks!");
     }
   };
-  return { isFavorite, toggleFavorite };
+  return { isBookmark, toggleBookmark };
 };
 
-export default useArticleLike;
+export default useArticleBookmark;

@@ -1,35 +1,46 @@
 "use client";
-import { useState, useEffect } from "react";
-import { auth, db } from "@/app/utils/firebase";
-import { collection, query, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "@/app/utils/firebase";
 
-const ReadLaterPage = () => {
+const ReadLater = () => {
   const [user] = useAuthState(auth);
-  const [savedArticles, setSavedArticles] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (user) fetchBookmarks();
+  }, [user]);
+
+  const fetchBookmarks = async () => {
     if (!user) return;
 
-    const fetchReadLater = async () => {
-      const q = query(collection(db, `users/${user.email}/readLater`));
-      const querySnapshot = await getDocs(q);
-      const articles = querySnapshot.docs.map(doc => doc.data());
-      setSavedArticles(articles);
-    };
-
-    fetchReadLater();
-  }, [user]);
+    setLoading(true);
+    try {
+      const querySnapshot = await getDocs(
+        collection(db, `users/${user.email}/bookmark`)
+      ); // ✅ Fixed path
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setBookmarks(data);
+    } catch (error) {
+      console.error("Error fetching bookmarks:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
-      <h2 className="text-2xl font-bold">Read Later</h2>
-      {savedArticles.length === 0 ? (
-        <p>No saved articles.</p>
+      <h2 className="text-2xl font-bold">Bookmark Articles</h2>
+      {bookmarks.length === 0 ? (
+        <p>No Bookmark articles yet.</p>
       ) : (
         <ul className="mt-4 space-y-2">
-          {savedArticles.map((article, index) => (
-            <li key={index} className="bg-gray-100 p-4 rounded-lg">{article.title}</li>
+          {bookmarks.map((article) => (
+            <li key={article.id} className="bg-gray-100 p-4 rounded-lg">
+              {article.article.headline.main}
+            </li>
           ))}
         </ul>
       )}
@@ -37,4 +48,4 @@ const ReadLaterPage = () => {
   );
 };
 
-export default ReadLaterPage;
+export default ReadLater;

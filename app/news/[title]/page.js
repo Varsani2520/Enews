@@ -13,23 +13,27 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PrintIcon from "@mui/icons-material/Print";
 import Icons from "@/app/Reuse/Icons";
 import ShareModal from "@/app/Models/ShareModal";
-import useBookmark from "@/app/hooks/ArticleBookmark";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
+import DrawerContent from "@/app/Models/useDrawer";
+import CommentsSection from "@/app/Components/CommentSection";
+import useArticleBookmark from "@/app/hooks/ArticleBookmark";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
   const [relatedArticles, setRelatedArticles] = useState([]);
   const { title } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const [user] = useAuthState(auth);
 
-
   const storedArticle = localStorage.getItem("clickedArticle");
   const parsedArticle = storedArticle ? JSON.parse(storedArticle) : null;
-  const { isBookmark, toggleBookmark } = useBookmark(parsedArticle);
+  const { isBookmark, toggleBookmark } = useArticleBookmark(parsedArticle);
 
   useEffect(() => {
     if (storedArticle) {
@@ -57,6 +61,20 @@ const NewsDetailPage = () => {
     whatsapp: `https://api.whatsapp.com/send?text=${articleTitle}%20-%20${articleUrl}`,
     linkedin: `https://www.linkedin.com/shareArticle?url=${articleUrl}&title=${articleTitle}`,
   };
+  const handleCommentSubmit = (commentText) => {
+    // Simulate submitting the comment (replace with actual database logic)
+    const newComment = {
+      user: user?.displayName || "Anonymous",
+      text: commentText,
+    };
+    setComments((prevComments) => [...prevComments, newComment]);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const pageComments = comments.slice((currentPage - 1) * 5, currentPage * 5);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -86,10 +104,14 @@ const NewsDetailPage = () => {
                   sx={{ cursor: "pointer" }}
                   onClick={() => setModalOpen(true)}
                 />
-                <Icons icon={<CommentIcon />} sx={{ cursor: "pointer" }} />
+                <Icons
+                  icon={<CommentIcon />}
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setDrawerOpen(true)}
+                />
               </div>
               <div className="flex space-x-2">
-              <Icons
+                <Icons
                   icon={isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}
                   sx={{
                     cursor: "pointer",
@@ -99,7 +121,9 @@ const NewsDetailPage = () => {
                   aria-label={isBookmark ? "Remove Bookmark" : "Add Bookmark"}
                 />
                 <button
-                  onClick={() => router.push(`/profile/${user.displayName}/read-later`)}
+                  onClick={() =>
+                    router.push(`/profile/${user?.displayName}/read-later`)
+                  }
                   className="text-gray-600 hover:underline"
                 >
                   Read Later
@@ -180,6 +204,15 @@ const NewsDetailPage = () => {
         onClose={() => setModalOpen(false)}
         shareLinks={shareLinks}
       />
+      {/* Comments Drawer */}
+      <DrawerContent open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <CommentsSection
+          comments={pageComments}
+          onSubmitComment={handleCommentSubmit}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </DrawerContent>
     </div>
   );
 };

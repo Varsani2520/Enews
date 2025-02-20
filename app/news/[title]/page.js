@@ -17,8 +17,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
 import DrawerContent from "@/app/Models/useDrawer";
-import CommentsSection from "@/app/Components/CommentSection";
 import useArticleBookmark from "@/app/hooks/ArticleBookmark";
+import CommentForm from "@/app/Components/CommentSection";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -26,8 +26,6 @@ const NewsDetailPage = () => {
   const { title } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const [user] = useAuthState(auth);
 
@@ -61,20 +59,6 @@ const NewsDetailPage = () => {
     whatsapp: `https://api.whatsapp.com/send?text=${articleTitle}%20-%20${articleUrl}`,
     linkedin: `https://www.linkedin.com/shareArticle?url=${articleUrl}&title=${articleTitle}`,
   };
-  const handleCommentSubmit = (commentText) => {
-    // Simulate submitting the comment (replace with actual database logic)
-    const newComment = {
-      user: user?.displayName || "Anonymous",
-      text: commentText,
-    };
-    setComments((prevComments) => [...prevComments, newComment]);
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const pageComments = comments.slice((currentPage - 1) * 5, currentPage * 5);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -206,11 +190,10 @@ const NewsDetailPage = () => {
       />
       {/* Comments Drawer */}
       <DrawerContent open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <CommentsSection
-          comments={pageComments}
-          onSubmitComment={handleCommentSubmit}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
+        <CommentForm
+          article={parsedArticle}
+          user={user}
+          key={parsedArticle._id}
         />
       </DrawerContent>
     </div>

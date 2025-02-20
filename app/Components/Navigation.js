@@ -15,13 +15,15 @@ import NavigationDrawer from "./NavigationDrawer";
 import Login from "../Models/Login";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user] = useAuthState(auth);
   const router = useRouter();
 
   const tabs = [
@@ -31,12 +33,6 @@ const Navigation = () => {
     { name: "Entertainment", link: "/categories-news/Entertainment" },
   ];
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("users");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   const handleSearchOpen = () => setIsDialogOpen(true);
   const handleSearchClose = () => setIsDialogOpen(false);

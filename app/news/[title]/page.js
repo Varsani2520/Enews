@@ -13,23 +13,25 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PrintIcon from "@mui/icons-material/Print";
 import Icons from "@/app/Reuse/Icons";
 import ShareModal from "@/app/Models/ShareModal";
-import useBookmark from "@/app/hooks/ArticleBookmark";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
+import DrawerContent from "@/app/Models/useDrawer";
+import useArticleBookmark from "@/app/hooks/ArticleBookmark";
+import CommentForm from "@/app/Components/CommentSection";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
   const [relatedArticles, setRelatedArticles] = useState([]);
   const { title } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
   const [user] = useAuthState(auth);
 
-
   const storedArticle = localStorage.getItem("clickedArticle");
   const parsedArticle = storedArticle ? JSON.parse(storedArticle) : null;
-  const { isBookmark, toggleBookmark } = useBookmark(parsedArticle);
+  const { isBookmark, toggleBookmark } = useArticleBookmark(parsedArticle);
 
   useEffect(() => {
     if (storedArticle) {
@@ -86,10 +88,14 @@ const NewsDetailPage = () => {
                   sx={{ cursor: "pointer" }}
                   onClick={() => setModalOpen(true)}
                 />
-                <Icons icon={<CommentIcon />} sx={{ cursor: "pointer" }} />
+                <Icons
+                  icon={<CommentIcon />}
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setDrawerOpen(true)}
+                />
               </div>
               <div className="flex space-x-2">
-              <Icons
+                <Icons
                   icon={isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}
                   sx={{
                     cursor: "pointer",
@@ -99,7 +105,9 @@ const NewsDetailPage = () => {
                   aria-label={isBookmark ? "Remove Bookmark" : "Add Bookmark"}
                 />
                 <button
-                  onClick={() => router.push(`/profile/${user.displayName}/read-later`)}
+                  onClick={() =>
+                    router.push(`/profile/${user?.displayName}/read-later`)
+                  }
                   className="text-gray-600 hover:underline"
                 >
                   Read Later
@@ -180,6 +188,14 @@ const NewsDetailPage = () => {
         onClose={() => setModalOpen(false)}
         shareLinks={shareLinks}
       />
+      {/* Comments Drawer */}
+      <DrawerContent open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <CommentForm
+          article={parsedArticle}
+          user={user}
+          key={parsedArticle._id}
+        />
+      </DrawerContent>
     </div>
   );
 };

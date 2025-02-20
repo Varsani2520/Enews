@@ -10,7 +10,7 @@ const CommentForm = ({ article, user }) => {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const commentsPerPage = 10; // Define how many comments per page
+  const commentsPerPage = 5; // Define how many comments per page
 
   // Fetch comments on mount
   useEffect(() => {
@@ -49,8 +49,8 @@ const CommentForm = ({ article, user }) => {
   const selectedComments = comments.slice(startIndex, startIndex + commentsPerPage);
 
   return (
-    <div className="p-4 bg-white shadow-lg rounded-lg border border-gray-200">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 p-4">
+    <div className="p-2 bg-white  rounded-lg ">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 p-1">
         {/* Comment Input Field */}
         <TextField
           label="Write a comment..."
@@ -78,7 +78,7 @@ const CommentForm = ({ article, user }) => {
       </form>
 
       {/* Comments List */}
-      <div className="mt-4 max-h-[400px] overflow-y-auto">
+      <div className="mt-4  overflow-y-auto">
         <h3 className="text-lg font-semibold mb-2">Comments</h3>
         {loading ? (
           <div className="flex justify-center">

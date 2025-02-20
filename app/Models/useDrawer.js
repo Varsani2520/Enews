@@ -4,11 +4,11 @@ import { Drawer } from "@mui/material";
 
 const DrawerContent = ({ open, onClose, children }) => {
   return (
-    <Drawer anchor="bottom" open={open} onClose={onClose} sx={{
+    <Drawer anchor="right" open={open} onClose={onClose} sx={{
       '& .MuiDrawer-paper': {
-        height: '50%',
         padding: '16px',
         display: 'flex',
+        width:'300px',
         flexDirection: 'column',
       },
     }}>

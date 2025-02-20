@@ -5,6 +5,7 @@ import Card1 from "../Reuse/Card1";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
+import slugify from "slugify";
 
 const PopularCards = () => {
   const [articles, setArticles] = useState([]);
@@ -32,7 +33,7 @@ const PopularCards = () => {
       <Grid container spacing={3}>
         {/* First Column - Left Side Cards */}
         <Grid item xs={12} sm={6} md={3}>
-          <Link href={`/news/${articles[0].headline.main}`}>
+          <Link href={`/news/${slugify(articles[0].headline.main)}`}>
             <Card1
               article={articles[0]}
               marginBottom={"5%"}
@@ -45,7 +46,7 @@ const PopularCards = () => {
               width="100%"
             />
           </Link>
-          <Link href={`/news/${articles[1].headline.main}`}>
+          <Link href={`/news/${slugify(articles[1].headline.main)}`}>
             <Card1
               category={articles[1].section_name}
               title={articles[1].headline.main}
@@ -61,7 +62,7 @@ const PopularCards = () => {
 
         {/* Second Column - Center Big Card */}
         <Grid item xs={12} sm={6} md={6}>
-          <Link href={`/news/${articles[2].headline.main}`}>
+          <Link href={`/news/${slugify(articles[2].headline.main)}`}>
             <Card1
               category={articles[2].section_name}
               title={articles[2].headline.main}
@@ -91,7 +92,7 @@ const PopularCards = () => {
             },
           }}
         >
-          <Link href={`/news/${articles[3].headline.main}`}>
+          <Link href={`/news/${slugify(articles[3].headline.main)}`}>
             <Card1
               marginBottom={"5%"}
               category={articles[3].section_name}
@@ -104,7 +105,7 @@ const PopularCards = () => {
               article={articles[3]}
             />
           </Link>
-          <Link href={`/news/${articles[4].headline.main}`}>
+          <Link href={`/news/${slugify(articles[4].headline.main)}`}>
             <Card1
               category={articles[4].section_name}
               title={articles[4].headline.main}

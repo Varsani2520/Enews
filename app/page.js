@@ -28,27 +28,27 @@ export default function Home() {
         link="/categories-news/recent"
       />
       <RecentNews />
-      <Technology />
-      <Heading
+      {/* <Technology /> */}
+      {/* <Heading
         title={"Travels"}
         subtitle={"Travels"}
         buttonText={"View More"}
         link="/categories-news/travel"
       />
-      <Travels />
+      <Travels /> */}
       <Banner
         logo={"/logo.png"}
         title="Stay informesd with us- 24/7 news updates"
         href="/categories-news/breaking"
       />
-      <Heading
+      {/* <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}
         buttonText={"View More"}
         link="/categories-news/breaking"
       />
 
-      <BreakingNews />
+      <BreakingNews /> */}
     </main>
   );
 }

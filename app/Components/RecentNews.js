@@ -7,46 +7,31 @@ import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
 import slugify from "slugify";
+import { useNews } from "../context/ArticleContext";
 
 const RecentNews = () => {
-  const [articles, setArticles] = useState([]);
-
-  const [loading, setLoading] = useState(true);
+  const { newsData, fetchNews, loading } = useNews();
+  const category = "recent";
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const response = await getNews("recent");
-        if (response?.docs?.length) {
-          setArticles(response.docs);
-        } else {
-          setArticles([]); // Ensure it's an array
-        }
-      } catch (error) {
-        console.error("Error fetching recent articles:", error);
-        setArticles([]); // Handle error case
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArticles();
+    fetchNews(category);
   }, []);
-  if (loading) {
+
+  if (loading.category || !newsData.category) {
     return <CardSkeleton />;
   }
 
-  // Ensure articles array has enough items before rendering
-  if (articles.length < 3) {
-    return <p>No recent news available.</p>;
-  }
+  const articles = newsData.category;
 
   return (
     <Container maxWidth="xl">
       <Grid container spacing={3}>
         {/* First Column - Left Side Large Card */}
         <Grid item xs={12} md={8}>
-        <Link href={`/news/${slugify(articles[0]?.headline?.main || "news")}`}>
-        <Card2
+          <Link
+            href={`/news/${slugify(articles[0]?.headline?.main || "news")}`}
+          >
+            <Card2
               article={articles[0]}
               height={"613px"}
               category={articles[0].section_name}
@@ -59,7 +44,15 @@ const RecentNews = () => {
         </Grid>
 
         {/* Second Column - Right Side Small Cards */}
-        <Grid item xs={12} sm={12} md={4} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={4}
+          display="flex"
+          flexDirection={{ xs: "column", sm: "row" }}
+          gap={2}
+        >
           {articles.slice(1, 3).map((article, index) => (
             <Link
               key={article._id}

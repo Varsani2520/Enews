@@ -11,17 +11,16 @@ import { useNews } from "../context/ArticleContext";
 
 const RecentNews = () => {
   const { newsData, fetchNews, loading } = useNews();
-  const category = "recent";
 
   useEffect(() => {
-    fetchNews(category);
+    fetchNews("recent");
   }, []);
 
-  if (loading.category || !newsData.category) {
+  if (loading.recent || !newsData.recent) {
     return <CardSkeleton />;
   }
 
-  const articles = newsData.category;
+  const articles = newsData.recent;
 
   return (
     <Container maxWidth="xl">
@@ -33,7 +32,6 @@ const RecentNews = () => {
           >
             <Card2
               article={articles[0]}
-              height={"613px"}
               category={articles[0].section_name}
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${
@@ -49,9 +47,10 @@ const RecentNews = () => {
           xs={12}
           sm={12}
           md={4}
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          gap={2}
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row", md: "column" },
+          }}
         >
           {articles.slice(1, 3).map((article, index) => (
             <Link
@@ -65,9 +64,8 @@ const RecentNews = () => {
                 imageUrl={`https://www.nytimes.com/${
                   article.multimedia?.[0]?.url || "/placeholder.jpg"
                 }`}
-                height="300px"
                 width="100%"
-                marginBottom={index === 0 ? "5%" : undefined}
+                height="50%"
               />
             </Link>
           ))}

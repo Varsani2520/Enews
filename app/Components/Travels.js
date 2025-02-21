@@ -7,25 +7,22 @@ import { Container } from "@mui/material";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
 import slugify from "slugify";
+import { useNews } from "../context/ArticleContext";
 
 const Travels = () => {
-  const [articles, setArticles] = useState([]);
+  const { newsData, fetchNews, loading } = useNews();
 
-  const fetchArticles = async () => {
-    try {
-      const response = await getNews("travel");
-      setArticles(response.docs);
-      console.log("travel", response);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
   useEffect(() => {
-    fetchArticles();
+    fetchNews("travel");
   }, []);
-  if (articles.length === 0) {
+
+  if (loading.travel || !newsData.travel) {
     return <CardSkeleton />;
   }
+
+  const articles = newsData.travel;
+  console.log("travel",articles);
+  
   return (
     <Container maxWidth="xl">
       <Grid container spacing={4}>

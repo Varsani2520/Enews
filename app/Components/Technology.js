@@ -13,10 +13,10 @@ const Technology = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetchNews("Technology");
-  }, [fetchNews]);
+    fetchNews("technology");
+  }, []);
 
-  const articles = newsData["Technology"] || [];
+  const articles = newsData.technology;
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -30,12 +30,15 @@ const Technology = () => {
     );
   };
 
-  if (loading || articles.length === 0) {
+  if (loading.technology || !newsData.technology) {
     return <CardSkeleton />;
   }
 
   return (
-    <div className="relative bg-cover bg-center" style={{ backgroundImage: "url('/breaking-background.jpg')" }}>
+    <div
+      className="relative bg-cover bg-center"
+      style={{ backgroundImage: "url('/breaking-background.jpg')" }}
+    >
       <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       <Container maxWidth="xl" sx={{ marginY: "5%" }} className="relative z-10">
         <Grid container spacing={3}>
@@ -47,7 +50,9 @@ const Technology = () => {
                 article={articles[0]}
                 category={articles[0].section_name}
                 title={articles[0].headline.main}
-                imageUrl={`https://www.nytimes.com/${articles[0].multimedia?.[0]?.url || "/placeholder.jpg"}`}
+                imageUrl={`https://www.nytimes.com/${
+                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                }`}
               />
             </Link>
           </Grid>
@@ -55,31 +60,75 @@ const Technology = () => {
           {/* Right Side - Three Smaller Cards */}
           <Grid item xs={12} sm={6} md={8}>
             <Grid container spacing={3}>
-              {articles.slice(currentIndex, currentIndex + 3).map((article, index) => (
-                <Grid item xs={12} md={4} sm={6} key={index}>
-                  <Link href={`/news/${slugify(article.headline.main, { lower: true })}`}>
-                    <Card5
-                      article={article}
-                      category={article.section_name || "Technology"}
-                      title={article.headline.main || "Untitled"}
-                      imageUrl={`https://www.nytimes.com/${article.multimedia?.[1]?.url || "/placeholder.jpg"}`}
-                      height="250px"
-                    />
-                  </Link>
-                </Grid>
-              ))}
+              {articles
+                .slice(currentIndex, currentIndex + 3)
+                .map((article, index) => (
+                  <Grid item xs={12} md={4} sm={12} key={index} sx={{display:'flex',flexDirection:{sm:'column'}}}>
+                    <Link
+                      href={`/news/${slugify(article.headline.main, {
+                        lower: true,
+                      })}`}
+                    >
+                      <Card5
+                        article={article}
+                        category={article.section_name || "Technology"}
+                        title={article.headline.main || "Untitled"}
+                        imageUrl={`https://www.nytimes.com/${
+                          article.multimedia?.[1]?.url || "/placeholder.jpg"
+                        }`}
+                        height="250px"
+                        className="transition-transform transform hover:scale-105 duration-300"
+
+                      />
+                    </Link>
+                  </Grid>
+                ))}
             </Grid>
 
             {/* Navigation Buttons */}
-            <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
-              <Grid item sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
-                <Button onClick={handlePrev} variant="contained" sx={{ background: "#ef4444" }}>
-                  Prev
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mt: 2 }}
+            >
+              <Grid
+                item
+                sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+              >
+                <Button
+                  onClick={handlePrev}
+                  variant="contained"
+                  sx={{
+                    background: "#ef4444",
+                    borderRadius: "8px",
+                    px: 3,
+                    py: 1,
+                    boxShadow: "0px 4px 10px rgba(239, 68, 68, 0.3)",
+                    "&:hover": { background: "#dc2626" },
+                  }}
+                >
+                  ◀ Prev
                 </Button>
               </Grid>
-              <Grid item xs={6} sm={4}>
-                <Button onClick={handleNext} variant="contained" sx={{ background: "#ef4444" }}>
-                  Next
+              <Grid
+                item
+                sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+              >
+                <Button
+                  onClick={handleNext}
+                  variant="contained"
+                  sx={{
+                    background: "#ef4444",
+                    borderRadius: "8px",
+                    px: 3,
+                    py: 1,
+                    boxShadow: "0px 4px 10px rgba(239, 68, 68, 0.3)",
+                    "&:hover": { background: "#dc2626" },
+                  }}
+                >
+                  Next ▶
                 </Button>
               </Grid>
             </Grid>

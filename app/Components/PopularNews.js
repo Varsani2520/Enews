@@ -56,7 +56,7 @@ const PopularCards = () => {
         </Grid>
 
         {/* Third Column - Right Side Cards */}
-        <Grid item xs={12} sm={6} md={3} sx={{ display: "flex", flexDirection: { xs: "column", sm: "row", md: "column" }, gap: { sm: 25 } }}>
+        <Grid item xs={12} sm={6} md={3} sx={{ display: "flex", flexDirection: { xs: "column", sm: "row", md: "column" }, gap: { sm: '2%' } }}>
           {articles.slice(3, 5).map((article, index) => (
             <Link key={index} href={`/news/${slugify(article.headline.main)}`}>
               <Card1

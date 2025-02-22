@@ -167,16 +167,17 @@ const NewsDetailPage = () => {
             </h2>
             <div className="space-y-4">
               {relatedArticles.map((article) => (
-                <Link href={`/news/${slugify(article.headline.main)}`} key={article._id}>
+                <Link
+                  href={`/news/${slugify(article.headline.main)}`}
+                  key={article._id}
+                >
                   {" "}
                   <Card4
                     article={article}
                     category={article.section_name}
                     title={article.headline.main}
                     alt={article.headline.main}
-                    imageUrl={`https://www.nytimes.com/${
-                      article.multimedia?.[0]?.url 
-                    }`}
+                    imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                   />
                 </Link>
               ))}
@@ -190,7 +191,11 @@ const NewsDetailPage = () => {
         shareLinks={shareLinks}
       />
       {/* Comments Drawer */}
-      <DrawerContent open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <DrawerContent
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title="Add Comment"
+      >
         <CommentForm
           article={parsedArticle}
           user={user}

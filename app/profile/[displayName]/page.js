@@ -12,19 +12,22 @@ const ProfilePage = () => {
       <div className="bg-white p-6 shadow-lg rounded-lg mt-4">
         <div className="flex items-center space-x-4">
           <img
-            src={user?.photoURL}
+            src={user?.photoURL || "/default-avatar.png"}
             alt="Profile"
             className="w-16 h-16 rounded-full border"
           />
           <div>
-            <h2 className="text-xl font-semibold">{user?.displayName || user?.name}</h2>
+            <h2 className="text-xl font-semibold">
+              {user?.displayName || user?.name}
+            </h2>
             <p className="text-gray-500">{user?.email}</p>
           </div>
         </div>
       </div>
 
       <p className="mt-6 text-gray-700">
-        Manage your **favorites**, **saved articles**, **comments**, and **notifications** here.
+        Manage your **favorites**, **saved articles**, **comments**, and
+        **notifications** here.
       </p>
     </div>
   );

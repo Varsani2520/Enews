@@ -1,23 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { TextField, Button, CircularProgress } from "@mui/material";
-import { createCommnet, getComment } from "../hooks/ArticleComment";
+import { createCommnet, getCommentsForArticle } from "../hooks/ArticleComment";
 import CustomPagination from "../Reuse/CustomPagination";
 import { toast } from "react-hot-toast";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
-const CommentForm = ({ article, user }) => {
+const CommentForm = ({ article }) => {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const commentsPerPage = 5; // Define how many comments per page
-
+  const [user] = useAuthState(auth);
   // Fetch comments on mount
   useEffect(() => {
     const fetchComments = async () => {
       setLoading(true);
       try {
-        const fetchedComments = await getComment(article);
+        const fetchedComments = await getCommentsForArticle(article);
+        console.log("getched comments", fetchedComments);
+
         setComments(fetchedComments);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -36,7 +40,9 @@ const CommentForm = ({ article, user }) => {
         setText("");
 
         // Refresh comments after posting
-        const updatedComments = await getComment(article);
+        const updatedComments = await getCommentsForArticle(article);
+        console.log("Updated comments after posting:", updatedComments);
+
         setComments(updatedComments);
       } catch (error) {
         toast.error("Failed to add comment!");
@@ -46,7 +52,10 @@ const CommentForm = ({ article, user }) => {
 
   // Paginate comments
   const startIndex = (page - 1) * commentsPerPage;
-  const selectedComments = comments.slice(startIndex, startIndex + commentsPerPage);
+  const selectedComments = comments.slice(
+    startIndex,
+    startIndex + commentsPerPage
+  );
 
   return (
     <div className="p-2 bg-white  rounded-lg ">
@@ -88,9 +97,13 @@ const CommentForm = ({ article, user }) => {
           selectedComments.map((comment, index) => (
             <div key={index} className="border-b py-2">
               <p className="font-medium text-blue-600">{comment.email}</p>
-              <p className="text-gray-600">{comment.commentText}</p>
+              <p className="text-gray-600">
+                {comment.text || comment.commentText}
+              </p>
               <p className="text-sm text-gray-400">
-                {new Date(comment.timestamp).toLocaleString()}
+                {comment.timestamp
+                  ? new Date(comment.timestamp).toLocaleString()
+                  : "No timestamp"}
               </p>
             </div>
           ))

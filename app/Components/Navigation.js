@@ -23,7 +23,7 @@ const Navigation = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
   const tabs = [
@@ -32,7 +32,6 @@ const Navigation = () => {
     { name: "Live News", link: "/categories-news/live" },
     { name: "Entertainment", link: "/categories-news/Entertainment" },
   ];
-
 
   const handleSearchOpen = () => setIsDialogOpen(true);
   const handleSearchClose = () => setIsDialogOpen(false);
@@ -48,6 +47,11 @@ const Navigation = () => {
     }
     setIsDrawerOpen(open);
   };
+
+  // Ensure correct user authentication state
+  useEffect(() => {
+    console.log("User state:", user);
+  }, [user]);
 
   return (
     <Container maxWidth="xl">
@@ -106,15 +110,17 @@ const Navigation = () => {
         {/* User Section and Search */}
         <Box className="hidden md:flex items-center gap-6">
           {user ? (
-            <Link href={`/profile/${user.displayName}`} passHref>
-              {" "}
+            <Link href={`/profile/${user.displayName || user.email}`} passHref>
               <Box className="flex items-center gap-3">
-                <Avatar alt={user.displayName} src={user.photoURL || ""} />
+                <Avatar
+                  alt={user.displayName || "User"}
+                  src={user.photoURL || ""}
+                />
                 <Typography
                   variant="body1"
                   sx={{ color: "#1a2e51", fontWeight: "bold" }}
                 >
-                  {user.displayName}
+                  {user.displayName || user.email}
                 </Typography>
               </Box>
             </Link>

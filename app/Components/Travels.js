@@ -37,7 +37,7 @@ const Travels = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url || "/placeholder.jpg"
+                  article.multimedia?.[0]?.url 
                 }`}
                 height="100%"
                 width="100%"

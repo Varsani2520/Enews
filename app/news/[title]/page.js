@@ -19,6 +19,7 @@ import { auth } from "@/app/utils/firebase";
 import DrawerContent from "@/app/Models/useDrawer";
 import useArticleBookmark from "@/app/hooks/ArticleBookmark";
 import CommentForm from "@/app/Components/CommentSection";
+import slugify from "slugify";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -166,7 +167,7 @@ const NewsDetailPage = () => {
             </h2>
             <div className="space-y-4">
               {relatedArticles.map((article) => (
-                <Link href={`/news/${article.headline.main}`} key={article._id}>
+                <Link href={`/news/${slugify(article.headline.main)}`} key={article._id}>
                   {" "}
                   <Card4
                     article={article}
@@ -174,7 +175,7 @@ const NewsDetailPage = () => {
                     title={article.headline.main}
                     alt={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${
-                      article.multimedia?.[0]?.url || "/placeholder.jpg"
+                      article.multimedia?.[0]?.url 
                     }`}
                   />
                 </Link>

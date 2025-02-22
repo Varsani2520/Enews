@@ -1,7 +1,5 @@
 "use client";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { db } from "../utils/firebase";
 import { getNews } from "../utils/getNews";
 
 const ArticleContext = createContext();
@@ -14,22 +12,29 @@ export const ArticleProvider = ({ children }) => {
   const [newsData, setNewsData] = useState({});
   const [loading, setLoading] = useState({});
 
+  // Load session storage data when provider mounts
+  useEffect(() => {
+    const cachedData = {};
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (key.startsWith("news_")) {
+        cachedData[key.replace("news_", "")] = JSON.parse(sessionStorage.getItem(key) || "{}");
+      }
+    }
+    setNewsData(cachedData);
+  }, []);
+
   const fetchNews = async (category) => {
     if (newsData[category]) return; // Avoid re-fetching if data exists
     setLoading((prev) => ({ ...prev, [category]: true }));
 
-    const docRef = doc(db, "newsCache", "session");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log(`📂 Firestore Data for ${category}:`, docSnap.data()); // Debugging log
-    }
-
-    if (docSnap.exists() && docSnap.data()[category]) {
-      console.log(`✅ Using cached data for ${category} from Firestore`);
+    // Check if cached in sessionStorage
+    const cachedData = sessionStorage.getItem(`news_${category}`);
+    if (cachedData) {
+      console.log(`✅ Using cached data for ${category} from sessionStorage`);
       setNewsData((prev) => ({
         ...prev,
-        [category]: docSnap.data()[category],
+        [category]: JSON.parse(cachedData),
       }));
       setLoading((prev) => ({ ...prev, [category]: false }));
       return;
@@ -40,7 +45,9 @@ export const ArticleProvider = ({ children }) => {
       const data = await getNews(category);
       console.log(`✅ API Response for ${category}:`, data);
 
-      await setDoc(docRef, { [category]: data.docs }, { merge: true });
+      // Store in sessionStorage
+      sessionStorage.setItem(`news_${category}`, JSON.stringify(data.docs));
+
       setNewsData((prev) => ({ ...prev, [category]: data.docs }));
     } catch (error) {
       console.error(`❌ Error fetching news for ${category}:`, error);
@@ -48,16 +55,6 @@ export const ArticleProvider = ({ children }) => {
 
     setLoading((prev) => ({ ...prev, [category]: false }));
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      deleteDoc(doc(db, "newsCache", "session")).then(() =>
-        console.log("🗑️ Session cache cleared after timeout")
-      );
-    }, 3600000); // Clear cache after 1 hour (3600000 ms)
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <ArticleContext.Provider value={{ newsData, fetchNews, loading }}>

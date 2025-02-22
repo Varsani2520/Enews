@@ -4,102 +4,78 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
   Button,
   TextField,
   IconButton,
   Box,
-  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleIcon from "@mui/icons-material/Google";
-import { setDoc, doc } from "firebase/firestore";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth, db } from "../utils/firebase";
+import {
+  signInWithGoogle,
+  loginWithEmail,
+  signUpWithEmail,
+} from "../utils/auth";
 
 const LoginDialog = ({ open, onClose }) => {
-  const [isLogin, setIsLogin] = useState(false); // State to toggle between login and signup
+  const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const toggleLogin = () => {
-    setIsLogin((prev) => !prev); // Toggle between login and signup
+    setIsLogin((prev) => !prev);
+    setError(""); // Clear error message on toggle
   };
 
   const handleInputChange = (e) => {
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      localStorage.setItem("users", JSON.stringify(result.user));
+  const handleAuthAction = async () => {
+    setLoading(true);
+    setError("");
 
-      await saveUserDataToFirestore(result.user);
-      onClose();
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-    }
-  };
-
-  const handleSignUpOrLogin = async () => {
     try {
       if (isLogin) {
-        if (!userData.email || !userData.password) {
-          console.error("Please fill in all required fields.");
-          return;
-        }
-        // Add login logic here
+        await loginWithEmail(userData.email, userData.password);
       } else {
-        if (!userData.name || !userData.email || !userData.password) {
-          console.error("Please fill in all required fields.");
-          return;
-        }
-        // Add sign-up logic here
+        await signUpWithEmail(userData.name, userData.email, userData.password);
       }
-    } catch (e) {
-      console.log(e);
+      onClose(); // Close dialog on successful login/signup
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const saveUserDataToFirestore = async (user) => {
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError("");
+
     try {
-      const userRef = doc(db, "users", user.uid);
-      const userDataToSave = {
-        name: userData.name || user.displayName,
-        email: userData.email || user.email,
-      };
-      await setDoc(userRef, userDataToSave);
-      console.log("User data saved to Firestore:", userDataToSave);
+      await signInWithGoogle();
+      onClose(); // Close dialog on success
     } catch (error) {
-      console.error("Error saving user data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      sx={{
-        "& .MuiDialog-paper": {
-          display: "flex",
-          flexDirection: "column",
-          width: "400px",
-        },
-      }}
-      fullWidth
-      maxWidth="sm"
-    >
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
       <DialogTitle>
         {isLogin ? "Login" : "Sign Up"}
         <IconButton
           aria-label="close"
           onClick={onClose}
-          style={{ position: "absolute", right: 8, top: 8 }}
+          sx={{ position: "absolute", right: 8, top: 8 }}
         >
           <CloseIcon />
         </IconButton>
@@ -138,63 +114,68 @@ const LoginDialog = ({ open, onClose }) => {
           value={userData.password}
           onChange={handleInputChange}
         />
+        {error && (
+          <Box sx={{ color: "red", fontSize: "0.875rem", mt: 1 }}>{error}</Box>
+        )}
+        <Button
+          onClick={handleAuthAction}
+          disabled={loading}
+          sx={{
+            background: "#f20404",
+            my: 1,
+            py: 1.2,
+            borderRadius: "8px",
+            fontWeight: "600",
+            fontSize: "0.95rem",
+            textTransform: "uppercase",
+            "&:hover": { background: "#d10202" },
+          }}
+          fullWidth
+          variant="contained"
+        >
+          {loading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
+        </Button>
+        <Button
+          onClick={handleGoogleSignIn}
+          disabled={loading}
+          sx={{
+            background: "#4285F4",
+            color: "#fff",
+            mb: 1,
+            py: 1.2,
+            borderRadius: "8px",
+            fontWeight: "600",
+            fontSize: "0.95rem",
+            textTransform: "uppercase",
+            "&:hover": { background: "#357ae8" },
+          }}
+          fullWidth
+          startIcon={<GoogleIcon />}
+          variant="contained"
+        >
+          {loading
+            ? "Signing in..."
+            : isLogin
+            ? "Login with Google"
+            : "Sign Up with Google"}
+        </Button>
+        <Button
+          onClick={toggleLogin}
+          fullWidth
+          variant="text"
+          sx={{
+            color: "#1976d2",
+            fontWeight: "500",
+            fontSize: "0.85rem",
+            textTransform: "none",
+            "&:hover": { textDecoration: "underline" },
+          }}
+        >
+          {isLogin
+            ? "Don't have an account? Sign Up"
+            : "Already have an account? Login"}
+        </Button>
       </DialogContent>
-      <DialogActions>
-        <Box width="100%">
-          <Button
-            onClick={handleSignUpOrLogin}
-            sx={{
-              background: "#f20404",
-              mb: 1,
-              py: 1.2,
-              borderRadius: "8px",
-              fontWeight: "600",
-              fontSize: "0.95rem",
-              textTransform: "uppercase",
-              "&:hover": { background: "#d10202" },
-            }}
-            fullWidth
-            variant="contained"
-          >
-            {isLogin ? "Login" : "Sign Up"}
-          </Button>
-          <Button
-            onClick={handleGoogleSignIn}
-            sx={{
-              background: "#4285F4",
-              color: "#fff",
-              mb: 1,
-              py: 1.2,
-              borderRadius: "8px",
-              fontWeight: "600",
-              fontSize: "0.95rem",
-              textTransform: "uppercase",
-              "&:hover": { background: "#357ae8" },
-            }}
-            fullWidth
-            startIcon={<GoogleIcon />}
-            variant="contained"
-          >
-            {isLogin ? "Login with Google" : "Sign Up with Google"}
-          </Button>
-          <Button
-            onClick={toggleLogin}
-            fullWidth
-            variant="text"
-            sx={{
-              color: "#1976d2",
-              fontWeight: "500",
-              fontSize: "0.85rem",
-              textTransform: "none",
-              "&:hover": { textDecoration: "underline" },
-            }}
-          >
-            {isLogin
-              ? "Don't have an account? Sign Up"
-              : "Already have an account? Login"}
-          </Button>
-        </Box>
-      </DialogActions>
     </Dialog>
   );
 };

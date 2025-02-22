@@ -35,7 +35,7 @@ const RecentNews = () => {
               category={articles[0].section_name}
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${
-                articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                articles[0].multimedia?.[0]?.url 
               }`}
             />
           </Link>
@@ -62,7 +62,7 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url || "/placeholder.jpg"
+                  article.multimedia?.[0]?.url 
                 }`}
                 width="100%"
                 height="50%"

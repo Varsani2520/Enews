@@ -45,17 +45,15 @@ const BreakingNews = () => {
         {/* Left Side - Big Card */}
         <Grid item xs={12} md={3}>
           <Link
-            href={`/news/${slugify(currentArticles[0]?.headline?.main || "news")}`}
+            href={`/news/${slugify(
+              currentArticles[0]?.headline?.main || "news"
+            )}`}
           >
             <Card2
               article={currentArticles[0]}
               category={currentArticles[0]?.section_name}
               title={currentArticles[0]?.headline?.main}
-              imageUrl={
-                currentArticles[0]?.multimedia?.[0]?.url
-                  ? `https://www.nytimes.com/${currentArticles[0].multimedia[0].url}`
-                  : "/placeholder.jpg"
-              }
+              imageUrl={`https://www.nytimes.com/${currentArticles[0].multimedia[0].url}`}
               height="fit-content"
             />
           </Link>
@@ -66,16 +64,14 @@ const BreakingNews = () => {
           <Grid container spacing={3}>
             {currentArticles.slice(1).map((article, index) => (
               <Grid item xs={12} md={4} key={index}>
-                <Link href={`/news/${slugify(article.headline?.main || "news")}`}>
+                <Link
+                  href={`/news/${slugify(article.headline?.main || "news")}`}
+                >
                   <Card3
                     article={article}
                     category={article.section_name}
                     title={article.headline?.main}
-                    imageUrl={
-                      article.multimedia?.[0]?.url
-                        ? `https://www.nytimes.com/${article.multimedia[0].url}`
-                        : "/placeholder.jpg"
-                    }
+                    imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                     width="100%"
                   />
                 </Link>

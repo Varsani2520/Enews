@@ -81,7 +81,7 @@ const SearchDialog = ({ open, onClose }) => {
                 title={article.headline.main}
                 category={article.section_name}
                 imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url || "/placeholder.jpg"
+                  article.multimedia?.[0]?.url 
                 }`}
               />
             ))}

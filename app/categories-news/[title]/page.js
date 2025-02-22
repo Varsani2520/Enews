@@ -55,7 +55,7 @@ const CategoryPage = () => {
                       category={article.section_name}
                       title={article.headline.main}
                       imageUrl={`https://www.nytimes.com/${
-                        article.multimedia?.[0]?.url || "/placeholder.jpg"
+                        article.multimedia?.[0]?.url
                       }`}
                       date={article.pub_date}
                       height="250px" article={article}

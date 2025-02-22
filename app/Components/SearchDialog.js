@@ -34,7 +34,7 @@ const SearchDialog = ({ open, onClose }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle className="flex justify-between items-center border-b pb-2">
         <span className="text-xl font-semibold">Search</span>
         <IconButton
@@ -73,7 +73,7 @@ const SearchDialog = ({ open, onClose }) => {
             No results found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
             {results.map((article) => (
               <Card4
                 article={article}

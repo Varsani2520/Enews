@@ -1,7 +1,7 @@
 import React from "react";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
-import { handleArticleClick } from "../hooks/ArticleClick";
+import { addHandleArticleClick } from "../hooks/ArticleClick";
 
 const Card5 = ({ category, title, imageUrl, height, article }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
@@ -11,7 +11,7 @@ const Card5 = ({ category, title, imageUrl, height, article }) => {
       <div
         className="relative"
         style={{ height }}
-        onClick={() => handleArticleClick(article)}
+        onClick={() => addHandleArticleClick(article)}
       >
         <img
           src={imageUrl}

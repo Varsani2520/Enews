@@ -2,7 +2,7 @@
 import React from "react";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
-import { handleArticleClick } from "../hooks/ArticleClick";
+import { addHandleArticleClick } from "../hooks/ArticleClick";
 
 const Card1 = ({
   height,
@@ -23,7 +23,7 @@ const Card1 = ({
         width: width || "100%",
         marginBottom,
       }}
-      onClick={() => handleArticleClick(article)}
+      onClick={() => addHandleArticleClick(article)}
     >
       <img
         className="object-cover w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"

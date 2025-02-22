@@ -20,6 +20,7 @@ import DrawerContent from "@/app/Models/useDrawer";
 import useArticleBookmark from "@/app/hooks/ArticleBookmark";
 import CommentForm from "@/app/Components/CommentSection";
 import slugify from "slugify";
+import { getHandleArticleClick } from "@/app/hooks/ArticleClick";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -30,29 +31,38 @@ const NewsDetailPage = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
 
-  const storedArticle = localStorage.getItem("clickedArticle");
-  const parsedArticle = storedArticle ? JSON.parse(storedArticle) : null;
-  const { isBookmark, toggleBookmark } = useArticleBookmark(parsedArticle);
+  const { isBookmark, toggleBookmark } = useArticleBookmark(clickedArticle);
 
   useEffect(() => {
-    if (storedArticle) {
-      const parsedArticle = JSON.parse(storedArticle);
-      setClickedArticle(parsedArticle);
-      getNews(parsedArticle.category)
-        .then((response) => setRelatedArticles(response.docs))
-        .catch((error) =>
-          console.error("Error fetching related articles:", error)
+    const fetchArticle = async () => {
+      try {
+        const articles = await getHandleArticleClick();
+        const foundArticle = articles.find(
+          (art) => slugify(art.headline.main) === title
         );
-    } else {
-      console.error("No article found in localStorage.");
-    }
-  }, [storedArticle]);
+        if (foundArticle) {
+          setClickedArticle(foundArticle);
+          const response = await getNews(foundArticle.category);
+          setRelatedArticles(response.docs);
+        } else {
+          console.error("No article found in Firestore.");
+        }
+      } catch (error) {
+        console.error("Error fetching clicked article:", error);
+      }
+    };
+
+    fetchArticle();
+  }, [title]);
 
   if (!clickedArticle) {
     return <CardSkeleton />;
   }
-  const articleTitle = clickedArticle.headline.main;
-  const articleUrl = encodeURIComponent(window.location.href);
+  const articleTitle = clickedArticle.headline?.main;
+  const articleUrl =
+    typeof window !== "undefined"
+      ? encodeURIComponent(window.location.href)
+      : "";
 
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
@@ -166,21 +176,30 @@ const NewsDetailPage = () => {
               Related News
             </h2>
             <div className="space-y-4">
-              {relatedArticles.map((article) => (
-                <Link
-                  href={`/news/${slugify(article.headline.main)}`}
-                  key={article._id}
-                >
-                  {" "}
-                  <Card4
-                    article={article}
-                    category={article.section_name}
-                    title={article.headline.main}
-                    alt={article.headline.main}
-                    imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                  />
-                </Link>
-              ))}
+              {relatedArticles.length > 0 ? (
+                relatedArticles.map((article) => (
+                  <Link
+                    href={`/news/${slugify(article.headline.main)}`}
+                    key={article._id}
+                  >
+                    <Card4
+                      article={article}
+                      category={article.section_name}
+                      title={article.headline.main}
+                      alt={article.headline.main}
+                      imageUrl={
+                        article.multimedia?.[0]?.url
+                          ? `https://www.nytimes.com/${article.multimedia[0].url}`
+                          : "/default-image.jpg"
+                      }
+                    />
+                  </Link>
+                ))
+              ) : (
+                <p className="text-gray-500 text-center">
+                  No related articles found.
+                </p>
+              )}
             </div>
           </Grid>
         </Grid>
@@ -197,9 +216,9 @@ const NewsDetailPage = () => {
         title="Add Comment"
       >
         <CommentForm
-          article={parsedArticle}
+          article={clickedArticle}
           user={user}
-          key={parsedArticle._id}
+          key={clickedArticle._id}
         />
       </DrawerContent>
     </div>

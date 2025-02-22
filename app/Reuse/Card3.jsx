@@ -1,6 +1,7 @@
 import React from "react";
 import useArticleLike from "../hooks/ArticleLikes";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { addHandleArticleClick } from "../hooks/ArticleClick";
 
 const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
 
@@ -10,7 +11,7 @@ const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
     <div
       className="bg-gray-200 border border-gray-300 rounded-lg p-4 relative"
       style={{ height, width, marginBottom }}
-      onClick={()=>handleArticleClick(article)}
+      onClick={()=>addHandleArticleClick(article)}
     >
       {/* Image */}
       <div className="w-full h-48 relative">

@@ -15,6 +15,7 @@ import {
   Button,
 } from "@mui/material";
 
+
 const FavoritesPage = () => {
   const [user] = useAuthState(auth);
   const [favorites, setFavorites] = useState([]);

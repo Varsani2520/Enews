@@ -1,17 +1,16 @@
 import React from "react";
 import useArticleLike from "../hooks/ArticleLikes";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { addHandleArticleClick } from "../hooks/ArticleClick";
 
 const Card2 = ({ category, title, imageUrl, height, width, article }) => {
- 
-
   const { isFavorite, toggleFavorite } = useArticleLike(article);
 
   return (
     <div
       className="relative overflow-hidden rounded-lg shadow-lg bg-white mb-4"
       style={{ height, width }}
-      onClick={()=>handleArticleClick(article)}
+      onClick={() => addHandleArticleClick(article)}
     >
       {/* Background Image */}
       <img

@@ -1,6 +1,6 @@
 import React from "react";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { handleArticleClick } from "../hooks/ArticleClick";
+import { addHandleArticleClick } from "../hooks/ArticleClick";
 import useArticleLike from "../hooks/ArticleLikes";
 
 const Card4 = ({ imageUrl, category, title, alt, article }) => {
@@ -9,7 +9,7 @@ const Card4 = ({ imageUrl, category, title, alt, article }) => {
   return (
     <div
       className="flex items-center bg-white shadow-md rounded-md overflow-hidden mb-4 relative"
-      onClick={() => handleArticleClick(article)}
+      onClick={() => addHandleArticleClick(article)}
     >
       {/* Left side image */}
       <div className="flex-shrink-0">

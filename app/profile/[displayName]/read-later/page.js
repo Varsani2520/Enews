@@ -1,29 +1,31 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import Card1 from "@/app/Reuse/Card1";
+import slugify from "slugify";
 
 const ReadLaterPage = () => {
   const [user] = useAuthState(auth);
-  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [bookmarkedArticles, setBookmarkedArticles] = useState([]);
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-      return;
-    }
-    fetchBookmarks();
-  }, [user]);
-
-  const fetchBookmarks = async () => {
+  const fetchBookmarks = useCallback(async () => {
     if (!user) return;
 
     try {
+      setLoading(true);
       const querySnapshot = await getDocs(
         collection(db, `users/${user.email}/bookmark`)
       );
@@ -34,8 +36,13 @@ const ReadLaterPage = () => {
       setBookmarkedArticles(articles);
     } catch (error) {
       console.error("Error fetching bookmarks:", error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [user]);
+  useEffect(() => {
+    fetchBookmarks();
+  }, [fetchBookmarks]);
 
   const removeBookmark = async (articleId) => {
     if (!user) return;
@@ -51,25 +58,51 @@ const ReadLaterPage = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold">Read Later Articles</h2>
-      {bookmarkedArticles.length === 0 ? (
-        <p className="text-gray-500">No saved articles yet.</p>
+    <div className="p-6 max-w-5xl mx-auto">
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <CircularProgress />
+        </div>
+      ) : bookmarkedArticles.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-10 text-gray-500">
+          {/* <img
+          src="/empty-favorites.svg"
+          alt="No favorites"
+          className="w-40 h-40 mb-4"
+        /> */}
+          <Typography>No Bookmark articles yet.</Typography>
+          <Button variant="contained" color="primary" className="mt-4" href="/">
+            Explore Articles
+          </Button>
+        </div>
       ) : (
-        <ul className="space-y-4">
+        <Grid container spacing={3}>
           {bookmarkedArticles.map((article) => (
-            <li key={article.id} className="bg-gray-100 p-4 rounded-lg">
-              <Link href={`/news/${article.headline.main}`}>
-                {article.headline?.main}
-              </Link>
-
-              <DeleteIcon
-                onClick={() => removeBookmark(article.id)}
-                sx={{ cursor: "pointer" }}
-              />
-            </li>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={article.id}>
+              <div className="relative">
+                <Link href={`/news/${slugify(article.headline.main)}`}>
+                  <Card1
+                    article={article}
+                    category={article.section_name}
+                    imageUrl={
+                      article.multimedia?.[0]?.url
+                        ? `https://www.nytimes.com/${article.multimedia[0].url}`
+                        : "/fallback-image.jpg"
+                    }
+                    height="100%"
+                    width="100%"
+                  />
+                </Link>
+                <IconButton
+                  onClick={() => removeBookmark(article.id)}
+                  className="absolute top-2 right-2 text-red-500 bg-white rounded-full p-1 shadow-lg hover:bg-gray-200 transition"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       )}
     </div>
   );

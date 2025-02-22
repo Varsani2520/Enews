@@ -175,7 +175,7 @@ const NewsDetailPage = () => {
                     title={article.headline.main}
                     alt={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${
-                      article.multimedia?.[0]?.url || "/placeholder.jpg"
+                      article.multimedia?.[0]?.url 
                     }`}
                   />
                 </Link>

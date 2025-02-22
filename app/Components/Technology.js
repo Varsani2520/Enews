@@ -51,7 +51,7 @@ const Technology = () => {
                 category={articles[0].section_name}
                 title={articles[0].headline.main}
                 imageUrl={`https://www.nytimes.com/${
-                  articles[0].multimedia?.[0]?.url || "/placeholder.jpg"
+                  articles[0].multimedia?.[0]?.url 
                 }`}
               />
             </Link>
@@ -74,7 +74,7 @@ const Technology = () => {
                         category={article.section_name || "Technology"}
                         title={article.headline.main || "Untitled"}
                         imageUrl={`https://www.nytimes.com/${
-                          article.multimedia?.[1]?.url || "/placeholder.jpg"
+                          article.multimedia?.[1]?.url 
                         }`}
                         height="250px"
                         className="transition-transform transform hover:scale-105 duration-300"

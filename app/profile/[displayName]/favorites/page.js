@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
+import slugify from "slugify";
 
 const FavoritesPage = () => {
   const [user] = useAuthState(auth);
@@ -52,7 +53,7 @@ const FavoritesPage = () => {
           {favorites.map((article) => (
             <li key={article.id} className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
               <Link
-                href={`/news/${encodeURIComponent(article.headline?.main)}`} // ✅ Encode for safe URL
+                href={`/news/${slugify(article.headline?.main)}`} // ✅ Encode for safe URL
                 className="text-blue-600 hover:underline"
               >
                 {article.headline?.main}

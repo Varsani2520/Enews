@@ -5,7 +5,8 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { auth, db, doc, provider, setDoc } from "./firebase";
+import { auth, db, doc, provider } from "./firebase";
+import { setDoc } from "firebase/firestore";
 
 // handle Google signin authenticaltion
 export const signInWithGoogle = async () => {

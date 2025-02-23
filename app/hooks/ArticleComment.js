@@ -1,5 +1,5 @@
-import { addDoc, getDocs, orderBy, query, where } from "firebase/firestore";
-import { collection, db } from "../utils/firebase";
+import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {  db } from "../utils/firebase";
 import toast from "react-hot-toast";
 // add comment to firestore
 export const createCommnet = async (article, user, commentText) => {

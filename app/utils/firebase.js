@@ -25,7 +25,7 @@ const messaging = getMessaging(app);
 export const registerServiceWorker = async () => {
   if (typeof window !== "undefined" && "serviceWorker" in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register(
+      const registration = await window.navigator.serviceWorker.register(
         "/firebase-messaging-sw.js"
       );
       console.log("Service Worker registered:", registration);
@@ -38,6 +38,8 @@ export const registerServiceWorker = async () => {
 
 // Request notification permission and get FCM token
 export const requestNotificationPermission = async (userId) => {
+  if (typeof window === "undefined") return null; // Prevent running on the server
+
   try {
     const permission = await Notification.requestPermission();
     if (permission === "granted") {

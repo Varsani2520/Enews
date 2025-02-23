@@ -23,8 +23,8 @@ const messaging = getMessaging(app);
 
 // Register service worker
 export const registerServiceWorker = async () => {
-  if ("serviceWorker" in navigator) {
-  try {
+  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+    try {
       const registration = await navigator.serviceWorker.register(
         "/firebase-messaging-sw.js"
       );

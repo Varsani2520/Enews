@@ -9,12 +9,14 @@ import Navigation from "./Components/Navigation";
 
 export default function ClientLayout({ children }) {
   useEffect(() => {
+    if (typeof window !== "undefined") {
     const setupFCM = async () => {
       await registerServiceWorker();
       await requestNotificationPermission();
     };
 
     setupFCM();
+  }
   }, []);
 
   return (

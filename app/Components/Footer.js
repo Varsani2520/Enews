@@ -1,29 +1,14 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../utils/firebase";
-import { toast } from "react-hot-toast";
+import { subscribeUser } from "../utils/subscribe";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const handleSubscribe = async () => {
-    if (!email) {
-      toast.error("Please enter a valid email.");
-      return;
-    }
-    try {
-      await addDoc(collection(db, "sunscriptions"), {
-        email,
-        subscribeAt: new Date(),
-      });
-      toast.success("Subscribed successfully!");
-      setEmail("");
-    } catch (error) {
-      toast.error("Failed to subscribe. Please try again.");
-      console.error("Error subscribing: ", error);
-    }
+  const handleSubscribe = () => {
+    subscribeUser(email);
+    setEmail(""); //clear input after subscribing
   };
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -54,7 +39,6 @@ const Footer = () => {
             <li className="mb-2">
               <Link href="/news/breaking-news">Breaking News</Link>
             </li>
-            
           </ul>
         </div>
 

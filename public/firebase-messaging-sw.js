@@ -36,7 +36,6 @@ messaging.onBackgroundMessage((payload) => {
       url:
         payload?.data?.click_action || "https://www.enews-varsani.vercel.app",
     },
-    url,
   });
 });
 

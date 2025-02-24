@@ -1,11 +1,24 @@
 "use client";
 
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import Navigation from "./Components/Navigation";
+import { useEffect } from "react";
 import Weather from "./Components/Weather";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import { registerServiceWorker, requestNotificationPermission } from "./utils/firebase";
+import Navigation from "./Components/Navigation";
 
 export default function ClientLayout({ children }) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+    const setupFCM = async () => {
+      await registerServiceWorker();
+      await requestNotificationPermission();
+    };
+
+    setupFCM();
+  }
+  }, []);
+
   return (
     <>
       <Weather />

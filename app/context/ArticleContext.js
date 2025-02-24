@@ -14,14 +14,20 @@ export const ArticleProvider = ({ children }) => {
 
   // Load session storage data when provider mounts
   useEffect(() => {
-    const cachedData = {};
-    for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i);
-      if (key.startsWith("news_")) {
-        cachedData[key.replace("news_", "")] = JSON.parse(sessionStorage.getItem(key) || "{}");
+    if (typeof window !== "undefined") {
+      // Ensure it's running in the browser
+
+      const cachedData = {};
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const key = sessionStorage.key(i);
+        if (key.startsWith("news_")) {
+          cachedData[key.replace("news_", "")] = JSON.parse(
+            sessionStorage.getItem(key) || "{}"
+          );
+        }
       }
+      setNewsData(cachedData);
     }
-    setNewsData(cachedData);
   }, []);
 
   const fetchNews = async (category) => {

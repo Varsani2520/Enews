@@ -1,11 +1,8 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import toast from "react-hot-toast";
-
-// Ensure Firebase is initialized only in the browser
-const isBrowser = typeof window !== "undefined";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-LXlcAmBYjSrk3cZyezuhLRhU7Z-kAgE",
@@ -17,20 +14,21 @@ const firebaseConfig = {
   measurementId: "G-H24LR9S22B",
 };
 
-let app;
-let messaging;
+// ✅ Initialize Firebase only if it hasn’t been initialized already
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
 
-if (isBrowser) {
-  app = initializeApp(firebaseConfig);
+// ✅ Ensure Messaging is only used in the browser
+let messaging;
+if (typeof window !== "undefined") {
   messaging = getMessaging(app);
 }
 
-export const auth = isBrowser ? getAuth(app) : null;
-export const db = isBrowser ? getFirestore(app) : null;
-export const provider = isBrowser ? new GoogleAuthProvider() : null;
-
+// ✅ Function to register Service Worker (Safe for Next.js)
 export const registerServiceWorker = async () => {
-  if ("serviceWorker" in( typeof window != undefined && navigator)) {
+  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(
         "/firebase-messaging-sw.js"
@@ -43,12 +41,13 @@ export const registerServiceWorker = async () => {
   }
 };
 
+// ✅ Function to request push notification permission
 export const requestNotificationPermission = async (userId) => {
-  if (!isBrowser) return null; // Ensure it runs only in the browser
+  if (typeof window === "undefined") return null; // Prevent running in SSR
 
   try {
     const permission = await Notification.requestPermission();
-    if (permission === "granted") {
+    if (permission === "granted" && messaging) {
       const token = await getToken(messaging, {
         vapidKey:
           "BFcbQvJZOyeaTYMRctstme-0yb9mG0fU089_y-4okGDZiCVsooidONnkntXa56-kE-uYDZNHQFP_EnYNfYfeqLU",
@@ -76,10 +75,12 @@ export const requestNotificationPermission = async (userId) => {
   }
 };
 
-// ✅ Listen for foreground messages only if in browser
-if (isBrowser) {
+// ✅ Listen for messages only on the client-side
+if (typeof window !== "undefined" && messaging) {
   onMessage(messaging, (payload) => {
     console.log("Message received:", payload);
     toast(payload.notification?.body || "New Notification", { icon: "🔔" });
   });
 }
+
+export { app, auth, db, provider };

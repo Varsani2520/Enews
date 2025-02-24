@@ -1,9 +1,9 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-import toast from "react-hot-toast";
 
+// ✅ Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC-LXlcAmBYjSrk3cZyezuhLRhU7Z-kAgE",
   authDomain: "enews-22664.firebaseapp.com",
@@ -14,13 +14,15 @@ const firebaseConfig = {
   measurementId: "G-H24LR9S22B",
 };
 
-// ✅ Initialize Firebase only if it hasn’t been initialized already
+// ✅ Initialize Firebase (only once)
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+
+// ✅ Initialize Services
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// ✅ Ensure Messaging is only used in the browser
+// ✅ Ensure Messaging is only initialized in the browser
 let messaging;
 if (typeof window !== "undefined") {
   messaging = getMessaging(app);
@@ -55,14 +57,13 @@ export const requestNotificationPermission = async (userId) => {
 
       console.log("FCM Token:", token);
 
-      if (userId && db) {
-        const userRef = doc(db, "users", "pushNotification", userId);
+      if (userId && db ) {
+        const userRef = doc(db, "pushNotifications", userId);
 
         // ✅ Store User Info & FCM Token
         await setDoc(userRef, {
           userId,
-          name: userInfo.name,
-          email: userInfo.email,
+         
           FCMTOKEN: token,
           timestamp: new Date().toISOString(),
         });
@@ -83,8 +84,11 @@ export const requestNotificationPermission = async (userId) => {
 if (typeof window !== "undefined" && messaging) {
   onMessage(messaging, (payload) => {
     console.log("Message received:", payload);
-    toast(payload.notification?.body || "New Notification", { icon: "🔔" });
+    import("react-hot-toast").then(({ default: toast }) => {
+      toast(payload.notification?.body || "New Notification", { icon: "🔔" });
+    });
   });
 }
 
+// ✅ Export services
 export { app, auth, db, provider };

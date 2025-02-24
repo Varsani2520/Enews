@@ -56,13 +56,17 @@ export const requestNotificationPermission = async (userId) => {
       console.log("FCM Token:", token);
 
       if (userId && db) {
-        const commentRef = collection(db, `users/pushNotification`);
-            // save comment to firestore
-            await addDoc(commentRef, {
-            FCMTOKEN:token,
-              timestamp: new Date().toISOString(),
-            });
-        console.log("FCM Token saved to Firestore");
+        const userRef = doc(db, "users", "pushNotification", userId);
+
+        // ✅ Store User Info & FCM Token
+        await setDoc(userRef, {
+          userId,
+          name: userInfo.name,
+          email: userInfo.email,
+          FCMTOKEN: token,
+          timestamp: new Date().toISOString(),
+        });
+        console.log("User info & FCM Token saved to Firestore");
       }
       return token;
     } else {

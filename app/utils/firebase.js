@@ -1,8 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { getMessaging, onMessage, getToken } from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import toast from "react-hot-toast";
+
+// Ensure Firebase is initialized only in the browser
+const isBrowser = typeof window !== "undefined";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-LXlcAmBYjSrk3cZyezuhLRhU7Z-kAgE",
@@ -14,18 +17,22 @@ const firebaseConfig = {
   measurementId: "G-H24LR9S22B",
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const provider = new GoogleAuthProvider();
-const messaging = getMessaging(app);
+let app;
+let messaging;
 
-// Register service worker
+if (isBrowser) {
+  app = initializeApp(firebaseConfig);
+  messaging = getMessaging(app);
+}
+
+export const auth = isBrowser ? getAuth(app) : null;
+export const db = isBrowser ? getFirestore(app) : null;
+export const provider = isBrowser ? new GoogleAuthProvider() : null;
+
 export const registerServiceWorker = async () => {
-  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+  if ("serviceWorker" in( typeof window != undefined && navigator)) {
     try {
-      const registration = await window.navigator.serviceWorker.register(
+      const registration = await navigator.serviceWorker.register(
         "/firebase-messaging-sw.js"
       );
       console.log("Service Worker registered:", registration);
@@ -36,23 +43,26 @@ export const registerServiceWorker = async () => {
   }
 };
 
-// Request notification permission and get FCM token
 export const requestNotificationPermission = async (userId) => {
-  if (typeof window === "undefined") return null; // Prevent running on the server
+  if (!isBrowser) return null; // Ensure it runs only in the browser
 
   try {
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
-
       const token = await getToken(messaging, {
         vapidKey:
           "BFcbQvJZOyeaTYMRctstme-0yb9mG0fU089_y-4okGDZiCVsooidONnkntXa56-kE-uYDZNHQFP_EnYNfYfeqLU",
       });
+
       console.log("FCM Token:", token);
 
-      if (userId) {
-        // Store the FCM token in Firestore under the user's document
-        await setDoc(doc(db, "users", userId), { fcmToken: token }, { merge: true });
+      if (userId && db) {
+        const { setDoc, doc } = await import("firebase/firestore");
+        await setDoc(
+          doc(db, "users", userId),
+          { fcmToken: token },
+          { merge: true }
+        );
         console.log("FCM Token saved to Firestore");
       }
       return token;
@@ -66,16 +76,10 @@ export const requestNotificationPermission = async (userId) => {
   }
 };
 
-// ✅ Listen for foreground messages
-onMessage(messaging, (payload) => {
-  console.log("Message received:", payload);
-
-  if (document.visibilityState === "visible") {
+// ✅ Listen for foreground messages only if in browser
+if (isBrowser) {
+  onMessage(messaging, (payload) => {
+    console.log("Message received:", payload);
     toast(payload.notification?.body || "New Notification", { icon: "🔔" });
-  } else {
-    new Notification(payload.notification?.title || "New Update", {
-      body: payload.notification?.body || "Check the latest update!",
-      icon: "/logo.png",
-    });
-  }
-});
+  });
+}

@@ -23,12 +23,11 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(title, {
     body,
     icon: "/logo.png",
-    badge: "/logo.png", // Optional
+    badge: "/logo.png",
     data: { url: payload?.data?.click_action || "/" },
   });
 });
 
-// Handle notification click event
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   event.waitUntil(clients.openWindow(event.notification.data.url || "/"));

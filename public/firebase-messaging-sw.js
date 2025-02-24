@@ -1,5 +1,9 @@
-importScripts("https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging-compat.js");
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"
+);
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging-compat.js"
+);
 
 firebase.initializeApp({
   apiKey: "AIzaSyC-LXlcAmBYjSrk3cZyezuhLRhU7Z-kAgE",
@@ -14,21 +18,33 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  console.log("[firebase-messaging-sw.js] Received background message", payload);
+  console.log(
+    "[firebase-messaging-sw.js] Received background message",
+    payload
+  );
 
   if (!payload.notification) return;
 
-  const { title = "New Update", body = "Check out the latest news update!" } = payload.notification;
+  const { title = "New Update", body = "Check out the latest news update!" } =
+    payload.notification;
 
   self.registration.showNotification(title, {
     body,
     icon: "/logo.png",
     badge: "/logo.png",
-    data: { url: payload?.data?.click_action || "/" },
+    data: {
+      url:
+        payload?.data?.click_action || "https://www.enews-varsani.vercel.app",
+    },
+    url,
   });
 });
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  event.waitUntil(clients.openWindow(event.notification.data.url || "/"));
+  event.waitUntil(
+    clients.openWindow(
+      event.notification.data.url || "https://www.enews-varsani.vercel.app"
+    )
+  );
 });

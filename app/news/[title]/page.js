@@ -61,7 +61,7 @@ const NewsDetailPage = () => {
   const articleTitle = clickedArticle.headline?.main;
   const articleUrl =
     typeof window !== "undefined"
-      ? encodeURIComponent(window.location.href)
+      ? slugify(window.location.href)
       : "";
 
   const shareLinks = {

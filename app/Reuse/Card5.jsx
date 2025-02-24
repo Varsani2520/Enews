@@ -20,24 +20,26 @@ const Card5 = ({ category, title, imageUrl, height, article }) => {
         />
         {/* Like Button */}
         <button
-          className="absolute top-2 right-2 text-white text-2xl"
+          className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${
+            isFavorite
+              ? "bg-red-500 text-white"
+              : "bg-gray-800 bg-opacity-50 text-white"
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
             toggleFavorite();
           }}
         >
-          {isFavorite ? (
-            <Favorite className="text-red-500" />
-          ) : (
-            <FavoriteBorder className="text-white" />
-          )}
+          {isFavorite ? <Favorite /> : <FavoriteBorder />}{" "}
         </button>
         <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-md">
           <p className="text-sm font-semibold">{category}</p>
         </div>
       </div>
-      <h2 className="text-lg font-semibold mb-2 text-[#1a2e51]">{title}</h2>
+      <h2 className="text-sm md:text-lg font-semibold mb-2 text-[#1a2e51]">
+        {title}
+      </h2>
     </div>
   );
 };

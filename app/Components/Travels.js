@@ -39,7 +39,7 @@ const Travels = () => {
                 imageUrl={`https://www.nytimes.com/${
                   article.multimedia?.[0]?.url 
                 }`}
-                height="100%"
+                height="400px"
                 width="100%"
                 marginBottom="20px"
               />

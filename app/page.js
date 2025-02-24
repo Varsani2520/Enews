@@ -28,6 +28,12 @@ export default function Home() {
         link="/categories-news/recent"
       />
       <RecentNews />
+      <Heading
+        title={"Technology"}
+        subtitle={"Tech News Here"}
+        buttonText={"View More"}
+        link="/categories-news/technology"
+      />
       <Technology />
       <Heading
         title={"Travels"}

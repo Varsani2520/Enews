@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import toast from "react-hot-toast";
 
@@ -56,12 +56,12 @@ export const requestNotificationPermission = async (userId) => {
       console.log("FCM Token:", token);
 
       if (userId && db) {
-        const { setDoc, doc } = await import("firebase/firestore");
-        await setDoc(
-          doc(db, "users", userId),
-          { fcmToken: token },
-          { merge: true }
-        );
+        const commentRef = collection(db, `users/pushNotification`);
+            // save comment to firestore
+            await addDoc(commentRef, {
+            FCMTOKEN:token,
+              timestamp: new Date().toISOString(),
+            });
         console.log("FCM Token saved to Firestore");
       }
       return token;

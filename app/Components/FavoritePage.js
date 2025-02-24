@@ -15,6 +15,7 @@ import {
   Button,
 } from "@mui/material";
 
+
 const FavoritesPage = () => {
   const [user] = useAuthState(auth);
   const [favorites, setFavorites] = useState([]);
@@ -79,7 +80,7 @@ const FavoritesPage = () => {
         <Grid container spacing={3}>
           {favorites.map((article) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={article.id}>
-              <div className="relative">
+              <div className="relative h-full">
                 <Link href={`/news/${slugify(article.headline.main)}`}>
                   <Card1
                     article={article}

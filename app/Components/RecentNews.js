@@ -23,20 +23,18 @@ const RecentNews = () => {
   const articles = newsData.recent;
 
   return (
-    <Container maxWidth="xl">
-      <Grid container spacing={3}>
+    <Container maxWidth="xl" >
+      <Grid container spacing={2}>
         {/* First Column - Left Side Large Card */}
-        <Grid item xs={12} md={8}>
-          <Link
-            href={`/news/${slugify(articles[0]?.headline?.main || "news")}`}
-          >
+        <Grid item sm={8} xs={12}>
+          <Link href={`/news/${slugify(articles[0]?.headline?.main)}`}>
             <Card2
               article={articles[0]}
               category={articles[0].section_name}
               title={articles[0].headline.main}
-              imageUrl={`https://www.nytimes.com/${
-                articles[0].multimedia?.[0]?.url 
-              }`}
+              imageUrl={`https://www.nytimes.com/${articles[0].multimedia?.[0]?.url}`}
+              height="400px"
+              width="100%"
             />
           </Link>
         </Grid>
@@ -45,14 +43,13 @@ const RecentNews = () => {
         <Grid
           item
           xs={12}
-          sm={12}
-          md={4}
+          sm={4}
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", sm: "row", md: "column" },
+            flexDirection: "column",
           }}
         >
-          {articles.slice(1, 3).map((article, index) => (
+          {articles.slice(1, 3).map((article) => (
             <Link
               key={article._id}
               href={`/news/${slugify(article.headline.main)}`}
@@ -61,11 +58,9 @@ const RecentNews = () => {
                 article={article}
                 category={article.section_name}
                 title={article.headline.main}
-                imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url 
-                }`}
+                imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                 width="100%"
-                height="50%"
+                height="191px"
               />
             </Link>
           ))}

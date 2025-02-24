@@ -37,11 +37,8 @@ const ProfileLayout = ({ children }) => {
 
   // Sidebar Tabs
   const tabs = [
-    { name: "overview", label: "Overview" },
     { name: "favorites", label: "Favorites" },
     { name: "bookmarks", label: "Bookmarks" },
-    { name: "comments", label: "Comments" },
-    { name: "notifications", label: "Notifications" },
   ];
 
   return (

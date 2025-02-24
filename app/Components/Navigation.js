@@ -17,17 +17,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-// import { getAuth } from "firebase/auth";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  // const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-  // console.log(auth?.currentUser);
+
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -35,7 +33,10 @@ const Navigation = () => {
     { name: "Entertainment", link: "/categories-news/Entertainment" },
   ];
 
-  const handleSearchOpen = () => setIsDialogOpen(true);
+  const handleSearchOpen = () => {
+    setIsDialogOpen(true);
+    setIsDrawerOpen(false); // Close the drawer when opening search
+  };
   const handleSearchClose = () => setIsDialogOpen(false);
   const handleLoginOpen = () => setIsLoginDialogOpen(true);
   const handleLoginClose = () => setIsLoginDialogOpen(false);

@@ -17,7 +17,7 @@ const Card1 = ({
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg shadow-lg mb-4"
+      className="relative overflow-hidden group  rounded-lg shadow-lg mb-4 cursor-pointer"
       style={{
         height: height || "300px",
         width: width || "100%",
@@ -26,7 +26,7 @@ const Card1 = ({
       onClick={() => addHandleArticleClick(article)}
     >
       <img
-        className="object-cover w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
+        className="object-fill w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
         src={imageUrl}
         alt="Card Background"
       />
@@ -35,9 +35,12 @@ const Card1 = ({
         {category}
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2">
-        <h2 className="text-sm md:text-lg font-semibold text-white font-bold">{title}</h2>
+      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2 transition-colors duration-300">
+        <h2 className="text-sm md:text-lg font-semibold text-white font-bold group-hover:text-red-600">
+          {title}
+        </h2>
       </div>
+
       {/* like button */}
       <button
         className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${

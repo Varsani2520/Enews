@@ -11,20 +11,19 @@ import slugify from "slugify";
 const CategoryPage = () => {
   const { title } = useParams();
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true); // For loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         if (title) {
           const response = await getNews(title);
-          console.log("response of popular", response.docs);
           setArticles(response.docs);
         }
       } catch (error) {
         console.error("Error fetching articles:", error);
       } finally {
-        setLoading(false); // Stop loading after fetch
+        setLoading(false);
       }
     };
 
@@ -44,23 +43,17 @@ const CategoryPage = () => {
             No news articles found
           </Typography>
         ) : (
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             {articles.map((article) => (
-              <Grid item key={article._id} xs={12} md={4}>
-                  <Link
-                    href={`/news/${slugify(article.headline.main)}`}
-                    passHref
-                  >
-                    <Card5
-                      category={article.section_name}
-                      title={article.headline.main}
-                      imageUrl={`https://www.nytimes.com/${
-                        article.multimedia?.[0]?.url
-                      }`}
-                      date={article.pub_date}
-                      height="250px" article={article}
-                    />
-                  </Link>
+              <Grid item key={article._id} xs={12} sm={6} md={3}>
+                <Link href={`/news/${slugify(article.headline.main)}`} passHref>
+                  <Card5
+                    category={article.section_name}
+                    title={article.headline.main}
+                    imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
+                    article={article}
+                  />
+                </Link>
               </Grid>
             ))}
           </Grid>

@@ -13,16 +13,12 @@ const Card4 = ({ imageUrl, category, title, alt, article }) => {
     >
       {/* Left side image */}
       <div className="flex-shrink-0">
-        <img
-          src={imageUrl}
-          alt={alt}
-          className="w-32 h-32 object-cover rounded-md"
-        />
+        <img src={imageUrl} alt={alt} className="w-32 h-32 object-cover " />
       </div>
 
       {/* Right side content */}
-      <div className="p-4 flex-1">
-        <div className="text-sm text-white bg-[#f20404] w-fit py-1 px-4 rounded-md font-bold">
+      <div className="px-3 py-0 flex-1">
+        <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 w-fit rounded-lg">
           {category}
         </div>
         <h2 className="text-[#0f1f40] text-lg font-semibold">{title}</h2>

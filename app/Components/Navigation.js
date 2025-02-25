@@ -132,15 +132,15 @@ const Navigation = () => {
             </Link>
           ) : (
             <NavLink
-              href="#"
-              isActive={activeTab === "SignUp"}
+              to="/"
+              isActive={activeTab === "Login"}
               onClick={() => {
-                setActiveTab("SignUp");
+                setActiveTab("Login");
                 handleLoginOpen();
               }}
               className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800"
             >
-              Sign Up
+              Login
             </NavLink>
           )}
 

@@ -15,7 +15,7 @@ const BreakingNews = () => {
   const { newsData, fetchNews, loading } = useNews();
 
   useEffect(() => {
-    fetchNews("breaking");
+    fetchNews("health");
   }, []);
 
   if (loading.breaking || !newsData.breaking) {
@@ -54,7 +54,7 @@ const BreakingNews = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ marginBottom: "5%" }}>
       <Slider {...settings}>
         {articles.map((article, index) => (
           <Box key={index} px={1}>

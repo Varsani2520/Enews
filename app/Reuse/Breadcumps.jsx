@@ -7,11 +7,19 @@ const Breadcumps = ({ heading }) => {
     <div className="bg-gray-200 py-4 text-[#0f20404]">
       <Container maxWidth="xl">
         <Breadcrumbs aria-label="breadcrumb" separator="|">
-          <Link color="inherit" href="/">
-            <HomeIcon className="inline-block mr-1 w-5 h-5 " />
+          <Link
+            color="inherit"
+            href="/"
+            className=" mr-1 w-5 h-5 hover:text-red-500"
+          >
+            <HomeIcon fontSize="small" />
             Home
           </Link>
-          {heading && <Typography className="inline-block">{heading}</Typography>}
+          {heading && (
+            <Typography className="inline-block text-[#1a2e51] font-semibold capitalize">
+              {heading}
+            </Typography>
+          )}
         </Breadcrumbs>
       </Container>
     </div>

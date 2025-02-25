@@ -25,7 +25,7 @@ const Travels = () => {
   
   return (
     <Container maxWidth="xl">
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {articles.slice(0, 4).map((article, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Link
@@ -39,8 +39,6 @@ const Travels = () => {
                 imageUrl={`https://www.nytimes.com/${
                   article.multimedia?.[0]?.url 
                 }`}
-                height="400px"
-                width="100%"
                 marginBottom="20px"
               />
             </Link>

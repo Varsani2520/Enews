@@ -34,7 +34,6 @@ const PopularCards = () => {
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                 height="191px"
-                width="100%"
               />
             </Link>
           ))}
@@ -49,7 +48,6 @@ const PopularCards = () => {
               title={articles[2].headline.main}
               imageUrl={`https://www.nytimes.com/${articles[2].multimedia?.[0]?.url}`}
               height="400px"
-              width="100%"
             />
           </Link>
         </div>
@@ -64,7 +62,6 @@ const PopularCards = () => {
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                 height="191px"
-                width="100%"
               />
             </Link>
           ))}

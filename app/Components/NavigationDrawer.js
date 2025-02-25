@@ -17,9 +17,18 @@ import {
   Person as PersonIcon,
 } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
+import Login from "../Models/Login";
 
-const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
+const NavigationDrawer = ({
+  activeTab,
+  setActiveTab,
+  handleSearchOpen,
+  handleDrawerClose,
+}) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+
+  const handleLoginOpen = () => setIsLoginDialogOpen(true);
 
   return (
     <Box role="presentation" className="w-64 bg-white p-5 rounded-lg">
@@ -27,6 +36,7 @@ const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
         {/* Login & Search Button */}
         <ListItem className="flex justify-between items-center">
           <Button
+            onClick={handleLoginOpen}
             variant="contained"
             color="error"
             startIcon={
@@ -50,15 +60,18 @@ const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
         {/* Navigation Links */}
         {[
           { name: "Home", href: "/" },
-          { name: "About Us", href: "/about-us" },
-          { name: "Contact", href: "/contact-us" },
-          { name: "Breaking News", href: "/all_breaking_news" },
+          { name: "Breaking News", href: "/categories-news/breaking" },
+          { name: "Live News", href: "/categories-news/live" },
+          { name: "Entertainment", href: "/categories-news/Entertainment" },
         ].map(({ name, href }) => (
           <ListItem key={name} className="px-2">
             <NavLink
               href={href}
               isActive={activeTab === name.toLowerCase()}
-              onClick={() => setActiveTab(name.toLowerCase())}
+              onClick={() => {
+                setActiveTab(name.toLowerCase());
+                handleDrawerClose(); // Close drawer on click
+              }}
               className={`block w-full text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${
                 activeTab === name.toLowerCase()
                   ? "bg-red-100 text-red-500"
@@ -111,7 +124,10 @@ const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
                 <NavLink
                   href={`/categories-news/${category.toLowerCase()}`}
                   isActive={activeTab === category.toLowerCase()}
-                  onClick={() => setActiveTab(category.toLowerCase())}
+                  onClick={() => {
+                    setActiveTab(category.toLowerCase());
+                    handleDrawerClose(); // Close drawer on click
+                  }}
                   className={`block text-gray-800 font-semibold text-base py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${
                     activeTab === category.toLowerCase()
                       ? "border-l-4 border-red-500 pl-3 text-red-500 bg-red-100"
@@ -125,6 +141,10 @@ const NavigationDrawer = ({ activeTab, setActiveTab, handleSearchOpen }) => {
           </List>
         </Collapse>
       </List>
+      <Login
+        open={isLoginDialogOpen}
+        onClose={() => setIsLoginDialogOpen(false)}
+      />
     </Box>
   );
 };

@@ -23,7 +23,7 @@ const RecentNews = () => {
   const articles = newsData.recent;
 
   return (
-    <Container maxWidth="xl" >
+    <Container maxWidth="xl">
       <Grid container spacing={2}>
         {/* First Column - Left Side Large Card */}
         <Grid item sm={8} xs={12}>
@@ -34,7 +34,6 @@ const RecentNews = () => {
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${articles[0].multimedia?.[0]?.url}`}
               height="400px"
-              width="100%"
             />
           </Link>
         </Grid>
@@ -59,7 +58,6 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                width="100%"
                 height="191px"
               />
             </Link>

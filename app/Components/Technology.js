@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Container, Grid, Box } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import Card2 from "../Reuse/Card2";
 import Link from "next/link";
 import CardSkeleton from "./Skeleton";
@@ -33,20 +33,26 @@ const Technology = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4, // Show 3 articles per row
+    slidesToShow: 4, // Show 4 articles per row
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024, // Tablet
+        breakpoint: 1200, // Large screen
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 900, // Tablet
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, // Mobile
+        breakpoint: 600, // Mobile
         settings: {
           slidesToShow: 1,
         },
@@ -55,31 +61,26 @@ const Technology = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-        <Slider {...settings}>
-          {articles.map((article, index) => (
-            <Box key={index} px={1}> {/* Adds spacing between cards */}
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item xs={12}>
-                  <Link
-                    href={`/news/${slugify(article?.headline?.main, {
-                      lower: true,
-                    })}`}
-                  >
-                    <Card2
-                      article={article}
-                      category={article?.section_name}
-                      title={article?.headline?.main}
-                      imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                      height="400px"
-                      width="100%"
-                    />
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          ))}
-        </Slider>
+    <Container maxWidth="xl" sx={{marginBottom:"2%"}}>
+      <Slider {...settings}>
+        {articles.map((article, index) => (
+          <Box key={index} px={1}> {/* Add spacing between cards */}
+            <Link
+              href={`/news/${slugify(article?.headline?.main, {
+                lower: true,
+              })}`}
+            >
+              <Card2
+                height="300px"
+                article={article}
+                category={article?.section_name}
+                title={article?.headline?.main}
+                imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
+              />
+            </Link>
+          </Box>
+        ))}
+      </Slider>
     </Container>
   );
 };

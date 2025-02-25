@@ -46,3 +46,4 @@ body {
 .hover\:pause-scroll:hover{
   animation-play-state: paused;
 }
+

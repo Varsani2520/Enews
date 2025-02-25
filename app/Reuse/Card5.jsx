@@ -3,21 +3,21 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
 import { addHandleArticleClick } from "../hooks/ArticleClick";
 
-const Card5 = ({ category, title, imageUrl, height, article }) => {
+const Card5 = ({ category, title, imageUrl, article }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
 
   return (
-    <div className="relative  overflow-hidden">
+    <div className="relative overflow-hidden group">
       <div
-        className="relative"
-        style={{ height }}
+        className="relative w-full aspect-[4/3]" // ✅ Ensures consistent height without cropping
         onClick={() => addHandleArticleClick(article)}
       >
         <img
-          src={imageUrl}
+          src={imageUrl || "/placeholder.jpg"}
           alt="Article Image"
-          className="w-full h-full object-cover object-center rounded "
+          className="w-full h-auto aspect-[4/3] rounded" // ✅ Fixes spacing issues
         />
+
         {/* Like Button */}
         <button
           className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${
@@ -31,13 +31,17 @@ const Card5 = ({ category, title, imageUrl, height, article }) => {
             toggleFavorite();
           }}
         >
-          {isFavorite ? <Favorite /> : <FavoriteBorder />}{" "}
+          {isFavorite ? <Favorite /> : <FavoriteBorder />}
         </button>
+
+        {/* Category Label */}
         <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-md">
           <p className="text-sm font-semibold">{category}</p>
         </div>
       </div>
-      <h2 className="text-sm md:text-lg font-semibold mb-2 text-[#1a2e51]">
+
+      {/* Title */}
+      <h2 className="text-sm md:text-lg font-semibold mb-2 text-[#1a2e51] group-hover:text-red-600 transition-colors duration-300">
         {title}
       </h2>
     </div>

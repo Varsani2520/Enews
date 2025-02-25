@@ -60,9 +60,7 @@ const NewsDetailPage = () => {
   }
   const articleTitle = clickedArticle.headline?.main;
   const articleUrl =
-    typeof window !== "undefined"
-      ? slugify(window.location.href)
-      : "";
+    typeof window !== "undefined" ? slugify(window.location.href) : "";
 
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
@@ -79,9 +77,9 @@ const NewsDetailPage = () => {
           {/* Left Side - Display Big Image */}
           <Grid item xs={12} md={8}>
             <div className="mb-4">
-              <p className="text-white bg-red-700 px-2 w-fit rounded-md">
+              <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg w-fit">
                 {clickedArticle.section_name}
-              </p>
+              </div>
               <h1 className="text-3xl font-bold mt-1 text-[#1a2e51]">
                 {clickedArticle.headline.main}
               </h1>
@@ -172,9 +170,9 @@ const NewsDetailPage = () => {
           </Grid>
           {/* Right Side - Display Related Articles */}
           <Grid item xs={12} md={4}>
-            <h2 className="text-2xl  mb-4 bg-red-700 text-center text-white px-2 rounded-lg">
+            <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg mb-4">
               Related News
-            </h2>
+            </div>
             <div className="space-y-4">
               {relatedArticles.length > 0 ? (
                 relatedArticles.map((article) => (

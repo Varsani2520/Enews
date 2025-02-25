@@ -1,10 +1,20 @@
-import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import {  db } from "../utils/firebase";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db } from "../utils/firebase";
 import toast from "react-hot-toast";
+
 // add comment to firestore
 export const createCommnet = async (article, user, commentText) => {
   try {
-    if (!user || !user.email) throw new Error("User is not authenticated");
+    if (!user || !user.email) {
+      toast.error("You need to be logged in to comment.");
+      throw new Error("User is not authenticated");
+    }
     if (!article || !article._id) throw new Error("Invalid article data");
     if (!commentText) throw new Error("comment text is required");
 

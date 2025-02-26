@@ -6,7 +6,7 @@ import Card1 from "../Reuse/Card1";
 import Link from "next/link";
 import slugify from "slugify";
 import { Container, Grid } from "@mui/material";
-import { popularSkeleton } from "./Skeleton";
+import { PopularSkeleton } from "./Skeleton";
 const PopularCards = () => {
   const { newsData, fetchNews, loading } = useNews();
 
@@ -15,7 +15,7 @@ const PopularCards = () => {
   }, []);
 
   if (loading.popular || !newsData.popular) {
-    return <popularSkeleton />;
+    return <PopularSkeleton />;
   }
 
   const articles = newsData.popular;

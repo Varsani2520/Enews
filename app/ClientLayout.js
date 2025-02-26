@@ -13,11 +13,15 @@ import Navigation from "./Components/Navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
+
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {
         await registerServiceWorker();
-        await requestNotificationPermission(user.uid);
+        // Run after a short delay or user action
+        setTimeout(() => {
+          requestNotificationPermission(user.uid);
+        }, 2000); // Small delay to prevent blocking
       };
 
       setupFCM();

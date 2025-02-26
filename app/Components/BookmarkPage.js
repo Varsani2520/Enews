@@ -33,6 +33,7 @@ const ReadLaterPage = () => {
         id: doc.id,
         ...doc.data().article,
       }));
+      console.log("book", articles);
       setBookmarkedArticles(articles);
     } catch (error) {
       console.error("Error fetching bookmarks:", error);
@@ -76,10 +77,10 @@ const ReadLaterPage = () => {
           </Button>
         </div>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {bookmarkedArticles.map((article) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={article.id}>
-              <div className="relative">
+              <div className="relative h-full">
                 <Link href={`/news/${slugify(article.headline.main)}`}>
                   <Card1
                     article={article}
@@ -95,7 +96,7 @@ const ReadLaterPage = () => {
                 </Link>
                 <IconButton
                   onClick={() => removeBookmark(article.id)}
-                  className="absolute top-2 right-2 text-red-500 bg-white rounded-full p-1 shadow-lg hover:bg-gray-200 transition"
+                  className="absolute top-2 right-2 text-red-500 bg-white rounded-full hover:bg-gray-200 transition"
                 >
                   <DeleteIcon />
                 </IconButton>

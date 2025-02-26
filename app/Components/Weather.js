@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { Container, IconButton, Menu, MenuItem } from "@mui/material";
+import { Container } from "@mui/material";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
-import LanguageIcon from "@mui/icons-material/Language";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import GithubIcon from "@mui/icons-material/Github";
 import Icons from "../Reuse/Icons";
 
 const Weather = () => {
@@ -20,16 +20,6 @@ const Weather = () => {
     return new Date().toLocaleDateString(undefined, options);
   };
 
-  const [languageAnchor, setLanguageAnchor] = React.useState(null);
-
-  const handleLanguageClick = (event) => {
-    setLanguageAnchor(event.currentTarget);
-  };
-
-  const handleLanguageClose = () => {
-    setLanguageAnchor(null);
-  };
-
   return (
     <div style={{ background: "#1a2e51", color: "white", padding: "10px 0" }}>
       {" "}
@@ -38,7 +28,7 @@ const Weather = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         {/* Left Side - Current Date and Calendar Icon */}
@@ -59,28 +49,14 @@ const Weather = () => {
           <span>{getCurrentDate()}</span>
         </div>
 
-        {/* Right Side - Language Option Menu and Social Icons */}
+        {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
-          {/* Language Option */}
-          <IconButton
-            color="inherit"
-            onClick={handleLanguageClick}
-            aria-label="Select Language"
-          >
-            <LanguageIcon />
-          </IconButton>
-
-          <Menu
-            anchorEl={languageAnchor}
-            open={Boolean(languageAnchor)}
-            onClose={handleLanguageClose}
-          >
-            <MenuItem onClick={handleLanguageClose}>English</MenuItem>
-            <MenuItem onClick={handleLanguageClose}>French</MenuItem>
-            <MenuItem onClick={handleLanguageClose}>Spanish</MenuItem>
-          </Menu>
-
           {/* Social Media Icons */}
+          <Icons
+            icon={<GithubIcon />}
+            href="https://github.com/varsani2520/"
+            aria-label="Visit our Facebook page"
+          />
           <Icons
             icon={<FacebookIcon />}
             href="https://www.facebook.com"

@@ -58,8 +58,7 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="24
-                0px"
+                height="240px"
               />
             </Link>
           ))}

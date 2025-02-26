@@ -12,7 +12,7 @@ const Banner = ({ title, href }) => {
       className="mt-4"
       sx={{ display: { xs: "none", sm: "none", md: "block" } }}
     >
-      <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-lg shadow-lg mb-4">
+      <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg mb-4">
         {/* Left side - Logo and Title */}
         <div className="flex items-center space-x-4">
           <img
@@ -22,7 +22,7 @@ const Banner = ({ title, href }) => {
             className="cursor-pointer"
             onClick={() => router.push("/")}
           />{" "}
-          <Typography variant="h5" className="font-bold">
+          <Typography variant="h5" className="font-semibold text-sm md:text-lg">
             {title || "Stay informed, stay ahead with our daily news"}
           </Typography>
         </div>

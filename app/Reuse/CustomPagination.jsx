@@ -2,7 +2,12 @@
 import React from "react";
 import { Pagination } from "@mui/material";
 
-const CustomPagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
+const CustomPagination = ({
+  totalItems,
+  itemsPerPage,
+  currentPage,
+  onPageChange,
+}) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages <= 1) return null; // Hide pagination if only one page
@@ -13,6 +18,8 @@ const CustomPagination = ({ totalItems, itemsPerPage, currentPage, onPageChange 
         count={totalPages}
         page={currentPage}
         onChange={(_, page) => onPageChange(page)}
+        variant="outlined"
+        shape="rounded"
         color="primary"
       />
     </div>

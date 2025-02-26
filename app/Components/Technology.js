@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import Card2 from "../Reuse/Card2";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
+import { TechnologySkeleton } from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 import Slider from "react-slick";
@@ -19,13 +19,13 @@ const Technology = () => {
   }, []);
 
   if (loading.technology || !newsData.technology) {
-    return <CardSkeleton />;
+    return <TechnologySkeleton />;
   }
 
   const articles = newsData.technology;
 
   if (articles.length === 0) {
-    return <CardSkeleton />;
+    return <h2>article not found</h2>;
   }
 
   // Slick slider settings
@@ -61,10 +61,12 @@ const Technology = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{marginBottom:"2%"}}>
+    <Container maxWidth="xl" sx={{ marginBottom: "2%" }}>
       <Slider {...settings}>
         {articles.map((article, index) => (
-          <Box key={index} px={1}> {/* Add spacing between cards */}
+          <Box key={index} px={1}>
+            {" "}
+            {/* Add spacing between cards */}
             <Link
               href={`/news/${slugify(article?.headline?.main, {
                 lower: true,

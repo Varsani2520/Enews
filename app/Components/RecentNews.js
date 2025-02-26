@@ -5,7 +5,7 @@ import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
+import recentNewsSkeleton from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 
@@ -17,7 +17,7 @@ const RecentNews = () => {
   }, []);
 
   if (loading.recent || !newsData.recent) {
-    return <CardSkeleton />;
+    return <recentNewsSkeleton />;
   }
 
   const articles = newsData.recent;
@@ -26,14 +26,14 @@ const RecentNews = () => {
     <Container maxWidth="xl">
       <Grid container spacing={2}>
         {/* First Column - Left Side Large Card */}
-        <Grid item sm={8} xs={12}>
+        <Grid item sm={9} xs={12}>
           <Link href={`/news/${slugify(articles[0]?.headline?.main)}`}>
             <Card2
               article={articles[0]}
               category={articles[0].section_name}
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${articles[0].multimedia?.[0]?.url}`}
-              height="400px"
+              height="500px"
             />
           </Link>
         </Grid>
@@ -42,7 +42,7 @@ const RecentNews = () => {
         <Grid
           item
           xs={12}
-          sm={4}
+          sm={3}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -58,7 +58,7 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="191px"
+                height="240px"
               />
             </Link>
           ))}

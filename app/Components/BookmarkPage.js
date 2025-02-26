@@ -8,13 +8,13 @@ import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
-  CircularProgress,
   Grid,
   IconButton,
   Typography,
 } from "@mui/material";
 import Card1 from "@/app/Reuse/Card1";
 import slugify from "slugify";
+import { TravelSkeleton } from "./Skeleton";
 
 const ReadLaterPage = () => {
   const [user] = useAuthState(auth);
@@ -33,6 +33,7 @@ const ReadLaterPage = () => {
         id: doc.id,
         ...doc.data().article,
       }));
+      console.log("book", articles);
       setBookmarkedArticles(articles);
     } catch (error) {
       console.error("Error fetching bookmarks:", error);
@@ -61,7 +62,7 @@ const ReadLaterPage = () => {
     <div className="p-6 max-w-5xl mx-auto">
       {loading ? (
         <div className="flex justify-center py-10">
-          <CircularProgress />
+          <TravelSkeleton />
         </div>
       ) : bookmarkedArticles.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-gray-500">
@@ -76,10 +77,10 @@ const ReadLaterPage = () => {
           </Button>
         </div>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {bookmarkedArticles.map((article) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={article.id}>
-              <div className="relative">
+              <div className="relative h-full">
                 <Link href={`/news/${slugify(article.headline.main)}`}>
                   <Card1
                     article={article}
@@ -95,7 +96,7 @@ const ReadLaterPage = () => {
                 </Link>
                 <IconButton
                   onClick={() => removeBookmark(article.id)}
-                  className="absolute top-2 right-2 text-red-500 bg-white rounded-full p-1 shadow-lg hover:bg-gray-200 transition"
+                  className="absolute top-2 right-2 text-red-500 bg-white rounded-full hover:bg-gray-200 transition"
                 >
                   <DeleteIcon />
                 </IconButton>

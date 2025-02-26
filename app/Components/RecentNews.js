@@ -5,7 +5,7 @@ import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
+import recentNewsSkeleton from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 
@@ -17,7 +17,7 @@ const RecentNews = () => {
   }, []);
 
   if (loading.recent || !newsData.recent) {
-    return <CardSkeleton />;
+    return <recentNewsSkeleton />;
   }
 
   const articles = newsData.recent;
@@ -58,7 +58,8 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="240px"
+                height="24
+                0px"
               />
             </Link>
           ))}

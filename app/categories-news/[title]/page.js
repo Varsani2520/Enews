@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Breadcumbs from "@/app/Reuse/Breadcumps";
 import slugify from "slugify";
+import { TravelSkeleton } from "@/app/Components/Skeleton";
 
 const CategoryPage = () => {
   const { title } = useParams();
@@ -35,9 +36,7 @@ const CategoryPage = () => {
       <Breadcumbs heading={title} />
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {loading ? (
-          <Typography variant="h6" align="center">
-            Loading articles...
-          </Typography>
+          <TravelSkeleton />
         ) : articles.length === 0 ? (
           <Typography variant="h6" align="center" color="error">
             No news articles found

@@ -8,13 +8,13 @@ import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
-  CircularProgress,
   Grid,
   IconButton,
   Typography,
 } from "@mui/material";
 import Card1 from "@/app/Reuse/Card1";
 import slugify from "slugify";
+import { TravelSkeleton } from "./Skeleton";
 
 const ReadLaterPage = () => {
   const [user] = useAuthState(auth);
@@ -62,7 +62,7 @@ const ReadLaterPage = () => {
     <div className="p-6 max-w-5xl mx-auto">
       {loading ? (
         <div className="flex justify-center py-10">
-          <CircularProgress />
+          <TravelSkeleton />
         </div>
       ) : bookmarkedArticles.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-gray-500">

@@ -5,7 +5,7 @@ import { getNews } from "../utils/getNews";
 import Card1 from "../Reuse/Card1";
 import { Container } from "@mui/material";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
+import CardSkeleton, { TravelSkeleton } from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 
@@ -17,12 +17,12 @@ const Travels = () => {
   }, []);
 
   if (loading.travel || !newsData.travel) {
-    return <CardSkeleton />;
+    return <TravelSkeleton />;
   }
 
   const articles = newsData.travel;
-  console.log("travel",articles);
-  
+  console.log("travel", articles);
+
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>
@@ -36,9 +36,7 @@ const Travels = () => {
                 article={article}
                 category={article.section_name}
                 title={article.headline.main}
-                imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url 
-                }`}
+                imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                 marginBottom="20px"
               />
             </Link>

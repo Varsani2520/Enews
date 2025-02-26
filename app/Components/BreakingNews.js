@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
+import CardSkeleton, { TechnologySkeleton } from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 import Slider from "react-slick";
@@ -15,17 +15,17 @@ const BreakingNews = () => {
   const { newsData, fetchNews, loading } = useNews();
 
   useEffect(() => {
-    fetchNews("health");
+    fetchNews("breaking");
   }, []);
 
   if (loading.breaking || !newsData.breaking) {
-    return <CardSkeleton />;
+    return <TechnologySkeleton />;
   }
 
   const articles = newsData.breaking;
 
   if (articles.length === 0) {
-    return <CardSkeleton />;
+    return <h2>Article not found...</h2>;
   }
 
   // Slick slider settings

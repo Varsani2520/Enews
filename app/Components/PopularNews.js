@@ -4,10 +4,9 @@ import React, { useEffect } from "react";
 import { useNews } from "../context/ArticleContext";
 import Card1 from "../Reuse/Card1";
 import Link from "next/link";
-import CardSkeleton from "./Skeleton";
 import slugify from "slugify";
 import { Container, Grid } from "@mui/material";
-
+import { popularSkeleton } from "./Skeleton";
 const PopularCards = () => {
   const { newsData, fetchNews, loading } = useNews();
 
@@ -16,7 +15,7 @@ const PopularCards = () => {
   }, []);
 
   if (loading.popular || !newsData.popular) {
-    return <CardSkeleton />;
+    return <popularSkeleton />;
   }
 
   const articles = newsData.popular;
@@ -39,7 +38,7 @@ const PopularCards = () => {
           ))}
         </div>
 
-        {/* Center Big Card (Takes 2 columns on md+) */}
+        {/* Center Big Card */}
         <div className="col-span-1 sm:col-span-2">
           <Link href={`/news/${slugify(articles[2].headline.main)}`}>
             <Card1
@@ -52,7 +51,7 @@ const PopularCards = () => {
           </Link>
         </div>
 
-        {/* Right Side Cards (Column layout on md+) */}
+        {/* Right Side Cards */}
         <div className="grid grid-cols-1">
           {articles.slice(3, 5).map((article, index) => (
             <Link key={index} href={`/news/${slugify(article.headline.main)}`}>

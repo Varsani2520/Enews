@@ -7,20 +7,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
 import slugify from "slugify";
 import Card1 from "@/app/Reuse/Card1";
-import {
-  Grid,
-  Typography,
-  IconButton,
-  CircularProgress,
-  Button,
-} from "@mui/material";
+import { Grid, Typography, IconButton, Button } from "@mui/material";
 import CustomPagination from "../Reuse/CustomPagination";
+import { TravelSkeleton } from "./Skeleton";
 
 const FavoritesPage = () => {
   const [user] = useAuthState(auth);
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Change as needed
@@ -71,7 +66,7 @@ const FavoritesPage = () => {
     <div className="p-6 max-w-5xl mx-auto">
       {loading ? (
         <div className="flex justify-center py-10">
-          <CircularProgress />
+          <TravelSkeleton />
         </div>
       ) : favorites.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-gray-500">

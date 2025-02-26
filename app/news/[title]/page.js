@@ -5,7 +5,7 @@ import { getNews } from "@/app/utils/getNews";
 import Card4 from "@/app/Reuse/Card4";
 import Breadcumbs from "@/app/Reuse/Breadcumps";
 import { useParams, useRouter } from "next/navigation";
-import CardSkeleton from "@/app/Components/Skeleton";
+import CardSkeleton, { NewsDetailSkeleton } from "@/app/Components/Skeleton";
 import Link from "next/link";
 import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";
@@ -56,7 +56,7 @@ const NewsDetailPage = () => {
   }, [title]);
 
   if (!clickedArticle) {
-    return <CardSkeleton />;
+    return <NewsDetailSkeleton />;
   }
   const articleTitle = clickedArticle.headline?.main;
   const articleUrl =

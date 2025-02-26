@@ -6,7 +6,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import GithubIcon from "@mui/icons-material/Github";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Icons from "../Reuse/Icons";
 
 const Weather = () => {
@@ -53,7 +53,7 @@ const Weather = () => {
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
           {/* Social Media Icons */}
           <Icons
-            icon={<GithubIcon />}
+            icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"
             aria-label="Visit our Facebook page"
           />

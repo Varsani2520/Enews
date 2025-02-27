@@ -14,7 +14,7 @@ const Card5 = ({ category, title, imageUrl, article }) => {
       >
         <img
           src={imageUrl || "/placeholder.jpg"}
-          alt="Article Image"
+          alt={title}
           className="w-full h-auto aspect-[4/3] rounded" // ✅ Fixes spacing issues
         />
 

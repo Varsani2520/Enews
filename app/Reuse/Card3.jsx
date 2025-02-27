@@ -17,7 +17,7 @@ const Card3 = ({ title, imageUrl, height, width, marginBottom, article }) => {
         <img
           className="object-cover w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
           src={imageUrl}
-          alt="Card Background"
+          alt={title}
         />
         {/* Like Button */}
         <button

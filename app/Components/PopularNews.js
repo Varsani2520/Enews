@@ -27,7 +27,7 @@ const PopularCards = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1">
           {articles.slice(0, 2).map((article, index) => (
             <Link key={index} href={`/news/${slugify(article.headline.main)}`}>
-              <Card1
+              <Card1 
                 article={article}
                 category={article.section_name}
                 title={article.headline.main}

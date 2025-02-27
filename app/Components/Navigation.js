@@ -121,7 +121,7 @@ const Navigation = () => {
               <Box className="flex items-center gap-3">
                 <Avatar
                   alt={user?.displayName || "User"}
-                  src={user?.photoURL || "/default-avatar.png"}
+                  src={user?.photoURL}
                 />
                 <Typography
                   variant="body1"

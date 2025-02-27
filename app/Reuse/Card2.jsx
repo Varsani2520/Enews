@@ -13,11 +13,7 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
       onClick={() => addHandleArticleClick(article)}
     >
       {/* Background Image */}
-      <img
-        className="object-fill w-full h-full"
-        src={imageUrl}
-        alt="Card Background"
-      />
+      <img className="object-fill w-full h-full" src={imageUrl} alt={title} />
       {/* Like Button */}
       <button
         className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${

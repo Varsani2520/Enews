@@ -28,7 +28,7 @@ const Card1 = ({
       <img
         className="object-fill w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
         src={imageUrl}
-        alt="Card Background"
+        alt={title}
       />
 
       <div className="absolute top-2 left-2 bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg">

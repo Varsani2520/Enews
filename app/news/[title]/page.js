@@ -12,7 +12,6 @@ import CommentIcon from "@mui/icons-material/Comment";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PrintIcon from "@mui/icons-material/Print";
 import Icons from "@/app/Reuse/Icons";
-import ShareModal from "@/app/Models/ShareModal";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
@@ -58,16 +57,6 @@ const NewsDetailPage = () => {
   if (!clickedArticle) {
     return <NewsDetailSkeleton />;
   }
-  const articleTitle = clickedArticle.headline?.main;
-  const articleUrl =
-    typeof window !== "undefined" ? slugify(window.location.href) : "";
-
-  const shareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
-    twitter: `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`,
-    whatsapp: `https://api.whatsapp.com/send?text=${articleTitle}%20-%20${articleUrl}`,
-    linkedin: `https://www.linkedin.com/shareArticle?url=${articleUrl}&title=${articleTitle}`,
-  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -95,8 +84,25 @@ const NewsDetailPage = () => {
                 <Icons
                   icon={<ShareIcon />}
                   sx={{ cursor: "pointer" }}
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => {
+                    const shareUrl = `${window.location.origin}/news/${title}`;
+
+                    if (navigator.share) {
+                      navigator
+                        .share({
+                          title: clickedArticle.headline.main,
+                          text: clickedArticle.abstract,
+                          url: shareUrl,
+                        })
+                        .catch((error) =>
+                          console.error("Error sharing:", error)
+                        );
+                    } else {
+                      setModalOpen(true); // Open modal if native sharing isn't supported
+                    }
+                  }}
                 />
+
                 <Icons
                   icon={<CommentIcon />}
                   sx={{ cursor: "pointer" }}
@@ -185,11 +191,7 @@ const NewsDetailPage = () => {
                       category={article.section_name}
                       title={article.headline.main}
                       alt={article.headline.main}
-                      imageUrl={
-                        article.multimedia?.[0]?.url
-                          ? `https://www.nytimes.com/${article.multimedia[0].url}`
-                          : "/default-image.jpg"
-                      }
+                      imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                     />
                   </Link>
                 ))
@@ -202,11 +204,7 @@ const NewsDetailPage = () => {
           </Grid>
         </Grid>
       </Container>
-      <ShareModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        shareLinks={shareLinks}
-      />
+
       {/* Comments Drawer */}
       <DrawerContent
         open={drawerOpen}

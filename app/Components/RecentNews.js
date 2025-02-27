@@ -5,9 +5,9 @@ import Card1 from "../Reuse/Card1";
 import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
-import recentNewsSkeleton from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
+import { RecentSkeleton } from "./Skeleton";
 
 const RecentNews = () => {
   const { newsData, fetchNews, loading } = useNews();
@@ -17,7 +17,7 @@ const RecentNews = () => {
   }, []);
 
   if (loading.recent || !newsData.recent) {
-    return <recentNewsSkeleton />;
+    return <RecentSkeleton />;
   }
 
   const articles = newsData.recent;

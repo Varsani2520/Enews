@@ -1,7 +1,16 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardMedia, Typography, Skeleton, Container, Box, Grid } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Skeleton,
+  Container,
+  Box,
+  Grid,
+} from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -46,7 +55,7 @@ export const PopularSkeleton = () => {
   );
 };
 
-export const RecentNewsSkeleton = () => {
+export const RecentSkeleton = () => {
   return (
     <Container maxWidth="xl">
       <CardSkeleton height="500px" />
@@ -92,8 +101,6 @@ export const TechnologySkeleton = () => {
   );
 };
 
-
-
 export const TravelSkeleton = () => {
   return (
     <Container maxWidth="xl">
@@ -107,8 +114,6 @@ export const TravelSkeleton = () => {
     </Container>
   );
 };
-
-
 
 export const NewsDetailSkeleton = () => {
   return (
@@ -145,4 +150,3 @@ export const NewsDetailSkeleton = () => {
     </div>
   );
 };
-

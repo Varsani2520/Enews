@@ -3,7 +3,7 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { addHandleArticleClick } from "../hooks/ArticleClick";
 import useArticleLike from "../hooks/ArticleLikes";
 
-const Card4 = ({ imageUrl, category, title, alt, article }) => {
+const Card4 = ({ imageUrl, category, title, article }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
 
   return (
@@ -13,7 +13,7 @@ const Card4 = ({ imageUrl, category, title, alt, article }) => {
     >
       {/* Left side image */}
       <div className="flex-shrink-0">
-        <img src={imageUrl} alt={alt} className="w-32 h-32 object-cover " />
+        <img src={imageUrl} alt={title} className="w-32 h-32 object-cover " />
       </div>
 
       {/* Right side content */}

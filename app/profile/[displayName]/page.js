@@ -12,7 +12,7 @@ const ProfilePage = () => {
       <div className="bg-white p-6 shadow-lg rounded-lg mt-4">
         <div className="flex items-center space-x-4">
           <img
-            src={user?.photoURL || "/default-avatar.png"}
+            src={user?.photoURL}
             alt="Profile"
             className="w-16 h-16 rounded-full border"
           />

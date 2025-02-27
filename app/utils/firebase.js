@@ -45,29 +45,33 @@ export const registerServiceWorker = async () => {
 
 // ✅ Function to request push notification permission
 export const requestNotificationPermission = async (userId) => {
-  if (typeof window === "undefined") return null; // Prevent running in SSR
+  if (typeof window === "undefined") return null;
+
+  // Check if permission is already granted
+  if (Notification.permission === "granted") {
+    console.log("Notification permission already granted");
+    return;
+  }
 
   try {
     const permission = await Notification.requestPermission();
     if (permission === "granted" && messaging) {
       const token = await getToken(messaging, {
-        vapidKey:
-          "BFcbQvJZOyeaTYMRctstme-0yb9mG0fU089_y-4okGDZiCVsooidONnkntXa56-kE-uYDZNHQFP_EnYNfYfeqLU",
+        vapidKey: "BFcbQvJZOyeaTYMRctstme-0yb9mG0fU089_y-4okGDZiCVsooidONnkntXa56-kE-uYDZNHQFP_EnYNfYfeqLU",
       });
 
       console.log("FCM Token:", token);
 
-      if (userId && db ) {
+      if (userId && db) {
         const userRef = doc(db, "pushNotifications", userId);
 
-        // ✅ Store User Info & FCM Token
         await setDoc(userRef, {
           userId,
-         
           FCMTOKEN: token,
           timestamp: new Date().toISOString(),
         });
-        console.log("User info & FCM Token saved to Firestore");
+
+        console.log("FCM Token saved to Firestore");
       }
       return token;
     } else {
@@ -79,6 +83,7 @@ export const requestNotificationPermission = async (userId) => {
     return null;
   }
 };
+
 
 // ✅ Listen for messages only on the client-side
 if (typeof window !== "undefined" && messaging) {

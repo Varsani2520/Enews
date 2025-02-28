@@ -47,35 +47,28 @@ export const registerServiceWorker = async () => {
 export const requestNotificationPermission = async (userId) => {
   if (typeof window === "undefined") return null;
 
-  // Check if permission is already granted
-  if (Notification.permission === "granted") {
-    console.log("Notification permission already granted");
-    return;
-  }
-
   try {
     const permission = await Notification.requestPermission();
+    console.log("Permission result:", permission);
+
     if (permission === "granted" && messaging) {
       const token = await getToken(messaging, {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPI_KEY,
       });
 
-      console.log("FCM Token:", token);
-
-      if (userId && db) {
-        const userRef = doc(db, "pushNotifications", userId);
-
-        await setDoc(userRef, {
-          userId,
-          FCMTOKEN: token,
-          timestamp: new Date().toISOString(),
-        });
-
-        console.log("FCM Token saved to Firestore");
+      if (!token) {
+        console.warn("No FCM token received, Incognito mode may be blocking it.");
+        return null;
       }
+
+      console.log("FCM Token:", token);
+      if (userId && db) {
+        await setDoc(doc(db, "pushNotifications", userId), { userId, FCMTOKEN: token });
+      }
+
       return token;
     } else {
-      console.warn("Notification permission denied");
+      console.warn("Notifications blocked by user or browser settings.");
       return null;
     }
   } catch (error) {
@@ -83,6 +76,7 @@ export const requestNotificationPermission = async (userId) => {
     return null;
   }
 };
+
 
 
 // ✅ Listen for messages only on the client-side

@@ -36,7 +36,7 @@ const Card1 = ({
       </div>
 
       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent px-4 py-2 transition-colors duration-300">
-        <h2 className="text-sm md:text-lg font-semibold text-white font-bold group-hover:text-red-600">
+        <h2 className="text-xs md:text-md font-semibold text-white font-bold group-hover:text-red-600">
           {title}
         </h2>
       </div>

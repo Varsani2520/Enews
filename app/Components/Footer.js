@@ -15,7 +15,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* First Section: Logo and Description */}
         <div>
-          <img src="/logo.png" alt="Logo" className="h-12 mb-4" />
+          <img
+            width="120px"
+            src="/logo.png"
+            alt="logo"
+            className="cursor-pointer"
+            onClick={() => router.push("/")}
+          />{" "}
           <Typography variant="body2" className="text-sm">
             News Web Website is an online platform that provides news and
             information about various topics, including current events,
@@ -34,10 +40,10 @@ const Footer = () => {
               <Link href="/">Home</Link>
             </li>
             <li className="mb-2">
-              <Link href="/news/live-news">Live News</Link>
+              <Link href="/categories-news/live-news">Live News</Link>
             </li>
             <li className="mb-2">
-              <Link href="/news/breaking-news">Breaking News</Link>
+              <Link href="/categories-news/breaking-news">Breaking News</Link>
             </li>
           </ul>
         </div>
@@ -50,34 +56,34 @@ const Footer = () => {
           <Divider />
           <ul className="text-sm">
             <li className="mb-1">
-              <Link href="/news/technology">Technology</Link>
+              <Link href="/categories-news/technology">Technology</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/science">Science</Link>
+              <Link href="/categories-news/science">Science</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/religion">Religion</Link>
+              <Link href="/categories-news/religion">Religion</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/politics">Politics</Link>
+              <Link href="/categories-news/politics">Politics</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/business">Business</Link>
+              <Link href="/categories-news/business">Business</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/family">Family</Link>
+              <Link href="/categories-news/family">Family</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/top-news">Top News</Link>
+              <Link href="/categories-news/top-news">Top News</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/cars">Cars</Link>
+              <Link href="/categories-news/cars">Cars</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/travels">Travels</Link>
+              <Link href="/categories-news/travels">Travels</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/sports">Sports</Link>
+              <Link href="/categories-news/sports">Sports</Link>
             </li>
             <li className="mb-1">
               <Link href="/categories-news/health">Health</Link>

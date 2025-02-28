@@ -92,6 +92,7 @@ const FavoritesPage = () => {
                       }
                       height="100%"
                       width="100%"
+                      title={article.headline.main}
                     />
                   </Link>
                   <IconButton

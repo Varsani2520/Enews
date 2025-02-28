@@ -18,6 +18,10 @@ import {
 } from "@mui/icons-material";
 import NavLink from "../Reuse/NavLink";
 import Login from "../Models/Login";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import Link from "next/link";
+import slugify from "slugify";
 
 const NavigationDrawer = ({
   activeTab,
@@ -29,25 +33,39 @@ const NavigationDrawer = ({
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   const handleLoginOpen = () => setIsLoginDialogOpen(true);
-
+  const [user] = useAuthState(auth);
   return (
     <Box role="presentation" className="w-64 bg-white p-5 rounded-lg">
       <List className="space-y-4">
         {/* Login & Search Button */}
         <ListItem className="flex justify-between items-center">
-          <Button
-            onClick={handleLoginOpen}
-            variant="contained"
-            color="error"
-            startIcon={
-              <Avatar className="bg-white text-red-500 shadow-md">
-                <PersonIcon />
-              </Avatar>
-            }
-            className="w-full capitalize font-semibold text-lg py-2 rounded-lg transition-all hover:bg-red-600"
-          >
-            Login
-          </Button>
+          {user ? (
+            <Link href={`/profile/${slugify(user?.displayName)}/favorites`} passHref>
+              <div className="flex items-center space-x-3">
+                <Avatar
+                  src={user.photoURL || ""}
+                  alt={user.displayName || "User"}
+                />
+                <Typography className="font-semibold text-lg">
+                  {user.displayName || "User"}
+                </Typography>
+              </div>
+            </Link>
+          ) : (
+            <Button
+              onClick={() => setIsLoginDialogOpen(true)}
+              variant="contained"
+              color="error"
+              startIcon={
+                <Avatar className="bg-white text-red-500 shadow-md">
+                  <PersonIcon />
+                </Avatar>
+              }
+              className="w-full capitalize font-semibold text-lg py-2 rounded-lg transition-all hover:bg-red-600"
+            >
+              Login
+            </Button>
+          )}
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"

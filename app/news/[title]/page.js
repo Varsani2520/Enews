@@ -20,6 +20,7 @@ import useArticleBookmark from "@/app/hooks/ArticleBookmark";
 import CommentForm from "@/app/Components/CommentSection";
 import slugify from "slugify";
 import { getHandleArticleClick } from "@/app/hooks/ArticleClick";
+import Card5 from "@/app/Reuse/Card5";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -69,7 +70,7 @@ const NewsDetailPage = () => {
               <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg w-fit">
                 {clickedArticle.section_name}
               </div>
-              <h1 className="text-3xl font-bold mt-1 text-[#1a2e51]">
+              <h1 className="text-2xl font-bold mt-1 text-[#1a2e51]">
                 {clickedArticle.headline.main}
               </h1>
               <p className="text-gray-500 mt-1">
@@ -121,7 +122,7 @@ const NewsDetailPage = () => {
                 />
                 <button
                   onClick={() =>
-                    router.push(`/profile/${user?.displayName}/read-later`)
+                    router.push(`/profile/${user?.displayName}/bookmarks`)
                   }
                   className="text-gray-600 hover:underline"
                 >
@@ -134,11 +135,13 @@ const NewsDetailPage = () => {
                 />
               </div>
             </div>
-            <img
-              src={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`}
-              alt={clickedArticle.headline_main}
-              className="w-full h-auto rounded-lg shadow-lg mb-6"
+            <Card5
+              imageUrl={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`} height="400px"
             />
+            {/* <img
+              alt={clickedArticle.headline_main}
+              className="w-full h-72 rounded-lg shadow-lg mb-6"
+            /> */}
             {/* Lead Paragraph */}
             {clickedArticle.lead_paragraph && (
               <p className="text-gray-700 leading-7 mb-4">

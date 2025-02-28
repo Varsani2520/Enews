@@ -14,12 +14,14 @@ export default function Home() {
         title="Stay informed,stay ahead with our daily news."
         href="/categories-news/popular"
       />
-      <Heading
-        title={"Popular News"}
-        subtitle={"Popular News Here"}
-        buttonText={"View More"}
-        link="/categories-news/popular"
-      />
+      <div className="hidden md:block">
+        <Heading
+          title={"Popular News"}
+          subtitle={"Popular News Here"}
+          buttonText={"View More"}
+          link="/categories-news/popular"
+        />
+      </div>
       <PopularCards />
       <Heading
         title={"Recent News"}

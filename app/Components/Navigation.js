@@ -115,7 +115,7 @@ const Navigation = () => {
         <Box className="hidden md:flex items-center gap-6">
           {user ? (
             <Link
-              href={`/profile/${slugify(user?.displayName) || user?.email}`}
+              href={`/profile/${slugify(user?.displayName)}/favorites`}
               passHref
             >
               <Box className="flex items-center gap-3">

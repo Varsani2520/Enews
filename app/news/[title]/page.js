@@ -121,7 +121,7 @@ const NewsDetailPage = () => {
                 />
                 <button
                   onClick={() =>
-                    router.push(`/profile/${user?.displayName}/read-later`)
+                    router.push(`/profile/${user?.displayName}/bookmarks`)
                   }
                   className="text-gray-600 hover:underline"
                 >

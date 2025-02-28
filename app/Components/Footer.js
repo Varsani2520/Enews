@@ -34,10 +34,10 @@ const Footer = () => {
               <Link href="/">Home</Link>
             </li>
             <li className="mb-2">
-              <Link href="/news/live-news">Live News</Link>
+              <Link href="/categories-news/live-news">Live News</Link>
             </li>
             <li className="mb-2">
-              <Link href="/news/breaking-news">Breaking News</Link>
+              <Link href="/categories-news/breaking-news">Breaking News</Link>
             </li>
           </ul>
         </div>
@@ -50,34 +50,34 @@ const Footer = () => {
           <Divider />
           <ul className="text-sm">
             <li className="mb-1">
-              <Link href="/news/technology">Technology</Link>
+              <Link href="/categories-news/technology">Technology</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/science">Science</Link>
+              <Link href="/categories-news/science">Science</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/religion">Religion</Link>
+              <Link href="/categories-news/religion">Religion</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/politics">Politics</Link>
+              <Link href="/categories-news/politics">Politics</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/business">Business</Link>
+              <Link href="/categories-news/business">Business</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/family">Family</Link>
+              <Link href="/categories-news/family">Family</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/top-news">Top News</Link>
+              <Link href="/categories-news/top-news">Top News</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/cars">Cars</Link>
+              <Link href="/categories-news/cars">Cars</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/travels">Travels</Link>
+              <Link href="/categories-news/travels">Travels</Link>
             </li>
             <li className="mb-1">
-              <Link href="/news/sports">Sports</Link>
+              <Link href="/categories-news/sports">Sports</Link>
             </li>
             <li className="mb-1">
               <Link href="/categories-news/health">Health</Link>

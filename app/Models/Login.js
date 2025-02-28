@@ -41,6 +41,15 @@ const LoginDialog = ({ open, onClose }) => {
     setError("");
 
     try {
+      if (
+        !userData.email ||
+        !userData.password ||
+        (!isLogin && !userData.name)
+      ) {
+        setError("Please fill in all fields.");
+        setLoading(false);
+        return;
+      }
       if (isLogin) {
         await loginWithEmail(userData.email, userData.password);
       } else {

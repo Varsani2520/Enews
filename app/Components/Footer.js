@@ -15,7 +15,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* First Section: Logo and Description */}
         <div>
-          <img src="/logo.png" alt="Logo" className="h-12 mb-4" />
+          <img
+            width="120px"
+            src="/logo.png"
+            alt="logo"
+            className="cursor-pointer"
+            onClick={() => router.push("/")}
+          />{" "}
           <Typography variant="body2" className="text-sm">
             News Web Website is an online platform that provides news and
             information about various topics, including current events,

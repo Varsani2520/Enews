@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Link from "next/link";
-import CardSkeleton, { TechnologySkeleton } from "./Skeleton";
+import { TechnologySkeleton } from "./Skeleton";
 import slugify from "slugify";
 import { useNews } from "../context/ArticleContext";
 import Slider from "react-slick";
@@ -70,8 +70,7 @@ const BreakingNews = () => {
                     category={article?.section_name}
                     title={article?.headline?.main}
                     imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                    height="400px"
-                    width="100%"
+                    height="250px"
                   />
                 </Link>
               </Grid>

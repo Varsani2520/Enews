@@ -3,19 +3,20 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
 import { addHandleArticleClick } from "../hooks/ArticleClick";
 
-const Card5 = ({ category, title, imageUrl, article }) => {
+const Card5 = ({ category, title, imageUrl, article,height }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
 
   return (
     <div className="relative overflow-hidden group">
       <div
-        className="relative w-full aspect-[4/3]" // ✅ Ensures consistent height without cropping
+        className="relative w-full"
+        style={{ height: height }} 
         onClick={() => addHandleArticleClick(article)}
       >
         <img
           src={imageUrl || "/placeholder.jpg"}
           alt={title}
-          className="w-full h-auto aspect-[4/3] rounded" // ✅ Fixes spacing issues
+          className="w-full h-full  object-fit rounded"
         />
 
         {/* Like Button */}

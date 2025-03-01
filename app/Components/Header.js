@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Container, Button } from "@mui/material";
+import { Container } from "@mui/material";
 import NavLink from "../Reuse/NavLink";
 
 const Header = () => {
@@ -16,6 +16,24 @@ const Header = () => {
     "Car",
     "Travels",
     "Sports",
+    "Health",
+    "Education",
+    "Entertainment",
+    "Food",
+    "Fashion",
+    "History",
+    "Music",
+    "Art",
+    "Gaming",
+    "Environment",
+    "Finance",
+    "Startup",
+    "AI & Machine Learning",
+    "Space",
+    "Movies",
+    "Photography",
+    "Books",
+    "Crypto",
   ];
 
   return (

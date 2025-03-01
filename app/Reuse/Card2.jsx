@@ -13,7 +13,11 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
       onClick={() => addHandleArticleClick(article)}
     >
       {/* Background Image */}
-      <img className="object-fill w-full h-full" src={imageUrl} alt={title} />
+      <img
+        className="object-fill w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
+        src={imageUrl}
+        alt={title}
+      />
       {/* Like Button */}
       <button
         className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${
@@ -34,7 +38,7 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
         <div className="bg-red-700 text-white text-xs md:text-sm lg:text-lg font-semibold px-2 py-1 rounded-md inline-block">
           {category}
         </div>
-        <div className="text-sm md:text-lg  font-bold text-white mt-2 group-hover:text-red-600">
+        <div className="text-sm md:text-lg  font-bold text-white mt-2 group-hover:text-red-500">
           {title}
         </div>
       </div>

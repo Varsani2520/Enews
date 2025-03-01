@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/app/utils/firebase";
 import { Container, Tabs, Tab, Box } from "@mui/material";
 import { useState, useEffect } from "react";
+import slugify from "slugify";
 
 const ProfileLayout = ({ children }) => {
   const [user] = useAuthState(auth);
@@ -14,11 +15,16 @@ const ProfileLayout = ({ children }) => {
   const pathname = usePathname();
   const [tabIndex, setTabIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Ensure displayName is always valid
+  const username = user?.displayName ? slugify(user.displayName) : "user";
+
   // Sidebar Tabs
   const tabs = [
     { name: "favorites", label: "Favorites" },
     { name: "bookmarks", label: "Bookmarks" },
   ];
+
   // Update tab index based on pathname
   useEffect(() => {
     const currentIndex = tabs.findIndex((tab) => pathname.includes(tab.name));
@@ -28,7 +34,7 @@ const ProfileLayout = ({ children }) => {
   // Detect screen size
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize(); // Run on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -58,11 +64,11 @@ const ProfileLayout = ({ children }) => {
 
   return (
     <Container maxWidth="xl">
-      <div className=" bg-gray-100 text-gray-900">
+      <div className="bg-gray-100 text-gray-900">
         {/* Show Sidebar on Desktop */}
         {!isMobile && (
           <div className="flex">
-            <aside className="w-72 bg-white  border-r border-gray-200 p-6">
+            <aside className="w-72 bg-white border-r border-gray-200 p-6">
               <h2 className="text-2xl font-bold mb-6 tracking-wide text-gray-800">
                 Profile
               </h2>
@@ -70,7 +76,7 @@ const ProfileLayout = ({ children }) => {
                 {tabs.map((tab) => (
                   <Link
                     key={tab.name}
-                    href={`/profile/${user.displayName}/${tab.name}`}
+                    href={`/profile/${username}/${tab.name}`}
                     className={`block px-4 py-2 rounded-lg font-medium transition-all ${
                       pathname.includes(tab.name)
                         ? "bg-blue-500 text-white shadow-md"
@@ -88,20 +94,18 @@ const ProfileLayout = ({ children }) => {
                 Logout
               </button>
             </aside>
-            <main className="flex-1 p-8 bg-white ">{children}</main>
+            <main className="flex-1 p-8 bg-white">{children}</main>
           </div>
         )}
 
         {/* Show Tabs on Mobile */}
-        {isMobile && (
-          <Box className="bg-white ">
+        {isMobile && user && (
+          <Box className="bg-white">
             <Tabs
               value={tabIndex}
               onChange={(_, newValue) => {
                 setTabIndex(newValue);
-                router.push(
-                  `/profile/${user.displayName}/${tabs[newValue].name}`
-                );
+                router.push(`/profile/${username}/${tabs[newValue].name}`);
               }}
               variant="fullWidth"
               indicatorColor="primary"
@@ -111,7 +115,10 @@ const ProfileLayout = ({ children }) => {
                 <Tab key={index} label={tab.label} />
               ))}
             </Tabs>
+            
             <main className="p-6">{children}</main>
+
+            
           </Box>
         )}
       </div>

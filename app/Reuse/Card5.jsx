@@ -3,14 +3,14 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import useArticleLike from "../hooks/ArticleLikes";
 import { addHandleArticleClick } from "../hooks/ArticleClick";
 
-const Card5 = ({ category, title, imageUrl, article,height }) => {
+const Card5 = ({ category, title, imageUrl, article, height }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
 
   return (
     <div className="relative overflow-hidden group">
       <div
         className="relative w-full"
-        style={{ height: height }} 
+        style={{ height: height }}
         onClick={() => addHandleArticleClick(article)}
       >
         <img
@@ -36,13 +36,17 @@ const Card5 = ({ category, title, imageUrl, article,height }) => {
         </button>
 
         {/* Category Label */}
-        <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-md">
-          <p className="text-sm font-semibold">{category}</p>
-        </div>
+        {category ? (
+          <div className="absolute top-4 left-4 bg-[#f20404] text-white px-2 py-1 rounded-md">
+            <p className="text-sm font-semibold">{category}</p>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {/* Title */}
-      <h2 className="text-sm md:text-lg font-semibold mb-2 text-[#1a2e51] group-hover:text-red-600 transition-colors duration-300">
+      <h2 className="text-sm md:text-lg font-semibold mb-2 text-[#1a2e51] group-hover:text-red-500 transition-colors duration-300">
         {title}
       </h2>
     </div>

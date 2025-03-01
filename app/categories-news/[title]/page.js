@@ -51,6 +51,7 @@ const CategoryPage = () => {
                     title={article.headline.main}
                     imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
                     article={article}
+                    height="250px"
                   />
                 </Link>
               </Grid>

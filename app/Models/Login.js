@@ -24,7 +24,8 @@ const LoginDialog = ({ open, onClose }) => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState("");
 
   const toggleLogin = () => {
@@ -37,7 +38,7 @@ const LoginDialog = ({ open, onClose }) => {
   };
 
   const handleAuthAction = async () => {
-    setLoading(true);
+    setEmailLoading(true);
     setError("");
 
     try {
@@ -47,7 +48,7 @@ const LoginDialog = ({ open, onClose }) => {
         (!isLogin && !userData.name)
       ) {
         setError("Please fill in all fields.");
-        setLoading(false);
+        setEmailLoading(false);
         return;
       }
       if (isLogin) {
@@ -59,12 +60,12 @@ const LoginDialog = ({ open, onClose }) => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false);
+      setEmailLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    setLoading(true);
+    setGoogleLoading(true);
     setError("");
 
     try {
@@ -73,7 +74,7 @@ const LoginDialog = ({ open, onClose }) => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false);
+      setGoogleLoading(false);
     }
   };
 
@@ -128,7 +129,7 @@ const LoginDialog = ({ open, onClose }) => {
         )}
         <Button
           onClick={handleAuthAction}
-          disabled={loading}
+          disabled={emailLoading}
           sx={{
             background: "#f20404",
             my: 1,
@@ -142,11 +143,11 @@ const LoginDialog = ({ open, onClose }) => {
           fullWidth
           variant="contained"
         >
-          {loading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
+          {emailLoading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
         </Button>
         <Button
           onClick={handleGoogleSignIn}
-          disabled={loading}
+          disabled={googleLoading}
           sx={{
             background: "#4285F4",
             color: "#fff",
@@ -162,7 +163,7 @@ const LoginDialog = ({ open, onClose }) => {
           startIcon={<GoogleIcon />}
           variant="contained"
         >
-          {loading
+          {googleLoading
             ? "Signing in..."
             : isLogin
             ? "Login with Google"

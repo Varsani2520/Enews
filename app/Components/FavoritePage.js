@@ -90,9 +90,8 @@ const FavoritesPage = () => {
                           ? `https://www.nytimes.com/${article.multimedia[0].url}`
                           : "/fallback-image.jpg"
                       }
-                      height="100%"
-                      width="100%"
                       title={article.headline.main}
+                      height="250px"
                     />
                   </Link>
                   <IconButton

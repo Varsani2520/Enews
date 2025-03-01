@@ -113,14 +113,14 @@ const Navigation = () => {
 
         {/* User Section and Search */}
         <Box className="hidden md:flex items-center gap-6">
-          {user ? (
+          {user?.displayName ? (
             <Link
-              href={`/profile/${slugify(user?.displayName)}/favorites`}
+              href={`/profile/${slugify(user.displayName)}/favorites`}
               passHref
             >
               <Box className="flex items-center gap-3">
                 <Avatar
-                  alt={user?.displayName || "User"}
+                  alt={user?.displayName}
                   src={user?.photoURL}
                 />
                 <Typography

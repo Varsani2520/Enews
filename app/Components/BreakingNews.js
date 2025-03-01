@@ -30,7 +30,6 @@ const BreakingNews = () => {
 
   // Slick slider settings
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,

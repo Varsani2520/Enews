@@ -30,7 +30,6 @@ const Technology = () => {
 
   // Slick slider settings
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4, // Show 4 articles per row
@@ -61,7 +60,7 @@ const Technology = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ marginBottom: "2%" }}>
+    <Container maxWidth="xl">
       <Slider {...settings}>
         {articles.map((article, index) => (
           <Box key={index} px={1}>

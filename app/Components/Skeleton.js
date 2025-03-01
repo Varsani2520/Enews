@@ -105,7 +105,7 @@ export const TravelSkeleton = () => {
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 10 }).map((_, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <CardSkeleton height="250px" />
           </Grid>

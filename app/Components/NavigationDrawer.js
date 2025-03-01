@@ -22,6 +22,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import Link from "next/link";
 import slugify from "slugify";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const NavigationDrawer = ({
   activeTab,
@@ -31,8 +34,14 @@ const NavigationDrawer = ({
 }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+  const router = useRouter();
 
-  const handleLoginOpen = () => setIsLoginDialogOpen(true);
+  const handleLogout = async () => {
+    await signOut(auth);
+    toast.success("Logged out successfully!");
+    router.push("/");
+  };
+
   const [user] = useAuthState(auth);
   return (
     <Box role="presentation" className="w-64 bg-white p-5 rounded-lg">
@@ -40,28 +49,20 @@ const NavigationDrawer = ({
         {/* Login & Search Button */}
         <ListItem className="flex justify-between items-center">
           {user ? (
-            <Link href={`/profile/${slugify(user?.displayName)}/favorites`} passHref>
-              <div className="flex items-center space-x-3">
-                <Avatar
-                  src={user.photoURL || ""}
-                  alt={user.displayName || "User"}
-                />
-                <Typography className="font-semibold text-lg">
-                  {user.displayName || "User"}
-                </Typography>
-              </div>
+            <Link
+              href={`/profile/${slugify(user?.displayName)}/favorites`}
+              passHref
+            >
+              <Typography className="font-semibold text-lg">
+                {user.displayName}
+              </Typography>
             </Link>
           ) : (
             <Button
               onClick={() => setIsLoginDialogOpen(true)}
               variant="contained"
               color="error"
-              startIcon={
-                <Avatar className="bg-white text-red-500 shadow-md">
-                  <PersonIcon />
-                </Avatar>
-              }
-              className="w-full capitalize font-semibold text-lg py-2 rounded-lg transition-all hover:bg-red-600"
+              className="w-full capitalize font-semibold text-lg py-2 mr-2 rounded-lg transition-all hover:bg-red-600"
             >
               Login
             </Button>
@@ -69,7 +70,7 @@ const NavigationDrawer = ({
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            className="ml-2 border border-gray-300 rounded-lg p-2 transition-all hover:bg-gray-200"
+            sx={{ color: "red", border: "1px solid #ccc", borderRadius: "5px" }}
           >
             <SearchIcon className="text-red-500" />
           </IconButton>
@@ -158,6 +159,16 @@ const NavigationDrawer = ({
             ))}
           </List>
         </Collapse>
+        {user ? (
+          <button
+            onClick={handleLogout}
+            className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-medium shadow transition-all"
+          >
+            Logout
+          </button>
+        ) : (
+          <></>
+        )}
       </List>
       <Login
         open={isLoginDialogOpen}

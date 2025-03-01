@@ -6,12 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  Button,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 import Card1 from "@/app/Reuse/Card1";
 import slugify from "slugify";
 import { TravelSkeleton } from "./Skeleton";
@@ -90,8 +85,8 @@ const ReadLaterPage = () => {
                         ? `https://www.nytimes.com/${article.multimedia[0].url}`
                         : "/fallback-image.jpg"
                     }
-                    height="100%"
-                    width="100%"
+                    title={article.headline.main}
+                    height="250px"
                   />
                 </Link>
                 <IconButton

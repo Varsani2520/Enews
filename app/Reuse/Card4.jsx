@@ -21,7 +21,7 @@ const Card4 = ({ imageUrl, category, title, article }) => {
         <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 w-fit rounded-lg">
           {category}
         </div>
-        <h2 className="text-[#0f1f40] text-lg font-semibold">{title}</h2>
+        <h2 className="text-sm md:text-lg  font-bold text-white mt-2 group-hover:text-red-500">{title}</h2>
       </div>
 
       {/* Favorite Button (Top-Right) */}

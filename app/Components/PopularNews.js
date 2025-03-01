@@ -21,7 +21,7 @@ const PopularCards = () => {
   const articles = newsData.popular;
 
   return (
-    <Container maxWidth="xl" className="sm:mt-[3%]">
+    <Container maxWidth="xl">
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         {/* Left Side Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-1">

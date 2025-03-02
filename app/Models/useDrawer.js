@@ -1,4 +1,3 @@
-// components/Reuse/DrawerContent.jsx
 import React from "react";
 import { Box, Drawer, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";

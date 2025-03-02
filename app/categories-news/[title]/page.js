@@ -15,6 +15,8 @@ const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = title ? `Enews - ${title} News ` : "Enews - Latest News";
+
     const fetchArticles = async () => {
       try {
         if (title) {

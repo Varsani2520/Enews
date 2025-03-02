@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Weather from "./Components/Weather";
 import Header from "./Components/Header";
-import Footer from "./Components/Footer";
 import {
   auth,
   registerServiceWorker,
@@ -11,6 +10,7 @@ import {
 } from "./utils/firebase";
 import Navigation from "./Components/Navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Footer from "./Components/Footer";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
 

@@ -5,7 +5,6 @@ import { getNews } from "@/app/utils/getNews";
 import Card4 from "@/app/Reuse/Card4";
 import Breadcumbs from "@/app/Reuse/Breadcumps";
 import { useParams, useRouter } from "next/navigation";
-import CardSkeleton, { NewsDetailSkeleton } from "@/app/Components/Skeleton";
 import Link from "next/link";
 import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";
@@ -17,10 +16,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
 import DrawerContent from "@/app/Models/useDrawer";
 import useArticleBookmark from "@/app/hooks/ArticleBookmark";
-import CommentForm from "@/app/Components/CommentSection";
 import slugify from "slugify";
 import { getHandleArticleClick } from "@/app/hooks/ArticleClick";
 import Card5 from "@/app/Reuse/Card5";
+import CommentForm from "@/app/Components/CommentSection";
+import { NewsDetailSkeleton } from "@/app/Components/Skeleton";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -32,25 +32,25 @@ const NewsDetailPage = () => {
   const [user] = useAuthState(auth);
 
   const { isBookmark, toggleBookmark } = useArticleBookmark(clickedArticle);
-
-  useEffect(() => {
-    const fetchArticle = async () => {
-      try {
-        const articles = await getHandleArticleClick();
-        const foundArticle = articles.find(
-          (art) => slugify(art.headline.main) === title
-        );
-        if (foundArticle) {
-          setClickedArticle(foundArticle);
-          const response = await getNews(foundArticle.category);
-          setRelatedArticles(response.docs);
-        } else {
-          console.error("No article found in Firestore.");
-        }
-      } catch (error) {
-        console.error("Error fetching clicked article:", error);
+  const fetchArticle = async () => {
+    try {
+      const articles = await getHandleArticleClick();
+      const foundArticle = articles.find(
+        (art) => slugify(art.headline.main) === title
+      );
+      if (foundArticle) {
+        setClickedArticle(foundArticle);
+        const response = await getNews(foundArticle.category);
+        setRelatedArticles(response.docs);
+      } else {
+        console.error("No article found in Firestore.");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching clicked article:", error);
+    }
+  };
+  useEffect(() => {
+    document.title = title ? `Enews - ${title} News ` : "Enews - Latest News";
 
     fetchArticle();
   }, [title]);
@@ -93,7 +93,7 @@ const NewsDetailPage = () => {
                         .share({
                           title: clickedArticle.headline.main,
                           text: clickedArticle.abstract,
-                          url: shareUrl,
+                          url: shareUrl
                         })
                         .catch((error) =>
                           console.error("Error sharing:", error)
@@ -115,7 +115,7 @@ const NewsDetailPage = () => {
                   icon={isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}
                   sx={{
                     cursor: "pointer",
-                    color: isBookmark ? "primary" : "inherit",
+                    color: isBookmark ? "primary" : "inherit"
                   }}
                   onClick={toggleBookmark}
                   aria-label={isBookmark ? "Remove Bookmark" : "Add Bookmark"}
@@ -136,7 +136,8 @@ const NewsDetailPage = () => {
               </div>
             </div>
             <Card5
-              imageUrl={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`} height="400px"
+              imageUrl={`https://www.nytimes.com/${clickedArticle.multimedia?.[0]?.url}`}
+              height="400px"
             />
             {/* <img
               alt={clickedArticle.headline_main}

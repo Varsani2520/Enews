@@ -7,11 +7,12 @@ import {
   IconButton,
   CircularProgress,
   InputBase,
-  Button,
+  Button
 } from "@mui/material";
 import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
 import { getNews } from "@/app/utils/getNews";
 import Card4 from "../Reuse/Card4";
+import Link from "next/link";
 
 const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -75,15 +76,18 @@ const SearchDialog = ({ open, onClose }) => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
             {results.map((article) => (
-              <Card4
-                article={article}
-                key={article._id}
-                title={article.headline.main}
-                category={article.section_name}
-                imageUrl={`https://www.nytimes.com/${
-                  article.multimedia?.[0]?.url 
-                }`}
-              />
+              <Link
+                key={article}
+                href={`/news/${slugify(article.headline.main)}`}
+              >
+                <Card4
+                  article={article}
+                  key={article._id}
+                  title={article.headline.main}
+                  category={article.section_name}
+                  imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
+                />
+              </Link>
             ))}
           </div>
         )}

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Card,
@@ -17,19 +15,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 export const CardSkeleton = ({ height = "191px" }) => {
   return (
-    <Card sx={{ width: "100%", height }}>
-      <CardMedia>
-        <Skeleton variant="rectangular" width="100%" height={height} />
-      </CardMedia>
-      <CardContent>
-        <Typography variant="body2">
-          <Skeleton variant="text" width="80%" />
-        </Typography>
-        <Typography variant="body2">
-          <Skeleton variant="text" width="60%" />
-        </Typography>
-      </CardContent>
-    </Card>
+    <Box sx={{ width: "100%", height, backgroundColor: "#f0f0f0", padding: 2, borderRadius: 2 }}>
+      <Skeleton variant="rectangular" width="100%" height={height} />
+      <Skeleton variant="text" width="80%" sx={{ mt: 1 }} />
+      <Skeleton variant="text" width="60%" />
+    </Box>
   );
 };
 

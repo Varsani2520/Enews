@@ -70,7 +70,7 @@ const NewsDetailPage = () => {
               <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg w-fit">
                 {clickedArticle.section_name}
               </div>
-              <h1 className="text-2xl font-bold mt-1 text-[#1a2e51]">
+              <h1 className="text-2xl sm:text-sm font-bold mt-1 text-[#1a2e51]">
                 {clickedArticle.headline.main}
               </h1>
               <p className="text-gray-500 mt-1">

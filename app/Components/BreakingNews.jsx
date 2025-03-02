@@ -40,28 +40,28 @@ const BreakingNews = () => {
       {
         breakpoint: 1024, // Tablet
         settings: {
-          slidesToShow: 2,
-        },
+          slidesToShow: 2
+        }
       },
       {
         breakpoint: 768, // Mobile
         settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+          slidesToShow: 1
+        }
+      }
+    ]
   };
 
   return (
     <Container maxWidth="xl" sx={{ marginBottom: "5%" }}>
       <Slider {...settings}>
         {articles.map((article, index) => (
-          <Box key={index} px={1}>
+          <Box key={index}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12}>
                 <Link
                   href={`/news/${slugify(article?.headline?.main, {
-                    lower: true,
+                    lower: true
                   })}`}
                 >
                   <Card5
@@ -69,7 +69,7 @@ const BreakingNews = () => {
                     category={article?.section_name}
                     title={article?.headline?.main}
                     imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                    height="250px"
+                    height="h-[250px] sm:h-[300px]"
                   />
                 </Link>
               </Grid>

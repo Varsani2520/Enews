@@ -27,12 +27,12 @@ const PopularCards = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1">
           {articles.slice(0, 2).map((article, index) => (
             <Link key={index} href={`/news/${slugify(article.headline.main)}`}>
-              <Card1 
+              <Card1
                 article={article}
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="191px"
+                height="h-[191px] sm:h-[300px]"
               />
             </Link>
           ))}
@@ -41,13 +41,15 @@ const PopularCards = () => {
         {/* Center Big Card */}
         <div className="col-span-1 sm:col-span-2">
           <Link href={`/news/${slugify(articles[2].headline.main)}`}>
-            <Card1
-              article={articles[2]}
-              category={articles[2].section_name}
-              title={articles[2].headline.main}
-              imageUrl={`https://www.nytimes.com/${articles[2].multimedia?.[0]?.url}`}
-              height="400px"
-            />
+            <div className="flex flex-col min-h-[191px]">
+              <Card1
+                article={articles[2]}
+                category={articles[2].section_name}
+                title={articles[2].headline.main}
+                imageUrl={`https://www.nytimes.com/${articles[2].multimedia?.[0]?.url}`}
+                height="h-[400px] sm:h-[300px]"
+              />
+            </div>
           </Link>
         </div>
 
@@ -60,7 +62,7 @@ const PopularCards = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="191px"
+                height="h-[191px] sm:h-[300px]"
               />
             </Link>
           ))}

@@ -63,7 +63,7 @@ const Technology = () => {
     <Container maxWidth="xl">
       <Slider {...settings}>
         {articles.map((article, index) => (
-          <Box key={index} px={1}>
+          <Box key={index}>
             {" "}
             {/* Add spacing between cards */}
             <Link

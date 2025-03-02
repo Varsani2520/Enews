@@ -33,8 +33,8 @@ const RecentNews = () => {
               category={articles[0].section_name}
               title={articles[0].headline.main}
               imageUrl={`https://www.nytimes.com/${articles[0].multimedia?.[0]?.url}`}
-              height="500px"
-            />
+              height="h-[500px] sm:h-[300px]"
+              />
           </Link>
         </Grid>
 
@@ -58,7 +58,7 @@ const RecentNews = () => {
                 category={article.section_name}
                 title={article.headline.main}
                 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                height="240px"
+                height="h-[240px] sm:h-[300px]"
               />
             </Link>
           ))}

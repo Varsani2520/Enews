@@ -58,6 +58,7 @@ const NewsDetailPage = () => {
             <NewsHeader article={clickedArticle}/>
             <NewsIcons article={clickedArticle} title={title} />
             <NewsContent article={clickedArticle} />
+            
           </Grid>
           {/* Right Side - Display Related Articles */}
           <Grid item xs={12} md={4}>

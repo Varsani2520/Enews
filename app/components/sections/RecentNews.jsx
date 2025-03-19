@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getNews } from "../utils/getNews";
-import Card1 from "../Reuse/Card1";
-import Card2 from "../Reuse/Card2";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import slugify from "slugify";
-import { useNews } from "../context/ArticleContext";
-import { RecentSkeleton } from "./Skeleton";
+import { useNews } from "@/app/context/ArticleContext";
+import { RecentSkeleton } from "../features/Skeleton";
+import Card2 from "../cards/Card2";
+import Card1 from "../cards/Card1";
+
 
 const RecentNews = () => {
   const { newsData, fetchNews, loading } = useNews();

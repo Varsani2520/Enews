@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import Weather from "./Components/Weather";
-import Header from "./Components/Header";
+
 import {
   auth,
   registerServiceWorker,
   requestNotificationPermission,
-} from "./utils/firebase";
-import Navigation from "./Components/Navigation";
+} from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Footer from "./Components/Footer";
+import Weather from "../components/layout/Weather";
+import Navigation from "../components/layout/Navigation";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
 

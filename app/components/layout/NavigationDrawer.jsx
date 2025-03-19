@@ -16,15 +16,16 @@ import {
   ExpandMore,
   Person as PersonIcon,
 } from "@mui/icons-material";
-import NavLink from "../Reuse/NavLink";
-import Login from "../Models/Login";
+
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
 import Link from "next/link";
 import slugify from "slugify";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import NavLink from "./NavLink";
+import LoginDialog from "@/app/Models/Login";
+import { auth } from "@/app/utils/firebase";
 
 const NavigationDrawer = ({
   activeTab,
@@ -170,7 +171,7 @@ const NavigationDrawer = ({
           <></>
         )}
       </List>
-      <Login
+      <LoginDialog
         open={isLoginDialogOpen}
         onClose={() => setIsLoginDialogOpen(false)}
       />

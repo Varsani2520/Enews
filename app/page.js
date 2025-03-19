@@ -1,12 +1,13 @@
 "use client";
-import Banner from "./Reuse/Banner";
-import Heading from "./Reuse/Heading";
-import PopularCards from "./Components/PopularNews";
-import RecentNews from "./Components/RecentNews";
-import Technology from "./Components/Technology";
-import Travels from "./Components/Travels";
+
 import { useEffect } from "react";
-import BreakingNews from "./Components/BreakingNews";
+import BreakingNews from "./components/sections/BreakingNews";
+import Banner from "./components/shared/Banner";
+import Heading from "./components/shared/Heading";
+import PopularCards from "./components/sections/PopularNews";
+import RecentNews from "./components/sections/RecentNews";
+import Technology from "./components/sections/Technology";
+import Travels from "./components/sections/Travels";
 export default function Home() {
 
   useEffect(() => {

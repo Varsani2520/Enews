@@ -3,13 +3,11 @@
 import React, { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Link from "next/link";
-import { TechnologySkeleton } from "./Skeleton";
+import { TechnologySkeleton } from "@/app/components/features/Skeleton";
 import slugify from "slugify";
-import { useNews } from "../context/ArticleContext";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Card5 from "../Reuse/Card5";
+import { useNews } from "@/app/context/ArticleContext";
+import Card5 from "../cards/Card5";
+import NewsSlider from "../features/Slider";
 
 const BreakingNews = () => {
   const { newsData, fetchNews, loading } = useNews();
@@ -28,35 +26,13 @@ const BreakingNews = () => {
     return <h2>Article not found...</h2>;
   }
 
-  // Slick slider settings
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: 1024, // Tablet
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 768, // Mobile
-        settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
-  };
+
 
   return (
     <Container maxWidth="xl" sx={{ marginBottom: "5%" }}>
-      <Slider {...settings}>
-        {articles.map((article, index) => (
-          <Box key={index}>
+   <NewsSlider slidesToShow={4}>   
+   {articles.map((article, index) => (
+          <Box key={index} px={1}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12}>
                 <Link
@@ -76,7 +52,7 @@ const BreakingNews = () => {
             </Grid>
           </Box>
         ))}
-      </Slider>
+      </NewsSlider>
     </Container>
   );
 };

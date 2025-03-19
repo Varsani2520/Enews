@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
 import { getNews } from "@/app/utils/getNews";
-import Card4 from "../Reuse/Card4";
 import Link from "next/link";
 import slugify from "slugify";
+import Card4 from "../cards/Card4";
 
 const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");

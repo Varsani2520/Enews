@@ -1,10 +1,9 @@
 "use client";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { ArticleProvider } from "./context/ArticleContext";
-import ClientLayout from "./ClientLayout";
+import ClientLayout from "./layout/ClientLayout";
 import { Toaster } from "react-hot-toast";
-
+import "./styles/globals.css"
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {

@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { getNews } from "@/app/utils/getNews";
-import Card5 from "@/app/Reuse/Card5";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import Breadcumbs from "@/app/Reuse/Breadcumps";
 import slugify from "slugify";
-import { TravelSkeleton } from "@/app/Components/Skeleton";
+import { TravelSkeleton } from "@/app/components/features/Skeleton";
+import Card5 from "@/app/components/cards/Card5";
+import Breadcumps from "@/app/components/shared/Breadcrumbs";
 
 const CategoryPage = () => {
   const { title } = useParams();
@@ -35,7 +35,7 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <Breadcumbs heading={title} />
+      <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {loading ? (
           <TravelSkeleton />

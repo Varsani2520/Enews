@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
-import { subscribeUser } from "../utils/subscribe";
+import { subscribeUser } from "@/app/utils/subscribe";
 
 const Footer = () => {
   const [email, setEmail] = useState("");

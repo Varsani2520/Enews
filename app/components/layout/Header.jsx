@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Container } from "@mui/material";
-import NavLink from "../Reuse/NavLink";
+import NavLink from "./NavLink";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("");

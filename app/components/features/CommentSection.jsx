@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { TextField, Button, CircularProgress } from "@mui/material";
-import { createCommnet, getCommentsForArticle } from "../hooks/ArticleComment";
-import CustomPagination from "../Reuse/CustomPagination";
 import { toast } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
+import { createCommnet, getCommentsForArticle } from "@/app/hooks/useArticleComment";
+import CustomPagination from "../shared/CustomPagination";
 
 const CommentForm = ({ article }) => {
   const [text, setText] = useState("");

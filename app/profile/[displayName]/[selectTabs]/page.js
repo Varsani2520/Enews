@@ -1,6 +1,6 @@
 "use client";
-import ReadLaterPage from "@/app/Components/BookmarkPage";
-import FavoritesPage from "@/app/Components/FavoritePage";
+import ReadLaterPage from "@/app/components/BookmarkPage";
+import FavoritesPage from "@/app/components/FavoritePage";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 

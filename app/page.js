@@ -8,6 +8,7 @@ import PopularCards from "./components/sections/PopularNews";
 import RecentNews from "./components/sections/RecentNews";
 import Technology from "./components/sections/Technology";
 import Travels from "./components/sections/Travels";
+import LazyComponent from "./components/shared/LazyComponent";
 export default function Home() {
 
   useEffect(() => {
@@ -29,28 +30,28 @@ export default function Home() {
           link="/categories-news/popular"
         />
       </div>
-      <PopularCards />
+      <LazyComponent component={PopularCards} />
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}
         buttonText={"View More"}
         link="/categories-news/recent"
       />
-      <RecentNews />
+      <LazyComponent component={RecentNews} />
       <Heading
         title={"Technology"}
         subtitle={"Tech News Here"}
         buttonText={"View More"}
         link="/categories-news/technology"
       />
-      <Technology />
+      <LazyComponent component={Technology} />
       <Heading
         title={"Travels"}
         subtitle={"Travels"}
         buttonText={"View More"}
         link="/categories-news/travel"
       />
-      <Travels />
+      <LazyComponent component={Travels} />
       <Banner
         logo={"/logo.png"}
         title="Stay informesd with us- 24/7 news updates"
@@ -63,7 +64,7 @@ export default function Home() {
         link="/categories-news/breaking"
       />
 
-      <BreakingNews />
+      <LazyComponent component={BreakingNews} />
     </main>
   );
 }

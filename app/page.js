@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import BreakingNews from "./Components/sections/BreakingNews";
+import BreakingNews from "./components/sections/BreakingNews";
 import Banner from "./components/shared/Banner";
 import Heading from "./components/shared/Heading";
 import PopularCards from "./components/sections/PopularNews";

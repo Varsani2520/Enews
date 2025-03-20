@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import { Slider, Typography, Box } from "@mui/material";
 
-const marks = [
-  { value: 14, label: "14px" },
-  { value: 16, label: "16px" },
-  { value: 18, label: "18px" },
-  { value: 20, label: "20px" },
-  { value: 22, label: "22px" },
-  { value: 24, label: "24px" },
-];
+const fontSizes = [14, 16, 18, 20, 22];
 
-const FontSizeSlider = ({ onChange }) => {
-  const [fontSize, setFontSize] = useState(18);
+const FontSizeSlider = ({ fontSize, setFontSize }) => {
 
-  const handleChange = (newValue) => {
-    setFontSize(newValue);
-    onChange(newValue);
-  };
 
   return (
     <Box
@@ -34,14 +22,15 @@ const FontSizeSlider = ({ onChange }) => {
         Font Size
       </Typography>
       <Slider
-        value={fontSize}
-        onChange={handleChange}
-        min={14}
-        max={24}
-        step={2}
-        marks={marks}
-        sx={{ width: "60%", color: "#0056b3" }}
-      />
+                    value={fontSize}
+                    onChange={(_, newValue) => setFontSize(newValue)}
+                    step={2}
+                    marks={fontSizes.map(size => ({ value: size, label: `${size}px` }))}
+                    min={14}
+                    max={22}
+                    valueLabelDisplay="auto"
+                    sx={{ width: "60%", color: "#0056b3" }}
+                />
       
     </Box>
   );

@@ -12,9 +12,10 @@ import Weather from "../components/layout/Weather";
 import Navigation from "../components/layout/Navigation";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import { useThemeContext } from "../context/ThemeContext";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
-
+const {themeData={}}=useThemeContext()
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {
@@ -30,12 +31,12 @@ export default function ClientLayout({ children }) {
   }, [user]);
 
   return (
-    <>
+    <div style={{ background: themeData.background }}>
       <Weather />
       <Navigation />
       <Header />
       {children}
       <Footer />
-    </>
+    </div>
   );
 }

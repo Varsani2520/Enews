@@ -12,7 +12,7 @@ const NewsContent = ({ article }) => {
       {/* News Image */}
       <Card5 imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`} height="400px" />
   {/* Font Size Slider */}
-  <FontSizeSlider onChange={(size) => setFontSize(size)} />
+  <FontSizeSlider fontSize={fontSize} setFontSize={setFontSize} />
       {/* News Content */}
       {article.lead_paragraph && (
         <p style={{ fontSize: `${fontSize}px` }} className="text-gray-700 leading-7 mb-4">

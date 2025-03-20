@@ -7,7 +7,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Icons from "../Reuse/Icons";
+import Icons from "../shared/Icons";
 
 const Weather = () => {
   const getCurrentDate = () => {

@@ -7,8 +7,8 @@ import Link from "next/link";
 import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, Grid, IconButton, Typography } from "@mui/material";
-import Card1 from "@/app/Reuse/Card1";
 import slugify from "slugify";
+import Card1 from "../cards/Card1";
 import { TravelSkeleton } from "./Skeleton";
 
 const ReadLaterPage = () => {

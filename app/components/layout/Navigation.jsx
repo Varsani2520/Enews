@@ -9,15 +9,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
-import NavLink from "../Reuse/NavLink";
-import SearchDialog from "./SearchDialog";
-import NavigationDrawer from "./NavigationDrawer";
-import Login from "../Models/Login";
+
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
 import slugify from "slugify";
+import NavLink from "./NavLink";
+import LoginDialog from "@/app/Models/Login";
+import { auth } from "@/app/utils/firebase";
+import NavigationDrawer from "./NavigationDrawer";
+import SearchDialog from "../features/SearchDialog";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -157,7 +158,7 @@ const Navigation = () => {
         {/* Search Dialog */}
         <SearchDialog open={isDialogOpen} onClose={handleSearchClose} />
         {/* Login Dialog */}
-        <Login open={isLoginDialogOpen} onClose={handleLoginClose} />
+        <LoginDialog open={isLoginDialogOpen} onClose={handleLoginClose} />
       </div>
     </Container>
   );

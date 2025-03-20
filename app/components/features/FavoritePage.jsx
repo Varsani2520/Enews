@@ -6,10 +6,11 @@ import { auth, db } from "@/app/utils/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
 import slugify from "slugify";
-import Card1 from "@/app/Reuse/Card1";
 import { Grid, Typography, IconButton, Button } from "@mui/material";
-import CustomPagination from "../Reuse/CustomPagination";
 import { TravelSkeleton } from "./Skeleton";
+import Card1 from "../cards/Card1";
+import CustomPagination from "../shared/CustomPagination";
+
 
 const FavoritesPage = () => {
   const [user] = useAuthState(auth);

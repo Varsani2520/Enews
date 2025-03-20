@@ -1,7 +1,7 @@
 import React from "react";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import useArticleLike from "../hooks/ArticleLikes";
-import { addHandleArticleClick } from "../hooks/ArticleClick";
+import useArticleLike from "@/app/hooks/useArticleLikes";
+import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
+import FavoriteButton from "@/app/components/features/FavouriteButton";
 
 const Card5 = ({ category, title, imageUrl, article, height }) => {
   const { isFavorite, toggleFavorite } = useArticleLike(article);
@@ -19,21 +19,8 @@ const Card5 = ({ category, title, imageUrl, article, height }) => {
           className="w-full h-full  object-fit rounded"
         />
 
-        {/* Like Button */}
-        <button
-          className={`absolute top-2 right-2 p-2 rounded-full shadow-md transition-all ${
-            isFavorite
-              ? "bg-red-500 text-white"
-              : "bg-gray-800 bg-opacity-50 text-white"
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            toggleFavorite();
-          }}
-        >
-          {isFavorite ? <Favorite /> : <FavoriteBorder />}
-        </button>
+<FavoriteButton isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
+
 
         {/* Category Label */}
         {category ? (

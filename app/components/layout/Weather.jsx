@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "@mui/material";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -8,11 +8,14 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Icons from "../shared/Icons";
+import ThemeButton from "../features/ThemeButton";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Weather = () => {
+const {themeData,setTheme}=useThemeContext()
+
   const getCurrentDate = () => {
     const options = {
-      // weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -21,7 +24,8 @@ const Weather = () => {
   };
 
   return (
-    <div style={{ background: "#1a2e51", color: "white", padding: "10px 0" }}>
+    <div style={{ background: themeData.primary,
+      color: themeData.background, padding: "10px 0" }}>
       {" "}
       <Container
         maxWidth="xl"
@@ -36,8 +40,8 @@ const Weather = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            backgroundColor: "#f20404",
-            color: "white",
+            backgroundColor: themeData.accent,
+            color: themeData.background,
             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
             fontWeight: "bold",
             borderRadius: "10px",
@@ -52,6 +56,7 @@ const Weather = () => {
         {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
           {/* Social Media Icons */}
+          <ThemeButton onThemeChange={setTheme} />
           <Icons
             icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"

@@ -19,6 +19,7 @@ import LoginDialog from "@/app/Models/Login";
 import { auth } from "@/app/utils/firebase";
 import NavigationDrawer from "./NavigationDrawer";
 import SearchDialog from "../features/SearchDialog";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -27,7 +28,7 @@ const Navigation = () => {
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-
+const {themeData}=useThemeContext()
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -60,7 +61,7 @@ const Navigation = () => {
 
   return (
     <Container maxWidth="xl">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center" >
         {/* Logo */}
         <img
           width="120px"
@@ -74,9 +75,12 @@ const Navigation = () => {
         <div className="md:hidden">
           <IconButton
             onClick={toggleDrawer(true)}
-            sx={{ border: "1px solid #ccc", borderRadius: "5px" }}
+            sx={{
+              border: `1px solid ${themeData.border}`,
+              borderRadius: "5px",
+            }}
           >
-            <MenuIcon sx={{ color: "#1a2e51" }} />
+            <MenuIcon sx={{ color: themeData.primary }} />
           </IconButton>
         </div>
 
@@ -101,11 +105,11 @@ const Navigation = () => {
               href={tab.link}
               isActive={activeTab === tab.link}
               onClick={() => setActiveTab(tab.link)}
-              className={`text-lg ${
-                activeTab === tab.link
-                  ? "text-red-500 font-bold"
-                  : "text-[#1a2e51]"
-              } hover:text-red-500`}
+              className={`text-lg hover:text-[${themeData.accent}]`}
+              style={{
+                color: activeTab === tab.link ? themeData.accent : themeData.text,
+                fontWeight: activeTab === tab.link ? "bold" : "normal",
+              }}
             >
               {tab.name}
             </NavLink>
@@ -126,7 +130,7 @@ const Navigation = () => {
                 />
                 <Typography
                   variant="body1"
-                  sx={{ color: "#1a2e51", fontWeight: "bold" }}
+                  sx={{ color: themeData.primary, fontWeight: "bold" }}
                 >
                   {user?.displayName || user?.email}
                 </Typography>
@@ -140,7 +144,11 @@ const Navigation = () => {
                 setActiveTab("Login");
                 handleLoginOpen();
               }}
-              className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800"
+              className="px-4 py-2 rounded-lg hover:bg-opacity-80"
+              style={{
+                background: themeData.accent,
+                color: themeData.background,
+              }}
             >
               Login
             </NavLink>
@@ -149,7 +157,8 @@ const Navigation = () => {
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            sx={{ color: "red", border: "1px solid #ccc", borderRadius: "5px" }}
+            sx={{ color: themeData.accent,               border: `1px solid ${themeData.border}`,
+            borderRadius: "5px" }}
           >
             <SearchIcon />
           </IconButton>

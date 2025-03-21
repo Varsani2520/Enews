@@ -2,11 +2,16 @@ import React from "react";
 import Link from "next/link";
 import slugify from "slugify";
 import Card4 from "@/app/components/cards/Card4";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const RelatedNews = ({ articles }) => {
+  const {themeData}=useThemeContext()
   return (
     <div>
-      <div className="bg-red-700 text-white text-xs md:text-lg font-semibold px-3 py-1 rounded-lg mb-4">
+      <div className="text-xs md:text-lg font-semibold px-3 py-1 rounded-lg mb-4" style={{
+          backgroundColor: themeData.buttonBg,
+          color: themeData.buttonText, 
+        }}>
         Related News
       </div>
       <div className="space-y-4">

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Container } from "@mui/material";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
@@ -12,21 +13,21 @@ import ThemeButton from "../features/ThemeButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Weather = () => {
-const {themeData,setTheme}=useThemeContext()
+  const { themeData } = useThemeContext();
 
   const getCurrentDate = () => {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
+    const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date().toLocaleDateString(undefined, options);
   };
 
   return (
-    <div style={{ background: themeData.primary,
-      color: themeData.background, padding: "10px 0" }}>
-      {" "}
+    <div
+      style={{
+        background: themeData?.primary,
+        color: themeData?.text,
+        padding: "10px 0",
+      }}
+    >
       <Container
         maxWidth="xl"
         style={{
@@ -40,8 +41,8 @@ const {themeData,setTheme}=useThemeContext()
           style={{
             display: "flex",
             alignItems: "center",
-            backgroundColor: themeData.accent,
-            color: themeData.background,
+            backgroundColor: themeData?.accent || "#f39c12",
+            color: themeData?.text || "#ffffff",
             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
             fontWeight: "bold",
             borderRadius: "10px",
@@ -55,12 +56,11 @@ const {themeData,setTheme}=useThemeContext()
 
         {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
-          {/* Social Media Icons */}
-          <ThemeButton onThemeChange={setTheme} />
+          <ThemeButton />
           <Icons
             icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"
-            aria-label="Visit our Facebook page"
+            aria-label="Visit our GitHub page"
           />
           <Icons
             icon={<FacebookIcon />}

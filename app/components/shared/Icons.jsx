@@ -1,17 +1,33 @@
+import { useThemeContext } from "@/app/context/ThemeContext";
 import { Box } from "@mui/material";
 import React from "react";
 
-const Icons = ({ onClick, icon, props, href ,sx}) => {
+const Icons = ({ onClick, icon, href, sx }) => {
+  const { themeData } = useThemeContext();
+
   return (
     <Box
       onClick={onClick}
-      {...props}
-      color="inherit"
+      component="a"
       href={href}
       target="_blank"
-      
+      rel="noopener noreferrer"
       sx={{
-        padding: "5px", ...sx
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "35px",
+        height: "35px",
+        borderRadius: "50%",
+        color: themeData.buttonText, 
+        cursor:"pointer",
+        textDecoration: "none",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          backgroundColor: themeData.primary, // Highlight effect on hover
+          transform: "scale(1.1)", // Slight increase in size
+        },
+        ...sx,
       }}
     >
       {icon}

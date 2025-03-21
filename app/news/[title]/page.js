@@ -15,11 +15,13 @@ import NewsIcons from "@/app/components/news-detail/NewsIcons";
 import RelatedNews from "@/app/components/news-detail/RelatedNews";
 import CommentsDrawer from "@/app/components/news-detail/CommentDrawer";
 import NewsContent from "@/app/components/news-detail/NewsContent";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
   const [relatedArticles, setRelatedArticles] = useState([]);
   const { title } = useParams();
+   const {themeData}=useThemeContext()
  
   const fetchArticle = async () => {
     try {
@@ -49,7 +51,7 @@ const NewsDetailPage = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className=" min-h-screen" style={{background:themeData.background}}>
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ mt: "2%" }}>
         <Grid container spacing={3}>

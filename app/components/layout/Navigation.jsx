@@ -105,11 +105,13 @@ const {themeData}=useThemeContext()
               href={tab.link}
               isActive={activeTab === tab.link}
               onClick={() => setActiveTab(tab.link)}
-              className={`text-lg hover:text-[${themeData.accent}]`}
-              style={{
-                color: activeTab === tab.link ? themeData.accent : themeData.text,
-                fontWeight: activeTab === tab.link ? "bold" : "normal",
-              }}
+              className="text-lg transition-colors duration-300"
+      style={{
+        color: activeTab === tab.link
+          ? themeData.searchIcon // Ensure visibility
+          : themeData.navText , // Fallback to readable color
+        fontWeight: activeTab === tab.link ? "bold" : "normal",
+      }}
             >
               {tab.name}
             </NavLink>
@@ -146,8 +148,8 @@ const {themeData}=useThemeContext()
               }}
               className="px-4 py-2 rounded-lg hover:bg-opacity-80"
               style={{
-                background: themeData.accent,
-                color: themeData.background,
+                background: themeData.buttonBg,
+                color: themeData.buttonText,
               }}
             >
               Login
@@ -157,7 +159,7 @@ const {themeData}=useThemeContext()
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            sx={{ color: themeData.accent,               border: `1px solid ${themeData.border}`,
+            sx={{ color: themeData.searchIcon,               border: `1px solid ${themeData.secondary}`,
             borderRadius: "5px" }}
           >
             <SearchIcon />

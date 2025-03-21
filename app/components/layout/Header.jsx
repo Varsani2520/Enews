@@ -4,12 +4,13 @@ import { usePathname } from "next/navigation";
 import { Container } from "@mui/material";
 import Loading from "@/app/layout/loading";
 import NavLink from "./NavLink";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("");
   const [loading, setLoading] = useState(false);
   const pathname = usePathname(); // Get the current path
-
+const {themeData}=useThemeContext()
   const categories = [
     "Technology", "Science", "Religion", "Politics", "Business",
     "Family", "Car", "Travels", "Sports", "Health", "Education",
@@ -37,7 +38,7 @@ const Header = () => {
         </div>
       )}
 
-      <div className="bg-gray-200 border-t border-b border-gray-400 hidden md:flex overflow-hidden">
+      <div className="border-t border-b border-gray-400 hidden md:flex overflow-hidden" style={{background:themeData.headerBg,color:themeData.navText}}>
         <Container maxWidth="xl">
           <div className="relative w-full overflow-hidden py-2">
             <div className="flex gap-10 animate-scroll whitespace-nowrap hover:pause-scroll">
@@ -49,11 +50,12 @@ const Header = () => {
                     href={categoryPath}
                     isActive={pathname === categoryPath}
                     onClick={() => handleClick(category)}
-                    className={`text-[#1a2e51] font-bold cursor-pointer transition-all duration-300 ${
+                    className={` font-bold cursor-pointer transition-all duration-300 ${
                       pathname === categoryPath
-                        ? "border-b-2 border-[#f20404] text-[#f20404]"
+                        ? "border-b-2 border-[#f20404]"
                         : "hover:text-[#ce2b2b]"
                     }`}
+                    
                   >
                     {category}
                   </NavLink>

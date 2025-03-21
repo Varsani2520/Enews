@@ -19,12 +19,11 @@ const Icons = ({ onClick, icon, href, sx }) => {
         width: "35px",
         height: "35px",
         borderRadius: "50%",
-        color: themeData.buttonText, 
+        color: themeData.navText, 
         cursor:"pointer",
         textDecoration: "none",
         transition: "all 0.3s ease-in-out",
         "&:hover": {
-          backgroundColor: themeData.primary, // Highlight effect on hover
           transform: "scale(1.1)", // Slight increase in size
         },
         ...sx,

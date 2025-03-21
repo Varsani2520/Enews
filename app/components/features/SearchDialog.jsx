@@ -38,16 +38,16 @@ const {themeData}=useThemeContext()
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{background:themeData.primary,color:themeData.cardText}}>
-        <span className="text-xl font-semibold">Search</span>
+      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{background:themeData.primary,color:themeData.navText}}>
+        <span className="text-xl font-semibold">Search News</span>
         <IconButton
           onClick={onClose}
-          className="text-gray-500 hover:text-red-500"
+          className=" hover:text-red-500" style={{color:themeData.navText}}
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent dividers sx={{background:themeData.background}}>
         <div className="flex items-center bg-gray-100 p-2 rounded-lg">
           <InputBase
             autoFocus

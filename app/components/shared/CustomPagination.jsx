@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Pagination } from "@mui/material";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const CustomPagination = ({
   totalItems,
@@ -8,6 +9,7 @@ const CustomPagination = ({
   currentPage,
   onPageChange,
 }) => {
+  const { themeData } = useThemeContext();
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages <= 1) return null; // Hide pagination if only one page
@@ -20,8 +22,16 @@ const CustomPagination = ({
         onChange={(_, page) => onPageChange(page)}
         variant="outlined"
         shape="rounded"
-        color="primary"
-      />
+        sx={{
+          "& .MuiPaginationItem-root": {
+            color: themeData.navText, // Text color
+            borderColor: themeData.buttonBg, // Border color
+          },
+          "& .MuiPaginationItem-page.Mui-selected": {
+            backgroundColor: themeData.buttonBg, // Selected page color
+            color: themeData.buttonText, // Selected text color
+          },
+        }}      />
     </div>
   );
 };

@@ -11,7 +11,7 @@ const NewsHeader = ({ article }) => {
         }}>
         {article.section_name}
       </div>
-      <h1 className="text-2xl sm:text-sm font-bold mt-1" style={{color:themeData.cardText}}>
+      <h1 className="text-sm sm:text-lg font-bold mt-1" style={{color:themeData.cardText}}>
         {article.headline.main}
       </h1>
       <p className=" mt-1" style={{color:themeData.cardText}}>

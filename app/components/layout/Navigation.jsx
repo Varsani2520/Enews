@@ -80,7 +80,7 @@ const {themeData}=useThemeContext()
               borderRadius: "5px",
             }}
           >
-            <MenuIcon sx={{ color: themeData.primary }} />
+            <MenuIcon sx={{ color: themeData.navText }} />
           </IconButton>
         </div>
 
@@ -132,7 +132,7 @@ const {themeData}=useThemeContext()
                 />
                 <Typography
                   variant="body1"
-                  sx={{ color: themeData.primary, fontWeight: "bold" }}
+                  sx={{ color: themeData.navText, fontWeight: "bold" }}
                 >
                   {user?.displayName || user?.email}
                 </Typography>
@@ -159,7 +159,7 @@ const {themeData}=useThemeContext()
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            sx={{ color: themeData.searchIcon,               border: `1px solid ${themeData.secondary}`,
+            sx={{ color: themeData.navText,               border: `1px solid ${themeData.buttonBg}`,
             borderRadius: "5px" }}
           >
             <SearchIcon />

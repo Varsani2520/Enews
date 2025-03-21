@@ -17,6 +17,7 @@ const {themeData}=useThemeContext()
         border: "1px solid #ccc",
         borderRadius: "8px",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        my:2,
       }}
     >
       <Typography variant="subtitle1" sx={{ fontWeight: "bold" ,color:themeData.cardText}}>

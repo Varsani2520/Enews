@@ -8,6 +8,7 @@ import { auth } from "@/app/utils/firebase";
 import { Container, Tabs, Tab, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import slugify from "slugify";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const ProfileLayout = ({ children }) => {
   const [user] = useAuthState(auth);
@@ -15,7 +16,7 @@ const ProfileLayout = ({ children }) => {
   const pathname = usePathname();
   const [tabIndex, setTabIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-
+const {themeData}=useThemeContext()
   // Ensure displayName is always valid
   const username = user?.displayName ? slugify(user.displayName) : "user";
 
@@ -68,23 +69,25 @@ const ProfileLayout = ({ children }) => {
         {/* Show Sidebar on Desktop */}
         {!isMobile && (
           <div className="flex">
-            <aside className="w-72 bg-white border-r border-gray-200 p-6">
-              <h2 className="text-2xl font-bold mb-6 tracking-wide text-gray-800">
+            <aside className="w-72 border-r border-gray-200 p-6" style={{background:themeData.background}}>
+              <h2 className="text-2xl font-bold mb-6 tracking-wide" style={{color:themeData.navText}}>
                 Profile
               </h2>
               <nav className="space-y-3">
                 {tabs.map((tab) => (
                   <Link
-                    key={tab.name}
-                    href={`/profile/${username}/${tab.name}`}
-                    className={`block px-4 py-2 rounded-lg font-medium transition-all ${
-                      pathname.includes(tab.name)
-                        ? "bg-blue-500 text-white shadow-md"
-                        : "hover:bg-gray-100 text-gray-700"
-                    }`}
-                  >
-                    {tab.label}
-                  </Link>
+                  key={tab.name}
+                  href={`/profile/${username}/${tab.name}`}
+                  className={`block px-4 py-2 rounded-lg font-medium transition-all ${
+                    pathname.includes(tab.name)
+                      ? "shadow-md"
+                      : ""
+                  }`}
+                  style={{ color: themeData.navText }}
+                >
+                  {tab.label}
+                </Link>
+                
                 ))}
               </nav>
               <button
@@ -94,13 +97,13 @@ const ProfileLayout = ({ children }) => {
                 Logout
               </button>
             </aside>
-            <main className="flex-1 p-8 bg-white">{children}</main>
+            <main className="flex-1 p-8" style={{background:themeData.background}}>{children}</main>
           </div>
         )}
 
         {/* Show Tabs on Mobile */}
         {isMobile && user && (
-          <Box className="bg-white">
+          <Box style={{background:themeData.background}}>
             <Tabs
               value={tabIndex}
               onChange={(_, newValue) => {
@@ -109,10 +112,10 @@ const ProfileLayout = ({ children }) => {
               }}
               variant="fullWidth"
               indicatorColor="primary"
-              textColor="primary"
             >
               {tabs.map((tab, index) => (
-                <Tab key={index} label={tab.label} />
+                <Tab key={index} label={tab.label}               sx={{color:themeData.navText}}
+/>
               ))}
             </Tabs>
             

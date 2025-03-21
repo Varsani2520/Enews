@@ -7,13 +7,24 @@ import { Toaster } from "react-hot-toast";
 import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
+import Script from "next/script";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  title: "My Website",
+  description: "Next.js AMP with AdSense",
+};
+
+// ✅ **New Route Segment Config for AMP**
+export const segmentConfig = {
+  amp: "hybrid", // Enables AMP in Next.js App Router
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html  lang="en">
+    <html lang="en">
       <Head>
         {/* AMP Auto Ads Script */}
         <script
@@ -40,6 +51,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-// Enable AMP in Next.js pages that use this layout
-export const config = { amp: "hybrid" };

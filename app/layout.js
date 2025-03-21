@@ -7,15 +7,11 @@ import { Toaster } from "react-hot-toast";
 import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
-import Script from "next/script";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "My Website",
-  description: "Next.js AMP with AdSense",
-};
+
 
 // ✅ **New Route Segment Config for AMP**
 export const segmentConfig = {

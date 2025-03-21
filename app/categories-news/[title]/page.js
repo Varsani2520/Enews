@@ -8,12 +8,13 @@ import slugify from "slugify";
 import { TravelSkeleton } from "@/app/components/features/Skeleton";
 import Card5 from "@/app/components/cards/Card5";
 import Breadcumps from "@/app/components/shared/Breadcrumbs";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const CategoryPage = () => {
   const { title } = useParams();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const {themeData}=useThemeContext()
   useEffect(() => {
     document.title = title ? `Enews - ${title} News ` : "Enews - Latest News";
 
@@ -34,7 +35,7 @@ const CategoryPage = () => {
   }, [title]);
 
   return (
-    <div>
+    <div style={{background:themeData.background}}>
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {loading ? (

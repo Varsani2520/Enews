@@ -14,13 +14,14 @@ import { getNews } from "@/app/utils/getNews";
 import Link from "next/link";
 import slugify from "slugify";
 import Card4 from "../cards/Card4";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
-
+const {themeData}=useThemeContext()
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
     setLoading(true);
@@ -37,7 +38,7 @@ const SearchDialog = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle className="flex justify-between items-center border-b pb-2">
+      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{background:themeData.primary,color:themeData.cardText}}>
         <span className="text-xl font-semibold">Search</span>
         <IconButton
           onClick={onClose}

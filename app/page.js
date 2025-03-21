@@ -9,14 +9,16 @@ import RecentNews from "./components/sections/RecentNews";
 import Technology from "./components/sections/Technology";
 import Travels from "./components/sections/Travels";
 import LazyComponent from "./components/shared/LazyComponent";
+import { useThemeContext } from "./context/ThemeContext";
 export default function Home() {
+  const {themeData}=useThemeContext()
 
   useEffect(() => {
     document.title = "Enews - Latest news & Updates";
   }, []);
   
   return (
-    <main className="flex  flex-col  justify-between bg-gray-200">
+    <main className="flex  flex-col  justify-between" style={{background:themeData.background}}>
       <Banner
         logo={"/logo.png"}
         title="Stay informed,stay ahead with our daily news."

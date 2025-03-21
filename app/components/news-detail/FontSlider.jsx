@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Slider, Typography, Box } from "@mui/material";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
-const fontSizes = [14, 16, 18, 20, 22];
+const fontSizes = [12,14, 16, 18, 20, 22,24];
 
 const FontSizeSlider = ({ fontSize, setFontSize }) => {
-
+const {themeData}=useThemeContext()
 
   return (
     <Box
@@ -18,7 +19,7 @@ const FontSizeSlider = ({ fontSize, setFontSize }) => {
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold" ,color:themeData.cardText}}>
         Font Size
       </Typography>
       <Slider
@@ -26,10 +27,10 @@ const FontSizeSlider = ({ fontSize, setFontSize }) => {
                     onChange={(_, newValue) => setFontSize(newValue)}
                     step={2}
                     marks={fontSizes.map(size => ({ value: size, label: `${size}px` }))}
-                    min={14}
-                    max={22}
+                    min={12}
+                    max={24}
                     valueLabelDisplay="auto"
-                    sx={{ width: "60%", color: "#0056b3" }}
+                    sx={{ width: "60%", color: themeData.cardText }}
                 />
       
     </Box>

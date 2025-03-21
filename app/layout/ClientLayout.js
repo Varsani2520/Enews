@@ -15,7 +15,7 @@ import Footer from "../components/layout/Footer";
 import { useThemeContext } from "../context/ThemeContext";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
-const {themeData={}}=useThemeContext()
+const {themeData}=useThemeContext()
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {
@@ -31,7 +31,7 @@ const {themeData={}}=useThemeContext()
   }, [user]);
 
   return (
-    <div style={{ background: themeData.background }}>
+    <div style={{ background: themeData.navigation }}>
       <Weather />
       <Navigation />
       <Header />

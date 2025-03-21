@@ -1,8 +1,10 @@
 "use client";
+import { useThemeContext } from "@/app/context/ThemeContext";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
 
 const Heading = ({ title, subtitle, buttonText, link }) => {
+  const {themeData}=useThemeContext()
   const handleClick = () => {
     if (link) {
       window.location.href = link;
@@ -21,11 +23,11 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
         <Box sx={{ flex: 1 }}>
           <Typography
             variant="h5"
-            sx={{ color: "#1a2e51", fontWeight: "bold" }}
+            sx={{ color: themeData.cardText, fontWeight: "bold" }}
           >
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#515d75" }}>
+          <Typography variant="body2" sx={{ color: themeData.secondary }}>
             {subtitle}
           </Typography>
         </Box>
@@ -34,8 +36,8 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
           variant="outlined"
           sx={{
             fontWeight: "bold",
-            color: "#1a2e51",
-            borderColor: "#ccc",
+            color: themeData.cardText,
+            borderColor: themeData.secondary, 
           }}
           onClick={handleClick}
         >

@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { createCommnet, getCommentsForArticle } from "@/app/hooks/useArticleComment";
 import CustomPagination from "../shared/CustomPagination";
+import { auth } from "@/app/utils/firebase";
 
 const CommentForm = ({ article }) => {
   const [text, setText] = useState("");
@@ -13,7 +14,7 @@ const CommentForm = ({ article }) => {
   const [loading, setLoading] = useState(false);
   const commentsPerPage = 5; // Define how many comments per page
   const [user] = useAuthState(auth);
-  // Fetch comments on mount
+
   useEffect(() => {
     const fetchComments = async () => {
       setLoading(true);

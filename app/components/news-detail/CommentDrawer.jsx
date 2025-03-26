@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import DrawerContent from "@/app/Models/useDrawer";
 import CommentForm from "@/app/components/features/CommentSection";
 
-const CommentsDrawer = ({ article }) => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+const CommentsDrawer = ({ article,open,setOpen }) => {
 
   return (
-    <DrawerContent open={drawerOpen} onClose={() => setDrawerOpen(false)} title="Add Comment">
+    <DrawerContent open={open} onClose={() => setOpen(false)} title="Add Comment">
       <CommentForm article={article} />
     </DrawerContent>
   );

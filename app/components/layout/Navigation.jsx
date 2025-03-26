@@ -159,7 +159,7 @@ const {themeData}=useThemeContext()
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            sx={{ color: themeData.navText,               border: `1px solid ${themeData.buttonBg}`,
+            sx={{ color: themeData.searchIcon,border: `1px solid ${themeData.secondary}`,
             borderRadius: "5px" }}
           >
             <SearchIcon />

@@ -8,6 +8,7 @@ import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import Head from "next/head";
+import OneSignalProvider from "./utils/oneSignalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
+        {/* OneSignal SDK */}
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
         {/* AMP Auto Ads Script */}
         <script
           async
@@ -30,6 +34,7 @@ export default function RootLayout({ children }) {
         ></script>
       </Head>
       <body className={inter.className}>
+        <OneSignalProvider/>
         {/* AMP Auto Ads */}
         <amp-auto-ads
           type="adsense"

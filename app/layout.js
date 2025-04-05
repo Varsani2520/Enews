@@ -19,42 +19,35 @@ export const segmentConfig = {
 };
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    // Load Google AdSense script dynamically for manual ads
+    const script = document.createElement("script");
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <html lang="en">
-      <head>
-      {/* ✅ AMP Auto Ads Script */}
-      <script
-          async
-          custom-element="amp-auto-ads"
-          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
-        ></script>
+        <Head>
+        {/* ✅ Google AdSense Auto Ads Script */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossOrigin="anonymous"></script>
 
-        {/* ✅ Standard Google AdSense Script (For Non-AMP) */}
+        {/* ✅ Enable Auto Ads (inline setup) */}
         <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          crossOrigin="anonymous"
-        ></script>
-      </head>
+          dangerouslySetInnerHTML={{
+            __html: `
+              (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6580779703282784",
+                enable_page_level_ads: true
+              });
+            `,
+          }}
+        />
+      </Head>
       <body className={inter.className}>
-        {/* ✅ AMP Auto Ads (Only Render for AMP Pages) */}
-        {segmentConfig.amp === "hybrid" && (
-          <amp-auto-ads type="adsense" data-ad-client="ca-pub-6580779703282784"></amp-auto-ads>
-        )}
-
-        {/* ✅ Normal Google Ads (For Non-AMP Pages) */}
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-6580779703282784"
-          data-ad-slot="1234567890" // Replace with actual Ad Slot
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-
-        <script>
-          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-        </script>
+       
 
         <Toaster />
         <ThemeProvider>

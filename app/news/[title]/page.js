@@ -58,7 +58,6 @@ const NewsDetailPage = () => {
         <Grid container spacing={3}>
           {/* Left Side - Display Big Image */}
           <Grid item xs={12} md={8}>
-            <InArticleAd/>
             <NewsHeader article={clickedArticle}/>
             <NewsIcons article={clickedArticle} title={title} />
             <InArticleAd/>

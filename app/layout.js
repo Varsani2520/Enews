@@ -20,22 +20,19 @@ export const segmentConfig = {
 };
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
-    // Load Google AdSense script dynamically for manual ads
-    const script = document.createElement("script");
-    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    document.body.appendChild(script);
-  }, []);
+
 
   return (
     <html lang="en">
-        <Head>
-        {/* ✅ Google AdSense Auto Ads Script */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossOrigin="anonymous"></script>
+         <Head>
+        {/* ✅ Load Google AdSense Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
+          crossOrigin="anonymous"
+        ></script>
 
-        {/* ✅ Enable Auto Ads (inline setup) */}
+        {/* ✅ Enable Auto Ads */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

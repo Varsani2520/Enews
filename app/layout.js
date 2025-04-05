@@ -8,7 +8,6 @@ import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import Head from "next/head";
-import OneSignalProvider from "./utils/oneSignalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,24 +21,40 @@ export const segmentConfig = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        {/* OneSignal SDK */}
-        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
-        {/* AMP Auto Ads Script */}
-        <script
+      <head>
+      {/* ✅ AMP Auto Ads Script */}
+      <script
           async
           custom-element="amp-auto-ads"
           src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
         ></script>
-      </Head>
+
+        {/* ✅ Standard Google AdSense Script (For Non-AMP) */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body className={inter.className}>
-        <OneSignalProvider/>
-        {/* AMP Auto Ads */}
-        <amp-auto-ads
-          type="adsense"
+        {/* ✅ AMP Auto Ads (Only Render for AMP Pages) */}
+        {segmentConfig.amp === "hybrid" && (
+          <amp-auto-ads type="adsense" data-ad-client="ca-pub-6580779703282784"></amp-auto-ads>
+        )}
+
+        {/* ✅ Normal Google Ads (For Non-AMP Pages) */}
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
           data-ad-client="ca-pub-6580779703282784"
-        ></amp-auto-ads>
+          data-ad-slot="1234567890" // Replace with actual Ad Slot
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+
+        <script>
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </script>
 
         <Toaster />
         <ThemeProvider>

@@ -8,7 +8,7 @@ import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import Head from "next/head";
-import OneSignalProvider from "./utils/oneSignalProvider";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,26 +20,35 @@ export const segmentConfig = {
 };
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    // Load Google AdSense script dynamically for manual ads
+    const script = document.createElement("script");
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <html lang="en">
-      <Head>
-        {/* OneSignal SDK */}
-        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <Head>
+        {/* ✅ Google AdSense Auto Ads Script */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossOrigin="anonymous"></script>
 
-        {/* AMP Auto Ads Script */}
+        {/* ✅ Enable Auto Ads (inline setup) */}
         <script
-          async
-          custom-element="amp-auto-ads"
-          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
-        ></script>
+          dangerouslySetInnerHTML={{
+            __html: `
+              (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6580779703282784",
+                enable_page_level_ads: true
+              });
+            `,
+          }}
+        />
       </Head>
       <body className={inter.className}>
-        <OneSignalProvider/>
-        {/* AMP Auto Ads */}
-        <amp-auto-ads
-          type="adsense"
-          data-ad-client="ca-pub-6580779703282784"
-        ></amp-auto-ads>
+       
 
         <Toaster />
         <ThemeProvider>

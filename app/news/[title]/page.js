@@ -16,7 +16,6 @@ import RelatedNews from "@/app/components/news-detail/RelatedNews";
 import CommentsDrawer from "@/app/components/news-detail/CommentDrawer";
 import NewsContent from "@/app/components/news-detail/NewsContent";
 import { useThemeContext } from "@/app/context/ThemeContext";
-import InArticleAd from "@/app/components/features/ArticleAd";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -58,10 +57,9 @@ const NewsDetailPage = () => {
         <Grid container spacing={3}>
           {/* Left Side - Display Big Image */}
           <Grid item xs={12} md={8}>
-            <InArticleAd/>
             <NewsHeader article={clickedArticle}/>
             <NewsIcons article={clickedArticle} title={title} />
-            <InArticleAd/>
+            
 
             <NewsContent article={clickedArticle} />
             

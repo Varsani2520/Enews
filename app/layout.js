@@ -8,6 +8,7 @@ import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import Head from "next/head";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -52,7 +52,7 @@ const NewsDetailPage = () => {
 
   return (
     <div className=" min-h-screen" style={{background:themeData.background}}>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
+      {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -62,7 +62,7 @@ const NewsDetailPage = () => {
      data-ad-slot="8270187895"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+</script> */}
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ mt: "2%" }}>
         <Grid container spacing={3}>

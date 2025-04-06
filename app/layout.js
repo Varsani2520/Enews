@@ -24,26 +24,11 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-         <Head>
-        {/* ✅ Load Google AdSense Script */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
-          crossOrigin="anonymous"
-        ></script>
+      <head>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
+     crossorigin="anonymous"></script>
+      </head>
 
-        {/* ✅ Enable Auto Ads */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-6580779703282784",
-                enable_page_level_ads: true
-              });
-            `,
-          }}
-        />
-      </Head>
       <body className={inter.className}>
        
 

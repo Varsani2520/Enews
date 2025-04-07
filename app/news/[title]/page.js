@@ -16,6 +16,7 @@ import RelatedNews from "@/app/components/news-detail/RelatedNews";
 import CommentsDrawer from "@/app/components/news-detail/CommentDrawer";
 import NewsContent from "@/app/components/news-detail/NewsContent";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import GoogleAd from "@/app/components/features/GoogleAd";
 
 const NewsDetailPage = () => {
   const [clickedArticle, setClickedArticle] = useState(null);
@@ -59,6 +60,7 @@ const NewsDetailPage = () => {
           <Grid item xs={12} md={8}>
             <NewsHeader article={clickedArticle}/>
             <NewsIcons article={clickedArticle} title={title} />
+            <GoogleAd/>
             <NewsContent article={clickedArticle} />
             
           </Grid>

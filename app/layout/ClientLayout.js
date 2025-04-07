@@ -36,7 +36,6 @@ const {themeData}=useThemeContext()
       <Weather />
       <Navigation />
       <Header />
-      <AdBanner/>
       {children}
       <Footer />
     </div>

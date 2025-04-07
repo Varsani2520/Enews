@@ -1,26 +1,22 @@
-// components/GoogleAd.tsx
-import { useEffect } from 'react';
+"use client";
+import { useEffect } from "react";
 
-const GoogleAd = () => {
+export default function GoogleAd({ slot,format,style={display:"block",textAlign:"center"}}) {
   useEffect(() => {
     try {
-      // @ts-ignore
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
-      console.error('Adsense error:', e);
+      console.error(e);
     }
   }, []);
 
   return (
     <ins
       className="adsbygoogle"
-      style={{ display: 'block' }}
+      style={style}
       data-ad-client="ca-pub-6580779703282784"
-      data-ad-slot="6729903768"
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    />
+      data-ad-slot={slot}
+      data-ad-layout="in-article"
+      data-ad-format={format}/>
   );
-};
-
-export default GoogleAd;
+}

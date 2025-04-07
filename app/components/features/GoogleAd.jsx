@@ -1,22 +1,30 @@
 "use client";
 import { useEffect } from "react";
 
-export default function GoogleAd({ slot,format,style={display:"block",textAlign:"center"}}) {
+const GoogleAd = () => {
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (window) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (e) {
-      console.error(e);
+      console.error("Adsbygoogle error:", e);
     }
   }, []);
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={style}
-      data-ad-client="ca-pub-6580779703282784"
-      data-ad-slot={slot}
-      data-ad-layout="in-article"
-      data-ad-format={format}/>
+    <>
+      {/* Google AdSense Script (added only once globally, ideally in _document.tsx or layout) */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        data-ad-client="ca-pub-6580779703282784"
+        data-ad-slot="6729903768"
+      />
+    </>
   );
-}
+};
+
+export default GoogleAd;

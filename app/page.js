@@ -26,10 +26,6 @@ export default function Home() {
         title="Stay informed,stay ahead with our daily news."
         href="/categories-news/popular"
       />
-
-      <div className="flex justify-center my-4">
-        <GoogleAd slot="6729903768" format="fluid" />
-      </div>
       <div className="hidden md:block">
         <Heading
           title={"Popular News"}
@@ -39,10 +35,6 @@ export default function Home() {
         />
       </div>
       <LazyComponent component={PopularCards} />
-      
-      <div className="flex justify-center my-6">
-      <GoogleAd slot="8270187895" format="fluid" />
-      </div>
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}
@@ -58,9 +50,7 @@ export default function Home() {
       />
 
       <LazyComponent component={Technology} />
-<div className="flex justify-center my-6">
-<GoogleAd slot="2424100318" format="autorelaxed" />
-</div>
+
       <Heading
         title={"Travels"}
         subtitle={"Travels"}
@@ -73,9 +63,7 @@ export default function Home() {
         title="Stay informesd with us- 24/7 news updates"
         href="/categories-news/breaking"
       />
-        <div className="flex justify-center my-6">
-        <GoogleAd slot="6729903768" format="fluid" />
-      </div>
+      
       <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}

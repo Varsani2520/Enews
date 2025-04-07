@@ -13,7 +13,6 @@ import Navigation from "../components/layout/Navigation";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { useThemeContext } from "../context/ThemeContext";
-import AdBanner from "../components/features/AdBanner";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
 const {themeData}=useThemeContext()
@@ -36,7 +35,6 @@ const {themeData}=useThemeContext()
       <Weather />
       <Navigation />
       <Header />
-      <AdBanner/>
       {children}
       <Footer />
     </div>

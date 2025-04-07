@@ -10,20 +10,25 @@ import Technology from "./components/sections/Technology";
 import Travels from "./components/sections/Travels";
 import LazyComponent from "./components/shared/LazyComponent";
 import { useThemeContext } from "./context/ThemeContext";
+import GoogleAd from "./components/features/GoogleAd";
 export default function Home() {
-  const {themeData}=useThemeContext()
+  const { themeData } = useThemeContext()
 
   useEffect(() => {
     document.title = "Enews - Latest news & Updates";
   }, []);
-  
+
   return (
-    <main className="flex  flex-col  justify-between" style={{background:themeData.background}}>
+    <main className="flex  flex-col  justify-between" style={{ background: themeData.background }}>
+
       <Banner
         logo={"/logo.png"}
         title="Stay informed,stay ahead with our daily news."
         href="/categories-news/popular"
       />
+      <div className="flex justify-center my-4">
+        <GoogleAd />
+      </div>
       <div className="hidden md:block">
         <Heading
           title={"Popular News"}
@@ -33,6 +38,10 @@ export default function Home() {
         />
       </div>
       <LazyComponent component={PopularCards} />
+      
+      <div className="flex justify-center my-6">
+        <GoogleAd />
+      </div>
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}
@@ -46,7 +55,11 @@ export default function Home() {
         buttonText={"View More"}
         link="/categories-news/technology"
       />
+
       <LazyComponent component={Technology} />
+<div className="flex justify-center my-6">
+        <GoogleAd />
+      </div>
       <Heading
         title={"Travels"}
         subtitle={"Travels"}
@@ -59,6 +72,9 @@ export default function Home() {
         title="Stay informesd with us- 24/7 news updates"
         href="/categories-news/breaking"
       />
+        <div className="flex justify-center my-6">
+        <GoogleAd />
+      </div>
       <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}

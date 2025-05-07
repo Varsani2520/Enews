@@ -15,7 +15,8 @@ import Footer from "../components/layout/Footer";
 import { useThemeContext } from "../context/ThemeContext";
 export default function ClientLayout({ children }) {
   const [user] = useAuthState(auth);
-const {themeData}=useThemeContext()
+  const { themeData } = useThemeContext();
+  console.log("themeData", themeData);
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {

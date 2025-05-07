@@ -5,8 +5,9 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { auth, db,  provider } from "./firebase";
+import { auth, db, provider } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { httpAxios } from "./httpAxios";
 
 // handle Google signin authenticaltion
 export const signInWithGoogle = async () => {
@@ -24,49 +25,52 @@ export const signInWithGoogle = async () => {
 /**
  * Handles Email & Password Login
  */
-export const loginWithEmail = async (email, password) => {
+export const loginWithEmail = async (userData) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return userCredential.user;
+    const userCredential = httpAxios.post("/auth/login", {
+      email: userData.email,
+      password: userData.password,
+    }).then((response) => {;
+    console.log("User credential:", response);
+    localStorage.setItem("user", JSON.stringify(response.data.data.user))})
+    // return response.data.user;
   } catch (error) {
     console.error("Login error:", error);
     throw error;
   }
 };
 // handle email & apssword signup
-export const signUpWithEmail = async (name, email, password) => {
+export const signUpWithEmail = async (userData) => {
   try {
-    const methods = await fetchSignInMethodsForEmail(auth, email);
-    if (methods.length > 0)
-      throw new Error("Email already in use. Please log in.");
+    const formData = new FormData();
+    formData.append("fullname", userData.name);
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    formData.append("phone_no", userData.phone_no);
+    formData.append("role", "user");
 
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
+    if (userData.avatar) {
+      formData.append("avatar", userData.avatar); // avatar must be a File object
+    }
 
-    // **Update Firebase Auth Profile**
-    await updateProfile(user, { displayName: name });
-   
-    // Save user data to Firestore
-    await saveUserDataToFirestore({ uid: user.uid, name, email });
-    return { success: true, message: "Account created. Please log in." };
+    const response = await httpAxios.post("/auth/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
   } catch (error) {
     console.error("Signup error:", error);
     throw error;
   }
 };
+
 /**
  * Saves user data to Firestore
  */
 const saveUserDataToFirestore = async (user) => {
-  if (!user?.uid) throw new Error("User UID is missing!");  
+  if (!user?.uid) throw new Error("User UID is missing!");
 
   try {
     const userRef = doc(db, "users", user.email);

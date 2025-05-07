@@ -26,9 +26,10 @@ const Navigation = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const [user, loading] = useAuthState(auth);
+  const userData = localStorage.getItem("user");
+  const user = JSON.parse(userData);
   const router = useRouter();
-const {themeData}=useThemeContext()
+  const { themeData } = useThemeContext();
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -61,7 +62,7 @@ const {themeData}=useThemeContext()
 
   return (
     <Container maxWidth="xl">
-      <div className="flex justify-between items-center" >
+      <div className="flex justify-between items-center">
         {/* Logo */}
         <img
           width="120px"
@@ -106,12 +107,13 @@ const {themeData}=useThemeContext()
               isActive={activeTab === tab.link}
               onClick={() => setActiveTab(tab.link)}
               className="text-lg transition-colors duration-300"
-      style={{
-        color: activeTab === tab.link
-          ? themeData.searchIcon // Ensure visibility
-          : themeData.navText , // Fallback to readable color
-        fontWeight: activeTab === tab.link ? "bold" : "normal",
-      }}
+              style={{
+                color:
+                  activeTab === tab.link
+                    ? themeData.searchIcon // Ensure visibility
+                    : themeData.navText, // Fallback to readable color
+                fontWeight: activeTab === tab.link ? "bold" : "normal",
+              }}
             >
               {tab.name}
             </NavLink>
@@ -120,21 +122,18 @@ const {themeData}=useThemeContext()
 
         {/* User Section and Search */}
         <Box className="hidden md:flex items-center gap-6">
-          {user?.displayName ? (
+          {user?.fullname ? (
             <Link
-              href={`/profile/${slugify(user.displayName)}/favorites`}
+              href={`/profile/${slugify(user.fullname)}/favorites`}
               passHref
             >
               <Box className="flex items-center gap-3">
-                <Avatar
-                  alt={user?.displayName}
-                  src={user?.photoURL}
-                />
+                <Avatar alt={user?.displayName} src={user?.avatar_url} />
                 <Typography
                   variant="body1"
                   sx={{ color: themeData.navText, fontWeight: "bold" }}
                 >
-                  {user?.displayName || user?.email}
+                  {user?.fullname || user?.email}
                 </Typography>
               </Box>
             </Link>
@@ -159,8 +158,11 @@ const {themeData}=useThemeContext()
           <IconButton
             onClick={handleSearchOpen}
             aria-label="Open Search"
-            sx={{ color: themeData.searchIcon,border: `1px solid ${themeData.secondary}`,
-            borderRadius: "5px" }}
+            sx={{
+              color: themeData.searchIcon,
+              border: `1px solid ${themeData.secondary}`,
+              borderRadius: "5px",
+            }}
           >
             <SearchIcon />
           </IconButton>

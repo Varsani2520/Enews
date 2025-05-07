@@ -23,6 +23,8 @@ const LoginDialog = ({ open, onClose }) => {
     name: "",
     email: "",
     password: "",
+    phone_no: "",
+    avatar: "",
   });
   const [emailLoading, setEmailLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -52,9 +54,9 @@ const LoginDialog = ({ open, onClose }) => {
         return;
       }
       if (isLogin) {
-        await loginWithEmail(userData.email, userData.password);
+        await loginWithEmail(userData);
       } else {
-        await signUpWithEmail(userData.name, userData.email, userData.password);
+        await signUpWithEmail(userData);
       }
       onClose(); // Close dialog on successful login/signup
     } catch (error) {
@@ -92,18 +94,66 @@ const LoginDialog = ({ open, onClose }) => {
       </DialogTitle>
       <DialogContent>
         {!isLogin && (
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={userData.name}
-            onChange={handleInputChange}
-          />
+          <>
+            <TextField
+              margin="dense"
+              id="name"
+              label="Name"
+              type="text"
+              fullWidth
+              variant="outlined"
+              value={userData.name}
+              onChange={handleInputChange}
+            />
+            <TextField
+              margin="dense"
+              id="phone_no"
+              label="Phone Number"
+              type="tel"
+              fullWidth
+              variant="outlined"
+              value={userData.phone_no}
+              onChange={handleInputChange}
+            />
+            <Box sx={{ mt: 2, mb: 2 }}>
+              <label
+                htmlFor="avatar-upload"
+                style={{ display: "block", marginBottom: 6, fontWeight: 500 }}
+              >
+                Avatar
+              </label>
+              <Box
+                sx={{
+                  border: "1px solid #c4c4c4",
+                  borderRadius: "8px",
+                  padding: "10px 12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <span style={{ color: "#555" }}>
+                  {userData.avatar ? userData.avatar.name : "No file chosen"}
+                </span>
+                <label htmlFor="avatar-upload">
+                  <Button variant="outlined" size="small" component="span">
+                    Choose File
+                  </Button>
+                </label>
+              </Box>
+              <input
+                id="avatar-upload"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) =>
+                  setUserData({ ...userData, avatar: e.target.files[0] })
+                }
+              />
+            </Box>
+          </>
         )}
+
         <TextField
           margin="dense"
           id="email"

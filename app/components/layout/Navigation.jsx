@@ -26,8 +26,15 @@ const Navigation = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const userData = localStorage.getItem("user");
-  const user = JSON.parse(userData);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const router = useRouter();
   const { themeData } = useThemeContext();
   const tabs = [

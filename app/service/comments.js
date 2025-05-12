@@ -4,7 +4,7 @@ export async function createComments({ article, user, content }) {
 
     try {
         const response = await httpAxios.post(`/comments`, { articleId: article._id, content });
-        return res.data?.data?.comment;
+        return response.data?.data?.comment;
     } catch (error) {
         console.error("Error fetching settings:", error);
         throw error;

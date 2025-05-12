@@ -3,20 +3,18 @@
 import { useEffect } from "react";
 
 import {
-  auth,
   registerServiceWorker,
   requestNotificationPermission,
 } from "../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import Weather from "../components/layout/Weather";
 import Navigation from "../components/layout/Navigation";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { useThemeContext } from "../context/ThemeContext";
+import useCurrentUser from "../hooks/useCurrentUser";
 export default function ClientLayout({ children }) {
-  const [user] = useAuthState(auth);
+  const user = useCurrentUser();
   const { themeData } = useThemeContext();
-  console.log("themeData", themeData);
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {
@@ -32,7 +30,7 @@ export default function ClientLayout({ children }) {
   }, [user]);
 
   return (
-    <div style={{ background: themeData.navigation }}>
+    <div style={{ background: themeData?.navigation }}>
       <Weather />
       <Navigation />
       <Header />

@@ -24,12 +24,12 @@ const CustomPagination = ({
         shape="rounded"
         sx={{
           "& .MuiPaginationItem-root": {
-            color: themeData.navText, // Text color
-            borderColor: themeData.buttonBg, // Border color
+            color: themeData?.navText, // Text color
+            borderColor: themeData?.buttonBg, // Border color
           },
           "& .MuiPaginationItem-page.Mui-selected": {
-            backgroundColor: themeData.buttonBg, // Selected page color
-            color: themeData.buttonText, // Selected text color
+            backgroundColor: themeData?.buttonBg, // Selected page color
+            color: themeData?.buttonText, // Selected text color
           },
         }}      />
     </div>

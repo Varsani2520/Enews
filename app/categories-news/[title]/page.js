@@ -9,51 +9,38 @@ import { TravelSkeleton } from "@/app/components/features/Skeleton";
 import Card5 from "@/app/components/cards/Card5";
 import Breadcumps from "@/app/components/shared/Breadcrumbs";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import { useArticleCollection } from "@/app/utils/useArticleCollection";
 
 const CategoryPage = () => {
   const { title } = useParams();
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-const {themeData}=useThemeContext()
+  const { themeData } = useThemeContext()
+  const { article, loading } = useArticleCollection(title)
+
   useEffect(() => {
     document.title = title ? `Enews - ${title} News ` : "Enews - Latest News";
 
-    const fetchArticles = async () => {
-      try {
-        if (title) {
-          const response = await getNews(title);
-          setArticles(response.docs);
-        }
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArticles();
   }, [title]);
 
   return (
-    <div style={{background:themeData.background}}>
+    <div style={{ background: themeData?.background }}>
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {loading ? (
           <TravelSkeleton />
-        ) : articles.length === 0 ? (
+        ) : !article?.length? (
           <Typography variant="h6" align="center" color="error">
             No news articles found
           </Typography>
         ) : (
           <Grid container spacing={2}>
-            {articles.map((article) => (
+            {article?.map((articleItem) => (
               <Grid item key={article._id} xs={12} sm={6} md={3}>
-                <Link href={`/news/${slugify(article.headline.main)}`} passHref>
+                <Link href={`/news/${slugify(articleItem.slug)}`} passHref>
                   <Card5
-                    category={article.section_name}
-                    title={article.headline.main}
-                    imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
-                    article={article}
+                    category={articleItem.category.name}
+                    title={articleItem.title}
+                    imageUrl={articleItem.image_url}
+                    article={articleItem}
                     height="250px"
                   />
                 </Link>

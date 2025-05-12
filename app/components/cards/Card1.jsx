@@ -36,15 +36,15 @@ const Card1 = ({
 
       <div className="absolute top-2 left-2  text-xs md:text-lg font-semibold px-3 py-1 rounded-lg" 
         style={{
-          backgroundColor: themeData.buttonBg,
-          color: themeData.buttonText, 
+          backgroundColor: themeData?.buttonBg,
+          color: themeData?.buttonText, 
         }}>
         {category}
       </div>
 
       <div  className="absolute bottom-0 left-0 w-full bg-gradient-to-t px-4 py-2 transition-colors duration-300">
         <h2    className="text-sm md:text-lg font-bold group-hover:text-red-500"
-          style={{ color: themeData.buttonText }}>
+          style={{ color: themeData?.buttonText }}>
           {title}
         </h2>
       </div>

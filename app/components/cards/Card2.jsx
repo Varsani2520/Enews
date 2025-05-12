@@ -27,13 +27,13 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
       {/* Category and Title */}
       <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent">
         <div className=" text-xs md:text-sm lg:text-lg font-semibold px-2 py-1 rounded-md inline-block"  style={{
-                 backgroundColor: themeData.buttonBg,
-                 color: themeData.buttonText, 
+                 backgroundColor: themeData?.buttonBg,
+                 color: themeData?.buttonText, 
               }}>
           {category}
         </div>
         <div className="text-sm md:text-lg  font-bold  mt-2 group-hover:text-red-500"  style={{
-                color: themeData.buttonText,
+                color: themeData?.buttonText,
               }}>
           {title}
         </div>

@@ -9,11 +9,11 @@ const Breadcumps = ({ heading }) => {
     <div
     className="py-4"
     style={{
-      backgroundColor: themeData.headerBg, // Background color from theme
+      backgroundColor: themeData?.headerBg, // Background color from theme
       color: "#1a2e51", 
     }}
   >      <Container maxWidth="xl">
-        <Breadcrumbs aria-label="breadcrumb" separator="|" style={{color:themeData.cardText}}>
+        <Breadcrumbs aria-label="breadcrumb" separator="|" style={{color:themeData?.cardText}}>
           <Link
             color="inherit"
             href="/"

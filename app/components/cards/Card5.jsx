@@ -26,8 +26,8 @@ const {themeData}=useThemeContext()
         {/* Category Label */}
         {category ? (
           <div className="absolute top-4 left-4  px-2 py-1 rounded-md"  style={{
-            backgroundColor: themeData.buttonBg, // Themed accent color
-            color: themeData.buttonText, // Themed text color
+            backgroundColor: themeData?.buttonBg, // Themed accent color
+            color: themeData?.buttonText, // Themed text color
           }}>
             <p className="text-sm font-semibold">{category}</p>
           </div>
@@ -37,7 +37,7 @@ const {themeData}=useThemeContext()
       </div>
 
       {/* Title */}
-      <h2 className="text-sm md:text-lg font-semibold mb-2 group-hover:text-red-500 transition-colors duration-300" style={{color:themeData.navText}}>
+      <h2 className="text-sm md:text-lg font-semibold mb-2 group-hover:text-red-500 transition-colors duration-300" style={{color:themeData?.navText}}>
         {title}
       </h2>
     </div>

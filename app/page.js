@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex  flex-col  justify-between" style={{ background: themeData.background }}>
+    <main className="flex  flex-col  justify-between" style={{ background: themeData?.background }}>
 
       <Banner
         logo={"/logo.png"}
@@ -63,7 +63,7 @@ export default function Home() {
         title="Stay informesd with us- 24/7 news updates"
         href="/categories-news/breaking"
       />
-      
+
       <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}

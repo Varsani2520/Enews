@@ -12,35 +12,28 @@ import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useAuthState } from "react-firebase-hooks/auth";
 import slugify from "slugify";
 import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
-import { auth } from "@/app/utils/firebase";
 import NavigationDrawer from "./NavigationDrawer";
 import SearchDialog from "../features/SearchDialog";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const user = useCurrentUser();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   const router = useRouter();
   const { themeData } = useThemeContext();
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
-    { name: "Live News", link: "/categories-news/live" },
+    { name: "Featured News", link: "/categories-news/featured" },
     { name: "Entertainment", link: "/categories-news/Entertainment" },
   ];
 
@@ -62,10 +55,7 @@ const Navigation = () => {
     setIsDrawerOpen(open);
   };
 
-  // Ensure correct user authentication state
-  useEffect(() => {
-    console.log("User state:", user);
-  }, [user]);
+  
 
   return (
     <Container maxWidth="xl">
@@ -84,11 +74,11 @@ const Navigation = () => {
           <IconButton
             onClick={toggleDrawer(true)}
             sx={{
-              border: `1px solid ${themeData.border}`,
+              border: `1px solid ${themeData?.border}`,
               borderRadius: "5px",
             }}
           >
-            <MenuIcon sx={{ color: themeData.navText }} />
+            <MenuIcon sx={{ color: themeData?.navText }} />
           </IconButton>
         </div>
 
@@ -117,8 +107,8 @@ const Navigation = () => {
               style={{
                 color:
                   activeTab === tab.link
-                    ? themeData.searchIcon // Ensure visibility
-                    : themeData.navText, // Fallback to readable color
+                    ? themeData?.searchIcon // Ensure visibility
+                    : themeData?.navText, // Fallback to readable color
                 fontWeight: activeTab === tab.link ? "bold" : "normal",
               }}
             >
@@ -138,7 +128,7 @@ const Navigation = () => {
                 <Avatar alt={user?.displayName} src={user?.avatar_url} />
                 <Typography
                   variant="body1"
-                  sx={{ color: themeData.navText, fontWeight: "bold" }}
+                  sx={{ color: themeData?.navText, fontWeight: "bold" }}
                 >
                   {user?.fullname || user?.email}
                 </Typography>
@@ -154,8 +144,8 @@ const Navigation = () => {
               }}
               className="px-4 py-2 rounded-lg hover:bg-opacity-80"
               style={{
-                background: themeData.buttonBg,
-                color: themeData.buttonText,
+                background: themeData?.buttonBg,
+                color: themeData?.buttonText,
               }}
             >
               Login
@@ -166,8 +156,8 @@ const Navigation = () => {
             onClick={handleSearchOpen}
             aria-label="Open Search"
             sx={{
-              color: themeData.searchIcon,
-              border: `1px solid ${themeData.secondary}`,
+              color: themeData?.searchIcon,
+              border: `1px solid ${themeData?.secondary}`,
               borderRadius: "5px",
             }}
           >

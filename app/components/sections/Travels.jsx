@@ -7,19 +7,17 @@ import slugify from "slugify";
 import { useNews } from "@/app/context/ArticleContext";
 import { TravelSkeleton } from "../features/Skeleton";
 import Card1 from "../cards/Card1";
+import { useHomes } from "@/app/utils/useHome";
 
 const Travels = () => {
-  const { newsData, fetchNews, loading } = useNews();
+  const { news, loading } = useHomes();
 
-  useEffect(() => {
-    fetchNews("travel");
-  }, []);
 
-  if (loading.travel || !newsData.travel) {
+  if (loading || !news.travelNews) {
     return <TravelSkeleton />;
   }
 
-  const articles = newsData.travel;
+  const articles = news.travelNews;
   console.log("travel", articles);
 
   return (
@@ -29,13 +27,13 @@ const Travels = () => {
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Link
               key={article._id}
-              href={`/news/${slugify(article.headline.main)}`}
+              href={`/news/${slugify(article.slug)}`}
             >
               <Card1
                 article={article}
-                category={article.section_name}
-                title={article.headline.main}
-                imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
+                category={article.category.name}
+                title={article.title}
+                imageUrl={article.image_url}
                 marginBottom="20px"
               />
             </Link>

@@ -5,6 +5,7 @@ import FavoriteButton from "@/app/components/features/FavouriteButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Card4 = ({ imageUrl, category, title, article }) => {
+  const { themeData } = useThemeContext();
   const { isArticleFavorite, toggleFavorite, loading } = useArticleLikes(
     article?._id
   ); // Use the hook here
@@ -13,7 +14,6 @@ const Card4 = ({ imageUrl, category, title, article }) => {
   if (loading) {
     return <div>Loading...</div>; // Show loading text or spinner
   }
-  const { themeData } = useThemeContext();
 
   return (
     <div

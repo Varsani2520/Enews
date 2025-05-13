@@ -14,11 +14,8 @@ const Card1 = ({
   category,
   title,
 }) => {
-  const { isArticleFavorite, toggleFavorite, loading } = useArticleLikes(article?._id);
+  const { isArticleFavorite, toggleFavorite } = useArticleLikes();
 
-  if (loading) {
-    return <div>Loading...</div>;  // Show loading text or spinner
-  }
   const { themeData } = useThemeContext();
 
   return (

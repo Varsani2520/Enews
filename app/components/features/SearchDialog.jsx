@@ -29,8 +29,11 @@ const SearchDialog = ({ open, onClose }) => {
   }
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{ background: themeData?.primary, color: themeData?.navText }}>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth sx={{
+      backgroundColor: themeData?.background?.body,
+      color: themeData?.text?.card,
+    }}>
+      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{ background: themeData?.background?.secondary, color: themeData?.navText }}>
         <span className="text-xl font-semibold">Search News</span>
         <IconButton
           onClick={onClose}
@@ -47,7 +50,7 @@ const SearchDialog = ({ open, onClose }) => {
             placeholder="Enter your search query..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             className="flex-1 px-3 text-gray-700 outline-none"
           />
           <Button
@@ -60,7 +63,7 @@ const SearchDialog = ({ open, onClose }) => {
             <SearchIcon className="text-white" />
           </Button>
         </div>
-        {loading ? (
+        {loading && searched ? (
           <div className="flex justify-center items-center h-64">
             <CircularProgress />
           </div>

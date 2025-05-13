@@ -106,8 +106,8 @@ const Navigation = () => {
               style={{
                 color:
                   activeTab === tab.link
-                    ? themeData?.searchIcon // Ensure visibility
-                    : themeData?.navText, // Fallback to readable color
+                    ? themeData?.icon?.main // Ensure visibility
+                    : themeData?.text?.primary, // Fallback to readable color
                 fontWeight: activeTab === tab.link ? "bold" : "normal",
               }}
             >
@@ -143,8 +143,8 @@ const Navigation = () => {
               }}
               className="px-4 py-2 rounded-lg hover:bg-opacity-80"
               style={{
-                background: themeData?.buttonBg,
-                color: themeData?.buttonText,
+                background: themeData?.background?.button,
+                color: themeData?.text?.button,
               }}
             >
               Login
@@ -155,8 +155,8 @@ const Navigation = () => {
             onClick={handleSearchOpen}
             aria-label="Open Search"
             sx={{
-              color: themeData?.searchIcon,
-              border: `1px solid ${themeData?.secondary}`,
+              color: themeData?.icon?.main,
+              border: `1px solid ${themeData?.text?.secondary}`,
               borderRadius: "5px",
             }}
           >

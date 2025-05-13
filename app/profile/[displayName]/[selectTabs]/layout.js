@@ -47,7 +47,7 @@ const ProfileLayout = ({ children }) => {
         </h2>
         <button
           className="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition-all"
-          onClick={() => router.push("/login")}
+          onClick={() => router.push("/")}
         >
           Go to Login
         </button>

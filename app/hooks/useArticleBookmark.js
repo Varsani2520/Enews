@@ -11,7 +11,7 @@ const useArticleBookmark = (article) => {
 
   // Memoize article ID to avoid redundant calculations
   const articleId = useMemo(() => {
-    return article?._id ? article._id.replace(/[^a-zA-Z0-9-_]/g, "_") : null;
+    return article?._id ? article?._id.replace(/[^a-zA-Z0-9-_]/g, "_") : null;
   }, [article]);
 
   // Function to check if the article is already bookmarked

@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,20 +15,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
-     crossOrigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <body className={inter.className}>
-       
-
         <Toaster />
         <ThemeProvider>
-          <CssBaseline />
-          <ArticleProvider>
-            <ClientLayout>{children}</ClientLayout>
-          </ArticleProvider>
+          <FavoritesProvider>
+            <CssBaseline />
+            <ArticleProvider>
+              <ClientLayout>{children}</ClientLayout>
+            </ArticleProvider>
+          </FavoritesProvider>
         </ThemeProvider>
       </body>
     </html>

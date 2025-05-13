@@ -76,7 +76,7 @@ const SearchDialog = ({ open, onClose }) => {
               >
                 <Card4
                   article={article}
-                  key={article._id}
+                  key={article?._id}
                   title={article.title}
                   category={article.category?.name}
                   imageUrl={article.image_url}

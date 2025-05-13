@@ -34,7 +34,7 @@ const CategoryPage = () => {
         ) : (
           <Grid container spacing={2}>
             {article?.map((articleItem) => (
-              <Grid item key={article._id} xs={12} sm={6} md={3}>
+              <Grid item key={article?._id} xs={12} sm={6} md={3}>
                 <Link href={`/news/${slugify(articleItem.slug)}`} passHref>
                   <Card5
                     category={articleItem.category.name}

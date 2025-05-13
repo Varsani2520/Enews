@@ -12,6 +12,7 @@ const CommentForm = ({ article }) => {
   const [page, setPage] = useState(1);
   const commentsPerPage = 5;
 
+
   // Use custom hook to handle comment operations
   const { comments, loading, postComment } = useComments(article);
   console.log("🟢 Comments from useComments:", comments);

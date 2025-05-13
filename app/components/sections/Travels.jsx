@@ -26,7 +26,7 @@ const Travels = () => {
         {articles.slice(0, 4).map((article, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Link
-              key={article._id}
+              key={article?._id}
               href={`/news/${slugify(article.slug)}`}
             >
               <Card1

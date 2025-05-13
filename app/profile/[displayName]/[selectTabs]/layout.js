@@ -23,7 +23,6 @@ const ProfileLayout = ({ children }) => {
   // Sidebar Tabs
   const tabs = [
     { name: "favorites", label: "Favorites" },
-    { name: "bookmarks", label: "Bookmarks" },
   ];
 
   // Update tab index based on pathname

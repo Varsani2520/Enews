@@ -1,64 +1,25 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "@/app/utils/firebase";
+
+import { useState, useEffect } from "react";
+import { Typography, Grid, IconButton, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
 import slugify from "slugify";
-import { Grid, Typography, IconButton, Button } from "@mui/material";
-import { TravelSkeleton } from "./Skeleton";
+
 import Card1 from "../cards/Card1";
 import CustomPagination from "../shared/CustomPagination";
+import { TravelSkeleton } from "./Skeleton";
 
+import { useArticleLikes } from "@/app/hooks/useArticleLikes";
 
 const FavoritesPage = () => {
-  const [user] = useAuthState(auth);
-  const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { favorites, loading, removeFromFavorites } = useArticleLikes(); // Custom hook managing all favorite logic
 
-  // Pagination states
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Change as needed
+  const itemsPerPage = 8;
 
-  const fetchFavorites = useCallback(async () => {
-    if (!user) return;
-
-    try {
-      setLoading(true);
-      const querySnapshot = await getDocs(
-        collection(db, `users/${user.email}/favorites`)
-      );
-      const favs = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data().article,
-      }));
-      setFavorites(favs);
-    } catch (error) {
-      console.error("Error fetching favorites:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    fetchFavorites();
-  }, [fetchFavorites]);
-
-  const removeFavorite = async (articleId) => {
-    if (!user) return;
-
-    try {
-      await deleteDoc(doc(db, `users/${user.email}/favorites/${articleId}`));
-      setFavorites((prev) =>
-        prev.filter((article) => article.id !== articleId)
-      );
-    } catch (error) {
-      console.error("Error deleting favorite:", error);
-    }
-  };
-
-  // Pagination Logic: Slice articles for current page
+  // Slice favorites for pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentFavorites = favorites.slice(indexOfFirstItem, indexOfLastItem);
@@ -80,23 +41,20 @@ const FavoritesPage = () => {
         <>
           <Grid container spacing={2}>
             {currentFavorites.map((article) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={article.id}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={article?._id}>
                 <div className="relative h-full">
-                  <Link href={`/news/${slugify(article.headline.main)}`}>
+                  <Link href={`/news/${article.slug}`}>
                     <Card1
                       article={article}
-                      category={article.section_name}
-                      imageUrl={
-                        article.multimedia?.[0]?.url
-                          ? `https://www.nytimes.com/${article.multimedia[0].url}`
-                          : "/fallback-image.jpg"
-                      }
-                      title={article.headline.main}
+                      category={article.category?.name}
+                      imageUrl={article.image_url}
+                      title={article.title}
                       height="250px"
                     />
                   </Link>
+
                   <IconButton
-                    onClick={() => removeFavorite(article.id)}
+                    onClick={() => removeFromFavorites(article?._id)}
                     className="absolute top-2 right-2 text-red-500 bg-white rounded-full hover:bg-gray-200 transition"
                   >
                     <DeleteIcon />
@@ -106,7 +64,6 @@ const FavoritesPage = () => {
             ))}
           </Grid>
 
-          {/* Pagination Component */}
           <CustomPagination
             totalItems={favorites.length}
             itemsPerPage={itemsPerPage}

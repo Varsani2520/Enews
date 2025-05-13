@@ -20,7 +20,7 @@ const CommentForm = ({ article }) => {
       try {
         const fetchedComments = await getCommentsForArticle(article);
         const filtered = fetchedComments.filter(
-          (c) => c.article?._id === article._id
+          (c) => c.article?._id === article?._id
         );
         setComments(filtered);
       } catch (error) {
@@ -43,7 +43,7 @@ const CommentForm = ({ article }) => {
       // Refresh comments after posting
       const updated = await getCommentsForArticle(article);
       const filtered = updated.filter(
-        (c) => c.article?._id === article._id
+        (c) => c.article?._id === article?._id
       );
       setComments(filtered);
 

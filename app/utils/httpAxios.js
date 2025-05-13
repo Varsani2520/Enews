@@ -22,14 +22,14 @@ httpAxios.interceptors.response.use(
         await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh-token`, {
           withCredentials: true,
         });
-        console.log("Token refreshed successfully");
+        console.log("Access token refreshed");
 
         // Retry the original request
         return httpAxios(originalRequest);
       } catch (refreshError) {
         console.error("Refresh failed:", refreshError);
         // Redirect to login or handle logout
-        // window.location.href = "/login";
+        // window.location.href = "/";
         return Promise.reject(refreshError);
       }
     }

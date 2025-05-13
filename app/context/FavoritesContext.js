@@ -1,11 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getFavorites } from "../service/favs"; // Import your API calls
+import { getFavorites } from "../service/favs";
 
 const FavoritesContext = createContext();
 
-export const useFavorites = () => {
-  return useContext(FavoritesContext);
-};
+export const useFavorites = () => useContext(FavoritesContext);
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);

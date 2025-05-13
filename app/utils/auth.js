@@ -6,7 +6,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth, db, provider } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
 import { httpAxios } from "./httpAxios";
 import Cookies from "js-cookie";
 
@@ -73,22 +72,4 @@ export const signUpWithEmail = async (userData) => {
   }
 };
 
-/**
- * Saves user data to Firestore
- */
-const saveUserDataToFirestore = async (user) => {
-  if (!user?.uid) throw new Error("User UID is missing!");
 
-  try {
-    const userRef = doc(db, "users", user.email);
-    const userData = {
-      name: user.displayName || "Anonymous",
-      email: user.email,
-      createdAt: new Date(),
-    };
-    await setDoc(userRef, userData, { merge: true });
-    console.log("User data saved to Firestore:", userData);
-  } catch (error) {
-    console.error("Error saving user data:", error);
-  }
-};

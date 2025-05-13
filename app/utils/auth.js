@@ -8,6 +8,7 @@ import {
 import { auth, db, provider } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { httpAxios } from "./httpAxios";
+import Cookies from "js-cookie";
 
 // handle Google signin authenticaltion
 export const signInWithGoogle = async () => {

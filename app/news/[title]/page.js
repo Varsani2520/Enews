@@ -28,7 +28,7 @@ const NewsDetailPage = () => {
   }
 
   return (
-    <div className=" min-h-screen" style={{ background: themeData.background }}>
+    <div className=" min-h-screen" >
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ my: "2%" }}>
         <Grid container spacing={3}>

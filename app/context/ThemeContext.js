@@ -1,17 +1,19 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
 import themes from "../utils/theme";
+import { useSettings } from "../utils/useSetting";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("default"); // Set a default theme
-  const [isMounted, setIsMounted] = useState(false); // Track if component is mounted
+  const [theme, setTheme] = useState("default");
+  const [isMounted, setIsMounted] = useState(false);
+  const { settings, loading } = useSettings();
 
   useEffect(() => {
     setIsMounted(true);
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
+    if (storedTheme && themes[storedTheme]) {
       setTheme(storedTheme);
     }
   }, []);
@@ -22,8 +24,11 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [theme, isMounted]);
 
+
+  const currentTheme = themes[theme] || themes["web-default"];
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, themeData: themes[theme] }}>
+    <ThemeContext.Provider value={{ theme, setTheme, themeData: currentTheme }}>
       {children}
     </ThemeContext.Provider>
   );

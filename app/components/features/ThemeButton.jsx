@@ -1,16 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, MenuItem, Box } from "@mui/material";
 import { PaletteOutlined } from "@mui/icons-material";
-import themes from "@/app/utils/theme";
 import { useThemeContext } from "@/app/context/ThemeContext";
 import Icons from "../shared/Icons";
 
 const ThemeButton = () => {
   const { setTheme, themeData } = useThemeContext();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [themeList, setThemeList] = useState([]);
   const open = Boolean(anchorEl);
+
+ useEffect(() => {
+  const stored = localStorage.getItem("theme");
+  try {
+    const parsed = JSON.parse(stored);
+    if (parsed?.config?.themes) {
+      setThemeList(parsed.config.themes);
+    }
+  } catch (err) {
+    console.warn("Invalid theme JSON in localStorage:", stored);
+  }
+}, []);
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,6 +36,10 @@ const ThemeButton = () => {
     }
   };
 
+  if (!themeList || themeList.length === 0) {
+    return <div>No themes available</div>; // Handle no themes case
+  }
+
   return (
     <Box>
       {/* Theme Switch Button */}
@@ -30,33 +47,29 @@ const ThemeButton = () => {
         onClick={handleClick}
         icon={<PaletteOutlined />}
         sx={{
-          color: themeData.buttonText,
+          color: themeData?.buttonText,
           cursor: "pointer",
           transition: "all 0.3s ease",
           "&:hover": {
             transform: "scale(1.1)",
-            backgroundColor: themeData.primary,
+            backgroundColor: themeData?.primary,
           },
         }}
       />
 
       {/* Animated Dropdown Menu */}
       <Menu anchorEl={anchorEl} open={open} onClose={() => handleClose()} keepMounted>
-              {themes &&
-                Object.keys(themes).map((themeKey) => (
-                  <MenuItem
-                    key={themeKey}
-                    onClick={() => handleClose(themeKey)}                    
-                  >
-                    <Box
-                      className="w-5 h-5 rounded-full mr-2"
-                      style={{
-                        background: themes[themeKey]?.primary || "#000",
-                      }}
-                    />
-                    {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
-                  </MenuItem>
-                ))}
+        {themeList.map((theme) => {
+          return (
+            <MenuItem key={theme.name} onClick={() => handleClose(theme.name)}>
+              <Box
+                className="w-5 h-5 rounded-full mr-2"
+                style={{ background: theme.background?.card }}
+              />
+              {theme.name.replace("web-", "").replace("admin-", "").replace("-", " ")}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </Box>
   );

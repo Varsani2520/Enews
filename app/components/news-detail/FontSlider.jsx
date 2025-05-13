@@ -20,7 +20,7 @@ const {themeData}=useThemeContext()
         my:2,
       }}
     >
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold" ,color:themeData.cardText}}>
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold" ,color:themeData?.cardText}}>
         Font Size
       </Typography>
       <Slider
@@ -31,7 +31,7 @@ const {themeData}=useThemeContext()
                     min={12}
                     max={24}
                     valueLabelDisplay="auto"
-                    sx={{ width: "60%", color: themeData.cardText }}
+                    sx={{ width: "60%", color: themeData?.cardText }}
                 />
       
     </Box>

@@ -17,7 +17,6 @@ import {
   Person as PersonIcon,
 } from "@mui/icons-material";
 
-import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 import slugify from "slugify";
 import { signOut } from "firebase/auth";
@@ -26,6 +25,7 @@ import toast from "react-hot-toast";
 import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
 import { auth } from "@/app/utils/firebase";
+import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 const NavigationDrawer = ({
   activeTab,
@@ -43,8 +43,8 @@ const NavigationDrawer = ({
     router.push("/");
   };
 
-  const [user] = useAuthState(auth);
-  return (
+const user = useCurrentUser();  
+return (
     <Box role="presentation" className="w-64 bg-white p-5 rounded-lg">
       <List className="space-y-4">
         {/* Login & Search Button */}

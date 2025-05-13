@@ -19,7 +19,7 @@ const Icons = ({ onClick, icon, href, sx }) => {
         width: "35px",
         height: "35px",
         borderRadius: "50%",
-        color: themeData.navText, 
+        color: themeData?.navText, 
         cursor:"pointer",
         textDecoration: "none",
         transition: "all 0.3s ease-in-out",

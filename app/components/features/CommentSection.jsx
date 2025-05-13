@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button, CircularProgress } from "@mui/material";
 import { toast } from "react-hot-toast";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { createCommnet, getCommentsForArticle } from "@/app/hooks/useArticleComment";
+import { createComment, createCommnet, getCommentsForArticle } from "@/app/hooks/useArticleComment";
 import CustomPagination from "../shared/CustomPagination";
 import { auth } from "@/app/utils/firebase";
+import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 const CommentForm = ({ article }) => {
   const [text, setText] = useState("");
@@ -13,16 +13,16 @@ const CommentForm = ({ article }) => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const commentsPerPage = 5; // Define how many comments per page
-  const [user] = useAuthState(auth);
-
+  const user = useCurrentUser();
   useEffect(() => {
     const fetchComments = async () => {
       setLoading(true);
       try {
         const fetchedComments = await getCommentsForArticle(article);
-        console.log("getched comments", fetchedComments);
-
-        setComments(fetchedComments);
+        const filtered = fetchedComments.filter(
+          (c) => c.article?._id === article._id
+        );
+        setComments(filtered);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
@@ -34,19 +34,22 @@ const CommentForm = ({ article }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (text.trim()) {
-      try {
-        await createCommnet(article, user, text);
-        setText("");
+    if (!text.trim()) return;
 
-        // Refresh comments after posting
-        const updatedComments = await getCommentsForArticle(article);
-        console.log("Updated comments after posting:", updatedComments);
+    try {
+      await createComment(article, user, text);
+      setText("");
 
-        setComments(updatedComments);
-      } catch (error) {
-        toast.error("Failed to add comment!");
-      }
+      // Refresh comments after posting
+      const updated = await getCommentsForArticle(article);
+      const filtered = updated.filter(
+        (c) => c.article?._id === article._id
+      );
+      setComments(filtered);
+
+      toast.success("Comment posted!");
+    } catch (error) {
+      toast.error("Failed to add comment!");
     }
   };
 
@@ -95,15 +98,11 @@ const CommentForm = ({ article }) => {
           </div>
         ) : comments.length > 0 ? (
           selectedComments.map((comment, index) => (
-            <div key={index} className="border-b py-2">
-              <p className="font-medium text-blue-600">{comment.email}</p>
-              <p className="text-gray-600">
-                {comment.text || comment.commentText}
-              </p>
+            <div key={comment._id} className="border-b py-2">
+              <p className="font-medium text-blue-600">{comment.user?.fullname || "Anonymous"}</p>
+              <p className="text-gray-700">{comment.content}</p>
               <p className="text-sm text-gray-400">
-                {comment.timestamp
-                  ? new Date(comment.timestamp).toLocaleString()
-                  : "No timestamp"}
+                {new Date(comment.created_at).toLocaleString()}
               </p>
             </div>
           ))

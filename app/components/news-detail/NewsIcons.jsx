@@ -7,26 +7,27 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PrintIcon from "@mui/icons-material/Print";
 import CommentsDrawer from "./CommentDrawer";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/utils/firebase";
-import  toast  from "react-hot-toast";
+import toast from "react-hot-toast";
+import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 const NewsIcons = ({ article, title }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { isBookmark, toggleBookmark } = useArticleBookmark(article);
-const [user]=useAuthState(auth);
+  const user = useCurrentUser();
+  console.log("user", user)
+
   return (
     <div className="flex justify-between items-center my-4">
       <div className="flex space-x-2">
         <Icons
           icon={<ShareIcon />}
           onClick={() => {
-            const shareUrl = `${window.location.origin}/news/${title}`;
+            const shareUrl = `${window.location.origin}/news/${article.slug}`;
             if (navigator.share) {
               navigator.share({
-                title: article.headline.main,
-                text: article.abstract,
+                title: article.title,
+                text: article.excerpt,
                 url: shareUrl,
               }).catch(console.error);
             } else {
@@ -34,17 +35,19 @@ const [user]=useAuthState(auth);
             }
           }}
         />
-        <Icons icon={<CommentIcon />} onClick={()=>{
-          if(user){
-            setDrawerOpen(true)}else{toast.error("please logged in !")}}}/>
+        <Icons icon={<CommentIcon />} onClick={() => {
+          if (user) {
+            setDrawerOpen(true)
+          } else { toast.error("please logged in !") }
+        }} />
       </div>
       <div className="flex space-x-2">
         <Icons icon={isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />} onClick={toggleBookmark} />
         <Icons icon={<PrintIcon />} onClick={() => window.print()} />
       </div>
-      <CommentsDrawer open={drawerOpen} setOpen={setDrawerOpen} article={article}/>
+      <CommentsDrawer open={drawerOpen} setOpen={setDrawerOpen} article={article} />
     </div>
-    
+
   );
 };
 

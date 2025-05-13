@@ -27,13 +27,19 @@ export const signInWithGoogle = async () => {
  */
 export const loginWithEmail = async (userData) => {
   try {
-    const userCredential = httpAxios.post("/auth/login", {
+    const response = await httpAxios.post("/auth/login", {
       email: userData.email,
       password: userData.password,
-    }).then((response) => {;
-    console.log("User credential:", response);
-    localStorage.setItem("user", JSON.stringify(response.data.data.user))})
-    // return response.data.user;
+    })
+    console.log("res user", response)
+    const user = response.data?.data?.user;
+
+    if (!user) {
+      throw new Error("User data is missing in response");
+    }
+     localStorage.setItem("user", JSON.stringify(user));
+
+    return user;
   } catch (error) {
     console.error("Login error:", error);
     throw error;

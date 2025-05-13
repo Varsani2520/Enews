@@ -10,44 +10,36 @@ import {
   Button
 } from "@mui/material";
 import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
-import { getNews } from "@/app/utils/getNews";
 import Link from "next/link";
 import slugify from "slugify";
 import Card4 from "../cards/Card4";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import { useSearch } from "@/app/utils/useSearch";
 
 const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
-const {themeData}=useThemeContext()
+  const { news, loading } = useSearch(searchQuery)
+  const { themeData } = useThemeContext()
+
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
-    setLoading(true);
     setSearched(true);
-    try {
-      const response = await getNews(searchQuery);
-      setResults(response.docs || []);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+  }
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{background:themeData.primary,color:themeData.navText}}>
+      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{ background: themeData?.primary, color: themeData?.navText }}>
         <span className="text-xl font-semibold">Search News</span>
         <IconButton
           onClick={onClose}
-          className=" hover:text-red-500" style={{color:themeData.navText}}
+          className=" hover:text-red-500" style={{ color: themeData?.navText }}
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers sx={{background:themeData.background}}>
+      <DialogContent dividers sx={{ background: themeData?.background }}>
         <div className="flex items-center bg-gray-100 p-2 rounded-lg">
           <InputBase
             autoFocus
@@ -71,23 +63,23 @@ const {themeData}=useThemeContext()
           <div className="flex justify-center items-center h-64">
             <CircularProgress />
           </div>
-        ) : searched && results.length === 0 ? (
+        ) : searched && news.length === 0 ? (
           <p className="text-gray-500 text-center w-full mt-4">
             No results found.
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
-            {results.map((article) => (
+            {news.map((article) => (
               <Link
                 key={article}
-                href={`/news/${slugify(article.headline.main)}`}
+                href={`/news/${slugify(article.slug)}`}
               >
                 <Card4
                   article={article}
                   key={article._id}
-                  title={article.headline.main}
-                  category={article.section_name}
-                  imageUrl={`https://www.nytimes.com/${article.multimedia?.[0]?.url}`}
+                  title={article.title}
+                  category={article.category?.name}
+                  imageUrl={article.image_url}
                 />
               </Link>
             ))}

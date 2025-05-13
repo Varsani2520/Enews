@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast"; // ✅ Add toast for feedback
-import { auth, db } from "../utils/firebase";
+import { db } from "../utils/firebase";
+import useCurrentUser from "./useCurrentUser";
 
 const useArticleLike = (article) => {
-  const [user] = useAuthState(auth);
+  const user = useCurrentUser();
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {

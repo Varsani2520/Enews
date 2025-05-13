@@ -1,56 +1,26 @@
-import {
-  addDoc,
-  collection,
-  getDocs,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import { db } from "../utils/firebase";
-import toast from "react-hot-toast";
+import { httpAxios } from "@/app/utils/httpAxios";
 
-// add comment to firestore
-export const createCommnet = async (article, user, commentText) => {
+// Create a comment
+export async function createComment(article, user, content) {
   try {
-    if (!user || !user.email) {
-      toast.error("You need to be logged in to comment.");
-      throw new Error("User is not authenticated");
-    }
-    if (!article || !article._id) throw new Error("Invalid article data");
-    if (!commentText) throw new Error("comment text is required");
-
-    // Generate a safe firestore document ID
-    const articleId = article._id.replace(/[^a-zA-Z0-9-_]/g, "_");
-
-    // Firestore document reference
-    const commentRef = collection(db, `articles/${articleId}/comments`);
-    // save comment to firestore
-    await addDoc(commentRef, {
-      email: user.email,
-      articleId,
-      commentText,
-      timestamp: new Date().toISOString(),
+    const res = await httpAxios.post("/comments", {
+      articleId: article._id,
+      content,
     });
-    toast.success("Comment Added!");
-    console.log(article, user, commentText, "comments");
+    return res.data?.data?.comment;
   } catch (error) {
-    console.error("Error adding comment:", error);
+    console.error("Error creating comment:", error);
+    throw error;
   }
-};
+}
 
-// Fetch comments for an article
-export const getCommentsForArticle = async (article) => {
-  if (!article || !article._id) return [];
-
+// Get comments for a specific article (can filter later)
+export async function getCommentsForArticle() {
   try {
-    const articleId = article._id.replace(/[^a-zA-Z0-9-_]/g, "_");
-    const commentRef = collection(db, `articles/${articleId}/comments`);
-    const q = query(commentRef, orderBy("timestamp", "desc"));
-
-    const querySnapshot = await getDocs(q);
-
-    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const res = await httpAxios.get("/comments");
+    return res.data?.comments || [];
   } catch (error) {
-    console.error("Error fetching comments:", error);
-    return [];
+    console.error("Error getting comments:", error);
+    throw error;
   }
-};
+}

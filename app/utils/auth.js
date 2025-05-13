@@ -37,7 +37,7 @@ export const loginWithEmail = async (userData) => {
     if (!user) {
       throw new Error("User data is missing in response");
     }
-     localStorage.setItem("user", JSON.stringify(user));
+     Cookies.set("user", JSON.stringify(user));
 
     return user;
   } catch (error) {

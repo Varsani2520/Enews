@@ -14,7 +14,7 @@ export const useSettings = () => {
             try {
                 const response = await getSettings();
                 setSettings(response.data.webSettings);
-                localStorage.setItem("theme", JSON.stringify(response.data.webSettings));
+             
             } catch (error) {
                 console.log("errorr", error)
             } finally {

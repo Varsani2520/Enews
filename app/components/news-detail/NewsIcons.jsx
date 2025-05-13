@@ -10,12 +10,14 @@ import CommentsDrawer from "./CommentDrawer";
 import toast from "react-hot-toast";
 import useCurrentUser from "@/app/hooks/useCurrentUser";
 import { httpAxios } from "@/app/utils/httpAxios";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const NewsIcons = ({ article, title }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { isBookmark, toggleBookmark } = useArticleBookmark(article);
   const user = useCurrentUser();
+  const { themeData } = useThemeContext();
   console.log("user", user);
 
   const handleShare = async () => {
@@ -30,7 +32,7 @@ const NewsIcons = ({ article, title }) => {
         });
 
         // ✅ After successful native share, call the API
-        await httpAxios.put(`/articles/${article._id}/share`);
+        await httpAxios.put(`/api/articles/${article._id}/share`);
       } else {
         setModalOpen(true);
       }

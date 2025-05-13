@@ -9,8 +9,8 @@ const RelatedNews = ({ articles }) => {
   return (
     <div>
       <div className="text-xs md:text-lg font-semibold px-3 py-1 rounded-lg mb-4" style={{
-          backgroundColor: themeData?.buttonBg,
-          color: themeData?.buttonText, 
+            backgroundColor: themeData?.background?.button,
+          color: themeData?.text?.button,
         }}>
         Related News
       </div>

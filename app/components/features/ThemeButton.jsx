@@ -7,22 +7,9 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 import Icons from "../shared/Icons";
 
 const ThemeButton = () => {
-  const { setTheme, themeData } = useThemeContext();
+  const { setTheme, themeData, themes, currentThemeName } = useThemeContext();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [themeList, setThemeList] = useState([]);
   const open = Boolean(anchorEl);
-
- useEffect(() => {
-  const stored = localStorage.getItem("theme");
-  try {
-    const parsed = JSON.parse(stored);
-    if (parsed?.config?.themes) {
-      setThemeList(parsed.config.themes);
-    }
-  } catch (err) {
-    console.warn("Invalid theme JSON in localStorage:", stored);
-  }
-}, []);
 
 
   const handleClick = (event) => {
@@ -35,11 +22,9 @@ const ThemeButton = () => {
       setTheme(themeKey); // Update theme globally
     }
   };
-
-  if (!themeList || themeList.length === 0) {
-    return <div>No themes available</div>; // Handle no themes case
+  if (!themes || themes.length === 0) {
+    return <div>No themes available</div>;
   }
-
   return (
     <Box>
       {/* Theme Switch Button */}
@@ -47,26 +32,30 @@ const ThemeButton = () => {
         onClick={handleClick}
         icon={<PaletteOutlined />}
         sx={{
-          color: themeData?.buttonText,
-          cursor: "pointer",
+          color: themeData?.text?.primary, background: themeData?.icon?.default, cursor: "pointer",
           transition: "all 0.3s ease",
           "&:hover": {
             transform: "scale(1.1)",
-            backgroundColor: themeData?.primary,
+            backgroundColor: themeData?.background?.button,
           },
         }}
+        aria-label="Open theme selector"
       />
 
       {/* Animated Dropdown Menu */}
-      <Menu anchorEl={anchorEl} open={open} onClose={() => handleClose()} keepMounted>
-        {themeList.map((theme) => {
+      <Menu anchorEl={anchorEl} open={open} onClose={() => handleClose()} keepMounted >
+        {themes.map((theme) => {
+          const isSelected = theme.name === currentThemeName;
           return (
-            <MenuItem key={theme.name} onClick={() => handleClose(theme.name)}>
+            <MenuItem key={theme.name} onClick={() => handleClose(theme.name)} sx={{
+              backgroundColor: isSelected ? theme.background?.header : 'transparent', // Highlight selected item
+              color: isSelected ? theme.text?.primary:""
+            }}>
               <Box
                 className="w-5 h-5 rounded-full mr-2"
                 style={{ background: theme.background?.card }}
               />
-              {theme.name.replace("web-", "").replace("admin-", "").replace("-", " ")}
+              {theme.name.replace("web-", "").replace("-", " ")}
             </MenuItem>
           );
         })}

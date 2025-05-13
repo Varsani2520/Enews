@@ -6,15 +6,15 @@ const NewsHeader = ({ article }) => {
   return (
     <div className="mb-4">
       <div className=" text-xs md:text-lg font-semibold px-3 py-1 rounded-lg w-fit" style={{
-        backgroundColor: themeData?.buttonBg,
-        color: themeData?.buttonText,
+        backgroundColor: themeData?.background?.button,
+        color: themeData?.text?.button,
       }}>
         {article.category?.name}
       </div>
-      <h1 className="text-sm sm:text-lg font-bold mt-1" style={{ color: themeData?.cardText }}>
+      <h1 className="text-sm sm:text-lg font-bold mt-1" style={{ color: themeData?.text.primary }}>
         {article.title}
       </h1>
-      <p className=" mt-1" style={{ color: themeData?.cardText }}>
+      <p className=" mt-1" style={{ color: themeData?.text?.secondary }}>
         By {article.createdBy?.fullname} • {new Date(article.published_at).toLocaleDateString()}
       </p>
     </div>

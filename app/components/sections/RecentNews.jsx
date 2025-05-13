@@ -30,7 +30,7 @@ const RecentNews = () => {
               category={articles[0].category.name}
               title={articles[0].title}
               imageUrl={articles[0].image_url}
-              height="h-[500px] sm:h-[300px]"
+              height="h-[520px] sm:h-[300px]"
             />
           </Link>
         </Grid>

@@ -1,35 +1,64 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
-import themes from "../utils/theme";
-import { useSettings } from "../utils/useSetting";
 
-const ThemeContext = createContext();
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getSettings } from "../service/settings";
+
+const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("default");
-  const [isMounted, setIsMounted] = useState(false);
-  const { settings, loading } = useSettings();
+  const [themes, setThemes] = useState([]);
+    const [config, setConfig] = useState(null);
+  const [currentThemeName, setCurrentThemeName] = useState("web-default");
+  const [themeData, setThemeData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setIsMounted(true);
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme && themes[storedTheme]) {
-      setTheme(storedTheme);
-    }
+    const fetchThemes = async () => {
+      try {
+        const response = await getSettings();
+        const allThemes = response.data.webSettings.config.themes;
+         const configData = response.data.webSettings.config;
+
+        // 1. Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem("selectedTheme");
+        const activeThemeName = savedTheme || response.data.webSettings.themeName || "web-default";
+
+        setThemes(allThemes);
+        setConfig(configData);
+        setCurrentThemeName(activeThemeName);
+
+        // 2. Set the theme data
+        const activeTheme = allThemes.find((t) => t.name === activeThemeName);
+        if (activeTheme) setThemeData(activeTheme);
+      } catch (error) {
+        console.error("Error loading theme settings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchThemes();
   }, []);
 
-  useEffect(() => {
-    if (isMounted) {
-      localStorage.setItem("theme", theme);
-    }
-  }, [theme, isMounted]);
-
-
-  const currentTheme = themes[theme] || themes["web-default"];
+  const setTheme = (themeName) => {
+    setCurrentThemeName(themeName);
+    localStorage.setItem("selectedTheme", themeName); // 3. Save selected theme
+    const selectedTheme = themes.find((t) => t.name === themeName);
+    if (selectedTheme) setThemeData(selectedTheme);
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, themeData: currentTheme }}>
-      {children}
+    <ThemeContext.Provider
+      value={{
+        themes,
+        config,
+        currentThemeName,
+        themeData,
+        setTheme,
+        loading,
+      }}
+    >
+      {!loading && children}
     </ThemeContext.Provider>
   );
 };

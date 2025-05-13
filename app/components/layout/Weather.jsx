@@ -14,7 +14,6 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Weather = () => {
   const { themeData } = useThemeContext();
-
   const getCurrentDate = () => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date().toLocaleDateString(undefined, options);
@@ -23,7 +22,7 @@ const Weather = () => {
   return (
     <div
       style={{
-        background: themeData?.primary,
+        background: themeData?.background?.navigation,
         color: themeData?.text,
         padding: "10px 0",
       }}
@@ -41,8 +40,8 @@ const Weather = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            backgroundColor: themeData?.accent || "#f39c12",
-            color: themeData?.text || "#ffffff",
+            backgroundColor: themeData?.background?.body || "#f39c12",
+            color: themeData?.text?.primary || "#ffffff",
             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
             fontWeight: "bold",
             borderRadius: "10px",
@@ -57,27 +56,27 @@ const Weather = () => {
         {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex">
           <ThemeButton />
-          <Icons sx={{color:"white"}}
+          <Icons sx={{ color: themeData?.icon?.default }}
             icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"
             aria-label="Visit our GitHub page"
           />
-          <Icons sx={{color:"white"}}
+          <Icons sx={{ color: themeData?.icon?.default }}
             icon={<FacebookIcon />}
             href="https://www.facebook.com"
             aria-label="Visit our Facebook page"
           />
-          <Icons sx={{color:"white"}}
+          <Icons sx={{ color: themeData?.icon?.default }}
             icon={<TwitterIcon />}
             href="https://x.com/RanjaniVar61457"
             aria-label="Visit our Twitter page"
           />
-          <Icons sx={{color:"white"}}
+          <Icons sx={{ color: themeData?.icon?.default }}
             icon={<LinkedInIcon />}
             href="https://www.linkedin.com/in/ranjani-varsani-45a875225/"
             aria-label="Visit our LinkedIn profile"
           />
-          <Icons sx={{color:"white"}}
+          <Icons sx={{ color: themeData?.icon?.default }}
             icon={<InstagramIcon />}
             href="https://www.instagram.com/varsaniranjani/"
             aria-label="Visit our Instagram page"

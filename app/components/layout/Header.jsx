@@ -34,7 +34,7 @@ const categories = news?.categories || [];
         </div>
       )}
 
-      <div className="border-t border-b border-gray-400 hidden md:flex overflow-hidden" style={{background:themeData?.headerBg,color:themeData?.navText}}>
+      <div className="border-t border-b border-gray-400 hidden md:flex overflow-hidden" style={{background:themeData?.background?.header,color:themeData?.text?.primary}}>
         <Container maxWidth="xl">
           <div className="relative w-full overflow-hidden py-2">
             <div className="flex gap-10 animate-scroll whitespace-nowrap hover:pause-scroll">

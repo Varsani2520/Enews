@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { getUserFromLocalStorage } from "../utils/getUserFromLocal";
+import { getUserFromCookies } from "../utils/getUserFromLocal";
 
 const useCurrentUser = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = getUserFromLocalStorage();
+    const user = getUserFromCookies();
     setUser(user);
   }, []);
 

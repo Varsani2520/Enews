@@ -4,7 +4,7 @@ import { httpAxios } from "@/app/utils/httpAxios";
 export async function createComment(article, user, content) {
   try {
     const res = await httpAxios.post("/comments", {
-      articleId: article._id,
+      articleId: article?._id,
       content,
     });
     return res.data?.data?.comment;

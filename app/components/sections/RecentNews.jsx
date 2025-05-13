@@ -47,7 +47,7 @@ const RecentNews = () => {
         >
           {articles.slice(1, 4).map((article) => (
             <Link
-              key={article._id}
+              key={article?._id}
               href={`/news/${slugify(article.slug)}`}
             >
               <Card1

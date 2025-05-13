@@ -37,8 +37,8 @@ const Card5 = ({ category, title, imageUrl, article, height }) => {
           <div
             className="absolute top-4 left-4  px-2 py-1 rounded-md"
             style={{
-              backgroundColor: themeData?.buttonBg, // Themed accent color
-              color: themeData?.buttonText, // Themed text color
+              backgroundColor: themeData?.background?.button,
+              color: themeData?.text?.button,
             }}
           >
             <p className="text-sm font-semibold">{category}</p>
@@ -51,8 +51,7 @@ const Card5 = ({ category, title, imageUrl, article, height }) => {
       {/* Title */}
       <h2
         className="text-sm md:text-lg font-semibold mb-2 group-hover:text-red-500 transition-colors duration-300"
-        style={{ color: themeData?.navText }}
-      >
+        style={{ color: themeData?.text?.primary }}>
         {title}
       </h2>
     </div>

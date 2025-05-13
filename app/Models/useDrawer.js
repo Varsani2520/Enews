@@ -17,8 +17,8 @@ const DrawerContent = ({ open, onClose, children,title }) => {
           width: "300px",
           flexDirection: "column",
         },
-        backgroundColor: themeData?.background,
-        color: themeData?.cardText,
+        backgroundColor:  themeData?.background?.body,
+        color: themeData?.text?.card ,
       }}
     >
       {/* Title and Close Button */}
@@ -28,15 +28,15 @@ const DrawerContent = ({ open, onClose, children,title }) => {
         alignItems="center"
         mb={2}
         sx={{
-          backgroundColor: themeData?.headerBg, 
+          backgroundColor: themeData?.background?.header, 
           padding: "8px",
           borderRadius: "4px",
         }}
       >
-        <Typography variant="h6" sx={{ color: themeData?.navText }}>
+        <Typography variant="h6" sx={{ color: themeData?.text?.primary }}>
           {title}
         </Typography>
-        <IconButton onClick={onClose} sx={{ color: themeData?.navText }}>
+        <IconButton onClick={onClose} sx={{ color: themeData?.text?.primary }}>
           <CloseIcon />
         </IconButton>
       </Box>

@@ -26,7 +26,6 @@ const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const user = useCurrentUser();
-  console.log("user store", user);
 
   const router = useRouter();
   const { themeData } = useThemeContext();

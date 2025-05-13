@@ -47,6 +47,7 @@ const SearchDialog = ({ open, onClose }) => {
             placeholder="Enter your search query..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             className="flex-1 px-3 text-gray-700 outline-none"
           />
           <Button
@@ -71,7 +72,7 @@ const SearchDialog = ({ open, onClose }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
             {news.map((article) => (
               <Link
-                key={article}
+                key={article._id}
                 href={`/news/${slugify(article.slug)}`}
               >
                 <Card4

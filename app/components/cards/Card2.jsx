@@ -7,13 +7,13 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 const Card2 = ({ category, title, imageUrl, height, width, article }) => {
   const { isArticleFavorite, toggleFavorite, loading } = useArticleLikes(
     article?._id
-  ); // Use the hook here
+  );
 
   // Handle loading state
   if (loading) {
     return <div>Loading...</div>; // Show loading text or spinner
   }
-  const { themeData } = useThemeContext(article?._id);
+  const { themeData } = useThemeContext();
 
   return (
     <div
@@ -38,17 +38,15 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
         <div
           className=" text-xs md:text-sm lg:text-lg font-semibold px-2 py-1 rounded-md inline-block"
           style={{
-            backgroundColor: themeData?.buttonBg,
-            color: themeData?.buttonText,
+            backgroundColor: themeData?.background?.button,
+            color: themeData?.text?.button,
           }}
         >
           {category}
         </div>
         <div
           className="text-sm md:text-lg  font-bold  mt-2 group-hover:text-red-500"
-          style={{
-            color: themeData?.buttonText,
-          }}
+          style={{ color: themeData?.text?.card }}
         >
           {title}
         </div>

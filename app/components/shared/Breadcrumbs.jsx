@@ -4,25 +4,35 @@ import HomeIcon from "@mui/icons-material/Home";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Breadcumps = ({ heading }) => {
-  const {themeData}=useThemeContext()
+  const { themeData } = useThemeContext()
   return (
     <div
-    className="py-4"
-    style={{
-      backgroundColor: themeData?.headerBg, // Background color from theme
-      color: "#1a2e51", 
-    }}
-  >      <Container maxWidth="xl">
-        <Breadcrumbs aria-label="breadcrumb" separator="|" style={{color:themeData?.cardText}}>
+      className="py-4"
+      style={{
+        backgroundColor: themeData?.background?.header, // Background color from theme
+        color: themeData?.text?.primary
+      }}
+    >      <Container maxWidth="xl">
+        <Breadcrumbs aria-label="breadcrumb" separator="|" sx={{ color: themeData?.text?.primary }}>
           <Link
-            color="inherit"
             href="/"
-            className="mr-1 w-5 h-5 hover:text-red-500">
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              color: themeData?.text?.primary,
+            }}
+          >
             <HomeIcon fontSize="small" />
             Home
           </Link>
           {heading && (
-            <Typography className="inline-block font-semibold capitalize">
+            <Typography
+              sx={{
+                fontWeight: 600,
+                textTransform: "capitalize",
+                color: themeData?.text?.primary,
+              }}>
               {heading}
             </Typography>
           )}

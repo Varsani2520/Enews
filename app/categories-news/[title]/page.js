@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
-import { getNews } from "@/app/utils/getNews";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import slugify from "slugify";

@@ -18,7 +18,8 @@ const NewsContent = ({ article }) => {
         <p
           style={{
             fontSize: `${fontSize}px`,
-            color: themeData?.cardText,
+            color: themeData?.text?.primary,
+            lineHeight: "1.6",
           }}
           className="leading-7 mb-4"
           dangerouslySetInnerHTML={{ __html: article.content }}
@@ -27,7 +28,7 @@ const NewsContent = ({ article }) => {
       {article.excerpt && (
         <p style={{
           fontSize: `${fontSize}px`,
-          color: themeData?.secondary,
+          color: themeData?.text?.secondary,
           fontStyle: "italic",
         }}
           className="mb-4" dangerouslySetInnerHTML={{ __html: article.excerpt }}
@@ -38,8 +39,8 @@ const NewsContent = ({ article }) => {
       {/* Keywords Section */}
       {article.tags?.length > 0 && (
         <div className="mt-4">
-          <h2 className="text-xl font-semibold mb-2" style={{ color: themeData?.cardText }}>Keywords:</h2>
-          <ul className="list-disc list-inside" style={{ color: themeData?.cardText }}>
+          <h2 className="text-xl font-semibold mb-2" style={{ color: themeData?.text?.primary }}>Keywords:</h2>
+          <ul className="list-disc list-inside" style={{ color: themeData?.text?.primary }}>
             {article.tags.map((tag, index) => (
               <li key={index}>{tag.name}</li>
             ))}

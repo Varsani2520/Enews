@@ -1,13 +1,16 @@
-// utils/getUserFromLocalStorage.ts
-export const getUserFromLocalStorage = () => {
-  if (typeof window !== "undefined") {
-    const storedUser = localStorage.getItem("user");
-    try {
-      return storedUser ? JSON.parse(storedUser) : null;
-    } catch (e) {
-      console.error("Failed to parse user:", e);
-      return null;
-    }
+// utils/getUserFromCookies.ts
+import Cookies from "js-cookie";
+
+export const getUserFromCookies = () => {
+  if (typeof window === "undefined") return null;
+
+  const userCookie = Cookies.get("user");
+  if (!userCookie) return null;
+
+  try {
+    return JSON.parse(decodeURIComponent(userCookie)); // just in case it was encoded
+  } catch (err) {
+    console.error("Failed to parse user from cookie:", err);
+    return null;
   }
-  return null;
 };

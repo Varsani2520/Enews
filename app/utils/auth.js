@@ -8,6 +8,7 @@ import {
 import { auth, db, provider } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { httpAxios } from "./httpAxios";
+import Cookies from "js-cookie";
 
 // handle Google signin authenticaltion
 export const signInWithGoogle = async () => {
@@ -37,7 +38,7 @@ export const loginWithEmail = async (userData) => {
     if (!user) {
       throw new Error("User data is missing in response");
     }
-     localStorage.setItem("user", JSON.stringify(user));
+     Cookies.set("user", JSON.stringify(user));
 
     return user;
   } catch (error) {

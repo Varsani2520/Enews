@@ -15,6 +15,7 @@ import useCurrentUser from "../hooks/useCurrentUser";
 export default function ClientLayout({ children }) {
   const user = useCurrentUser();
   const { themeData } = useThemeContext();
+
   useEffect(() => {
     if (typeof window !== "undefined" && user?.uid) {
       const setupFCM = async () => {
@@ -27,10 +28,10 @@ export default function ClientLayout({ children }) {
 
       setupFCM();
     }
-  }, [user]);
+  }, [user,themeData]);
 
   return (
-    <div style={{ background: themeData?.navigation }}>
+    <div style={{ background: themeData?.background?.body }}>
       <Weather />
       <Navigation />
       <Header />

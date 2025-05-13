@@ -27,7 +27,6 @@ const Navigation = () => {
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const user = useCurrentUser();
 
-
   const router = useRouter();
   const { themeData } = useThemeContext();
   const tabs = [
@@ -55,7 +54,7 @@ const Navigation = () => {
     setIsDrawerOpen(open);
   };
 
-  
+
 
   return (
     <Container maxWidth="xl">

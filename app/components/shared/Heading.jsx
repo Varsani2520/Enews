@@ -23,11 +23,11 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
         <Box sx={{ flex: 1 }}>
           <Typography
             variant="h5"
-            sx={{ color: themeData?.cardText, fontWeight: "bold" }}
+            sx={{ color: themeData?.text?.primary, fontWeight: "bold" }}
           >
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: themeData?.secondary }}>
+          <Typography variant="body2" sx={{ color: themeData?.text?.secondary }}>
             {subtitle}
           </Typography>
         </Box>
@@ -36,8 +36,8 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
           variant="outlined"
           sx={{
             fontWeight: "bold",
-            color: themeData?.cardText,
-            borderColor: themeData?.secondary, 
+            color: themeData?.text?.primary,
+            borderColor: themeData?.text?.border, 
           }}
           onClick={handleClick}
         >

@@ -9,13 +9,11 @@ import NewsIcons from "@/app/components/news-detail/NewsIcons";
 import RelatedNews from "@/app/components/news-detail/RelatedNews";
 import CommentsDrawer from "@/app/components/news-detail/CommentDrawer";
 import NewsContent from "@/app/components/news-detail/NewsContent";
-import { useThemeContext } from "@/app/context/ThemeContext";
 import GoogleAd from "@/app/components/features/GoogleAd";
 import { useSingleArticles } from "@/app/utils/useSingleArticle";
 
 const NewsDetailPage = () => {
   const { title } = useParams();
-  const { themeData } = useThemeContext()
   const { article: clickedArticle, loading, relatedArticles } = useSingleArticles(title);
 
   useEffect(() => {
@@ -28,7 +26,7 @@ const NewsDetailPage = () => {
   }
 
   return (
-    <div className=" min-h-screen" style={{ background: themeData.background }}>
+    <div className=" min-h-screen" >
       <Breadcumps heading={title} />
       <Container maxWidth="xl" sx={{ my: "2%" }}>
         <Grid container spacing={3}>

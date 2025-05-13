@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Link from "next/link";
 import { TechnologySkeleton } from "@/app/components/features/Skeleton";
 import slugify from "slugify";
-import { useNews } from "@/app/context/ArticleContext";
 import Card5 from "../cards/Card5";
 import NewsSlider from "../features/Slider";
 import { useHomes } from "@/app/utils/useHome";

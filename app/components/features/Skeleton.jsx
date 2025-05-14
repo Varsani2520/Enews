@@ -12,10 +12,12 @@ import {
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 export const CardSkeleton = ({ height = "191px" }) => {
+  const { config } = useThemeContext()
   return (
-    <Box sx={{ width: "100%", height, backgroundColor: "#f0f0f0", padding: 2, borderRadius: 2 }}>
+    <Box sx={{ width: "100%", height, backgroundColor: "#f0f0f0", padding: 2, borderRadius: config?.borderRadius }}>
       <Skeleton variant="rectangular" width="100%" height={height} />
       <Skeleton variant="text" width="80%" sx={{ mt: 1 }} />
       <Skeleton variant="text" width="60%" />

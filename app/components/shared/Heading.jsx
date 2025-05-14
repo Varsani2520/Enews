@@ -4,7 +4,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
 
 const Heading = ({ title, subtitle, buttonText, link }) => {
-  const {themeData}=useThemeContext()
+  const { themeData, config } = useThemeContext()
   const handleClick = () => {
     if (link) {
       window.location.href = link;
@@ -18,6 +18,7 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "16px 0",
+
         }}
       >
         <Box sx={{ flex: 1 }}>
@@ -37,7 +38,7 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
           sx={{
             fontWeight: "bold",
             color: themeData?.text?.primary,
-            borderColor: themeData?.text?.border, 
+            borderColor: themeData?.text?.secondary,
           }}
           onClick={handleClick}
         >

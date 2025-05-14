@@ -1,6 +1,6 @@
 import React from "react";
 import { useArticleLikes } from "@/app/hooks/useArticleLikes";
-import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
+// import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
 import FavoriteButton from "@/app/components/features/FavouriteButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
@@ -19,7 +19,7 @@ const Card4 = ({ imageUrl, category, title, article }) => {
     <div
       className="flex items-center  shadow-md rounded-md overflow-hidden mb-4 relative"
       style={{ background: themeData?.background }}
-      onClick={() => addHandleArticleClick(article)}
+      // onClick={() => addHandleArticleClick(article)}
     >
       {/* Left side image */}
       <div className="flex-shrink-0">

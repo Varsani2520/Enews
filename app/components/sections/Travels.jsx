@@ -4,13 +4,12 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import Link from "next/link";
 import slugify from "slugify";
-import { useNews } from "@/app/context/ArticleContext";
 import { TravelSkeleton } from "../features/Skeleton";
 import Card1 from "../cards/Card1";
-import { useHomes } from "@/app/utils/useHome";
+import { useHomeContext } from "@/app/utils/useHome";
 
 const Travels = () => {
-  const { news, loading } = useHomes();
+const { homeData: news, loading } = useHomeContext();
 
 
   if (loading || !news.travelNews) {

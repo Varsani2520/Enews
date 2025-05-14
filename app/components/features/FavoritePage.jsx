@@ -11,10 +11,11 @@ import CustomPagination from "../shared/CustomPagination";
 import { TravelSkeleton } from "./Skeleton";
 
 import { useArticleLikes } from "@/app/hooks/useArticleLikes";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const FavoritesPage = () => {
   const { favorites, loading, removeFromFavorites } = useArticleLikes(); // Custom hook managing all favorite logic
-
+const {themeData}=useThemeContext()
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
@@ -43,24 +44,27 @@ const FavoritesPage = () => {
             {currentFavorites.map((article) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={article?._id}>
                 <div className="relative h-full">
-                  <Link href={`/news/${article.slug}`}>
+                  <Link href={`/news/${article.slug}`} className="block">
                     <Card1
                       article={article}
                       category={article.category?.name}
                       imageUrl={article.image_url}
                       title={article.title}
                       height="250px"
+                      showFavourite={false}
                     />
                   </Link>
 
+                  {/* Delete icon outside the link */}
                   <IconButton
                     onClick={() => removeFromFavorites(article?._id)}
-                    className="absolute top-2 right-2 text-red-500 bg-white rounded-full hover:bg-gray-200 transition"
+                    className="!absolute top-2 right-2 z-10 rounded-full hover:bg-gray-200 transition" size="small" sx={{color:themeData?.icon?.default,background:themeData?.icon?.main}}
                   >
-                    <DeleteIcon />
+                    <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </div>
               </Grid>
+
             ))}
           </Grid>
 

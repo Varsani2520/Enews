@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useThemeContext } from "../context/ThemeContext";
 
 const DrawerContent = ({ open, onClose, children,title }) => {
-  const {themeData}=useThemeContext()
+  const {themeData,config}=useThemeContext()
   return (
     <Drawer
       anchor="right"
@@ -30,7 +30,7 @@ const DrawerContent = ({ open, onClose, children,title }) => {
         sx={{
           backgroundColor: themeData?.background?.header, 
           padding: "8px",
-          borderRadius: "4px",
+          borderRadius: config?.borderRadius,
         }}
       >
         <Typography variant="h6" sx={{ color: themeData?.text?.primary }}>

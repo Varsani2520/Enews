@@ -4,16 +4,15 @@ import React, { useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import Link from "next/link";
 import slugify from "slugify";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { TechnologySkeleton } from "../features/Skeleton";
 import Card2 from "../cards/Card2";
 import NewsSlider from "../features/Slider";
-import { useHomes } from "@/app/utils/useHome";
+import { useHomeContext } from "@/app/utils/useHome";
 
 const Technology = () => {
-  const { news, loading } = useHomes()
+  const { homeData: news, loading } = useHomeContext();
 
 
   if (loading || !news.technology) {

@@ -18,17 +18,17 @@ import LoginDialog from "@/app/Models/Login";
 import NavigationDrawer from "./NavigationDrawer";
 import SearchDialog from "../features/SearchDialog";
 import { useThemeContext } from "@/app/context/ThemeContext";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
+import { useAuth } from "@/app/context/AuthContext";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const user = useCurrentUser();
+  const { user } = useAuth();
 
   const router = useRouter();
-  const { themeData } = useThemeContext();
+  const { themeData, config } = useThemeContext();
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -62,7 +62,7 @@ const Navigation = () => {
         {/* Logo */}
         <img
           width="120px"
-          src="/logo.png"
+          src={config?.headerLogo}
           alt="logo"
           className="cursor-pointer"
           onClick={() => router.push("/")}
@@ -74,7 +74,7 @@ const Navigation = () => {
             onClick={toggleDrawer(true)}
             sx={{
               border: `1px solid ${themeData?.border}`,
-              borderRadius: "5px",
+              borderRadius: config?.borderRadius,
             }}
           >
             <MenuIcon sx={{ color: themeData?.navText }} />
@@ -106,7 +106,7 @@ const Navigation = () => {
               style={{
                 color:
                   activeTab === tab.link
-                    ? themeData?.icon?.main // Ensure visibility
+                    ? themeData?.background?.button // Ensure visibility
                     : themeData?.text?.primary, // Fallback to readable color
                 fontWeight: activeTab === tab.link ? "bold" : "normal",
               }}
@@ -155,9 +155,9 @@ const Navigation = () => {
             onClick={handleSearchOpen}
             aria-label="Open Search"
             sx={{
-              color: themeData?.icon?.main,
+              color: themeData?.icon?.default,
               border: `1px solid ${themeData?.text?.secondary}`,
-              borderRadius: "5px",
+              borderRadius: config?.borderRadius,
             }}
           >
             <SearchIcon />

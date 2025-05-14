@@ -3,8 +3,10 @@ import React from "react";
 import { Container, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Banner = ({ title, href }) => {
+  const { config } = useThemeContext()
   const router = useRouter();
   return (
     <Container
@@ -17,7 +19,7 @@ const Banner = ({ title, href }) => {
         <div className="flex items-center space-x-4">
           <img
             width="120px"
-            src="/logo.png"
+            src={config?.headerLogo}
             alt="logo"
             className="cursor-pointer"
             onClick={() => router.push("/")}

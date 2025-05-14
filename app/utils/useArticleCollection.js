@@ -14,7 +14,6 @@ export const useArticleCollection = (slug) => {
         const fetchArticleBasedOnCategory = async () => {
             try {
                 const response = await getArticleBasedonCategory(slug);
-                console.log("single", response.articles)
                 setArticle(response.articles);
             } catch (error) {
                 console.error("Error fetching article:", error);

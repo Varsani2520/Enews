@@ -4,8 +4,8 @@ import FontSizeSlider from "./FontSlider";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const NewsContent = ({ article }) => {
-  const [fontSize, setFontSize] = useState(18);
-  const { themeData } = useThemeContext()
+  const { themeData,config } = useThemeContext()
+  const [fontSize, setFontSize] = useState(config.fontSizeBase);
 
   return (
     <>

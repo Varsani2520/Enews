@@ -19,13 +19,10 @@ import {
 
 import Link from "next/link";
 import slugify from "slugify";
-import { signOut } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
-import { auth } from "@/app/utils/firebase";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
+
+import { logoutUser } from "@/app/utils/auth";
 
 const NavigationDrawer = ({
   activeTab,
@@ -35,16 +32,11 @@ const NavigationDrawer = ({
 }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const router = useRouter();
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    toast.success("Logged out successfully!");
-    router.push("/");
-  };
 
-const user = useCurrentUser();  
-return (
+
+  const { user } = useAuth();
+  return (
     <Box role="presentation" className="w-64 bg-white p-5 rounded-lg">
       <List className="space-y-4">
         {/* Login & Search Button */}
@@ -92,11 +84,10 @@ return (
                 setActiveTab(name.toLowerCase());
                 handleDrawerClose(); // Close drawer on click
               }}
-              className={`block w-full text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${
-                activeTab === name.toLowerCase()
-                  ? "bg-red-100 text-red-500"
-                  : ""
-              }`}
+              className={`block w-full text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${activeTab === name.toLowerCase()
+                ? "bg-red-100 text-red-500"
+                : ""
+                }`}
             >
               {name}
             </NavLink>
@@ -112,11 +103,10 @@ return (
             href="#"
             isActive={activeTab === "categories"}
             onClick={() => setActiveTab("categories")}
-            className={`w-full text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg transition-all flex justify-between items-center ${
-              activeTab === "categories"
-                ? "bg-red-100 text-red-500"
-                : "hover:text-red-500"
-            }`}
+            className={`w-full text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg transition-all flex justify-between items-center ${activeTab === "categories"
+              ? "bg-red-100 text-red-500"
+              : "hover:text-red-500"
+              }`}
           >
             Categories
             {categoriesOpen ? (
@@ -148,11 +138,10 @@ return (
                     setActiveTab(category.toLowerCase());
                     handleDrawerClose(); // Close drawer on click
                   }}
-                  className={`block text-gray-800 font-semibold text-base py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${
-                    activeTab === category.toLowerCase()
-                      ? "border-l-4 border-red-500 pl-3 text-red-500 bg-red-100"
-                      : ""
-                  }`}
+                  className={`block text-gray-800 font-semibold text-base py-2 px-4 rounded-lg transition-all hover:text-red-500 hover:bg-gray-100 ${activeTab === category.toLowerCase()
+                    ? "border-l-4 border-red-500 pl-3 text-red-500 bg-red-100"
+                    : ""
+                    }`}
                 >
                   {category}
                 </NavLink>
@@ -162,7 +151,7 @@ return (
         </Collapse>
         {user ? (
           <button
-            onClick={handleLogout}
+            onClick={logoutUser}
             className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-medium shadow transition-all"
           >
             Logout

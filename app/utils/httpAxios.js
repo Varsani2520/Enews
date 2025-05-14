@@ -7,6 +7,12 @@ export const httpAxios = axios.create({
   },
   withCredentials: true, // ✅ Fix: use true, not "include"
 });
+export const httpAxiosForHome = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // Interceptor to handle 401 errors and refresh the token
 httpAxios.interceptors.response.use(

@@ -1,6 +1,6 @@
 import React from "react";
 import { useArticleLikes } from "@/app/hooks/useArticleLikes";
-import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
+// import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
 import FavoriteButton from "@/app/components/features/FavouriteButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
@@ -21,7 +21,7 @@ const Card2 = ({ category, title, imageUrl, height, width, article }) => {
     <div
       className="relative overflow-hidden rounded-lg shadow-lg mb-4 group cursor-pointer"
       style={{ height: height || "300px", width: width || "100%" }}
-      onClick={() => addHandleArticleClick(article)}
+      // onClick={() => addHandleArticleClick(article)}
     >
       {/* Background Image */}
       <img

@@ -3,22 +3,22 @@ import React, { useState } from "react";
 import { TextField, Button, CircularProgress, Avatar } from "@mui/material";
 import { toast } from "react-hot-toast";
 import CustomPagination from "../shared/CustomPagination";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
 import { useComments } from "@/app/utils/useComment";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import { useAuth } from "@/app/context/AuthContext";
 
 const CommentForm = ({ article }) => {
-  const user = useCurrentUser();
-  const [text, setText] = useState("");
+  const { user } = useAuth();
+    const [text, setText] = useState("");
   const [page, setPage] = useState(1);
   const commentsPerPage = 5;
 
-  const { themeData } = useThemeContext()
-   const bgColor = themeData?.background?.card 
-  const borderColor = themeData?.text?.secondary ;
-  const textColor = themeData?.text?.card ;
+  const { themeData, config } = useThemeContext()
+  const bgColor = themeData?.background?.card
+  const borderColor = themeData?.text?.secondary;
+  const textColor = themeData?.text?.card;
   const buttonBg = themeData?.background?.button;
-  const buttonText = themeData?.text?.button 
+  const buttonText = themeData?.text?.button
   // Use custom hook to handle comment operations
   const { comments, loading, postComment } = useComments(article);
 
@@ -79,7 +79,7 @@ const CommentForm = ({ article }) => {
           sx={{
             textTransform: "none",
             fontWeight: "bold",
-            borderRadius: "8px",
+            borderRadius: config?.borderRadius,
           }}
           disabled={loading}
         >

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useArticleLikes } from "@/app/hooks/useArticleLikes";
-import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
 import FavoriteButton from "@/app/components/features/FavouriteButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
@@ -13,6 +12,7 @@ const Card1 = ({
   imageUrl,
   category,
   title,
+  showFavourite = true
 }) => {
   const { isArticleFavorite, toggleFavorite } = useArticleLikes();
 
@@ -26,7 +26,7 @@ const Card1 = ({
         width: width || "100%",
         marginBottom,
       }}
-      onClick={() => addHandleArticleClick(article)}
+    // onClick={() => addHandleArticleClick(article)}
     >
       <img
         className="object-fill w-full h-full transition-transform duration-500 ease-in-out transform hover:scale-110"
@@ -54,10 +54,13 @@ const Card1 = ({
       </div>
 
       {/* like button */}
-      <FavoriteButton
-        isFavorite={isArticleFavorite(article?._id)}
-        toggleFavorite={() => toggleFavorite(article?._id)}
-      />
+      {showFavourite && (
+
+        <FavoriteButton
+          isFavorite={isArticleFavorite(article?._id)}
+          toggleFavorite={() => toggleFavorite(article?._id)}
+        />
+      )}
     </div>
   );
 };

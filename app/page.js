@@ -12,7 +12,7 @@ import LazyComponent from "./components/shared/LazyComponent";
 import { useThemeContext } from "./context/ThemeContext";
 import GoogleAd from "./components/features/GoogleAd";
 export default function Home() {
-  const { themeData } = useThemeContext()
+  const { themeData, config } = useThemeContext()
 
   useEffect(() => {
     document.title = "Enews - Latest news & Updates";
@@ -22,7 +22,7 @@ export default function Home() {
     <main className="flex  flex-col  justify-between" style={{ background: themeData?.background }}>
 
       <Banner
-        logo={"/logo.png"}
+        logo={config?.headerLogo}
         title="Stay informed,stay ahead with our daily news."
         href="/categories-news/popular"
       />
@@ -59,7 +59,7 @@ export default function Home() {
       />
       <LazyComponent component={Travels} />
       <Banner
-        logo={"/logo.png"}
+        logo={config?.headerLogo}
         title="Stay informesd with us- 24/7 news updates"
         href="/categories-news/breaking"
       />

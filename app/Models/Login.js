@@ -10,14 +10,17 @@ import {
   Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import GoogleIcon from "@mui/icons-material/Google";
 import {
-  signInWithGoogle,
   loginWithEmail,
   signUpWithEmail,
 } from "../utils/auth";
+import { useThemeContext } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
 
 const LoginDialog = ({ open, onClose }) => {
+  const { config } = useThemeContext()
+  const { setUser } = useAuth();
+
   const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState({
     name: "",
@@ -27,7 +30,6 @@ const LoginDialog = ({ open, onClose }) => {
     avatar: "",
   });
   const [emailLoading, setEmailLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState("");
 
   const toggleLogin = () => {
@@ -36,49 +38,36 @@ const LoginDialog = ({ open, onClose }) => {
   };
 
   const handleInputChange = (e) => {
-    setUserData({ ...userData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    setUserData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleAuthAction = async () => {
     setEmailLoading(true);
     setError("");
 
+    const { email, password, name } = userData;
+
+    if (!email || !password || (!isLogin && !name)) {
+      setError("Please fill in all required fields.");
+      setEmailLoading(false);
+      return;
+    }
+
     try {
-      if (
-        !userData.email ||
-        !userData.password ||
-        (!isLogin && !userData.name)
-      ) {
-        setError("Please fill in all fields.");
-        setEmailLoading(false);
-        return;
-      }
-      if (isLogin) {
-        await loginWithEmail(userData);
-      } else {
-        await signUpWithEmail(userData);
-      }
-      onClose(); // Close dialog on successful login/signup
-    } catch (error) {
-      setError(error.message);
+      const user = isLogin
+        ? await loginWithEmail(userData)
+        : await signUpWithEmail(userData);
+      setUser(user);
+      onClose();
+    } catch (err) {
+      setError(err.message);
     } finally {
       setEmailLoading(false);
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setGoogleLoading(true);
-    setError("");
 
-    try {
-      await signInWithGoogle();
-      onClose(); // Close dialog on success
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setGoogleLoading(false);
-    }
-  };
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
@@ -125,7 +114,7 @@ const LoginDialog = ({ open, onClose }) => {
               <Box
                 sx={{
                   border: "1px solid #c4c4c4",
-                  borderRadius: "8px",
+                  borderRadius: config?.borderRadius,
                   padding: "10px 12px",
                   display: "flex",
                   alignItems: "center",
@@ -184,7 +173,7 @@ const LoginDialog = ({ open, onClose }) => {
             background: "#f20404",
             my: 1,
             py: 1.2,
-            borderRadius: "8px",
+            borderRadius: config?.borderRadius,
             fontWeight: "600",
             fontSize: "0.95rem",
             textTransform: "uppercase",
@@ -195,30 +184,7 @@ const LoginDialog = ({ open, onClose }) => {
         >
           {emailLoading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
         </Button>
-        <Button
-          onClick={handleGoogleSignIn}
-          disabled={googleLoading}
-          sx={{
-            background: "#4285F4",
-            color: "#fff",
-            mb: 1,
-            py: 1.2,
-            borderRadius: "8px",
-            fontWeight: "600",
-            fontSize: "0.95rem",
-            textTransform: "uppercase",
-            "&:hover": { background: "#357ae8" },
-          }}
-          fullWidth
-          startIcon={<GoogleIcon />}
-          variant="contained"
-        >
-          {googleLoading
-            ? "Signing in..."
-            : isLogin
-            ? "Login with Google"
-            : "Sign Up with Google"}
-        </Button>
+
         <Button
           onClick={toggleLogin}
           fullWidth

@@ -1,6 +1,6 @@
 import React from "react";
 import { useArticleLikes } from "@/app/hooks/useArticleLikes";
-import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
+// import { addHandleArticleClick } from "@/app/hooks/useArticleClick";
 import FavoriteButton from "@/app/components/features/FavouriteButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
@@ -19,7 +19,7 @@ const Card5 = ({ category, title, imageUrl, article, height }) => {
       <div
         className="relative w-full"
         style={{ height: height }}
-        onClick={() => addHandleArticleClick(article)}
+        // onClick={() => addHandleArticleClick(article)}
       >
         <img
           src={imageUrl || "/placeholder.jpg"}

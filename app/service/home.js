@@ -1,8 +1,8 @@
-import { httpAxios } from "../utils/httpAxios";
+import {  httpAxiosForHome } from "../utils/httpAxios";
 
 export async function getHome() {
   try {
-    const resposne = await httpAxios.get("/home");
+    const resposne = await httpAxiosForHome.get("/home");
     return resposne.data.data;
   } catch (error) {
     console.error("Error fetching settings:", error);

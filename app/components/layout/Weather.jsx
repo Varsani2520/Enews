@@ -13,7 +13,7 @@ import ThemeButton from "../features/ThemeButton";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Weather = () => {
-  const { themeData } = useThemeContext();
+  const { themeData,config } = useThemeContext();
   const getCurrentDate = () => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date().toLocaleDateString(undefined, options);
@@ -44,7 +44,7 @@ const Weather = () => {
             color: themeData?.text?.button || "#ffffff",
             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
             fontWeight: "bold",
-            borderRadius: "10px",
+            borderRadius:config?.borderRadius,
             fontSize: "small",
             paddingRight: "6px",
           }}

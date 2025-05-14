@@ -1,7 +1,6 @@
 "use client";
 
 import { Inter } from "next/font/google";
-import { ArticleProvider } from "./context/ArticleContext";
 import ClientLayout from "./layout/ClientLayout";
 import { Toaster } from "react-hot-toast";
 import "./styles/globals.css";
@@ -9,6 +8,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import { HomeProvider } from "./utils/useHome";
+import { AuthProvider } from "./context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,16 +26,16 @@ export default function RootLayout({ children }) {
 
       <body className={inter.className}>
         <Toaster />
-        <ThemeProvider>
-          <CssBaseline />
-          <HomeProvider>
-            <FavoritesProvider>
-              <ArticleProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <CssBaseline />
+            <HomeProvider>
+              <FavoritesProvider>
                 <ClientLayout>{children}</ClientLayout>
-              </ArticleProvider>
-            </FavoritesProvider>
-          </HomeProvider>
-        </ThemeProvider>
+              </FavoritesProvider>
+            </HomeProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

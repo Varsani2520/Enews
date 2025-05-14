@@ -2,14 +2,12 @@
 import React, { useState } from "react";
 import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
-import { subscribeUser } from "@/app/utils/subscribe";
+import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const handleSubscribe = () => {
-    subscribeUser(email);
-    setEmail(""); //clear input after subscribing
-  };
+  const { config } = useThemeContext()
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -17,7 +15,7 @@ const Footer = () => {
         <div>
           <img
             width="120px"
-            src="/logo.png"
+            src={config?.footerLogo}
             alt="logo"
             className="cursor-pointer"
             onClick={() => router.push("/")}
@@ -91,34 +89,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Fourth Section: Email Subscription */}
-        <div>
-          <Typography variant="h6" className="text-lg font-bold mb-4">
-            Subscribe to our Newsletter
-          </Typography>
-          <Typography variant="body2" className="text-sm mb-4">
-            Get the latest updates right in your inbox.
-          </Typography>
-
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-            className="bg-white rounded-md mb-2"
-          />
-
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubscribe}
-          >
-            Subscribe
-          </Button>
-        </div>
       </div>
     </footer>
   );

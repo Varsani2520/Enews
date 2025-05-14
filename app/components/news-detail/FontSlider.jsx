@@ -5,7 +5,7 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 const fontSizes = [12,14, 16, 18, 20, 22,24];
 
 const FontSizeSlider = ({ fontSize, setFontSize }) => {
-const {themeData}=useThemeContext()
+const {themeData,config}=useThemeContext()
 
   return (
     <Box
@@ -15,7 +15,7 @@ const {themeData}=useThemeContext()
         justifyContent: "space-evenly",
         p: 2,
         border: "1px solid #ccc",
-        borderRadius: "8px",
+        borderRadius:config?.borderRadius,
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         my:2,
       }}

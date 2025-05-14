@@ -6,14 +6,15 @@ import CommentIcon from "@mui/icons-material/Comment";
 import PrintIcon from "@mui/icons-material/Print";
 import CommentsDrawer from "./CommentDrawer";
 import toast from "react-hot-toast";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
+
 import { useThemeContext } from "@/app/context/ThemeContext";
+import { useAuth } from "@/app/context/AuthContext";
 
 const NewsIcons = ({ article, title }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { isBookmark, toggleBookmark } = useArticleBookmark(article);
-  const user = useCurrentUser();
+
+   const { user } = useAuth();
   const { themeData } = useThemeContext();
   return (
     <div className="flex justify-between items-center my-4">

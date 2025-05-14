@@ -1,17 +1,14 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { signOut } from "firebase/auth";
-import { auth } from "@/app/utils/firebase";
 import { Container, Tabs, Tab, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import slugify from "slugify";
 import { useThemeContext } from "@/app/context/ThemeContext";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
+import { useAuth } from "@/app/context/AuthContext";
 
 const ProfileLayout = ({ children }) => {
-  const user = useCurrentUser();
+  const { user } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [tabIndex, setTabIndex] = useState(0);
@@ -21,9 +18,14 @@ const ProfileLayout = ({ children }) => {
   const username = user?.displayName ? slugify(user.displayName) : "user";
 
   // Sidebar Tabs
+  // Add new tabs
   const tabs = [
+    { name: "edit", label: "Edit Profile" },
     { name: "favorites", label: "Favorites" },
+    { name: "logout", label: "logout" },
+    { name: "delete", label: "Delete Account" },
   ];
+
 
   // Update tab index based on pathname
   useEffect(() => {
@@ -55,12 +57,6 @@ const ProfileLayout = ({ children }) => {
     );
   }
 
-  // Logout Function
-  const handleLogout = async () => {
-    await signOut(auth);
-    toast.success("Logged out successfully!");
-    router.push("/");
-  };
 
   return (
     <Container maxWidth="xl">
@@ -78,8 +74,8 @@ const ProfileLayout = ({ children }) => {
                     key={tab.name}
                     href={`/profile/${username}/${tab.name}`}
                     className={`block px-4 py-2 rounded-lg font-medium transition-all ${pathname.includes(tab.name)
-                        ? "shadow-md"
-                        : ""
+                      ? "shadow-md"
+                      : ""
                       }`}
                     style={{ color: themeData?.navText }}
                   >
@@ -88,12 +84,6 @@ const ProfileLayout = ({ children }) => {
 
                 ))}
               </nav>
-              <button
-                onClick={handleLogout}
-                className="mt-8 w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-medium shadow transition-all"
-              >
-                Logout
-              </button>
             </aside>
             <main className="flex-1 p-8" style={{ background: themeData?.background }}>{children}</main>
           </div>

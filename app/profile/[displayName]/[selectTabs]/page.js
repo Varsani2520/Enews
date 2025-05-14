@@ -21,7 +21,8 @@ const SelectedTabs = () => {
     phoneNumber: user?.phone_no || "",
     avatar: null, // Handle avatar file
   });
-  console.log("jdh", user)
+  console.log("jdh", user);
+
   useEffect(() => {
     document.title = `Enews - ${selectTabs?.charAt(0).toUpperCase() + selectTabs?.slice(1)}`;
   }, [selectTabs]);
@@ -42,6 +43,7 @@ const SelectedTabs = () => {
       )}
     </div>
   );
+
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
@@ -58,12 +60,14 @@ const SelectedTabs = () => {
       toast.error("Error updating user profile");
     }
   };
+
   const handleAvatarChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setFormData({ ...formData, avatar: file });
     }
   };
+
   const renderEditProfile = () => (
     <div className="max-w-xl mx-auto mt-6 p-6 bg-white rounded-lg shadow">
       {renderHeader()}
@@ -103,7 +107,6 @@ const SelectedTabs = () => {
     </div>
   );
 
-
   const renderDeleteAccount = () => (
     <div className="max-w-xl mx-auto mt-6 p-6 bg-white rounded-lg shadow text-center">
       {renderHeader()}
@@ -121,7 +124,8 @@ const SelectedTabs = () => {
     </div>
   );
 
-  const renderLogout = () => {
+  // New RenderLogout Component
+  const RenderLogout = () => {
     useEffect(() => {
       logoutUser(setUser);
       router.push("/");
@@ -138,7 +142,7 @@ const SelectedTabs = () => {
   // -- Main Switch --
   if (selectTabs === "edit") return renderEditProfile();
   if (selectTabs === "favorites") return <FavoritesPage />;
-  if (selectTabs === "logout") return renderLogout();
+  if (selectTabs === "logout") return <RenderLogout />;
   if (selectTabs === "delete") return renderDeleteAccount();
 
   return (

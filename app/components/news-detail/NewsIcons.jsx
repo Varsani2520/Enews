@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useArticleBookmark from "@/app/hooks/useArticleBookmark";
 import Icons from "@/app/components/shared/Icons";
 import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";

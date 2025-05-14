@@ -106,7 +106,7 @@ const Navigation = () => {
               style={{
                 color:
                   activeTab === tab.link
-                    ? themeData?.icon?.main // Ensure visibility
+                    ? themeData?.background?.button // Ensure visibility
                     : themeData?.text?.primary, // Fallback to readable color
                 fontWeight: activeTab === tab.link ? "bold" : "normal",
               }}
@@ -155,7 +155,7 @@ const Navigation = () => {
             onClick={handleSearchOpen}
             aria-label="Open Search"
             sx={{
-              color: themeData?.icon?.main,
+              color: themeData?.icon?.default,
               border: `1px solid ${themeData?.text?.secondary}`,
               borderRadius: "5px",
             }}

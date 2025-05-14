@@ -8,6 +8,7 @@ import "./styles/globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CssBaseline } from "@mui/material";
 import { FavoritesProvider } from "./context/FavoritesContext";
+import { HomeProvider } from "./utils/useHome";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +27,14 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Toaster />
         <ThemeProvider>
-          <FavoritesProvider>
-            <CssBaseline />
-            <ArticleProvider>
-              <ClientLayout>{children}</ClientLayout>
-            </ArticleProvider>
-          </FavoritesProvider>
+          <CssBaseline />
+          <HomeProvider>
+            <FavoritesProvider>
+              <ArticleProvider>
+                <ClientLayout>{children}</ClientLayout>
+              </ArticleProvider>
+            </FavoritesProvider>
+          </HomeProvider>
         </ThemeProvider>
       </body>
     </html>

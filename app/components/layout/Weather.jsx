@@ -40,8 +40,8 @@ const Weather = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            backgroundColor: themeData?.background?.body || "#f39c12",
-            color: themeData?.text?.primary || "#ffffff",
+            backgroundColor: themeData?.background?.button || "#f39c12",
+            color: themeData?.text?.button || "#ffffff",
             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
             fontWeight: "bold",
             borderRadius: "10px",

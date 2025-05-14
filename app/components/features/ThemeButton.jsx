@@ -36,7 +36,6 @@ const ThemeButton = () => {
           transition: "all 0.3s ease",
           "&:hover": {
             transform: "scale(1.1)",
-            backgroundColor: themeData?.background?.button,
           },
         }}
         aria-label="Open theme selector"

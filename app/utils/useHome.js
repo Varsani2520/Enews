@@ -1,25 +1,34 @@
+// context/HomeContext.tsx
 "use client";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getHome } from "@/app/service/home";
 
-import { useEffect, useState } from "react";
-import { getHome } from "../service/home";
+const HomeContext = createContext(null);
 
-export const useHomes = () => {
-    const [news, setNews] = useState([])
-    const [loading, setLoading] = useState(true)
+export const HomeProvider = ({ children }) => {
+    const [homeData, setHomeData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const fetchHome = async () => {
-        try {
-            const response = await getHome();
-            setNews(response)
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
     useEffect(() => {
+        const fetchHome = async () => {
+            try {
+                const response = await getHome();
+                setHomeData(response);
+            } catch (error) {
+                console.error("Error fetching home data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchHome();
     }, []);
 
-    return { news, loading };
+    return (
+        <HomeContext.Provider value={{ homeData, loading }}>
+            {children}
+        </HomeContext.Provider>
+    );
 };
+
+export const useHomeContext = () => useContext(HomeContext);

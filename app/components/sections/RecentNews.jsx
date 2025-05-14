@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import slugify from "slugify";
 import { RecentSkeleton } from "../features/Skeleton";
 import Card2 from "../cards/Card2";
 import Card1 from "../cards/Card1";
-import { useHomes } from "@/app/utils/useHome";
+import { useHomeContext } from "@/app/utils/useHome";
 
 
 const RecentNews = () => {
-  const { news, loading } = useHomes()
+  const { homeData: news, loading } = useHomeContext();
 
 
   if (loading || !news.recentNews) {

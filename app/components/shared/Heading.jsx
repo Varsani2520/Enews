@@ -37,7 +37,7 @@ const Heading = ({ title, subtitle, buttonText, link }) => {
           sx={{
             fontWeight: "bold",
             color: themeData?.text?.primary,
-            borderColor: themeData?.text?.border, 
+            borderColor: themeData?.text?.secondary, 
           }}
           onClick={handleClick}
         >

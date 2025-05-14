@@ -7,10 +7,10 @@ import { TechnologySkeleton } from "@/app/components/features/Skeleton";
 import slugify from "slugify";
 import Card5 from "../cards/Card5";
 import NewsSlider from "../features/Slider";
-import { useHomes } from "@/app/utils/useHome";
+import { useHomeContext } from "@/app/utils/useHome";
 
 const BreakingNews = () => {
-  const { news, loading } = useHomes();
+  const { homeData: news, loading } = useHomeContext();
 
 
   if (loading || !news.breakingNews) {

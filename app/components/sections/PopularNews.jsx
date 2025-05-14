@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import Link from "next/link";
 import slugify from "slugify";
-import { Container, Grid } from "@mui/material";
+import { Container } from "@mui/material";
 import { PopularSkeleton } from "../features/Skeleton";
 import Card1 from "../cards/Card1";
-import { useHomes } from "@/app/utils/useHome";
+import { useHomeContext, } from "@/app/utils/useHome";
 const PopularCards = () => {
-  const { news, loading } = useHomes();
+  const { homeData: news, loading } = useHomeContext();
   const popular = news?.popularNews;
 
 

@@ -19,7 +19,7 @@ const Icons = ({ onClick, icon, href, sx }) => {
         width: "35px",
         height: "35px",
         borderRadius: "50%",
-        color: themeData?.text?.primary, 
+        color: themeData?.text?.button, 
         cursor:"pointer",
         textDecoration: "none",
         transition: "all 0.3s ease-in-out",

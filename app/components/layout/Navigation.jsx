@@ -28,7 +28,8 @@ const Navigation = () => {
   const { user } = useAuth();
 
   const router = useRouter();
-  const { themeData, config } = useThemeContext();
+  const { themeData, config, settings } = useThemeContext();
+  console.log("Theme Data", themeData, "config", config);
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -62,7 +63,7 @@ const Navigation = () => {
         {/* Logo */}
         <img
           width="120px"
-          src={config?.headerLogo}
+          src={settings?.headerLogo}
           alt="logo"
           className="cursor-pointer"
           onClick={() => router.push("/")}

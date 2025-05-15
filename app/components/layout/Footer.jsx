@@ -1,83 +1,94 @@
 "use client";
 import React, { useState } from "react";
-import { Typography, Divider } from "@mui/material";
+import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useThemeContext } from "@/app/context/ThemeContext";
-import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const { config } = useThemeContext();
-  const router = useRouter();
+  const { config, settings } = useThemeContext()
 
   return (
-    <footer className="bg-gray-900 text-white py-16 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {/* Logo & Description */}
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* First Section: Logo and Description */}
         <div>
           <img
-            src={config?.footerLogo}
+            width="120px"
+            src={settings?.footerLogo}
             alt="logo"
-            className="w-32 cursor-pointer mb-4"
+            className="cursor-pointer"
             onClick={() => router.push("/")}
-          />
-          <Typography variant="body2" className="text-sm text-gray-300 leading-relaxed">
+          />{" "}
+          <Typography variant="body2" className="text-sm">
             News Web Website is an online platform that provides news and
-            information about current events, entertainment, politics, sports,
-            technology, and more.
+            information about various topics, including current events,
+            entertainment, politics, sports, technology, and more.
           </Typography>
         </div>
 
-        {/* Navigation */}
+        {/* Second Section: Navigation Links */}
         <div>
-          <Typography variant="h6" className="text-lg font-semibold mb-2">
+          <Typography variant="h6" className="text-lg font-bold mb-4">
             Navigations
           </Typography>
-          <Divider className="bg-gray-700" />
-          <ul className="space-y-2 text-sm text-gray-400 mt-4">
-            <li><Link href="/" className="hover:text-white">Home</Link></li>
-            <li><Link href="/categories-news/live-news" className="hover:text-white">Live News</Link></li>
-            <li><Link href="/categories-news/breaking-news" className="hover:text-white">Breaking News</Link></li>
+          <Divider />
+          <ul className="text-sm">
+            <li className="mb-2">
+              <Link href="/">Home</Link>
+            </li>
+            <li className="mb-2">
+              <Link href="/categories-news/live-news">Live News</Link>
+            </li>
+            <li className="mb-2">
+              <Link href="/categories-news/breaking-news">Breaking News</Link>
+            </li>
           </ul>
         </div>
 
-        {/* Categories */}
+        {/* Third Section: Categories */}
         <div>
-          <Typography variant="h6" className="text-lg font-semibold mb-2">
+          <Typography variant="h6" className="text-lg font-bold mb-4">
             Categories
           </Typography>
-          <Divider className="bg-gray-700 " />
-          <ul className="grid grid-cols-2 gap-2 text-sm text-gray-400 mt-4">
-            {[
-              "technology",
-              "science",
-              "religion",
-              "politics",
-              "business",
-              "family",
-              "top-news",
-              "cars",
-              "travels",
-              "sports",
-              "health",
-            ].map((category) => (
-              <li key={category}>
-                <Link
-                  href={`/categories-news/${category}`}
-                  className="capitalize hover:text-white"
-                >
-                  {category.replace("-", " ")}
-                </Link>
-              </li>
-            ))}
+          <Divider />
+          <ul className="text-sm">
+            <li className="mb-1">
+              <Link href="/categories-news/technology">Technology</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/science">Science</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/religion">Religion</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/politics">Politics</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/business">Business</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/family">Family</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/top-news">Top News</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/cars">Cars</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/travels">Travels</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/sports">Sports</Link>
+            </li>
+            <li className="mb-1">
+              <Link href="/categories-news/health">Health</Link>
+            </li>
           </ul>
         </div>
 
-      </div>
-
-      {/* Footer Bottom */}
-      <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} News Web Website. All rights reserved.
       </div>
     </footer>
   );

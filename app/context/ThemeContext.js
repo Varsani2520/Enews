@@ -7,9 +7,10 @@ const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
   const [themes, setThemes] = useState([]);
-    const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState(null);
   const [currentThemeName, setCurrentThemeName] = useState("web-default");
   const [themeData, setThemeData] = useState(null);
+  const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,11 +18,13 @@ export const ThemeProvider = ({ children }) => {
       try {
         const response = await getSettings();
         const allThemes = response.data.webSettings.config.themes;
-         const configData = response.data.webSettings.config;
+        const configData = response.data.webSettings.config;
+        setSettings(response.data.webSettings);
 
         // 1. Check for saved theme in localStorage
         const savedTheme = localStorage.getItem("selectedTheme");
-        const activeThemeName = savedTheme || response.data.webSettings.themeName || "web-default";
+        const activeThemeName =
+          savedTheme || response.data.webSettings.themeName || "web-default";
 
         setThemes(allThemes);
         setConfig(configData);
@@ -56,6 +59,7 @@ export const ThemeProvider = ({ children }) => {
         themeData,
         setTheme,
         loading,
+        settings
       }}
     >
       {!loading && children}

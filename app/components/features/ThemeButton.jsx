@@ -47,8 +47,8 @@ const ThemeButton = () => {
           const isSelected = theme.name === currentThemeName;
           return (
             <MenuItem key={theme.name} onClick={() => handleClose(theme.name)} sx={{
-              backgroundColor: isSelected ? theme.background?.header : 'transparent', // Highlight selected item
-              color: isSelected ? theme.text?.primary:""
+              backgroundColor: isSelected ? theme.background?.header, // Highlight selected item
+              color: isSelected ? theme.text?.primary
             }}>
               <Box
                 className="w-5 h-5 rounded-full mr-2"

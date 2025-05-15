@@ -155,7 +155,7 @@ const Navigation = () => {
             onClick={handleSearchOpen}
             aria-label="Open Search"
             sx={{
-              color: themeData?.icon?.default,
+              color: themeData?.icon?.main,
               border: `1px solid ${themeData?.text?.secondary}`,
               borderRadius: config?.borderRadius,
             }}

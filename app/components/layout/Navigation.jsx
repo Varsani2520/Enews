@@ -29,7 +29,7 @@ const Navigation = () => {
 
   const router = useRouter();
   const { themeData, config, settings } = useThemeContext();
-  console.log("Theme Data", themeData, "config", config);
+  
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -59,7 +59,7 @@ const Navigation = () => {
 
   return (
     <Container maxWidth="xl">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center py-4">
         {/* Logo */}
         <img
           width="120px"

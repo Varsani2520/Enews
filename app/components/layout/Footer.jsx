@@ -6,7 +6,7 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const { config } = useThemeContext()
+  const { config, settings } = useThemeContext()
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -15,7 +15,7 @@ const Footer = () => {
         <div>
           <img
             width="120px"
-            src={config?.footerLogo}
+            src={settings?.footerLogo}
             alt="logo"
             className="cursor-pointer"
             onClick={() => router.push("/")}

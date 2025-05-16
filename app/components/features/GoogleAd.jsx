@@ -20,8 +20,6 @@ const GoogleAd = () => {
       data-ad-slot="6729903768"
       data-ad-format="auto"
       data-full-width-responsive="true"
-
-
     />
   );
 };

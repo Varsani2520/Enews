@@ -13,7 +13,7 @@ import LazyComponent from "./components/shared/LazyComponent";
 import { useThemeContext } from "./context/ThemeContext";
 
 export default function Home() {
-  const { themeData, config, settings } = useThemeContext();
+  const { themeData } = useThemeContext();
 
   useEffect(() => {
     document.title = "Enews - Latest news & Updates";
@@ -29,11 +29,7 @@ export default function Home() {
         />
       </Head>
 
-      <Banner
-        logo={settings?.headerLogo}
-        title="Stay informed, stay ahead with our daily news."
-        href="/categories-news/popular"
-      />
+      <Banner/>
 
       <div className="hidden md:block">
         <Heading
@@ -66,11 +62,7 @@ export default function Home() {
         link="/categories-news/travel"
       />
       <LazyComponent component={Travels} />
-      <Banner
-        logo={config?.headerLogo}
-        title="Stay informed with us - 24/7 news updates"
-        href="/categories-news/breaking"
-      />
+      <Banner/>
       <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}

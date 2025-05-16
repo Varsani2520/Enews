@@ -31,9 +31,9 @@ const ThemeButton = () => {
       {/* Theme Switch Button */}
       <Icons
         onClick={handleClick}
-        icon={<PaletteOutlined />}
+        icon={<PaletteOutlined sx={{ color: themeData?.icon?.default }} />}
         sx={{
-          color: themeData?.text?.primary,
+
           background: themeData?.icon?.default,
           cursor: "pointer",
           transition: "all 0.3s ease",

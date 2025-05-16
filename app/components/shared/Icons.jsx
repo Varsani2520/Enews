@@ -3,7 +3,7 @@ import React from "react";
 
 const Icons = ({ onClick, icon, href, sx, ariaLabel }) => {
   const { themeData } = useThemeContext();
-
+  console.log("theme", themeData)
   return (
     <a
       onClick={onClick}

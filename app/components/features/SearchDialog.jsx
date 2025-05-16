@@ -7,7 +7,7 @@ import {
   IconButton,
   CircularProgress,
   InputBase,
-  Button
+  Button,
 } from "@mui/material";
 import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
 import Link from "next/link";
@@ -18,25 +18,36 @@ import { useSearch } from "@/app/utils/useSearch";
 const SearchDialog = ({ open, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searched, setSearched] = useState(false);
-  const { news, loading } = useSearch(searchQuery)
-  const { themeData } = useThemeContext()
+  const { news, loading } = useSearch(searchQuery);
+  const { themeData } = useThemeContext();
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
     setSearched(true);
-
-  }
+  };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth sx={{
-      backgroundColor: themeData?.background?.body,
-      color: themeData?.text?.card,
-    }}>
-      <DialogTitle className="flex justify-between items-center border-b pb-2" sx={{ background: themeData?.background?.secondary, color: themeData?.navText }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      sx={{
+        color: themeData?.text?.card,
+      }}
+    >
+      <DialogTitle
+        className="flex justify-between items-center border-b pb-2"
+        sx={{
+          background: themeData?.background?.secondary,
+          color: themeData?.navText,
+        }}
+      >
         <span className="text-xl font-semibold">Search News</span>
         <IconButton
           onClick={onClose}
-          className=" hover:text-red-500" style={{ color: themeData?.navText }}
+          className=" hover:text-red-500"
+          style={{ color: themeData?.navText }}
         >
           <CloseIcon />
         </IconButton>
@@ -77,6 +88,7 @@ const SearchDialog = ({ open, onClose }) => {
                 key={article._id}
                 href={`/news/${article.slug}`}
               >
+
                 <Card4
                   article={article}
                   key={article?._id}

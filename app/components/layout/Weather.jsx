@@ -34,6 +34,7 @@ const Weather = () => {
           justifyContent: "space-between",
           alignItems: "center",
         }}
+        className="gap-2"
       >
         {/* Left Side - Current Date and Calendar Icon */}
         <div
@@ -46,7 +47,7 @@ const Weather = () => {
             fontWeight: "bold",
             borderRadius:config?.borderRadius,
             fontSize: "small",
-            paddingRight: "6px",
+            padding: "3px",
           }}
         >
           <Icons icon={<DateRangeOutlinedIcon fontSize="small" />} />

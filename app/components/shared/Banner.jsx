@@ -7,10 +7,10 @@ const Banner = () => {
   return (
     <Container
       maxWidth="xl"
-      className="mt-4"
-      sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+      className="mt-4 flex justify-center overflow-visible"
+      sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
     >
-      <div className="w-full mx-auto overflow-hidden rounded-lg  mb-4">
+      <div style={{ maxWidth: "1200px", width: "100%" }}>
         <GoogleAd />
       </div>
     </Container>

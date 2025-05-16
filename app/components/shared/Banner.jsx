@@ -16,9 +16,9 @@ const Banner = ({ title, href }) => {
       className="mt-4"
       sx={{ display: { xs: "none", sm: "none", md: "block" } }}
     >
-      <div className="relative w-full max-w-[728px] mx-auto rounded-lg overflow-hidden shadow-lg mb-4">
+      <div className="relative w-full max-w-screen-lg mx-auto rounded-lg overflow-hidden shadow-lg mb-4">
         {/* Google Ad as background */}
-        <div className="w-full h-[90px]">
+        <div className="w-full">
           <GoogleAd />
         </div>
 

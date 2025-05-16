@@ -14,16 +14,10 @@ const GoogleAd = () => {
 
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{
-        display: "block"
-      }}
+    <ins class="adsbygoogle"
+      style="display:inline-block;width:1200px;height:90px"
       data-ad-client="ca-pub-6580779703282784"
-      data-ad-slot="1338579894"
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    />
+      data-ad-slot="1338579894" />
 
   );
 };

@@ -56,6 +56,7 @@ const Weather = () => {
 
         {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex gap-2">
+
           <ThemeButton />
           <Icons 
             icon={<GitHubIcon sx={{color: themeData.icon.default}}/>}

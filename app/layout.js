@@ -18,11 +18,13 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Stay informed with Enews – your source for the latest updates and trending news." />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6580779703282784"
           crossOrigin="anonymous"
         ></script>
+        <title>Enews - Latest News & Updates</title>
       </head>
       <body className={inter.className}>
         <Toaster />

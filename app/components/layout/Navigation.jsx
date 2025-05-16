@@ -18,17 +18,19 @@ import NavigationDrawer from "./NavigationDrawer";
 import SearchDialog from "../features/SearchDialog";
 import { useThemeContext } from "@/app/context/ThemeContext";
 import { useAuth } from "@/app/context/AuthContext";
+import Loading from "@/app/layout/loading";
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
-  const { user } = useAuth();
+  const [loading, setLoading] = useState(false)
 
+  const { user } = useAuth();
   const router = useRouter();
   const { themeData, config, settings } = useThemeContext();
-  
+
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -54,10 +56,23 @@ const Navigation = () => {
     setIsDrawerOpen(open);
   };
 
+  const handleNavigate = (link) => {
+    setLoading(true);
+    setActiveTab(link);
+    router.push(link);
+  };
 
+  useEffect(() => {
+    setLoading(false); // hide loading once mounted on new route
+  }, []);
 
   return (
     <Container maxWidth="xl">
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-white/70 z-[9999]">
+          <Loading />
+        </div>
+      )}
       <div className="flex justify-between items-center py-4">
         {/* Logo */}
         <img

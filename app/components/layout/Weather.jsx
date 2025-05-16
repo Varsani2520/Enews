@@ -57,27 +57,27 @@ const Weather = () => {
         {/* Right Side - Social Icons */}
         <div style={{ alignItems: "center" }} className="hidden sm:flex gap-3">
           <ThemeButton />
-          <Icons sx={{ color: themeData?.icon?.default }}
+          <Icons 
             icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"
             ariaLabel="Visit our GitHub page"
           />
-          <Icons sx={{ color: themeData?.icon?.default }}
+          <Icons 
             icon={<FacebookIcon />}
             href="https://www.facebook.com"
             ariaLabel="Visit our Facebook page"
           />
-          <Icons sx={{ color: themeData?.icon?.default }}
+          <Icons 
             icon={<TwitterIcon />}
             href="https://x.com/RanjaniVar61457"
             ariaLabel="Visit our Twitter page"
           />
-          <Icons sx={{ color: themeData?.icon?.default }}
+          <Icons 
             icon={<LinkedInIcon />}
             href="https://www.linkedin.com/in/ranjani-varsani-45a875225/"
             ariaLabel="Visit our LinkedIn profile"
           />
-          <Icons sx={{ color: themeData?.icon?.default }}
+          <Icons 
             icon={<InstagramIcon />}
             href="https://www.instagram.com/varsaniranjani/"
             ariaLabel="Visit our Instagram page"

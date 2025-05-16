@@ -13,17 +13,15 @@ const Banner = ({ title, href }) => {
   return (
     <Container
       maxWidth="xl"
+      disableGutters
       className="mt-4"
-      sx={{ display: { xs: "none", sm: "none", md: "block" },height: "100px"  }}
+      sx={{ display: { xs: "none", sm: "none", md: "block" }, height: "100px" }}
     >
       <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
-        {/* Google Ad as background */}
         <GoogleAd />
-
-        {/* Black transparent overlay */}
-
       </div>
     </Container>
+
   );
 };
 

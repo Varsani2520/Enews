@@ -2,7 +2,7 @@ import { useThemeContext } from "@/app/context/ThemeContext";
 import { Box } from "@mui/material";
 import React from "react";
 
-const Icons = ({ onClick, icon, href, sx }) => {
+const Icons = ({ onClick, icon, href, sx, ariaLabel }) => {
   const { themeData } = useThemeContext();
 
   return (
@@ -28,6 +28,7 @@ const Icons = ({ onClick, icon, href, sx }) => {
         },
         ...sx,
       }}
+      aria-label={ariaLabel}
     >
       {icon}
     </Box>

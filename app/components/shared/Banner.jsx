@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
 const Banner = ({ title, href }) => {
-  const { config } = useThemeContext()
+  const { config, settings } = useThemeContext()
   const router = useRouter();
   return (
     <Container
@@ -14,12 +14,12 @@ const Banner = ({ title, href }) => {
       className="mt-4"
       sx={{ display: { xs: "none", sm: "none", md: "block" } }}
     >
-      <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg mb-4">
+      <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg mb-4 py-3">
         {/* Left side - Logo and Title */}
         <div className="flex items-center space-x-4">
           <img
             width="120px"
-            src={config?.headerLogo}
+            src={settings?.headerLogo}
             alt="logo"
             className="cursor-pointer"
             onClick={() => router.push("/")}

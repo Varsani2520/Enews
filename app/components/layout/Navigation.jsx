@@ -28,7 +28,8 @@ const Navigation = () => {
   const { user } = useAuth();
 
   const router = useRouter();
-  const { themeData, config } = useThemeContext();
+  const { themeData, config, settings } = useThemeContext();
+  
   const tabs = [
     { name: "Home", link: "/" },
     { name: "Breaking News", link: "/categories-news/breaking" },
@@ -58,11 +59,11 @@ const Navigation = () => {
 
   return (
     <Container maxWidth="xl">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center py-4">
         {/* Logo */}
         <img
           width="120px"
-          src={config?.headerLogo}
+          src={settings?.headerLogo}
           alt="logo"
           className="cursor-pointer"
           onClick={() => router.push("/")}
@@ -71,6 +72,7 @@ const Navigation = () => {
         {/* Burger Menu for Mobile */}
         <div className="md:hidden">
           <IconButton
+            aria-label="Open Menu"
             onClick={toggleDrawer(true)}
             sx={{
               border: `1px solid ${themeData?.border}`,

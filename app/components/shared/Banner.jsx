@@ -14,9 +14,9 @@ const Banner = ({ title, href }) => {
     <Container
       maxWidth="xl"
       className="mt-4"
-      sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+      sx={{ display: { xs: "none", sm: "none", md: "block" },height: "100px"  }}
     >
-      <div className="w-full h-[90px] rounded-lg overflow-hidden shadow-lg">
+      <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
         {/* Google Ad as background */}
         <GoogleAd />
 

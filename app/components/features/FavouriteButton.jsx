@@ -11,6 +11,7 @@ const FavoriteButton = ({ isFavorite, toggleFavorite }) => {
   return (
     <button
       className="absolute top-2 right-2 p-2 rounded-full transition-all"
+      aria-label="Toggle Favorite"
       style={{
         backgroundColor: isFavorite
           ? themeData?.icon?.main

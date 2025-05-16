@@ -4,7 +4,7 @@ import { Container, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useThemeContext } from "@/app/context/ThemeContext";
-import GoogleAd from "./GoogleAd";
+import GoogleAd from "../features/GoogleAd";
 
 const Banner = ({ title, href }) => {
   const { settings } = useThemeContext();

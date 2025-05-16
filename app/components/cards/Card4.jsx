@@ -31,8 +31,8 @@ const Card4 = ({ imageUrl, category, title, article }) => {
         <div
           className="  text-xs md:text-lg font-semibold px-3 w-fit rounded-lg"
           style={{
-            backgroundColor: themeData?.buttonBg,
-            color: themeData?.buttonText,
+            backgroundColor: themeData?.background?.button,
+            color: themeData?.text?.button,
           }}
         >
           {category}

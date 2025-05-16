@@ -15,7 +15,7 @@ const Banner = ({ title, href }) => {
       maxWidth="xl"
       disableGutters
       className="mt-4"
-      sx={{ display: { xs: "none", sm: "none", md: "block" }, height: "100px" }}
+      sx={{ display: { xs: "none", sm: "none", md: "block" }}}
     >
       <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
         <GoogleAd />

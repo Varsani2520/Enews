@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const GoogleAd = () => {
   useEffect(() => {
     try {
-      if (window) {
+      if (typeof window !== "undefined") {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (e) {
@@ -13,17 +13,14 @@ const GoogleAd = () => {
   }, []);
 
   return (
-    <>
-      {/* Google AdSense Script (added only once globally, ideally in _document.tsx or layout) */}
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", width: "100%", height: "90px" }}
-        data-ad-client="ca-pub-6580779703282784"
-        data-ad-slot="6729903768"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </>
+    <ins
+      className="adsbygoogle"
+      style={{ display: "block", width: "100%", height: "120px" }}
+      data-ad-client="ca-pub-6580779703282784"
+      data-ad-slot="6729903768"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   );
 };
 

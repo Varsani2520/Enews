@@ -72,6 +72,7 @@ const Navigation = () => {
         {/* Burger Menu for Mobile */}
         <div className="md:hidden">
           <IconButton
+            aria-label="Open Menu"
             onClick={toggleDrawer(true)}
             sx={{
               border: `1px solid ${themeData?.border}`,

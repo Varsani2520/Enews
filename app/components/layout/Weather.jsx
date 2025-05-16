@@ -59,27 +59,27 @@ const Weather = () => {
           <Icons sx={{ color: themeData?.icon?.default }}
             icon={<GitHubIcon />}
             href="https://github.com/varsani2520/"
-            aria-label="Visit our GitHub page"
+            ariaLabel="Visit our GitHub page"
           />
           <Icons sx={{ color: themeData?.icon?.default }}
             icon={<FacebookIcon />}
             href="https://www.facebook.com"
-            aria-label="Visit our Facebook page"
+            ariaLabel="Visit our Facebook page"
           />
           <Icons sx={{ color: themeData?.icon?.default }}
             icon={<TwitterIcon />}
             href="https://x.com/RanjaniVar61457"
-            aria-label="Visit our Twitter page"
+            ariaLabel="Visit our Twitter page"
           />
           <Icons sx={{ color: themeData?.icon?.default }}
             icon={<LinkedInIcon />}
             href="https://www.linkedin.com/in/ranjani-varsani-45a875225/"
-            aria-label="Visit our LinkedIn profile"
+            ariaLabel="Visit our LinkedIn profile"
           />
           <Icons sx={{ color: themeData?.icon?.default }}
             icon={<InstagramIcon />}
             href="https://www.instagram.com/varsaniranjani/"
-            aria-label="Visit our Instagram page"
+            ariaLabel="Visit our Instagram page"
           />
         </div>
       </Container>

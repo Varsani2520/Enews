@@ -14,11 +14,14 @@ const GoogleAd = () => {
 
 
   return (
-    <ins class="adsbygoogle"
-      style={{display:"inline-block",width:"1200px",height:"90px"}}
-      data-ad-client="ca-pub-6580779703282784"
-      data-ad-slot="1338579894" />
-
+    <ins
+        className="adsbygoogle"
+        style={{ display: "block", width: "100%", height: "90px" }}
+        data-ad-client="ca-pub-6580779703282784"
+        data-ad-slot="1338579894"
+        data-ad-format="horizontal"
+        data-full-width-responsive="true"
+      />
   );
 };
 

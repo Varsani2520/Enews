@@ -5,7 +5,6 @@ import Head from "next/head";
 import { Container, Grid, Typography } from "@mui/material";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import slugify from "slugify";
 import { TravelSkeleton } from "@/app/components/features/Skeleton";
 import Card5 from "@/app/components/cards/Card5";
 import Breadcumps from "@/app/components/shared/Breadcrumbs";
@@ -48,7 +47,7 @@ const CategoryPage = () => {
             {article.map((articleItem) => (
               <Grid item key={articleItem._id} xs={12} sm={6} md={3}>
                 <Link
-                  href={`/news/${slugify(articleItem.slug)}`}
+                  href={`/news/${articleItem.slug}`}
                   aria-label={`Read article: ${articleItem.title}`}
                   passHref
                 >

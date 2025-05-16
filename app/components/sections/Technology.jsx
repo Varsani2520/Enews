@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Box } from "@mui/material";
 import Link from "next/link";
-import slugify from "slugify";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { TechnologySkeleton } from "../features/Skeleton";
 import Card2 from "../cards/Card2";
 import NewsSlider from "../features/Slider";
@@ -35,7 +32,7 @@ const Technology = () => {
 
             {/* Add spacing between cards */}
             <Link
-              href={`/news/${slugify(article?.slug)}`}
+              href={`/news/${article?.slug}`}
             >
               <Card2
                 height="300px"

@@ -34,12 +34,12 @@ export default function Home() {
         title="Stay informed, stay ahead with our daily news."
         href="/categories-news/popular"
       />
-      
+
       <div className="hidden md:block">
         <Heading
           title={"Popular News"}
           subtitle={"Popular News Here"}
-          buttonText={"View More"}
+          buttonText={"View More Popular News"}
           link="/categories-news/popular"
         />
       </div>
@@ -48,21 +48,21 @@ export default function Home() {
       <Heading
         title={"Recent News"}
         subtitle={"Recent News Here"}
-        buttonText={"View More"}
+        buttonText={"View More Recent News"}
         link="/categories-news/recent"
       />
       <LazyComponent component={RecentNews} />
       <Heading
         title={"Technology"}
         subtitle={"Tech News Here"}
-        buttonText={"View More"}
+        buttonText={"View More Technology News"}
         link="/categories-news/technology"
       />
       <LazyComponent component={Technology} />
       <Heading
         title={"Travels"}
         subtitle={"Travels"}
-        buttonText={"View More"}
+        buttonText={"View More Travel News"}
         link="/categories-news/travel"
       />
       <LazyComponent component={Travels} />
@@ -74,7 +74,7 @@ export default function Home() {
       <Heading
         title={"Breaking News"}
         subtitle={"Breaking News Here"}
-        buttonText={"View More"}
+        buttonText={"View More Breaking News"}
         link="/categories-news/breaking"
       />
       <LazyComponent component={BreakingNews} />

@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
 import Link from "next/link";
-import slugify from "slugify";
 import Card4 from "../cards/Card4";
 import { useThemeContext } from "@/app/context/ThemeContext";
 import { useSearch } from "@/app/utils/useSearch";
@@ -76,7 +75,7 @@ const SearchDialog = ({ open, onClose }) => {
             {news.map((article) => (
               <Link
                 key={article._id}
-                href={`/news/${slugify(article.slug)}`}
+                href={`/news/${article.slug}`}
               >
                 <Card4
                   article={article}

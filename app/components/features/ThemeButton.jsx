@@ -11,7 +11,6 @@ const ThemeButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -22,9 +21,11 @@ const ThemeButton = () => {
       setTheme(themeKey); // Update theme globally
     }
   };
+
   if (!themes || themes.length === 0) {
     return <div>No themes available</div>;
   }
+
   return (
     <Box>
       {/* Theme Switch Button */}
@@ -32,7 +33,9 @@ const ThemeButton = () => {
         onClick={handleClick}
         icon={<PaletteOutlined />}
         sx={{
-          color: themeData?.text?.primary, background: themeData?.icon?.default, cursor: "pointer",
+          color: themeData?.text?.primary,
+          background: themeData?.icon?.default,
+          cursor: "pointer",
           transition: "all 0.3s ease",
           "&:hover": {
             transform: "scale(1.1)",
@@ -42,14 +45,23 @@ const ThemeButton = () => {
       />
 
       {/* Animated Dropdown Menu */}
-      <Menu anchorEl={anchorEl} open={open} onClose={() => handleClose()} keepMounted >
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={() => handleClose()}
+        keepMounted
+      >
         {themes.map((theme) => {
           const isSelected = theme.name === currentThemeName;
           return (
-            <MenuItem key={theme.name} onClick={() => handleClose(theme.name)} sx={{
-              backgroundColor: isSelected ? theme.background?.header, // Highlight selected item
-              color: isSelected ? theme.text?.primary
-            }}>
+            <MenuItem
+              key={theme.name}
+              onClick={() => handleClose(theme.name)}
+              sx={{
+                backgroundColor: isSelected ? theme.background?.header : undefined,
+                color: isSelected ? theme.text?.primary : undefined,
+              }}
+            >
               <Box
                 className="w-5 h-5 rounded-full mr-2"
                 style={{ background: theme.background?.card }}

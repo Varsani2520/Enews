@@ -4,7 +4,6 @@ import React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Link from "next/link";
 import { TechnologySkeleton } from "@/app/components/features/Skeleton";
-import slugify from "slugify";
 import Card5 from "../cards/Card5";
 import NewsSlider from "../features/Slider";
 import { useHomeContext } from "@/app/utils/useHome";
@@ -33,7 +32,7 @@ const BreakingNews = () => {
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12}>
                 <Link
-                  href={`/news/${slugify(article?.slug)}`}
+                  href={`/news/${article?.slug}`}
                 >
                   <Card5
                     article={article}

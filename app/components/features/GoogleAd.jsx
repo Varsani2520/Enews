@@ -15,7 +15,7 @@ const GoogleAd = () => {
   return (
     <ins
        className="adsbygoogle"
-      style={{ display: "inline-block", width: "1200px", height: "90px" }}
+      style={{ display: "inline-block", width: "100%", height: "90px" ,maxWidth:"1200px"}}
       data-ad-client="ca-pub-6580779703282784"
       data-ad-slot="1338579894"
     />

@@ -4,9 +4,12 @@ import GoogleAd from "../features/GoogleAd";
 
 const Banner = () => {
   return (
-    <div className="mt-4 max-w-screen-lg mx-auto px-4">
-      <div className="overflow-hidden rounded-lg shadow-lg">
-        <GoogleAd />
+    <div className="w-full bg-transparent py-4">
+      {/* Match container with navbar (likely same as the one in layout/header) */}
+      <div className="max-w-screen-xl mx-auto px-4">
+        <div className="rounded-lg overflow-hidden shadow">
+          <GoogleAd />
+        </div>
       </div>
     </div>
   );

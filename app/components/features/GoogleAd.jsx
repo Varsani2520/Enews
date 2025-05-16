@@ -17,7 +17,7 @@ const GoogleAd = () => {
       className="adsbygoogle"
       style={{
         display: "block",
-        width: "100%",     // fill the container
+        width: "100%",  // Make it responsive inside container
         height: "90px",
       }}
       data-ad-client="ca-pub-6580779703282784"

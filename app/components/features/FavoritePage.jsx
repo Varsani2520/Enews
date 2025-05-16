@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Typography, Grid, IconButton, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
-import slugify from "slugify";
 
 import Card1 from "../cards/Card1";
 import CustomPagination from "../shared/CustomPagination";

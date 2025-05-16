@@ -1,17 +1,17 @@
 import { useThemeContext } from "@/app/context/ThemeContext";
-import { Box } from "@mui/material";
 import React from "react";
 
 const Icons = ({ onClick, icon, href, sx, ariaLabel }) => {
   const { themeData } = useThemeContext();
 
   return (
-    <Box
+    <a
       onClick={onClick}
       component="a"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={ariaLabel}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -28,10 +28,9 @@ const Icons = ({ onClick, icon, href, sx, ariaLabel }) => {
         },
         ...sx,
       }}
-      aria-label={ariaLabel}
     >
       {icon}
-    </Box>
+    </a>
   );
 };
 

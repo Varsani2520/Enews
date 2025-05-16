@@ -1,18 +1,15 @@
 import React from "react";
 import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
   Skeleton,
   Container,
   Box,
   Grid,
 } from "@mui/material";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { useThemeContext } from "@/app/context/ThemeContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
 
 export const CardSkeleton = ({ height = "191px" }) => {
   const { config } = useThemeContext()
@@ -61,34 +58,31 @@ export const RecentSkeleton = () => {
 
 // Technology Section Skeleton with Slider
 export const TechnologySkeleton = () => {
-  // Slick slider settings
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: false,
-    responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 3 } },
-      { breakpoint: 900, settings: { slidesToShow: 2 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } },
-    ],
-  };
-
   return (
     <Container maxWidth="xl" sx={{ marginBottom: "2%" }}>
-      <Slider {...settings}>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={20}
+        slidesPerView={4}
+        autoplay={{ delay: 5000 }}
+        loop={true}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          600: { slidesPerView: 2 },
+          900: { slidesPerView: 3 },
+          1200: { slidesPerView: 4 },
+        }}
+      >
         {Array.from({ length: 4 }).map((_, index) => (
-          <Box key={index} px={1}>
-            <Skeleton variant="rectangular" width="100%" height="300px" />
-            <Skeleton variant="text" width="80%" sx={{ mt: 1 }} />
-            <Skeleton variant="text" width="60%" />
-          </Box>
+          <SwiperSlide key={index}>
+            <Box px={1}>
+              <Skeleton variant="rectangular" width="100%" height="300px" />
+              <Skeleton variant="text" width="80%" sx={{ mt: 1 }} />
+              <Skeleton variant="text" width="60%" />
+            </Box>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </Container>
   );
 };

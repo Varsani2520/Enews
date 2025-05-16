@@ -55,6 +55,7 @@ const NewsIcons = ({ article, title }) => {
         />
       </div>
       <div className="flex space-x-2">
+
         <Icons icon={<PrintIcon />} onClick={() => window.print()} />
       </div>
       <CommentsDrawer

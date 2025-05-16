@@ -12,7 +12,6 @@ import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import slugify from "slugify";
 import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
 import NavigationDrawer from "./NavigationDrawer";
@@ -122,7 +121,7 @@ const Navigation = () => {
         <Box className="hidden md:flex items-center gap-6">
           {user?.fullname ? (
             <Link
-              href={`/profile/${slugify(user.fullname)}/favorites`}
+              href={`/profile/${user.fullname}/favorites`}
               passHref
             >
               <Box className="flex items-center gap-3">

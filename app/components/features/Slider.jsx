@@ -1,36 +1,33 @@
 "use client";
 
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css"; // core styles
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay } from "swiper/modules";
 
 const NewsSlider = ({ children, slidesToShow = 4 }) => {
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 900,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 600,
-        settings: { slidesToShow: 1 },
-      },
-    ],
-  };
-
-  return <Slider {...settings}>{children}</Slider>;
+  return (
+    <Swiper
+      modules={[Autoplay]}
+      spaceBetween={20}
+      slidesPerView={slidesToShow}
+      autoplay={{ delay: 5000 }}
+      loop={true}
+      breakpoints={{
+        0: { slidesPerView: 1 },
+        600: { slidesPerView: 2 },
+        900: { slidesPerView: 3 },
+        1200: { slidesPerView: slidesToShow },
+      }}
+    >
+      {React.Children.map(children, (child, i) => (
+        <SwiperSlide key={i}>{child}</SwiperSlide>
+      ))}
+    </Swiper>
+  );
 };
 
 export default NewsSlider;

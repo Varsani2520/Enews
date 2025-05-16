@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Container, Tabs, Tab, Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import slugify from "slugify";
 import { useThemeContext } from "@/app/context/ThemeContext";
 import { useAuth } from "@/app/context/AuthContext";
 
@@ -15,7 +14,7 @@ const ProfileLayout = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { themeData } = useThemeContext()
   // Ensure displayName is always valid
-  const username = user?.displayName ? slugify(user.displayName) : "user";
+  const username = user?.displayName ? (user.displayName) : "user";
 
   // Sidebar Tabs
   // Add new tabs

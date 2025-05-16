@@ -18,7 +18,6 @@ import {
 } from "@mui/icons-material";
 
 import Link from "next/link";
-import slugify from "slugify";
 import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
 
@@ -43,7 +42,7 @@ const NavigationDrawer = ({
         <ListItem className="flex justify-between items-center">
           {user ? (
             <Link
-              href={`/profile/${slugify(user?.displayName)}/favorites`}
+              href={`/profile/${user?.displayName}/favorites`}
               passHref
             >
               <Typography className="font-semibold text-lg">

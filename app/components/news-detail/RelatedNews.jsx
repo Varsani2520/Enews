@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import slugify from "slugify";
 import Card4 from "@/app/components/cards/Card4";
 import { useThemeContext } from "@/app/context/ThemeContext";
 
@@ -17,7 +16,7 @@ const RelatedNews = ({ articles }) => {
       <div className="space-y-4">
         {articles.length > 0 ? (
           articles.map((article) => (
-            <Link href={`/news/${slugify(article.slug)}`} key={article?._id}>
+            <Link href={`/news/${article.slug}`} key={article?._id}>
               <Card4
                 article={article}
                 category={article.category?.name}

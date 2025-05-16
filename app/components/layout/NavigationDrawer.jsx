@@ -22,6 +22,7 @@ import NavLink from "./NavLink";
 import LoginDialog from "@/app/Models/Login";
 
 import { logoutUser } from "@/app/utils/auth";
+import { useAuth } from "@/app/context/AuthContext";
 
 const NavigationDrawer = ({
   activeTab,
